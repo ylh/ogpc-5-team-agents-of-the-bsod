@@ -33,4 +33,9 @@ public class CityGame extends Game{
         
     }
     
+    @Override
+    public void Run(){
+        super.Run();
+    }
+    
 }
