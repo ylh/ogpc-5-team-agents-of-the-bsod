@@ -4,6 +4,8 @@
  */
 package ogpc5.game;
 
+import Game.GameBase;
+
 /**
  *
  * @author RomulusAaron
@@ -14,6 +16,6 @@ public class OGPC5Game {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new GameBase(new CityGame(), "Agents of the BSoD").Run();
     }
 }
