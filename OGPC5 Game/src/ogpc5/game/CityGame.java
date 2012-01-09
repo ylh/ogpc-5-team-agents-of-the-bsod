@@ -22,6 +22,11 @@ public class CityGame extends Game{
     public void UnloadContent() {
         
     }
+    
+    @Override
+    public void Run(){
+        super.Run();
+    }
 
     @Override
     public void Update() {
@@ -31,11 +36,6 @@ public class CityGame extends Game{
     @Override
     public void Draw(Graphics grphcs) {
         
-    }
-    
-    @Override
-    public void Run(){
-        super.Run();
     }
     
 }
