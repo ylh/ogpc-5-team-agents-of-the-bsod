@@ -8,7 +8,7 @@ import Game.GameBase;
 
 /**
  *
- * @author RomulusAaron
+ * @author Nekel_Seyew
  */
 public class OGPC5Game {
 

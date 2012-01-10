@@ -9,7 +9,7 @@ import java.awt.Graphics;
 
 /**
  *
- * @author RomulusAaron
+ * @author Nekel_Seyew
  */
 public class CityGame extends Game{
 
