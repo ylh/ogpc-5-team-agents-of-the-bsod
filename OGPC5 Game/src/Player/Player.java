@@ -7,7 +7,7 @@ package Player;
 import Utilities.Animation;
 import Utilities.Vector2;
 import java.util.ArrayList;
-import ogpc5.game.WorldObjects.WorldObject;
+import WorldObjects.WorldObject;
 
 /**
  *
