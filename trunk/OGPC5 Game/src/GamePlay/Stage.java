@@ -15,4 +15,8 @@ import java.util.ArrayList;
 public class Stage {
     private Player player;
     private ArrayList<WorldObject> worldObjects;
+    
+    public void init(String pathName){
+        
+    }
 }
