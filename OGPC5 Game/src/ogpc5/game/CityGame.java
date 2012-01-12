@@ -6,6 +6,7 @@ package ogpc5.game;
 
 import Game.Game;
 import java.awt.Graphics;
+import java.io.File;
 
 /**
  *
@@ -34,8 +35,18 @@ public class CityGame extends Game{
     }
 
     @Override
-    public void Draw(Graphics grphcs) {
+    public void Draw(Graphics g) {
         
+    }
+    
+    
+    private void save(){
+        String path="Saved Files/";
+        File allSavedFiles= new File(path+"SavedFilesHead.txt");
+    }
+    private void load(){
+        String path="Saved Files/";
+        File allSavedFiles= new File(path+"SavedFilesHead.txt");
     }
     
 }
