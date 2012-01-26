@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author pcowal15
  */
-public class ParticleManager {
+public class particleManager {
     public ArrayList<Particle> particles;
     Image2D sprite;
     double g;
