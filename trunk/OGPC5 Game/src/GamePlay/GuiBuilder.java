@@ -15,8 +15,9 @@ import java.awt.event.MouseWheelEvent;
  */
 public class GuiBuilder extends Utilities.InputAdvance{
 
+    int five=5;
     public GuiBuilder(){
-        
+        //Adding stuff
     }
     
     public void Draw(ImageCollection batch){
