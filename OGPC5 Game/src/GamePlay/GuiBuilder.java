@@ -5,6 +5,10 @@
 package GamePlay;
 
 import Utilities.ImageCollection;
+import Utilities.Mouse;
+import Utilities.Rect;
+import Utilities.Vector2;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -15,13 +19,30 @@ import java.awt.event.MouseWheelEvent;
  */
 public class GuiBuilder extends Utilities.InputAdvance{
 
-    int five=5;
-    public GuiBuilder(){
-        //Adding stuff
+    Vector2 mouseStart;
+    boolean mouseSelect=false;
+    Mouse mouse;
+    Rect mouseSelectRect;
+    
+    public GuiBuilder(Mouse m){
+        mouseStart= new Vector2();
+        mouseSelect=false;
+        mouse=m;
+    }
+    
+    private void determineMouseSelectRect(){
+        double mouseStartX=mouseStart.getX();
+        double mouseStartY=mouseStart.getY();
+        double destX=mouse.location().getX();
+        double destY=mouse.location().getY();
+        
+        if(mouseStartX<destX && mouseStartY<destY){
+            mouseSelectRect= new Rect(mouseStart, (int)(destX-mouseStartX), (int)(destY-mouseStartY));
+        }
     }
     
     public void Draw(ImageCollection batch){
-        
+        batch.drawRect(new Vector2(200,200), 40, 30, Color.red, 10);
     }
     
     @Override
@@ -46,7 +67,8 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     @Override
     public void mousePressed(MouseEvent me) {
-        
+        mouseSelect=true;
+        mouseStart.reset(me.getX(), me.getY());
     }
 
     @Override

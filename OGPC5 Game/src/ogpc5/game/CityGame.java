@@ -5,6 +5,7 @@
 package ogpc5.game;
 
 import Game.Game;
+import GamePlay.GuiBuilder;
 import java.awt.Graphics;
 import java.io.File;
 
@@ -13,10 +14,16 @@ import java.io.File;
  * @author Nekel_Seyew
  */
 public class CityGame extends Game{
+    
+    GuiBuilder gb;
 
     @Override
     public void InitializeAndLoad() {
-        
+        gb=new GuiBuilder(mouse);
+        this.addKeyListener(gb);
+        this.addMouseListener(gb);
+        this.addMouseMotionListener(gb);
+        this.addMouseWheelListener(gb);
     }
 
     @Override
@@ -36,7 +43,7 @@ public class CityGame extends Game{
 
     @Override
     public void Draw(Graphics g) {
-        
+        gb.Draw(batch);
     }
     
     
