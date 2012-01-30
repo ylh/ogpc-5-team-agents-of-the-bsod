@@ -5,13 +5,15 @@
 package WorldObjects;
 
 import Utilities.Image2D;
+import Utilities.ImageCollection;
 import Utilities.Vector2;
+import java.util.ArrayList;
 
 /**
  *
  * @author Nekel_Seyew
  */
-public class WorldObject {
+public abstract class WorldObject {
     protected Vector2 position;
     protected int direction;//1=left, 2= right, 3=up, 4= down
     protected Image2D sprite;
@@ -21,4 +23,9 @@ public class WorldObject {
         this.position=pos;
         this.sprite=new Image2D(spritePath);
     }
+    
+    public abstract void Update(ArrayList<WorldObject> wol);
+    
+    public abstract void Draw(ImageCollection batch);
+    
 }
