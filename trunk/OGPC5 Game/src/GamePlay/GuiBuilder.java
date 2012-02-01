@@ -4,6 +4,7 @@
  */
 package GamePlay;
 
+import Game.Game;
 import Utilities.ImageCollection;
 import Utilities.Mouse;
 import Utilities.Rect;
@@ -19,30 +20,49 @@ import java.awt.event.MouseWheelEvent;
  */
 public class GuiBuilder extends Utilities.InputAdvance{
 
-    Vector2 mouseStart;
+    Game g;
+    
+    
+    //Mouse Selection Boxes
+    Vector2 mouseSelectStart;
     boolean mouseSelect=false;
     Mouse mouse;
-    Rect mouseSelectRect;
+    Rect mouseSelectBox;
     
-    public GuiBuilder(Mouse m){
-        mouseStart= new Vector2();
+    public GuiBuilder(Mouse m, Game g){
+        mouseSelectStart= new Vector2();
         mouseSelect=false;
         mouse=m;
+        this.g=g;
     }
     
     private void determineMouseSelectRect(){
-        double mouseStartX=mouseStart.getX();
-        double mouseStartY=mouseStart.getY();
-        double destX=mouse.location().getX();
-        double destY=mouse.location().getY();
+        double mouseSelectX=mouseSelectStart.getX();
+        double mouseSelectY=mouseSelectStart.getY();
+        double mouseX=mouse.location().getX();
+        double mouseY=mouse.location().getY();
         
-        if(mouseStartX<destX && mouseStartY<destY){
-            mouseSelectRect= new Rect(mouseStart, (int)(destX-mouseStartX), (int)(destY-mouseStartY));
+        if(mouseSelectX<mouseX && mouseSelectY<mouseY){
+            mouseSelectBox=new Rect(mouseSelectStart.clone(), (int)(mouseX-mouseSelectX), (int)(mouseY-mouseSelectY));
+        }else if(mouseSelectX<mouseX &&mouseSelectY>mouseY){
+            mouseSelectBox= new Rect((int)mouseSelectX, (int)mouseY, (int)(mouseX-mouseSelectX),(int)(mouseSelectY-mouseY) );
+        }else if(mouseSelectX>mouseX && mouseSelectY<mouseY){
+            mouseSelectBox= new Rect((int)mouseX, (int)mouseSelectY, (int)(mouseSelectX-mouseX),(int)(mouseY-mouseSelectY));
+        }else{
+            mouseSelectBox=new Rect((int)mouseX, (int)mouseY, (int)(mouseSelectX-mouseX), (int)(mouseSelectY-mouseY));
         }
     }
     
+    public void update(){
+        
+    }
+    
     public void Draw(ImageCollection batch){
-        batch.drawRect(new Vector2(200,200), 40, 30, Color.red, 10);
+        
+        if(mouseSelect){
+            determineMouseSelectRect();
+            batch.drawRect(mouseSelectBox, Color.red, 10);
+        }
     }
     
     @Override
@@ -68,12 +88,12 @@ public class GuiBuilder extends Utilities.InputAdvance{
     @Override
     public void mousePressed(MouseEvent me) {
         mouseSelect=true;
-        mouseStart.reset(me.getX(), me.getY());
+        mouseSelectStart.reset(me.getX(), me.getY());
     }
 
     @Override
     public void mouseReleased(MouseEvent me) {
-        
+       mouseSelect=false;  
     }
 
     @Override
