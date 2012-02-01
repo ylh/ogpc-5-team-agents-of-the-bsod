@@ -6,8 +6,10 @@ package ogpc5.game;
 
 import Game.Game;
 import GamePlay.GuiBuilder;
+import WorldObjects.WorldObject;
 import java.awt.Graphics;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,14 +18,16 @@ import java.io.File;
 public class CityGame extends Game{
     
     GuiBuilder gb;
+    ArrayList<WorldObject> allObjects;
 
     @Override
     public void InitializeAndLoad() {
-        gb=new GuiBuilder(mouse);
+        gb=new GuiBuilder(mouse,this);
         this.addKeyListener(gb);
         this.addMouseListener(gb);
         this.addMouseMotionListener(gb);
         this.addMouseWheelListener(gb);
+        allObjects= new ArrayList<WorldObject>();
     }
 
     @Override
@@ -38,14 +42,23 @@ public class CityGame extends Game{
 
     @Override
     public void Update() {
-        
+        gb.update();
+        for(WorldObject wo: allObjects){
+            wo.Update(allObjects);
+        }
     }
 
     @Override
     public void Draw(Graphics g) {
+        for(WorldObject wo: allObjects){
+            wo.Draw(batch);
+        }
         gb.Draw(batch);
     }
     
+    public void addToWorldObjects(WorldObject wo){
+        allObjects.add(wo);
+    }
     
     private void save(){
         String path="Saved Files/";
