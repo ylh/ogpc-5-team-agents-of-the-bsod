@@ -37,6 +37,9 @@ public class Enemy extends WorldObject {
     {
         return health<1;
     }
+    public double getDanger(){
+        return danger;
+    }
     @Override
     public void Update(ArrayList<WorldObject> wol) {
         //we'll want to change this in the future when we add roads
