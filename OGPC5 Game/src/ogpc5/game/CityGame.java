@@ -8,8 +8,11 @@ import Game.Game;
 import GamePlay.GuiBuilder;
 import Utilities.Image2D;
 import Utilities.Rect;
+import Utilities.Vector2;
 import WorldObjects.WorldObject;
 import WorldObjects.towers.Tower;
+import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.io.File;
 import java.util.ArrayList;
@@ -44,7 +47,10 @@ public class CityGame extends Game{
     @Override
     public void Run(){
         super.Run();
-        
+        //this.base.theGUI.setExtendedState(Frame.MAXIMIZED_BOTH);//OPTIONAL
+        //TODO: determine max size.
+        this.base.theGUI.setMaximizedBounds(new Rect(new Vector2(0,0), 860, 660));
+        this.base.theGUI.setMinimumSize(new Dimension(860,660));
     }
 
     @Override
