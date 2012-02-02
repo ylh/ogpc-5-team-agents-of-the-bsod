@@ -4,6 +4,7 @@
  */
 package WorldObjects.towers;
 
+import Enemies.Enemy;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
@@ -18,6 +19,9 @@ public class Tower extends WorldObject {
     protected int bonus;
     protected double strength;  //Base damage dealt
     protected double health;
+    protected double range;
+    protected double adamage;  //Damage dealt to armor
+    protected double sdamage;  //Damage dealt to speed
     
     /*
      * Coordinates for bounding box
@@ -70,5 +74,24 @@ public class Tower extends WorldObject {
         bx2 = (int) ((int)sprite.getPosition().getX()+(.5*sprite.getIconWidth()));
         by1 = (int) ((int)sprite.getPosition().getY()+(.5*sprite.getIconHeight()));
         by2 = (int) ((int)sprite.getPosition().getY()-(.5*sprite.getIconHeight()));
+    }
+    public void shoot(WorldObject[] wo){
+        double minDistance=range;
+        
+        Vector2 displacement=new Vector2(range,0);
+        double distance;
+        WorldObject target=new Enemy(0,0,0,new Vector2(),"asdf");
+        for(WorldObject w: wo){
+            if(w instanceof Enemy){
+                displacement=w.getPosition();
+                displacement.subtract(position);
+                distance=displacement.length();
+                
+                if (distance<minDistance){
+                    target=w;
+                    minDistance=distance;
+                }
+            }
+        }
     }
 }
