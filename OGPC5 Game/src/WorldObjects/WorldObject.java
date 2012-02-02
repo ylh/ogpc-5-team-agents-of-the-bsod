@@ -23,15 +23,20 @@ public abstract class WorldObject {
         this.direction=dir;
         this.position=pos;
         this.sprite=new Image2D(spritePath);
+        
     }
     
     public abstract void Update(ArrayList<WorldObject> wol);
     
     public abstract void Draw(ImageCollection batch);
     
+    public Vector2 getPosition(){
+        return position;
+    }
+    
     public static Rect getRectangle(Image2D i2d){
         return new Rect((int)(i2d.getPosition().getX()-i2d.getIconWidth()/2), 
-                (int)(i2d.getPosition().getY()-i2d.getIconWidth()/2), 
+                (int)(i2d.getPosition().getY()-i2d.getIconHeight()/2), 
                 i2d.getIconWidth(), i2d.getIconHeight());
     }
     
