@@ -48,6 +48,9 @@ public class CityGame extends Game{
 
     @Override
     public void Update() {
+        if(gb==null){
+            InitializeAndLoad(); 
+        }
         gb.update();
         for(WorldObject wo: allObjects){
             wo.Update(allObjects);

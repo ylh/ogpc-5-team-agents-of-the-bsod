@@ -39,6 +39,8 @@ public class GuiBuilder extends Utilities.InputAdvance{
         this.g=g;
         ribbons=new ArrayList<GUIObject>();
         ribbons.add(new GUIObject(new Vector2(100,100), "Game Resources/Sprites/GUIs/BlueBox.png"));
+        ribbons.add(new GUIObject(new Vector2(500,100), "Game Resources/Sprites/GUIs/BlueBox.png"));
+
     }
     
     private void determineMouseSelectRect(){
@@ -91,15 +93,18 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        
+        for(GUIObject o: ribbons){
+            if(o.boundingBox.contains(me.getX(), me.getY())){
+                o.setMove(false);
+            }
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent me) {
         for(GUIObject o: ribbons){
             if(o.boundingBox.contains(me.getX(), me.getY())){
-                o.setMove(true);
-                return;
+                o.setMove(false);
             }
         }
         mouseSelect=true;
