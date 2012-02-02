@@ -44,6 +44,7 @@ public class CityGame extends Game{
     @Override
     public void Run(){
         super.Run();
+        
     }
 
     @Override
@@ -71,7 +72,7 @@ public class CityGame extends Game{
     
     public static Rect getRectangle(Image2D i2d){
         return new Rect((int)(i2d.getPosition().getX()-i2d.getIconWidth()/2), 
-                (int)(i2d.getPosition().getY()-i2d.getIconWidth()/2), 
+                (int)(i2d.getPosition().getY()-i2d.getIconHeight()/2), 
                 i2d.getIconWidth(), i2d.getIconHeight());
     }
     

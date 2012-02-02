@@ -22,8 +22,8 @@ public class GUIObject {
     Vector2 pos;
     boolean shouldMove=true;
     
-    public void setMove(boolean should){
-        shouldMove=should;
+    public void setMove(){
+        shouldMove=!shouldMove;
     }
     
     public GUIObject(Vector2 position, String path){
