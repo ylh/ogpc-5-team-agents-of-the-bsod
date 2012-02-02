@@ -18,14 +18,18 @@ public class Bullet extends WorldObject {
     
     Animation sprite;
     Vector2 velocity;
-    int damage;
+    double damage;
+    double adamage;
+    double sdamage;
     
-    public Bullet(Vector2 pos, int damage, double velocity, Vector2 endPoint){
+    public Bullet(Vector2 pos, double damage,double adamage,double sdamage, double velocity, Vector2 endPoint){
         super(pos, -1, "Hi there");
         loadAnimation();
         this.velocity= new Vector2((pos.getX()-endPoint.getX())/velocity,
                 (pos.getY()-endPoint.getY())/velocity);
         this.damage=damage;
+        this.adamage=adamage;
+        this.sdamage=sdamage;
     }
 
     @Override
@@ -44,8 +48,14 @@ public class Bullet extends WorldObject {
         //TODO: load bullet animations
     }
     
-    public int getDamage(){
+    public double getDamage(){
         return damage;
+    }
+    public double getArmorDamage(){
+        return adamage;
+    }
+    public double getSpeedDamage(){
+        return sdamage;
     }
     
 }
