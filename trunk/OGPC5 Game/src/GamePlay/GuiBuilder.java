@@ -13,6 +13,8 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.util.ArrayList;
+import ogpc5.game.CityGame;
 
 /**
  *
@@ -22,6 +24,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     Game g;
     
+    ArrayList<GUIObject> ribbons;
     
     //Mouse Selection Boxes
     Vector2 mouseSelectStart;
@@ -34,6 +37,8 @@ public class GuiBuilder extends Utilities.InputAdvance{
         mouseSelect=false;
         mouse=m;
         this.g=g;
+        ribbons=new ArrayList<GUIObject>();
+        ribbons.add(new GUIObject(new Vector2(100,100), "Game Resources/Sprites/GUIs/BlueBox.png"));
     }
     
     private void determineMouseSelectRect(){
@@ -54,11 +59,15 @@ public class GuiBuilder extends Utilities.InputAdvance{
     }
     
     public void update(){
-        
+        for(GUIObject r: ribbons){
+            r.Update(ribbons);
+        }
     }
     
     public void Draw(ImageCollection batch){
-        
+        for(GUIObject r: ribbons){
+            r.Draw(batch);
+        }
         if(mouseSelect){
             determineMouseSelectRect();
             batch.drawRect(mouseSelectBox, Color.red, 10);
@@ -87,6 +96,12 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     @Override
     public void mousePressed(MouseEvent me) {
+        for(GUIObject o: ribbons){
+            if(o.boundingBox.contains(me.getX(), me.getY())){
+                o.setMove(true);
+                return;
+            }
+        }
         mouseSelect=true;
         mouseSelectStart.reset(me.getX(), me.getY());
     }

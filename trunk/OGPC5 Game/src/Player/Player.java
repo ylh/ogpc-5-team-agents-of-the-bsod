@@ -14,7 +14,7 @@ import WorldObjects.WorldObject;
  */
 public class Player {
     
-    public Player(Vector2 position, int direction){
+    public Player(){
     }
     
     public void update(ArrayList<WorldObject> worldObjects){

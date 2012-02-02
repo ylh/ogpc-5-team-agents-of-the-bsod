@@ -6,6 +6,7 @@ package WorldObjects;
 
 import Utilities.Image2D;
 import Utilities.ImageCollection;
+import Utilities.Rect;
 import Utilities.Vector2;
 import java.util.ArrayList;
 
@@ -27,5 +28,11 @@ public abstract class WorldObject {
     public abstract void Update(ArrayList<WorldObject> wol);
     
     public abstract void Draw(ImageCollection batch);
+    
+    public static Rect getRectangle(Image2D i2d){
+        return new Rect((int)(i2d.getPosition().getX()-i2d.getIconWidth()/2), 
+                (int)(i2d.getPosition().getY()-i2d.getIconWidth()/2), 
+                i2d.getIconWidth(), i2d.getIconHeight());
+    }
     
 }
