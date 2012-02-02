@@ -21,9 +21,23 @@ public class GUIObject {
     Image2D sprite;
     Vector2 pos;
     boolean shouldMove=true;
+    boolean reachedBottom=false;
+    boolean reachedTop=false;
     
     public void setMove(){
         shouldMove=!shouldMove;
+    }
+    
+    public void setMove(boolean b){
+        shouldMove=b;
+    }
+    
+    public void hasReachedBottom(boolean b){
+        reachedBottom=b;
+    }
+    
+    public void hasRechedTop(boolean b){
+        reachedTop=b;
     }
     
     public GUIObject(Vector2 position, String path){
@@ -36,11 +50,10 @@ public class GUIObject {
     public void Update(ArrayList<GUIObject> guiobjects){
         boundingBox=CityGame.getRectangle(sprite);
         for(GUIObject g: guiobjects){
-            if(!boundingBox.intersects(CityGame.getRectangle(g.sprite))&&g!=this&&shouldMove){
+            if(!boundingBox.intersects(CityGame.getRectangle(g.sprite))&&g!=this&&shouldMove&&!reachedTop&&!reachedBottom){
                 pos.dY(5);
             }
         }
-        //pos.dY(5);
     }
     
     public void Draw(ImageCollection batch){

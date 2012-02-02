@@ -39,7 +39,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
         this.g=g;
         ribbons=new ArrayList<GUIObject>();
         ribbons.add(new GUIObject(new Vector2(100,100), "Game Resources/Sprites/GUIs/BlueBox.png"));
-        ribbons.add(new GUIObject(new Vector2(500,100), "Game Resources/Sprites/GUIs/RedBox.png"));
+        ribbons.add(new GUIObject(new Vector2(780,100), "Game Resources/Sprites/GUIs/RedBox.png"));
 
     }
     
@@ -50,18 +50,25 @@ public class GuiBuilder extends Utilities.InputAdvance{
         double mouseY=mouse.location().getY();
         
         if(mouseSelectX<mouseX && mouseSelectY<mouseY){
-            mouseSelectBox=new Rect(mouseSelectStart.clone(), (int)(mouseX-mouseSelectX), (int)(mouseY-mouseSelectY));
+            mouseSelectBox=new Rect(mouseSelectStart.clone(), 
+                    (int)(mouseX-mouseSelectX), (int)(mouseY-mouseSelectY));
         }else if(mouseSelectX<mouseX &&mouseSelectY>mouseY){
-            mouseSelectBox= new Rect((int)mouseSelectX, (int)mouseY, (int)(mouseX-mouseSelectX),(int)(mouseSelectY-mouseY) );
+            mouseSelectBox= new Rect((int)mouseSelectX, (int)mouseY, 
+                    (int)(mouseX-mouseSelectX),(int)(mouseSelectY-mouseY) );
         }else if(mouseSelectX>mouseX && mouseSelectY<mouseY){
-            mouseSelectBox= new Rect((int)mouseX, (int)mouseSelectY, (int)(mouseSelectX-mouseX),(int)(mouseY-mouseSelectY));
+            mouseSelectBox= new Rect((int)mouseX, (int)mouseSelectY, 
+                    (int)(mouseSelectX-mouseX),(int)(mouseY-mouseSelectY));
         }else{
-            mouseSelectBox=new Rect((int)mouseX, (int)mouseY, (int)(mouseSelectX-mouseX), (int)(mouseSelectY-mouseY));
+            mouseSelectBox=new Rect((int)mouseX, (int)mouseY, 
+                    (int)(mouseSelectX-mouseX), (int)(mouseSelectY-mouseY));
         }
     }
     
     public void update(){
         for(GUIObject r: ribbons){
+            if((r.pos.getY())>=600){
+                r.hasReachedBottom(true);
+            }
             r.Update(ribbons);
         }
     }
