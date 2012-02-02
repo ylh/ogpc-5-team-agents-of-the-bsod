@@ -39,7 +39,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
         this.g=g;
         ribbons=new ArrayList<GUIObject>();
         ribbons.add(new GUIObject(new Vector2(100,100), "Game Resources/Sprites/GUIs/BlueBox.png"));
-        ribbons.add(new GUIObject(new Vector2(500,100), "Game Resources/Sprites/GUIs/BlueBox.png"));
+        ribbons.add(new GUIObject(new Vector2(500,100), "Game Resources/Sprites/GUIs/RedBox.png"));
 
     }
     
@@ -93,18 +93,13 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        for(GUIObject o: ribbons){
-            if(o.boundingBox.contains(me.getX(), me.getY())){
-                o.setMove(false);
-            }
-        }
     }
 
     @Override
     public void mousePressed(MouseEvent me) {
         for(GUIObject o: ribbons){
             if(o.boundingBox.contains(me.getX(), me.getY())){
-                o.setMove(false);
+                o.setMove();
             }
         }
         mouseSelect=true;
