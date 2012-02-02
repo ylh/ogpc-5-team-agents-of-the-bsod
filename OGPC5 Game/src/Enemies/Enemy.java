@@ -17,6 +17,7 @@ public class Enemy extends WorldObject {
     double speed;
     double health;
     double armor;
+    double danger;
     
     public Enemy(double Speed,double Health,double Armor,Vector2 pos,String path)
     {
@@ -24,6 +25,7 @@ public class Enemy extends WorldObject {
         speed=Speed;
         health=Health;
         armor=Armor;
+        danger=0;
     }
     public void hit(double damage,double adamage,double sdamage,boolean air)
     {
@@ -39,11 +41,12 @@ public class Enemy extends WorldObject {
     public void Update(ArrayList<WorldObject> wol) {
         //we'll want to change this in the future when we add roads
         position.add(new Vector2(0,-speed));
+        danger+=speed;
     }
 
     @Override
     public void Draw(ImageCollection batch) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        batch.addToCollection(sprite,1,position);
     }
     
 }
