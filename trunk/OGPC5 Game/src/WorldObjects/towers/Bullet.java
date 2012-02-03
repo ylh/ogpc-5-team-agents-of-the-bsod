@@ -18,15 +18,22 @@ public class Bullet extends WorldObject {
     
     Animation sprite;
     Vector2 velocity;
+    WorldObject target;
+    double distance;
     double damage;
     double adamage;
     double sdamage;
+    double speed;
     
-    public Bullet(Vector2 pos, double damage,double adamage,double sdamage, double velocity, Vector2 endPoint){
+    public Bullet(Vector2 pos, double damage,double adamage,double sdamage, double velocity, WorldObject t){
         super(pos, -1, "Hi there");
         loadAnimation();
+        this.speed=velocity;
+        this.target=t;
+        Vector2 endPoint=t.getPosition();
         this.velocity= new Vector2((pos.getX()-endPoint.getX())/velocity,
                 (pos.getY()-endPoint.getY())/velocity);
+        this.distance=0;
         this.damage=damage;
         this.adamage=adamage;
         this.sdamage=sdamage;
@@ -36,6 +43,14 @@ public class Bullet extends WorldObject {
     public void Update(ArrayList<WorldObject> wol) {
         this.position.dX(velocity.getX());
         this.position.dY(velocity.getY());
+        this.distance+=1/speed;
+    }
+    public boolean HasReachedTarget(){
+        return distance>1;
+    }
+    public void HitTarget(){
+        //TODO: hit the target
+        //target.Hit(damage,adamage,sdamage);
     }
 
     @Override
