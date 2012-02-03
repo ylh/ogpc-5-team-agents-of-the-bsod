@@ -107,7 +107,10 @@ public class Tower extends WorldObject {
             }
         }
         if (target != null) {
-            wo.add(new Bullet(position, damage, adamage, sdamage, speed, target.getPosition()));
+            wo.add(new Bullet(position, damage, adamage, sdamage, speed, target));
         }
+    }
+    public void Hit(double damage,double adamage,double sdamage){
+        //TODO: damage the tower
     }
 }
