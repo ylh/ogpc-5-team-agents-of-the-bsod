@@ -27,7 +27,7 @@ public class Enemy extends WorldObject {
         armor=Armor;
         danger=0;
     }
-    public void hit(double damage,double adamage,double sdamage,boolean air)
+    public void Hit(double damage,double adamage,double sdamage)
     {
         speed/=sdamage;
         armor=Math.max(0,armor-adamage);
