@@ -10,6 +10,7 @@ import Utilities.Mouse;
 import Utilities.Rect;
 import Utilities.Vector2;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -76,6 +77,17 @@ public class GuiBuilder extends Utilities.InputAdvance{
     public void Draw(ImageCollection batch){
         for(GUIObject r: ribbons){
             r.Draw(batch);
+        }
+        int width= Toolkit.getDefaultToolkit().getScreenSize().width;
+        int height= Toolkit.getDefaultToolkit().getScreenSize().height;
+        int squareConstant=32;
+        int lx=0,ly=0;
+        for(int i=0; i<width/squareConstant; i++){
+            for(int j=0; j<height/squareConstant; j++){
+                batch.drawRect(new Vector2(lx,ly), squareConstant, squareConstant, Color.MAGENTA, 5);
+                lx+=squareConstant;
+            }
+            lx=0;ly+=squareConstant;
         }
         if(mouseSelect){
             determineMouseSelectRect();
