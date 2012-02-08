@@ -20,25 +20,13 @@ public class GUIObject {
     Rect boundingBox;
     Image2D sprite;
     Vector2 pos;
-    boolean shouldMove=false;
-    boolean reachedBottom=false;
-    boolean reachedTop=false;
+    int distanceToGo;
+    int direction;
     
-    public void setMove(){
-        shouldMove=!shouldMove;
-    }
+    public boolean isMoving;
+    public boolean isAtTop;
+    public boolean isAtBottom;
     
-    public void setMove(boolean b){
-        shouldMove=b;
-    }
-    
-    public void hasReachedBottom(boolean b){
-        reachedBottom=b;
-    }
-    
-    public void hasRechedTop(boolean b){
-        reachedTop=b;
-    }
     
     public GUIObject(Vector2 position, String path){
         pos=position;
@@ -47,14 +35,21 @@ public class GUIObject {
         boundingBox=CityGame.getRectangle(sprite);
     }
     
-    public void Update(ArrayList<GUIObject> guiobjects){
-        boundingBox=CityGame.getRectangle(sprite);
-        for(GUIObject g: guiobjects){
-            if(!boundingBox.intersects(CityGame.getRectangle(g.sprite))
-                    &&g!=this&&shouldMove&&!reachedTop&&!reachedBottom){
-                pos.dY(5);
+    public void Update(){
+        if(isMoving && distanceToGo>0){
+            distanceToGo-=5;
+            pos.dY(5*direction);
+        }
+        if(isMoving && distanceToGo<=0){
+            if(direction>0){
+                isAtBottom=true;
+                isAtTop=false;
             }
-            
+            if(direction<0){
+                isAtTop=true;
+                isAtBottom=false;
+            }
+            this.stop();
         }
     }
     
@@ -62,4 +57,23 @@ public class GUIObject {
         batch.addToCollection(sprite, 10, pos);
     }
     
+     public void setDistanceToGo(int i, int direction){
+        distanceToGo=i;
+        this.direction=sign(direction);
+    }
+     
+     private int sign(int i){
+         return Math.abs(i)/i;
+     }
+     
+    public void start(){
+        if(!isMoving){
+            isMoving=true;
+        }
+    }
+    public void stop(){
+        if(isMoving){
+            isMoving=false;
+        }
+    }
 }
