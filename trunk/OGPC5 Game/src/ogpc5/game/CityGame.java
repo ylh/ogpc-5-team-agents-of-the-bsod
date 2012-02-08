@@ -25,6 +25,7 @@ public class CityGame extends Game{
     
     GuiBuilder gb;
     ArrayList<WorldObject> allObjects;
+    Tower[][] towers;
     
     public double money;
     public double score;
@@ -51,6 +52,7 @@ public class CityGame extends Game{
         //TODO: determine max size.
         this.base.theGUI.setMaximizedBounds(new Rect(new Vector2(0,0), 860, 660));
         this.base.theGUI.setMinimumSize(new Dimension(860,660));
+        this.base.theGUI.setResizable(false);
     }
 
     @Override

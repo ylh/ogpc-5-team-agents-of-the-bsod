@@ -20,7 +20,7 @@ public class GUIObject {
     Rect boundingBox;
     Image2D sprite;
     Vector2 pos;
-    boolean shouldMove=true;
+    boolean shouldMove=false;
     boolean reachedBottom=false;
     boolean reachedTop=false;
     
@@ -50,9 +50,11 @@ public class GUIObject {
     public void Update(ArrayList<GUIObject> guiobjects){
         boundingBox=CityGame.getRectangle(sprite);
         for(GUIObject g: guiobjects){
-            if(!boundingBox.intersects(CityGame.getRectangle(g.sprite))&&g!=this&&shouldMove&&!reachedTop&&!reachedBottom){
+            if(!boundingBox.intersects(CityGame.getRectangle(g.sprite))
+                    &&g!=this&&shouldMove&&!reachedTop&&!reachedBottom){
                 pos.dY(5);
             }
+            
         }
     }
     

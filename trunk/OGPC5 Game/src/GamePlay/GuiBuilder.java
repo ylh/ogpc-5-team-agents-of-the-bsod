@@ -39,8 +39,8 @@ public class GuiBuilder extends Utilities.InputAdvance{
         mouse=m;
         this.g=g;
         ribbons=new ArrayList<GUIObject>();
-        ribbons.add(new GUIObject(new Vector2(100,100), "Game Resources/Sprites/GUIs/BlueBox.png"));
-        ribbons.add(new GUIObject(new Vector2(780,100), "Game Resources/Sprites/GUIs/RedBox.png"));
+        ribbons.add(new GUIObject(new Vector2(780,100), "Game Resources/Sprites/GUIs/BlueBox.png"));
+        ribbons.add(new GUIObject(new Vector2(780,200), "Game Resources/Sprites/GUIs/RedBox.png"));
 
     }
     
@@ -67,7 +67,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
     
     public void update(){
         for(GUIObject r: ribbons){
-            if((r.pos.getY())>=600){
+            if((r.pos.getY())>=550){
                 r.hasReachedBottom(true);
             }
             r.Update(ribbons);
@@ -78,12 +78,12 @@ public class GuiBuilder extends Utilities.InputAdvance{
         for(GUIObject r: ribbons){
             r.Draw(batch);
         }
-        int width= Toolkit.getDefaultToolkit().getScreenSize().width;
-        int height= Toolkit.getDefaultToolkit().getScreenSize().height;
+        int width= g.getWidth();
+        int height= g.getHeight();
         int squareConstant=32;
         int lx=0,ly=0;
-        for(int i=0; i<width/squareConstant; i++){
-            for(int j=0; j<height/squareConstant; j++){
+        for(int i=0; i<height/squareConstant; i++){
+            for(int j=0; j<width/squareConstant; j++){
                 batch.drawRect(new Vector2(lx,ly), squareConstant, squareConstant, Color.MAGENTA, 5);
                 lx+=squareConstant;
             }
