@@ -25,23 +25,20 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     Game g;
     
-    ArrayList<GUIObject> ribbons;
     
     //Mouse Selection Boxes
     Vector2 mouseSelectStart;
     boolean mouseSelect=false;
     Mouse mouse;
     Rect mouseSelectBox;
+    Menu menu;
     
     public GuiBuilder(Mouse m, Game g){
         mouseSelectStart= new Vector2();
         mouseSelect=false;
         mouse=m;
         this.g=g;
-        ribbons=new ArrayList<GUIObject>();
-        ribbons.add(new GUIObject(new Vector2(780,100), "Game Resources/Sprites/GUIs/BlueBox.png"));
-        ribbons.add(new GUIObject(new Vector2(780,200), "Game Resources/Sprites/GUIs/RedBox.png"));
-
+        menu= new Menu();
     }
     
     private void determineMouseSelectRect(){
@@ -66,18 +63,10 @@ public class GuiBuilder extends Utilities.InputAdvance{
     }
     
     public void update(){
-        for(GUIObject r: ribbons){
-            if((r.pos.getY())>=550){
-                r.hasReachedBottom(true);
-            }
-            r.Update(ribbons);
-        }
+        menu.Update();
     }
     
     public void Draw(ImageCollection batch){
-        for(GUIObject r: ribbons){
-            r.Draw(batch);
-        }
         int width= g.getWidth();
         int height= g.getHeight();
         int squareConstant=32;
@@ -89,6 +78,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
             }
             lx=0;ly+=squareConstant;
         }
+        menu.Draw(batch);
         if(mouseSelect){
             determineMouseSelectRect();
             batch.drawRect(mouseSelectBox, Color.red, 10);
@@ -116,13 +106,9 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     @Override
     public void mousePressed(MouseEvent me) {
-        for(GUIObject o: ribbons){
-            if(o.boundingBox.contains(me.getX(), me.getY())){
-                o.setMove();
-            }
-        }
         mouseSelect=true;
         mouseSelectStart.reset(me.getX(), me.getY());
+        menu.giveMouseEvent(me);
     }
 
     @Override
@@ -152,7 +138,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent mwe) {
-        
+        menu.giveMouseWheelEvent(mwe);
     }
     
 }
