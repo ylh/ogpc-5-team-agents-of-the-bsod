@@ -48,10 +48,7 @@ public class CityGame extends Game{
     @Override
     public void Run(){
         super.Run();
-        //this.base.theGUI.setExtendedState(Frame.MAXIMIZED_BOTH);//OPTIONAL
-        //TODO: determine max size.
-        this.base.theGUI.setMaximizedBounds(new Rect(new Vector2(0,0), 860, 660));
-        this.base.theGUI.setMinimumSize(new Dimension(860,660));
+        this.base.theGUI.setSize(new Dimension(970,640));
         this.base.theGUI.setResizable(false);
     }
 
