@@ -38,7 +38,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
         mouseSelect=false;
         mouse=m;
         this.g=g;
-        menu= new Menu();
+        menu= new Menu((CityGame)g);
     }
     
     private void determineMouseSelectRect(){
