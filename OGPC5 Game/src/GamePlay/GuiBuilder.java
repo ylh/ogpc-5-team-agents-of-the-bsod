@@ -64,11 +64,12 @@ public class GuiBuilder extends Utilities.InputAdvance{
     
     public void update(){
         menu.Update();
+        System.out.println(g.getWidth() +" "+ g.getHeight());
     }
     
     public void Draw(ImageCollection batch){
-        int width= g.getWidth();
-        int height= g.getHeight();
+        int width= 854;
+        int height= 632;
         int squareConstant=32;
         int lx=0,ly=0;
         for(int i=0; i<height/squareConstant; i++){
@@ -92,7 +93,9 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        
+        if(ke.getKeyChar()=='z'){
+            menu.resetRibbons();
+        }
     }
 
     @Override

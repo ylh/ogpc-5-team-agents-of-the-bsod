@@ -36,9 +36,10 @@ public class GUIObject {
     }
     
     public void Update(){
+        boundingBox=CityGame.getRectangle(sprite);
         if(isMoving && distanceToGo>0){
-            distanceToGo-=5;
-            pos.dY(5*direction);
+            distanceToGo-=10;
+            pos.dY(10*direction);
         }
         if(isMoving && distanceToGo<=0){
             if(direction>0){
@@ -69,6 +70,12 @@ public class GUIObject {
     public void start(){
         if(!isMoving){
             isMoving=true;
+        }
+        if(direction>0){
+            isAtTop=false;
+        }
+        if(direction<0){
+            isAtBottom=false;
         }
     }
     public void stop(){
