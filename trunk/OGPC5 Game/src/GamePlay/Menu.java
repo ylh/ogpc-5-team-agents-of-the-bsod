@@ -9,6 +9,7 @@ import Utilities.Vector2;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import ogpc5.game.CityGame;
 
 /**
  *
@@ -24,13 +25,16 @@ public class Menu {
     GUIObject statsRibbon;
     GUIObject optionsRibbon;
     
-    public Menu(){
+    ScrollingMenu stats;
+    
+    public Menu(CityGame g){
         position=new Vector2(715,0);
         width= 128;
         height=40*8;
         towerRibbon= new GUIObject(new Vector2(780,20), "Game Resources/Sprites/GUIs/BlueBox.png");
         statsRibbon=new GUIObject(new Vector2(780,60), "Game Resources/Sprites/GUIs/RedBox.png");
         optionsRibbon=new GUIObject(new Vector2(780,100), "Game Resources/Sprites/GUIs/BlueBox.png");
+        stats= new Stats(g, new Vector2());
     }
     
     public void Draw(ImageCollection batch){
