@@ -22,6 +22,7 @@ public class Tower extends WorldObject {
     protected double range;
     protected double adamage;  //Damage dealt to armor
     protected double sdamage;  //Damage dealt to speed
+    protected double projspeed;
     protected double speed;
     /*
      * Coordinates for bounding box
@@ -61,6 +62,11 @@ public class Tower extends WorldObject {
     }
     public double getSpeedDamage() {
         return sdamage;
+    }
+    public void Hit(double damage,double adamage,double sdamage)
+    {
+        speed/=sdamage;
+        health-=Math.max(0,damage);
     }
 
     public void setDamage(double s) {
@@ -107,7 +113,7 @@ public class Tower extends WorldObject {
             }
         }
         if (target != null) {
-            wo.add(new Bullet(position, damage, adamage, sdamage, speed, target));
+            wo.add(new Bullet(position, damage, adamage, sdamage, projspeed, target));
         }
     }
     public void Hit(double damage,double adamage,double sdamage){
