@@ -4,6 +4,7 @@
  */
 package WorldObjects.towers;
 
+import Enemies.Enemy;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
@@ -29,7 +30,9 @@ public class Bullet extends WorldObject {
         super(pos, -1, "Hi there");
         loadAnimation();
         this.speed=velocity;
+        
         this.target=t;
+        
         Vector2 endPoint=t.getPosition();
         this.velocity= new Vector2((pos.getX()-endPoint.getX())/velocity,
                 (pos.getY()-endPoint.getY())/velocity);
@@ -49,8 +52,16 @@ public class Bullet extends WorldObject {
         return distance>1;
     }
     public void HitTarget(){
-        //TODO: hit the target
-        //target.Hit(damage,adamage,sdamage);
+        Enemy e;
+        Tower t;
+        if (target instanceof Enemy){
+            e=(Enemy)target;
+            e.Hit(damage,adamage,sdamage);
+        }
+        else if (target instanceof Tower){
+            //this.target=(Tower)target;
+        }
+         
     }
 
     @Override
