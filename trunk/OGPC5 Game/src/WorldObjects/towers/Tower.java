@@ -116,7 +116,4 @@ public class Tower extends WorldObject {
             wo.add(new Bullet(position, damage, adamage, sdamage, projspeed, target));
         }
     }
-    public void Hit(double damage,double adamage,double sdamage){
-        //TODO: damage the tower
-    }
 }
