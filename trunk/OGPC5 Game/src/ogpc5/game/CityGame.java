@@ -38,6 +38,7 @@ public class CityGame extends Game{
         this.addMouseMotionListener(gb);
         this.addMouseWheelListener(gb);
         allObjects= new ArrayList<WorldObject>();
+        towers = new Tower[854/32][632/32];
     }
 
     @Override
@@ -61,6 +62,15 @@ public class CityGame extends Game{
         for(WorldObject wo: allObjects){
             wo.Update(allObjects);
         }
+        for(int i=0; i<towers.length; i++){
+            for(int j=0; j<towers[i].length; j++){
+                if(towers[i][j]==null){
+                    continue;
+                }else{
+                    towers[i][j].Update(allObjects);
+                }
+            }
+        }
     }
 
     @Override
@@ -69,6 +79,15 @@ public class CityGame extends Game{
             wo.Draw(batch);
         }
         gb.Draw(batch);
+        for(int i=0; i<towers.length; i++){
+            for(int j=0; j<towers[i].length; j++){
+                if(towers[i][j]==null){
+                    continue;
+                }else{
+                    towers[i][j].Draw(batch);
+                }
+            }
+        }
     }
     
     public void addToWorldObjects(WorldObject wo){
