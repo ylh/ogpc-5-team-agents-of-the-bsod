@@ -53,6 +53,12 @@ public class Menu {
         towerRibbon.Update();
         statsRibbon.Update();
         optionsRibbon.Update();
+        if(!(towerRibbon.pos.getY()<statsRibbon.pos.getY())||!(statsRibbon.pos.getY()<optionsRibbon.pos.getY())){
+            resetRibbons();
+        }
+        if((towerRibbon.pos.getY()>statsRibbon.pos.getY())||(statsRibbon.pos.getY()>optionsRibbon.pos.getY())){
+            resetRibbons();
+        }
     }
     
     public void giveMouseEvent(MouseEvent e){
@@ -92,14 +98,20 @@ public class Menu {
             }
         }
         if(optionsRibbon.boundingBox.contains(e.getX(), e.getY())){
+            if(!statsRibbon.isAtTop){
+                statsRibbon.setDistanceToGo(40 * 10, -1);
+                statsRibbon.start();
+                optionsRibbon.setDistanceToGo(40 * 10, -1);
+                optionsRibbon.start();
+            }
             this.currentRibbon=3;
         }
     }
     
     public void resetRibbons(){
-        towerRibbon= new GUIObject(new Vector2(780,20), "Game Resources/Sprites/GUIs/BlueBox.png");
-        statsRibbon=new GUIObject(new Vector2(780,60), "Game Resources/Sprites/GUIs/RedBox.png");
-        optionsRibbon=new GUIObject(new Vector2(780,100), "Game Resources/Sprites/GUIs/BlueBox.png");
+        towerRibbon= new GUIObject(new Vector2(900,20), "Game Resources/Sprites/GUIs/BlueBox.png");
+        statsRibbon=new GUIObject(new Vector2(900,60), "Game Resources/Sprites/GUIs/RedBox.png");
+        optionsRibbon=new GUIObject(new Vector2(900,100), "Game Resources/Sprites/GUIs/BlueBox.png");
         this.currentRibbon=0;
     }
     
