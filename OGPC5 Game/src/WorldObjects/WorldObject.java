@@ -34,6 +34,10 @@ public abstract class WorldObject {
         return position;
     }
     
+    public void setPosition(Vector2 newPos){
+        position= newPos;
+    }
+    
     public static Rect getRectangle(Image2D i2d){
         return new Rect((int)(i2d.getPosition().getX()-i2d.getIconWidth()/2), 
                 (int)(i2d.getPosition().getY()-i2d.getIconHeight()/2), 

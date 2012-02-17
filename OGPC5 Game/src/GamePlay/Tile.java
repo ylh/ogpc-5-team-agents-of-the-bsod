@@ -24,7 +24,7 @@ public class Tile {
     public Tile(Animation a, Vector2 pos, int towerType){
         ani=a;
         this.pos=pos;
-        bounding=new Rect((int)pos.getX()-16, (int)pos.getY()-16,23,23);
+        bounding=new Rect((int)pos.getX()-16, (int)pos.getY()-16,32,32);
         ani.setPosition(pos);
         this.towerType=towerType;
     }
@@ -35,6 +35,7 @@ public class Tile {
     }
     
     public void Draw(ImageCollection batch){
+        bounding=new Rect((int)pos.getX()-16, (int)pos.getY()-16,32,32);
         ani.Draw(batch);
     }
     
