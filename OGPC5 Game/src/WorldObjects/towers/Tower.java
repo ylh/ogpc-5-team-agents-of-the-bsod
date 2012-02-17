@@ -5,6 +5,7 @@
 package WorldObjects.towers;
 
 import Enemies.Enemy;
+import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author tsutton14
  */
-public class Tower extends WorldObject {
+public abstract class Tower extends WorldObject {
 
     protected int bonus;
     protected double damage;  //Base damage dealt
@@ -24,6 +25,9 @@ public class Tower extends WorldObject {
     protected double sdamage;  //Damage dealt to speed
     protected double projspeed;
     protected double speed;
+    
+    Animation ani;
+    
     /*
      * Coordinates for bounding box
      */
@@ -35,6 +39,8 @@ public class Tower extends WorldObject {
     public Tower(Vector2 pos, int dir, String spritePath) {
         super(pos, dir, spritePath);
     }
+    
+    public abstract Animation getAnimation();
 
     @Override
     public void Update(ArrayList<WorldObject> wol) {

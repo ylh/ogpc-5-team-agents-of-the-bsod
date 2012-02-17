@@ -25,20 +25,20 @@ public class CityGame extends Game{
     
     GuiBuilder gb;
     ArrayList<WorldObject> allObjects;
-    Tower[][] towers;
+    public Tower[][] towers;
     
     public double money;
     public double score;
 
     @Override
     public void InitializeAndLoad() {
+        allObjects= new ArrayList<WorldObject>();
+        towers = new Tower[854/32][632/32];
         gb=new GuiBuilder(mouse,this);
         this.addKeyListener(gb);
         this.addMouseListener(gb);
         this.addMouseMotionListener(gb);
         this.addMouseWheelListener(gb);
-        allObjects= new ArrayList<WorldObject>();
-        towers = new Tower[854/32][632/32];
     }
 
     @Override

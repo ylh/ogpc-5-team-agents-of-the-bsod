@@ -5,8 +5,11 @@
 package GamePlay;
 
 import Utilities.ImageCollection;
+import Utilities.Rect;
 import Utilities.Vector2;
+import WorldObjects.towers.Tower;
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import ogpc5.game.CityGame;
@@ -21,11 +24,16 @@ public class Menu {
     int height;
     int currentRibbon;//1-tower, 2-stats, 3-option
     
+    Tile selectedTower;
+    
     GUIObject towerRibbon;
     GUIObject statsRibbon;
     GUIObject optionsRibbon;
     
     ScrollingMenu stats;
+    ScrollingMenu Towers;
+    
+    Tower[][] t;
     
     public Menu(CityGame g){
         position=new Vector2(835,0);
@@ -35,6 +43,8 @@ public class Menu {
         statsRibbon=new GUIObject(new Vector2(900,60), "Game Resources/Sprites/GUIs/RedBox.png");
         optionsRibbon=new GUIObject(new Vector2(900,100), "Game Resources/Sprites/GUIs/BlueBox.png");
         stats= new Stats(g, new Vector2(840,120));
+        Towers = new Towers(new Vector2(860,60));
+        t=g.towers;
     }
     
     public void Draw(ImageCollection batch){
@@ -46,6 +56,12 @@ public class Menu {
         
         if(this.currentRibbon==2 && optionsRibbon.isAtBottom && statsRibbon.isAtTop){
             stats.Draw(batch);
+        }
+        if(this.currentRibbon==1 && optionsRibbon.isAtBottom && statsRibbon.isAtBottom){
+            Towers.Draw(batch);
+        }
+        if(selectedTower!=null){
+            selectedTower.Draw(batch);
         }
     }
     
@@ -106,6 +122,36 @@ public class Menu {
             }
             this.currentRibbon=3;
         }
+        
+        if(currentRibbon==1){
+           selectedTower=(Tile)Towers.giveMouseEvent(e);
+        }
+    }
+    
+    public void giveMouseDraggedEvent(MouseEvent e){
+        if(selectedTower!=null){
+            selectedTower.giveNewPos(new Vector2(e.getX(), e.getY()));
+        }
+    }
+    
+    public void giveMouseReleased(MouseEvent e){
+        for(int i=0; i<t.length; i++){
+            for(int j=0; j<t[i].length; j++){
+                if(shouldPlaceTileHere(i*32, j*32)){
+                    t[i][j]=selectedTower.getTower();
+                    selectedTower=null;
+                }
+            }
+        }
+    }
+    private boolean shouldPlaceTileHere(int x, int y){
+        if (selectedTower != null) {
+            Rectangle b = selectedTower.bounding.intersection(new Rect(x, y, 32, 32));
+            if (b.height * b.width > 4*4) {
+                return true;
+            }
+        }
+        return false;
     }
     
     public void resetRibbons(){

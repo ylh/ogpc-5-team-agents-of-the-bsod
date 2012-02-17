@@ -6,31 +6,31 @@ package GamePlay;
 
 import Utilities.ImageCollection;
 import Utilities.Vector2;
-import java.awt.Color;
+import WorldObjects.towers.Store;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import ogpc5.game.CityGame;
 
 /**
  *
  * @author Nekel-Seyew
  */
-public class Stats implements ScrollingMenu{
-
-    CityGame g;
+public class Towers implements ScrollingMenu{
+    
+    Store b= new Store(new Vector2(), 3, "");
+    
+    Tile TowerA;
     Vector2 offset;
     
-    public Stats(CityGame game, Vector2 offSet){
-        g=game;
-        offset=offSet;
+    public Towers(Vector2 offset){
+        this.offset=offset;
+        Vector2 give= offset.clone();
+        give.dY(20);
+        TowerA= new Tile(b.getAnimation(),give, 1);
     }
-    
+
     @Override
     public void Draw(ImageCollection batch) {
-        batch.DrawString(new Vector2(offset.getX(), offset.getY()+20), 
-                "Score: "+g.score, Color.red, 10);
-        batch.DrawString(new Vector2(offset.getX(), offset.getY()+40), 
-                "Money: "+g.money, Color.red, 10);
+        TowerA.Draw(batch);
     }
 
     @Override
@@ -40,12 +40,15 @@ public class Stats implements ScrollingMenu{
 
     @Override
     public Object giveMouseEvent(MouseEvent e) {
+        if(TowerA.bounding.contains(e.getX(), e.getY())){
+            return new Tile(new Store(new Vector2(), 3, "").getAnimation(), new Vector2(e.getX(), e.getY()),1);
+        }
         return null;
     }
 
     @Override
     public void setOffset(Vector2 offset) {
-        this.offset=offset;
+        
     }
     
 }
