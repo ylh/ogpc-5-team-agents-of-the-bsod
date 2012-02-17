@@ -139,15 +139,17 @@ public class Menu {
             for(int j=0; j<t[i].length; j++){
                 if(shouldPlaceTileHere(i*32, j*32)){
                     t[i][j]=selectedTower.getTower();
+                    t[i][j].setPosition(new Vector2(i*32-16, j*32-16));
                     selectedTower=null;
                 }
             }
         }
     }
     private boolean shouldPlaceTileHere(int x, int y){
-        if (selectedTower != null) {
-            Rectangle b = selectedTower.bounding.intersection(new Rect(x, y, 32, 32));
-            if (b.height * b.width > 4*4) {
+        Rect c=new Rect(x, y, 32, 32);
+        if (selectedTower != null && selectedTower.bounding.intersects(c)) {
+            Rectangle b = selectedTower.bounding.intersection(c);
+            if (b.height * b.width > 16*16) {
                 return true;
             }
         }
