@@ -64,7 +64,6 @@ public class GuiBuilder extends Utilities.InputAdvance{
     
     public void update(){
         menu.Update();
-        System.out.println(g.getWidth() +" "+ g.getHeight());
     }
     
     public void Draw(ImageCollection batch){
@@ -82,7 +81,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
         menu.Draw(batch);
         if(mouseSelect){
             determineMouseSelectRect();
-            batch.drawRect(mouseSelectBox, Color.red, 10);
+            //batch.drawRect(mouseSelectBox, Color.red, 10);
         }
     }
     
@@ -117,6 +116,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
     @Override
     public void mouseReleased(MouseEvent me) {
        mouseSelect=false;  
+       menu.giveMouseReleased(me);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class GuiBuilder extends Utilities.InputAdvance{
 
     @Override
     public void mouseDragged(MouseEvent me) {
-        
+        menu.giveMouseDraggedEvent(me);
     }
 
     @Override
