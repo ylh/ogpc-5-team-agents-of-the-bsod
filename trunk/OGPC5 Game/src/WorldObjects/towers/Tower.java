@@ -20,14 +20,13 @@ public abstract class Tower extends WorldObject {
     protected int bonus;
     protected double damage;  //Base damage dealt
     protected double health;
-    protected double range;
+    protected double range;  
     protected double adamage;  //Damage dealt to armor
     protected double sdamage;  //Damage dealt to speed
-    protected double projspeed;
-    protected double speed;
-    
+    protected double projspeed;   //speed of the projectile
+    protected double speed;  //lower is faster- any value <=1 fires every frame.
+    protected double loaded;  //used to compute firing times.
     Animation ani;
-    
     /*
      * Coordinates for bounding box
      */
@@ -38,12 +37,14 @@ public abstract class Tower extends WorldObject {
 
     public Tower(Vector2 pos, int dir, String spritePath) {
         super(pos, dir, spritePath);
+        loaded=0;
     }
-    
+
     public abstract Animation getAnimation();
 
     @Override
     public void Update(ArrayList<WorldObject> wol) {
+        loaded -= 1;
         shoot(wol);
 
     }
@@ -63,24 +64,28 @@ public abstract class Tower extends WorldObject {
     public double getDamage() {
         return damage;
     }
+
     public double getArmorDamage() {
         return adamage;
     }
+
     public double getSpeedDamage() {
         return sdamage;
     }
-    public void Hit(double damage,double adamage,double sdamage)
-    {
-        speed/=sdamage;
-        health-=Math.max(0,damage);
+
+    public void Hit(double damage, double adamage, double sdamage) {
+        speed /= sdamage;
+        health -= Math.max(0, damage);
     }
 
     public void setDamage(double s) {
         damage = s;
     }
+
     public void setArmorDamage(double s) {
         adamage = s;
     }
+
     public void setSpeedDamage(double s) {
         sdamage = s;
     }
@@ -101,25 +106,31 @@ public abstract class Tower extends WorldObject {
     }
 
     public void shoot(ArrayList<WorldObject> wo) {
-        double minDistance = range;
+        if (loaded < 0) {
 
-        Vector2 displacement = new Vector2(range, 0);
-        double distance;
-        WorldObject target = null;
-        for (WorldObject w : wo) {
-            if (w instanceof Enemy) {
-                displacement = w.getPosition();
-                displacement.subtract(position);
-                distance = displacement.length();
 
-                if (distance < minDistance) {
-                    target = w;
-                    minDistance = distance;
+            double minDistance = range;
+
+            Vector2 displacement = new Vector2(range, 0);
+            double distance;
+            WorldObject target = null;
+            for (WorldObject w : wo) {
+                if (w instanceof Enemy) {
+                    displacement = w.getPosition();
+                    displacement.subtract(position);
+                    distance = displacement.length();
+
+                    if (distance < minDistance) {
+                        target = w;
+                        minDistance = distance;
+                    }
                 }
             }
-        }
-        if (target != null) {
-            wo.add(new Bullet(position, damage, adamage, sdamage, projspeed, target));
+
+            if (target != null) {
+                wo.add(new Bullet(position, damage, adamage, sdamage, projspeed, target));
+                loaded+=speed;
+            }
         }
     }
 }
