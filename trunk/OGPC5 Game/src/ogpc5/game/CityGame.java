@@ -4,13 +4,15 @@
  */
 package ogpc5.game;
 
+import GUIStuff.Tile;
 import Game.Game;
-import GamePlay.GuiBuilder;
 import Utilities.Image2D;
+import Utilities.Mouse;
 import Utilities.Rect;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
 import WorldObjects.towers.Tower;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -23,22 +25,23 @@ import java.util.ArrayList;
  */
 public class CityGame extends Game{
     
-    GuiBuilder gb;
     ArrayList<WorldObject> allObjects;
     public Tower[][] towers;
     
     public double money;
     public double score;
+    
+    Tile selection;
 
     @Override
     public void InitializeAndLoad() {
         allObjects= new ArrayList<WorldObject>();
         towers = new Tower[854/32][632/32];
-        gb=new GuiBuilder(mouse,this);
-        this.addKeyListener(gb);
-        this.addMouseListener(gb);
-        this.addMouseMotionListener(gb);
-        this.addMouseWheelListener(gb);
+        for(int i=0; i<towers.length; i++){
+            for(int j=0; j<towers[i].length; j++){
+                towers[i][j]=new Tile(new Vector2(i*32, j*32));
+            }
+        }
     }
 
     @Override
@@ -55,10 +58,6 @@ public class CityGame extends Game{
 
     @Override
     public void Update() {
-        if(gb==null){
-            InitializeAndLoad(); 
-        }
-        gb.update();
         for(WorldObject wo: allObjects){
             wo.Update(allObjects);
         }
@@ -67,6 +66,17 @@ public class CityGame extends Game{
                 if(towers[i][j]==null){
                     continue;
                 }else{
+                    Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
+                    if (mouse.isPressed(Mouse.LEFT_BUTTON) && b.contains(mouse.location().getX(), mouse.location().getY())) {
+                        if(selection==null){
+                            selection=(Tile)towers[i][j];
+                            selection.select();
+                        }else{
+                            selection.unselect();
+                            selection=(Tile)towers[i][j];
+                            selection.select();
+                        }
+                    }
                     towers[i][j].Update(allObjects);
                 }
             }
@@ -78,7 +88,6 @@ public class CityGame extends Game{
         for(WorldObject wo: allObjects){
             wo.Draw(batch);
         }
-        gb.Draw(batch);
         for(int i=0; i<towers.length; i++){
             for(int j=0; j<towers[i].length; j++){
                 if(towers[i][j]==null){
@@ -87,6 +96,8 @@ public class CityGame extends Game{
                     towers[i][j].Draw(batch);
                 }
             }
+        }if(selection!=null){
+            selection.Draw(batch);
         }
     }
     
