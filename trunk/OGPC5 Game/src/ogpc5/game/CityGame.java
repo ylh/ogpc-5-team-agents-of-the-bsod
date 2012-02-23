@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class CityGame extends Game{
     
     ArrayList<WorldObject> allObjects;
-    public Tower[][] towers;
+    public Tile[][] tiles;
     
     public double money;
     public double score;
@@ -36,10 +36,10 @@ public class CityGame extends Game{
     @Override
     public void InitializeAndLoad() {
         allObjects= new ArrayList<WorldObject>();
-        towers = new Tower[854/32][632/32];
-        for(int i=0; i<towers.length; i++){
-            for(int j=0; j<towers[i].length; j++){
-                towers[i][j]=new Tile(new Vector2(i*32, j*32));
+        tiles= new Tile[854/32][632/32];
+        for(int i=0; i<tiles.length; i++){
+            for(int j=0; j<tiles[i].length; j++){
+                tiles[i][j]=new Tile(new Vector2(i*32, j*32));
             }
         }
     }
@@ -61,23 +61,23 @@ public class CityGame extends Game{
         for(WorldObject wo: allObjects){
             wo.Update(allObjects);
         }
-        for(int i=0; i<towers.length; i++){
-            for(int j=0; j<towers[i].length; j++){
-                if(towers[i][j]==null){
+        for(int i=0; i<tiles.length; i++){
+            for(int j=0; j<tiles[i].length; j++){
+                if(tiles[i][j]==null){
                     continue;
                 }else{
                     Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
                     if (mouse.isPressed(Mouse.LEFT_BUTTON) && b.contains(mouse.location().getX(), mouse.location().getY())) {
                         if(selection==null){
-                            selection=(Tile)towers[i][j];
+                            selection=(Tile)tiles[i][j];
                             selection.select();
                         }else{
                             selection.unselect();
-                            selection=(Tile)towers[i][j];
+                            selection=(Tile)tiles[i][j];
                             selection.select();
                         }
                     }
-                    towers[i][j].Update(allObjects);
+                    tiles[i][j].Update(allObjects);
                 }
             }
         }
@@ -88,12 +88,12 @@ public class CityGame extends Game{
         for(WorldObject wo: allObjects){
             wo.Draw(batch);
         }
-        for(int i=0; i<towers.length; i++){
-            for(int j=0; j<towers[i].length; j++){
-                if(towers[i][j]==null){
+        for(int i=0; i<tiles.length; i++){
+            for(int j=0; j<tiles[i].length; j++){
+                if(tiles[i][j]==null){
                     continue;
                 }else{
-                    towers[i][j].Draw(batch);
+                    tiles[i][j].Draw(batch);
                 }
             }
         }if(selection!=null){

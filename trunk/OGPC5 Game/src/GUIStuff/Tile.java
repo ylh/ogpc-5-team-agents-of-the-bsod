@@ -7,14 +7,16 @@ package GUIStuff;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
+import WorldObjects.WorldObject;
 import WorldObjects.towers.Tower;
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
  * @author Nekel-Seyew
  */
-public class Tile extends Tower{
+public class Tile extends WorldObject{
     
     private boolean isSelected;
 
@@ -39,12 +41,11 @@ public class Tile extends Tower{
         }else{
             batch.drawRect(position, 32, 32, Color.red, 1);
         }
-        super.Draw(batch);
     }
-    
+
     @Override
-    public Animation getAnimation() {
-        return null;
+    public void Update(ArrayList<WorldObject> wol) {
+        
     }
     
 }
