@@ -4,6 +4,7 @@
  */
 package GUIStuff;
 
+import Utilities.Rect;
 import Utilities.Vector2;
 import WorldObjects.towers.Tower;
 
@@ -12,31 +13,50 @@ import WorldObjects.towers.Tower;
  * @author pcowal15
  */
 public class Button {
+
     Vector2 pos;
     Vector2 openpos;
     Vector2 closepos;
     Tower tower;
+    Rect button;
     double movespeed; //you want a value less than 0.5
     boolean open;
-    public Button(Vector2 op, Vector2 cp, Tower t, double ms){
-        openpos=op;
-        closepos=cp;
-        pos=cp;
-        movespeed=ms;
-        open=false;
+
+    public Button(Vector2 op, Vector2 cp, Tower t, double ms) {
+        openpos = op;
+        closepos = cp;
+        pos = cp;
+        movespeed = ms;
+        open = false;
+        button = new Rect(pos, 48, 16);
     }
-    public void update(){
+
+    public void update() {
+        glide();
+    }
+    
+    public void setOpen(boolean o){
+        open=o;
+    }
+
+    public void glide() {
         //open or closed?
         Vector2 targetpos;
         double dy;
-        if (open){
-            targetpos=openpos.clone();
+        if (open) {
+            targetpos = openpos.clone();
+        } else {
+            targetpos = closepos.clone();
         }
-        else{
-            targetpos=closepos.clone();
-        }
-        dy=targetpos.getY()-pos.getY();
-        dy*=movespeed;
+        //smooth glidey motion!
+        dy = targetpos.getY() - pos.getY();
+        dy *= movespeed;
         pos.dY(dy);
+        //reset the bounding box
+        button = new Rect(pos, 48, 16);
+    }
+    public boolean isPressed() {
+        
+        return false;
     }
 }
