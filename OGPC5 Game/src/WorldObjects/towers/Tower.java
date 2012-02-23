@@ -38,6 +38,14 @@ public abstract class Tower extends WorldObject {
 
     public Tower(Vector2 pos, int dir, String spritePath) {
         super(pos, dir, spritePath);
+        //sets default values so it'll work properly
+        damage=10;
+        health=10;
+        range=100;
+        adamage=0;
+        sdamage=0;
+        projspeed=10;
+        speed=10;
         loaded=0;
     }
 
