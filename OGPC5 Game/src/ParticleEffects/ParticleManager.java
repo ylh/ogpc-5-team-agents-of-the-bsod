@@ -50,7 +50,7 @@ public class ParticleManager {
     public void explode(Vector2 pos, double speed, int amt) {
         //creates a single-frame burst of particles at pos
         for (int i = 0; i < amt; i += 1) {
-            double theta = Math.random() * Math.PI;
+            double theta = Math.random() * Math.PI * 2;
             double s = Math.random() * speed;
             Vector2 vel = new Vector2(s * Math.cos(theta), s * Math.sin(theta));
             add(pos, vel);
