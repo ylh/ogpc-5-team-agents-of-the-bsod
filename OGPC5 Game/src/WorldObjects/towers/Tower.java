@@ -5,6 +5,7 @@
 package WorldObjects.towers;
 
 import Enemies.Enemy;
+import GUIStuff.Tile;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * @author Taylor Sutton & Peter Cowal
  * WHAT!? pcowal15 totally did more work than tsutton14 on this!!!
  */
-public abstract class Tower extends WorldObject {
+public abstract class Tower extends Tile {
 
     protected int bonus;
     protected double damage;  //Base damage dealt
@@ -36,8 +37,8 @@ public abstract class Tower extends WorldObject {
     protected int by1;
     protected int by2;
 
-    public Tower(Vector2 pos, int dir, String spritePath) {
-        super(pos, dir, spritePath);
+    public Tower(Vector2 pos,String spritePath) {
+        super(pos);
         //sets default values so it'll work properly
         damage=10;
         health=10;
