@@ -32,11 +32,8 @@ public class Button {
         button = new Rect(pos, 48, 16);
     }
 
-    public void update() {
+    public void update(Tile[][]tiles) {
         glide();
-        if (isPressed()){
-            
-        }
     }
     
     public void setOpen(boolean o){
@@ -60,7 +57,8 @@ public class Button {
         button = new Rect(pos, 48, 16);
     }
     public boolean isPressed() {
-        if (mouse.isPressed(Mouse.LEFT_BUTTON) && 
+        if (open &&
+                mouse.isPressed(Mouse.LEFT_BUTTON) && 
                 button.contains(mouse.location().getX(), mouse.location().getY())){
             return true;
         }
