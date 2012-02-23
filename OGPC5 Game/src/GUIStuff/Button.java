@@ -4,10 +4,10 @@
  */
 package GUIStuff;
 
+import Utilities.Mouse;
 import Utilities.Rect;
 import Utilities.Vector2;
 import WorldObjects.towers.Tower;
-
 /**
  *
  * @author pcowal15
@@ -21,6 +21,7 @@ public class Button {
     Rect button;
     double movespeed; //you want a value less than 0.5
     boolean open;
+    Mouse mouse;
 
     public Button(Vector2 op, Vector2 cp, Tower t, double ms) {
         openpos = op;
@@ -33,6 +34,9 @@ public class Button {
 
     public void update() {
         glide();
+        if (isPressed()){
+            
+        }
     }
     
     public void setOpen(boolean o){
@@ -56,7 +60,12 @@ public class Button {
         button = new Rect(pos, 48, 16);
     }
     public boolean isPressed() {
-        
-        return false;
+        if (mouse.isPressed(Mouse.LEFT_BUTTON) && 
+                button.contains(mouse.location().getX(), mouse.location().getY())){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
