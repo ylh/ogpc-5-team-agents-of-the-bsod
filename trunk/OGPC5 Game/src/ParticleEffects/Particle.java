@@ -33,6 +33,7 @@ public class Particle {
         vel.dY(g);
         double rx=(double)roomx;
         double ry=(double)roomy;
+        //these compute the deceleration due to resistance
         if (vel.getX()<0) vel.setX(Math.min(0,vel.getX()+r));
         if (vel.getX()>0) vel.setX(Math.max(0,vel.getX()-r));
         if (vel.getY()<0) vel.setY(Math.min(0,vel.getY()+r));
