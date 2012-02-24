@@ -4,6 +4,7 @@
  */
 package ogpc5.game;
 
+import GUIStuff.Button;
 import GUIStuff.Tile;
 import Game.Game;
 import Utilities.Image2D;
@@ -27,9 +28,10 @@ public class CityGame extends Game{
     
     ArrayList<WorldObject> allObjects;
     public Tile[][] tiles;
-    
+    public ArrayList<Button> buttons;
     public double money;
     public double score;
+    public boolean invOpen=false;
     
     Tile selection;
 
@@ -42,6 +44,7 @@ public class CityGame extends Game{
                 tiles[i][j]=new Tile(new Vector2(i*32, j*32));
             }
         }
+        
     }
 
     @Override
@@ -58,8 +61,19 @@ public class CityGame extends Game{
 
     @Override
     public void Update() {
+        
         for(WorldObject wo: allObjects){
             wo.Update(allObjects);
+        }
+        
+        for(Button b : buttons){
+            b.glide();
+            if (b.isPressed(mouse)){
+                invOpen = false;
+            }
+        }
+        for(Button b : buttons){
+            b.setOpen(invOpen);
         }
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
@@ -71,10 +85,12 @@ public class CityGame extends Game{
                         if(selection==null){
                             selection=(Tile)tiles[i][j];
                             selection.select();
+                            invOpen=true;
                         }else{
                             selection.unselect();
                             selection=(Tile)tiles[i][j];
                             selection.select();
+                            invOpen=false;
                         }
                     }
                     tiles[i][j].Update(allObjects);
