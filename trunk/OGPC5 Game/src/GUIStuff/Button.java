@@ -32,9 +32,6 @@ public class Button {
         button = new Rect(pos, 48, 16);
     }
 
-    public void update(Tile[][]tiles) {
-        glide();
-    }
     
     public void setOpen(boolean o){
         open=o;
