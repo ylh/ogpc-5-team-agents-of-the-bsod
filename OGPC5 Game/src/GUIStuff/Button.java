@@ -36,12 +36,6 @@ public class Button {
         glide();
     }
     
-    public void addTower(Tile[][]tiles) {
-        int i=getI();
-        int j=getJ();
-        
-    }
-    
     public void setOpen(boolean o){
         open=o;
     }
@@ -79,16 +73,6 @@ public class Button {
         mx=32*Math.floor(mouse.location().getX()/32);
         my=32*Math.floor(mouse.location().getY()/32);
         return new Vector2(mx,my);
-    }
-    public int getI(){
-        int i;
-        i=(int)Math.floor(mouse.location().getX()/32);
-        return i;
-    }
-    public int getJ(){
-        int j;
-        j=(int)Math.floor(mouse.location().getY()/32);
-        return j;
     }
 }
 
