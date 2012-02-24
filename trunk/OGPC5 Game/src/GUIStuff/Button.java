@@ -8,6 +8,7 @@ import Utilities.Mouse;
 import Utilities.Rect;
 import Utilities.Vector2;
 import WorldObjects.towers.Tower;
+import WorldObjects.towers.Tower1;
 /**
  *
  * @author pcowal15
@@ -17,7 +18,6 @@ public class Button {
     Vector2 pos;
     Vector2 openpos;
     Vector2 closepos;
-    Tower tower;
     Rect button;
     double movespeed; //you want a value less than 0.5
     boolean open;
@@ -34,6 +34,12 @@ public class Button {
 
     public void update(Tile[][]tiles) {
         glide();
+    }
+    
+    public void addTower(Tile[][]tiles) {
+        int i=getI();
+        int j=getJ();
+        
     }
     
     public void setOpen(boolean o){
@@ -65,5 +71,24 @@ public class Button {
         else{
             return false;
         }
+    }
+    public Vector2 mouseSquare(){
+        //returns the mouse's grid square
+        double mx;
+        double my;
+        mx=32*Math.floor(mouse.location().getX()/32);
+        my=32*Math.floor(mouse.location().getY()/32);
+        return new Vector2(mx,my);
+    }
+    public int getI(){
+        int i;
+        i=(int)Math.floor(mouse.location().getX()/32);
+        return i;
+    }
+    public int getJ(){
+        int j;
+        j=(int)Math.floor(mouse.location().getY()/32);
+        return j;
+    }
     }
 }
