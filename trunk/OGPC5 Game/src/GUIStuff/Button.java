@@ -21,7 +21,6 @@ public class Button {
     Rect button;
     double movespeed; //you want a value less than 0.5
     boolean open;
-    Mouse mouse;
 
     public Button(Vector2 op, Vector2 cp, Tower t, double ms) {
         openpos = op;
@@ -53,7 +52,7 @@ public class Button {
         //reset the bounding box
         button = new Rect(pos, 48, 16);
     }
-    public boolean isPressed() {
+    public boolean isPressed(Mouse mouse) {
         if (open &&
                 mouse.isPressed(Mouse.LEFT_BUTTON) && 
                 button.contains(mouse.location().getX(), mouse.location().getY())){
@@ -62,14 +61,6 @@ public class Button {
         else{
             return false;
         }
-    }
-    public Vector2 mouseSquare(){
-        //returns the mouse's grid square
-        double mx;
-        double my;
-        mx=32*Math.floor(mouse.location().getX()/32);
-        my=32*Math.floor(mouse.location().getY()/32);
-        return new Vector2(mx,my);
     }
 }
 
