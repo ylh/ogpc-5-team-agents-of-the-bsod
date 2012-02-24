@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class Bullet extends WorldObject {
     
-    Animation sprite;
+    Animation spriteAnimation;
     Vector2 velocity;
     WorldObject target;
     double distance;
@@ -66,12 +66,12 @@ public class Bullet extends WorldObject {
 
     @Override
     public void Draw(ImageCollection batch) {
-        if(sprite!=null)
-            sprite.Draw(batch);
+        if(spriteAnimation!=null)
+            spriteAnimation.Draw(batch);
     }
     
     public void loadAnimation(){
-        //TODO: load bullet animations
+        spriteAnimation= new Animation(1,1, position, 1000);
     }
     
     public double getDamage(){
