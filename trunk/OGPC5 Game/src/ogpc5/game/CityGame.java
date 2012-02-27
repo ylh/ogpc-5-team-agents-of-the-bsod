@@ -39,6 +39,7 @@ public class CityGame extends Game{
     public void InitializeAndLoad() {
         allObjects= new ArrayList<WorldObject>();
         tiles= new Tile[854/32][632/32];
+        buttons=new ArrayList<Button>();
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
                 tiles[i][j]=new Tile(new Vector2(i*32, j*32));
@@ -103,6 +104,9 @@ public class CityGame extends Game{
     public void Draw(Graphics g) {
         for(WorldObject wo: allObjects){
             wo.Draw(batch);
+        }
+        for (Button b: buttons){
+            //TODO: button drawing
         }
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
