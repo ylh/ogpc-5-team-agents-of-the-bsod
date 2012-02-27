@@ -29,45 +29,89 @@ public class Spawner extends Thread{
     }
     
     public void setSmog(int i){
-        enemyProbabilities[1]=1;
+        setting(1,i);
     }
     public void setGangs(int i){
-        enemyProbabilities[2]=1;
+        setting(2,i);
     }
     public void setArsonist(int i){
-        enemyProbabilities[3]=i;
+        setting(3,i);
     }
     public void setCriminal( int i){
-        enemyProbabilities[4]=i;
+        setting(4,i);
     }
     public void setTrash(int i){
-        enemyProbabilities[5]=i;
+        setting(5,i);
     }
     public void setWaterPolution(int i){
-        enemyProbabilities[6]=i;
+        setting(6,i);
     }
     public void setFire(int i){
-        enemyProbabilities[7]=i;
+        setting(7,i);
     }
     public void setFlood(int i){
-        enemyProbabilities[8]=i;
+        setting(8,i);
     }
     public void setEarthquake(int i){
-        enemyProbabilities[9]=i;
+        setting(9,i);
     }
     public void setPoorEducation(int i){
-        enemyProbabilities[10]=i;
+        setting(10,i);
+    }
+    
+    private void setting(int type, int percentile) {
+        synchronized (this) {
+            if (percentile < 0) {
+                enemyProbabilities[type] = enemyProbabilities[type] - percentile;
+            }
+            enemyProbabilities[type] = percentile;
+        }
     }
     
     public void spawn(){
         double counter=0;
+        double past=0;
         double odds= Math.random()*100;
         for(int t=0; t<quota; t++){
             for(int j=0; j<enemyProbabilities.length; j++){
                 if(odds<=enemyProbabilities[j]){
-                    
+                    makeMonstor(j);
+                    past=counter;
+                    counter++;
+                    continue;
                 }
             }
+            if(counter==past){
+                makeMonstor(0);
+                past=counter;
+                counter++;
+            }
+        }
+    }
+    
+    private void makeMonstor(int i){
+        if(i==1){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==2){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==3){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==4){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==5){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==6){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==7){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==8){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==9){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==10){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
+        }else if(i==0){
+            theGame.addToWorldObjects(new Enemy(1,20,20,pos.clone(), ""));
         }
     }
     
