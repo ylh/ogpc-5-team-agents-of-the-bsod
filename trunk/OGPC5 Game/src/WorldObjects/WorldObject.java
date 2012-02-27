@@ -19,7 +19,7 @@ public abstract class WorldObject {
     protected int direction;//1=left, 2= right, 3=up, 4= down
     protected Image2D sprite;
     
-    public WorldObject(Vector2 pos, int dir, String spritePath){
+        public WorldObject(Vector2 pos, int dir, String spritePath){
         this.direction=dir;
         this.position=pos;
         this.sprite=new Image2D(spritePath);
