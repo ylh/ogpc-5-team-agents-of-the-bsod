@@ -24,7 +24,7 @@ public class Spawner extends Thread{
         timeToWait=waitTime;
         this.quota=quota;
         this.theGame=theGame;
-        enemyProbabilities=new int[10];
+        enemyProbabilities=new int[11];
         start();
     }
     
@@ -60,6 +60,7 @@ public class Spawner extends Thread{
     }
     
     public void spawn(){
+        double counter=0;
         double odds= Math.random()*100;
         for(int t=0; t<quota; t++){
             for(int j=0; j<enemyProbabilities.length; j++){
