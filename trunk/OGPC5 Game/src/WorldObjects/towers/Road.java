@@ -25,6 +25,7 @@ public class Road extends Tile {
     
     public Road(Vector2 pos){
         super(pos);
+        sprite=new Image2D("Game Resources/Sprites/BasicRoad.png");
     }
 
     @Override
@@ -32,7 +33,12 @@ public class Road extends Tile {
     }
 
     @Override
-    public void Draw(ImageCollection batch) {        
+    public void Draw(ImageCollection batch) {
+        super.Draw(batch);
+        Vector2 dp=position.clone();
+        dp.dX(16);
+        dp.dY(16);
+        batch.addToCollection(sprite, 20, dp);
     }
 
     
