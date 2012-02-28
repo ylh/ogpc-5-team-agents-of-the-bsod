@@ -148,4 +148,11 @@ public class CityGame extends Game{
         File allSavedFiles= new File(path+"SavedFilesHead.txt");
     }
     
+    public boolean isTileRoad(int i, int j){  //Used by Road to determine the shape it should take
+        if(tiles[i][j] instanceof Road){
+            return true;
+        }
+        return false;
+    }
+    
 }
