@@ -81,7 +81,7 @@ public class CityGame extends Game{
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
                 Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);   
-                if(b.contains(mouse.location().getX(), mouse.location().getY()) && keyboard.isKeyDown('r')){
+                if(b.contains(mouse.location().getX(), mouse.location().getY()) && keyboard.isKeyDown('r')&&mouse.isPressed(Mouse.LEFT_BUTTON)){
                     if(!(tiles[i][j] instanceof Road)){
                         Vector2 roadPos = new Vector2(i*32,j*32);
                         tiles[i][j] = new Road(roadPos);
