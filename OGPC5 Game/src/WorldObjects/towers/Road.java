@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import Utilities.Mouse;
+import ogpc5.game.CityGame;
 
 /**
  *
@@ -21,11 +22,12 @@ import Utilities.Mouse;
 public class Road extends Tile {
     
     protected Mouse mouse = new Mouse();
+    protected CityGame city = new CityGame();   
     
     
-    public Road(Vector2 pos){
-        super(pos);
-        sprite=new Image2D("Game Resources/Sprites/BasicRoad.png");
+    public Road(Vector2 pos, String spritePath){
+        super(pos);   
+        sprite = new Image2D(spritePath);
     }
 
     @Override
@@ -36,10 +38,12 @@ public class Road extends Tile {
     public void Draw(ImageCollection batch) {
         super.Draw(batch);
         Vector2 dp=position.clone();
-        dp.dX(16);
+        dp.dX(16);        
         dp.dY(16);
         batch.addToCollection(sprite, 20, dp);
     }
+    
+
 
     
     
