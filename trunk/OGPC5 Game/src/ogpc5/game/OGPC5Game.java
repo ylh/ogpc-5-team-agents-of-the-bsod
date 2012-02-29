@@ -15,7 +15,7 @@ public class OGPC5Game {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {        
         new GameBase(new CityGame(), "Agents of the BSoD").Run();
     }
 }
