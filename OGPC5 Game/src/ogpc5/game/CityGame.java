@@ -4,6 +4,7 @@
  */
 package ogpc5.game;
 
+import Enemies.Spawner;
 import GUIStuff.Button;
 import GUIStuff.Tile;
 import Game.Game;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Nekel_Seyew and tsutton14 (Road related subroutines)
+ * @author Nekel_Seyew, Tsutton14, and Peter Cowal
  */
 public class CityGame extends Game{
     
@@ -92,6 +93,9 @@ public class CityGame extends Game{
                     if(!(tiles[i][j] instanceof Road)){
                         Vector2 roadPos = new Vector2(i*32,j*32);
                         tiles[i][j] = new Road(roadPos, returnSprite(setRoadShape(i,j)));
+                        if((i+1)>=tiles.length){
+                            //spawnController.add();
+                        }
                     }
                 }
                 if(tiles[i][j]==null){
@@ -147,11 +151,11 @@ public class CityGame extends Game{
     }
     
     private void save(){
-        String path="Saved Files/";
+        String path="Game Resources/Saved Files/";
         File allSavedFiles= new File(path+"SavedFilesHead.txt");
     }
     private void load(){
-        String path="Saved Files/";
+        String path="Game Resources/Saved Files/";
         File allSavedFiles= new File(path+"SavedFilesHead.txt");
     }
     
