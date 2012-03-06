@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author pcowal15
+ * @author pcowal15, Nekel_Seyew
  */
 public class Enemy extends WorldObject {
     double speed;
@@ -19,13 +19,12 @@ public class Enemy extends WorldObject {
     double armor;
     double danger;
     
-    public Enemy(double Speed,double Health,double Armor,Vector2 pos,String path)
-    {
-        super(pos,1,path);
-        speed=Speed;
-        health=Health;
-        armor=Armor;
-        danger=0;
+    public Enemy(double Speed, double Health, double Armor, Vector2 pos, String path) {
+        super(pos, 1, path);
+        speed = Speed;
+        health = Health;
+        armor = Armor;
+        danger = 0;
     }
     public void Hit(double damage,double adamage,double sdamage)
     {
@@ -52,4 +51,16 @@ public class Enemy extends WorldObject {
         batch.addToCollection(sprite,1,position);
     }
     
+    public static final int GENERIC=0;
+    public static final int SMOG=1;
+    public static final int GANGS=2;
+    public static final int ARSONIST=3;
+    public static final int CRIMINAL=4;
+    public static final int TRASH=5;
+    public static final int WATER_POLUTION=6;
+    public static final int FIRE=7;
+    public static final int FLOOD=8;
+    public static final int EARTHQUACKE=9;
+    public static final int GRAFITTI=10;
+    public static final int EDUCATION=11;
 }
