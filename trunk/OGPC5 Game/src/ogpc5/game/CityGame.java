@@ -36,12 +36,7 @@ public class CityGame extends Game{
     public double score;
     public boolean invOpen=false;
     
-    private final int ROAD_UP_RIGHT = 0;
-    private final int ROAD_UP_LEFT= 1;
-    private final int ROAD_DOWN_RIGHT = 2;
-    private final int ROAD_DOWN_LEFT = 3;
     
-    private int roadIndex;
     
     Tile selection;
 
@@ -92,7 +87,7 @@ public class CityGame extends Game{
                 if(b.contains(mouse.location().getX(), mouse.location().getY()) && keyboard.isKeyDown('r')&&mouse.isPressed(Mouse.LEFT_BUTTON)){
                     if(!(tiles[i][j] instanceof Road)){
                         Vector2 roadPos = new Vector2(i*32,j*32);
-                        tiles[i][j] = new Road(roadPos, returnSprite(setRoadShape(i,j)));
+                        tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(i,j,tiles)));
                         if((i+1)>=tiles.length){
                             //spawnController.add();
                         }
@@ -159,77 +154,6 @@ public class CityGame extends Game{
         File allSavedFiles= new File(path+"SavedFilesHead.txt");
     }
     
-    public boolean isTileRoad(int i, int j){  //Used by Road to determine the shape it should take
-        if(tiles[i][j] instanceof Road){
-            return true;
-        }
-        return false;
-    }
-    
-    private int setRoadShape(int i, int j){
-        if(isRoadDown(tiles, i, j) && !isRoadUp(tiles, i, j) && !isRoadRight(tiles, i, j)){
-            roadIndex = ROAD_UP_RIGHT;
-        }
-        else if(isRoadDown(tiles, i, j) && !isRoadUp(tiles, i, j) && !isRoadLeft(tiles, i, j)){
-            roadIndex = ROAD_UP_LEFT;
-        }
-        else if(isRoadUp(tiles, i, j) && !isRoadDown(tiles, i, j) && !isRoadRight(tiles, i, j)){
-            roadIndex = ROAD_DOWN_RIGHT;
-        }
-        else if(isRoadUp(tiles, i, j) && !isRoadDown(tiles, i, j) && !isRoadLeft(tiles, i, j)){
-            roadIndex = ROAD_DOWN_LEFT;
-        }
-        else{
-            roadIndex = 4;
-        }
-        
-        return roadIndex;
-    }
-    
-    private boolean isRoadUp(Tile[][] t, int i, int j){  //Checks if road is above
-        if(t[i][j-1] instanceof Tile){
-            if(tiles[i][j-1] instanceof Road){
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private boolean isRoadDown(Tile[][] t, int i, int j){  //Checks if road is above
-        if(t[i][j+1] instanceof Tile){
-            if(tiles[i][j+1] instanceof Road){
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private boolean isRoadRight(Tile[][] t, int i, int j){  //Checks if road is right
-        if(t[i-1][j] instanceof Tile){
-            if(tiles[i-1][j] instanceof Road){
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private boolean isRoadLeft(Tile[][] t, int i, int j){  //Checks if road is left
-        if(t[i+1][j] instanceof Tile){
-            if(tiles[i+1][j] instanceof Road){
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private String returnSprite(int i){  //Returns proper image according to orientation
-        switch(i){
-            case 0: return "Game Resources/Sprites/UpRight.png";
-            case 1: return "Game Resources/Sprites/UpLeft.png";
-            case 2: return "Game Resources/Sprites/DownRight.png";
-            case 3: return "Game Resources/Sprites/DownLeft.png";
-            default: return "Game Resources/Sprites/BasicRoad.png";                
-        }
-    }
+
     
 }
