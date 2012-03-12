@@ -36,6 +36,7 @@ public class CityGame extends Game{
     public double score;
     public boolean invOpen=false;
     
+    //LOOK FOR ROAD STUFF IN ROAD CLASS
     
     
     Tile selection;
@@ -87,7 +88,7 @@ public class CityGame extends Game{
                 if(b.contains(mouse.location().getX(), mouse.location().getY()) && keyboard.isKeyDown('r')&&mouse.isPressed(Mouse.LEFT_BUTTON)){
                     if(!(tiles[i][j] instanceof Road)){
                         Vector2 roadPos = new Vector2(i*32,j*32);
-                        tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(i,j,tiles)));
+                        tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles,i,j)));
                         if((i+1)>=tiles.length){
                             //spawnController.add();
                         }
@@ -153,7 +154,5 @@ public class CityGame extends Game{
         String path="Game Resources/Saved Files/";
         File allSavedFiles= new File(path+"SavedFilesHead.txt");
     }
-    
 
-    
 }
