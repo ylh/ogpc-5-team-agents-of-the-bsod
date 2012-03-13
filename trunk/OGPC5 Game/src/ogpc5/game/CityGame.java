@@ -89,6 +89,7 @@ public class CityGame extends Game{
                     if(!(tiles[i][j] instanceof Road)){
                         Vector2 roadPos = new Vector2(i*32,j*32);
                         tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles,i,j)));
+                        Road.setNeighbors(tiles, i, j);
                         if((i+1)>=tiles.length){
                             //spawnController.add();
                         }
