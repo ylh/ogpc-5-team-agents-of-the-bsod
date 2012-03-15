@@ -45,6 +45,7 @@ public class Particle {
         return l;
     }
     public void draw(ImageCollection batch){
-        batch.addToCollection(sprite,1,pos);
+//        batch.addToCollection(sprite,1,pos);
+        batch.Draw(sprite, pos, 1);
     }
 }

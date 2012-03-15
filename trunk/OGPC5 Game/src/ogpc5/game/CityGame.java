@@ -43,6 +43,7 @@ public class CityGame extends Game{
 
     @Override
     public void InitializeAndLoad() {
+        this.gameSpeed=32;
         allObjects= new ArrayList<WorldObject>();
         tiles= new Tile[854/32][632/32];
         buttons=new ArrayList<Button>();
@@ -60,8 +61,8 @@ public class CityGame extends Game{
     }
     
     @Override
-    public void Run(){
-        super.Run();
+    public void run(){
+//        super.Run();
         this.base.theGUI.setSize(new Dimension(970,640));
         this.base.theGUI.setResizable(false);
     }

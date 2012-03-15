@@ -50,7 +50,8 @@ public class Road extends Tile {
         Vector2 dp=position.clone();
         dp.dX(16);        
         dp.dY(16);
-        batch.addToCollection(sprite, 20, dp);
+//        batch.addToCollection(sprite, 20, dp);
+        batch.Draw(sprite, dp, 20);
     }
     
     
