@@ -22,7 +22,8 @@ import ogpc5.game.CityGame;
 public class Road extends Tile {
     
     protected Mouse mouse = new Mouse();
-    protected CityGame city = new CityGame();  
+    protected CityGame city = new CityGame(); 
+    protected Vector2 spritePos;
     private static final int ROAD_UP_RIGHT = 0;
     private static final int ROAD_UP_LEFT= 1;
     private static final int ROAD_DOWN_RIGHT = 2;
@@ -38,6 +39,9 @@ public class Road extends Tile {
     public Road(Vector2 pos, String spritePath){
         super(pos);   
         sprite = new Image2D(spritePath);
+        spritePos=position.clone();
+        spritePos.dX(16);
+        spritePos.dY(16);
     }
 
     @Override
@@ -47,11 +51,11 @@ public class Road extends Tile {
     @Override
     public void Draw(ImageCollection batch) {
         super.Draw(batch);
-        Vector2 dp=position.clone();
-        dp.dX(16);        
-        dp.dY(16);
+        // dp=position.clone();
+//        dp.dX(16);        
+//        dp.dY(16);
 //        batch.addToCollection(sprite, 20, dp);
-        batch.Draw(sprite, dp, 20);
+        batch.Draw(sprite, spritePos, 20);
     }
     
     

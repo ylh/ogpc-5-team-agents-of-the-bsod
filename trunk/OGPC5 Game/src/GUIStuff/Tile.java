@@ -39,8 +39,6 @@ public class Tile extends WorldObject{
         if(isSelected){
             batch.fillRect(position, 32, 32, Color.blue, 2);
             batch.drawRect(position, 32, 32, Color.blue, 100);
-        }else{
-            batch.drawRect(position, 32, 32, Color.red, 1);
         }
     }
 
