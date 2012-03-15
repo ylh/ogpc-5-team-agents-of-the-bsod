@@ -35,6 +35,7 @@ public class CityGame extends Game{
     public double money;
     public double score;
     public boolean invOpen=false;
+    Image2D Background= new Image2D("Game Resources/Sprites/GUIs/Background.PNG");
     
     //LOOK FOR ROAD STUFF IN ROAD CLASS
     
@@ -83,38 +84,72 @@ public class CityGame extends Game{
         for(Button b : buttons){
             b.setOpen(invOpen);
         }
-        for(int i=0; i<tiles.length; i++){
-            for(int j=0; j<tiles[i].length; j++){
-                Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);   
-                if(b.contains(mouse.location().getX(), mouse.location().getY()) && keyboard.isKeyDown('r')&&mouse.isPressed(Mouse.LEFT_BUTTON)){
-                    if(!(tiles[i][j] instanceof Road)){
-                        Vector2 roadPos = new Vector2(i*32,j*32);
-                        tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles,i,j)));
-                        Road.setNeighbors(tiles, i, j);
-                        if((i+1)>=tiles.length){
-                            //spawnController.add();
-                        }
+        
+        if (mouse.isPressed(Mouse.LEFT_BUTTON)) {
+            int x = (int) mouse.location().getX();
+            int y = (int) mouse.location().getY();
+
+            int i = x / 32;
+            int j = y / 32;
+
+            Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
+
+            if (selection == null) {
+                selection = (Tile) tiles[i][j];
+                selection.select();
+                invOpen = true;
+            } else {
+                selection.unselect();
+                selection = (Tile) tiles[i][j];
+                selection.select();
+                invOpen = false;
+            }
+
+            if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                if (!(tiles[i][j] instanceof Road)) {
+                    Vector2 roadPos = new Vector2((i * 32), (j * 32));
+                    tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
+                    Road.setNeighbors(tiles, i, j);
+                    if ((i + 1) >= tiles.length) {
+                        //spawnController.add();
                     }
-                }
-                if(tiles[i][j]==null){
-                    continue;
-                }else{
-                    if (mouse.isPressed(Mouse.LEFT_BUTTON) && b.contains(mouse.location().getX(), mouse.location().getY())) {
-                        if(selection==null){
-                            selection=(Tile)tiles[i][j];
-                            selection.select();
-                            invOpen=true;
-                        }else{
-                            selection.unselect();
-                            selection=(Tile)tiles[i][j];
-                            selection.select();
-                            invOpen=false;
-                        }
-                    }
-                    tiles[i][j].Update(allObjects);
                 }
             }
         }
+        
+//        for (int i = 0; i < tiles.length; i++) {
+//            for (int j = 0; j < tiles[i].length; j++) {
+//                Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
+//                double x= mouse.location().getX();
+//                double y=mouse.location().getY();
+//                if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+//                    if (!(tiles[i][j] instanceof Road)) {
+//                        Vector2 roadPos = new Vector2(i * 32, j * 32);
+//                        tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
+//                        Road.setNeighbors(tiles, i, j);
+//                        if ((i + 1) >= tiles.length) {
+//                            //spawnController.add();
+//                        }
+//                    }
+//                }
+//
+//                if (mouse.isPressed(Mouse.LEFT_BUTTON) && b.contains(x, y)) {
+//                    if (selection == null) {
+//                        selection = (Tile) tiles[i][j];
+//                        selection.select();
+//                        invOpen = true;
+//                    } else {
+//                        selection.unselect();
+//                        selection = (Tile) tiles[i][j];
+//                        selection.select();
+//                        invOpen = false;
+//                    }
+//                }
+//                
+//                tiles[i][j].Update(allObjects);
+//
+//            }
+//        }
     }
 
     @Override
@@ -125,15 +160,19 @@ public class CityGame extends Game{
         for (Button b: buttons){
             //TODO: button drawing
         }
+        batch.Draw(Background, new Vector2(835/2,611/2), 0);
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
-                if(tiles[i][j]==null){
+                Tile t= tiles[i][j];
+                if(t==null){
                     continue;
                 }else{
-                    tiles[i][j].Draw(batch);
+                    //t.Update(allObjects);
+                    t.Draw(batch);
                 }
             }
-        }if(selection!=null){
+        }
+        if(selection!=null){
             selection.Draw(batch);
         }
     }
