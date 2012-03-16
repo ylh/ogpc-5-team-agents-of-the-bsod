@@ -31,6 +31,7 @@ public class CityGame extends Game{
     
     ArrayList<WorldObject> allObjects;
     public Tile[][] tiles;
+    public ArrayList<Tile> activeTiles;
     public ArrayList<Button> buttons;
     public double money;
     public double score;
@@ -46,6 +47,7 @@ public class CityGame extends Game{
     public void InitializeAndLoad() {
         this.gameSpeed=32;
         allObjects= new ArrayList<WorldObject>();
+        activeTiles= new ArrayList<Tile>();
         tiles= new Tile[854/32][632/32];
         buttons=new ArrayList<Button>();
         for(int i=0; i<tiles.length; i++){
@@ -84,6 +86,9 @@ public class CityGame extends Game{
         for(Button b : buttons){
             b.setOpen(invOpen);
         }
+        for(Tile t: activeTiles){
+            t.Update(allObjects);
+        }
         
         if (mouse.isPressed(Mouse.LEFT_BUTTON)) {
             int x = (int) mouse.location().getX();
@@ -110,6 +115,7 @@ public class CityGame extends Game{
                     Vector2 roadPos = new Vector2((i * 32), (j * 32));
                     tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
                     Road.setNeighbors(tiles, i, j);
+                    activeTiles.add(tiles[i][j]);
                     if ((i + 1) >= tiles.length) {
                         //spawnController.add();
                     }
@@ -161,16 +167,8 @@ public class CityGame extends Game{
             //TODO: button drawing
         }
         batch.Draw(Background, new Vector2(835/2,611/2), 0);
-        for(int i=0; i<tiles.length; i++){
-            for(int j=0; j<tiles[i].length; j++){
-                Tile t= tiles[i][j];
-                if(t==null){
-                    continue;
-                }else{
-                    //t.Update(allObjects);
-                    t.Draw(batch);
-                }
-            }
+        for(Tile t: activeTiles){
+            t.Draw(batch);
         }
         if(selection!=null){
             selection.Draw(batch);
