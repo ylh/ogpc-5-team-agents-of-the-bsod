@@ -88,6 +88,7 @@ public class CityGame extends Game{
             b.glide();
             if (b.isPressed(mouse)){
                 invOpen = false;
+                selection=null;
             }
             
         }
@@ -100,7 +101,8 @@ public class CityGame extends Game{
             t.Update(allObjects);
         }
         
-        if (mouse.isPressed(Mouse.LEFT_BUTTON)) {
+        if (mouse.isPressed(Mouse.LEFT_BUTTON)&&mouse.location().getX()<854) {
+            invOpen = true;
             int x = (int) mouse.location().getX();
             int y = (int) mouse.location().getY();
 
@@ -112,7 +114,7 @@ public class CityGame extends Game{
             if (selection == null) {
                 selection = (Tile)tiles[i][j];
                 selection.select();
-                invOpen = true;
+                
             } else {
                 selection.unselect();
                 selection =(Tile)tiles[i][j];
