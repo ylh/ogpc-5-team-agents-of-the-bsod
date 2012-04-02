@@ -30,7 +30,7 @@ public class Button {
         closepos = cp;
         pos = cp;
         movespeed = ms;
-        sprite=new Image2D("BlueBox.png");
+        sprite=new Image2D("Game Resources/Sprites/GUIs/BlueBox.png");
         open = false;
         button = new Rect(pos, 48, 16);
     }
@@ -67,7 +67,7 @@ public class Button {
         }
     }
     public void draw(ImageCollection batch){
-        batch.Draw(sprite,pos,1);
+        batch.Draw(sprite,pos,10000);
     }
 }
 
