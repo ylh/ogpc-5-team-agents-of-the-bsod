@@ -50,7 +50,7 @@ public class Button {
         } else {
             targetpos = closepos.clone();
         }
-        System.out.print( targetpos.getY());
+        //System.out.print( targetpos.getY());
         //smooth glidey motion!
         dy = targetpos.getY() - pos.getY();
         dy *= movespeed;
