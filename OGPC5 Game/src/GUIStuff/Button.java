@@ -4,6 +4,8 @@
  */
 package GUIStuff;
 
+import Utilities.Image2D;
+import Utilities.ImageCollection;
 import Utilities.Mouse;
 import Utilities.Rect;
 import Utilities.Vector2;
@@ -21,12 +23,14 @@ public class Button {
     Rect button;
     double movespeed; //you want a value less than 0.5
     boolean open;
+    Image2D sprite;
 
-    public Button(Vector2 op, Vector2 cp, Tower t, double ms) {
+    public Button(Vector2 op, Vector2 cp, double ms) {
         openpos = op;
         closepos = cp;
         pos = cp;
         movespeed = ms;
+        sprite=new Image2D("BlueBox.png");
         open = false;
         button = new Rect(pos, 48, 16);
     }
@@ -61,6 +65,9 @@ public class Button {
         else{
             return false;
         }
+    }
+    public void draw(ImageCollection batch){
+        batch.addToCollection(sprite,1,button);
     }
 }
 
