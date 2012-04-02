@@ -33,6 +33,7 @@ public class CityGame extends Game{
     public Tile[][] tiles;
     public ArrayList<Tile> activeTiles;
     public ArrayList<Button> buttons;
+    public ArrayList<Road> roads;
     public double money;
     public double score;
     public boolean invOpen=false;
@@ -49,6 +50,7 @@ public class CityGame extends Game{
         this.gameSpeed=32;
         allObjects= new ArrayList<WorldObject>();
         activeTiles= new ArrayList<Tile>();
+        roads= new ArrayList<Road>();
         tiles= new Tile[854/32][632/32];
         buttons=new ArrayList<Button>();
         
@@ -138,14 +140,16 @@ public class CityGame extends Game{
                     Vector2 roadPos = new Vector2((i * 32), (j * 32));
                     tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
                     Road.setNeighbors(tiles, i, j);
-                    activeTiles.add(tiles[i][j]);
+                    roads.add((Road)tiles[i][j]);
+                    //activeTiles.add(tiles[i][j]);
                     if ((i + 1) >= tiles.length) {
                         //ADD SPAWNER CODE
                     }
                 }
             }
             if(b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)){
-                activeTiles.remove(tiles[i][j]);
+                //activeTiles.remove(tiles[i][j]);
+                roads.remove(tiles[i][j]);
                 Road.setNeighbors(tiles, i, j);
                 tiles[i][j]=new Tile(new Vector2(i*32, j*32));
             }
@@ -201,6 +205,11 @@ public class CityGame extends Game{
         for(Tile t: activeTiles){
             t.Draw(batch);
         }
+        
+        for(Road r : roads){
+            r.Draw(batch);
+        }
+        
         if(selection!=null){
             selection.Draw(batch);
         }
