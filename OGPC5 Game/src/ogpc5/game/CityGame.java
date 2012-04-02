@@ -89,9 +89,12 @@ public class CityGame extends Game{
             if (b.isPressed(mouse)){
                 invOpen = false;
             }
+            
         }
         for(Button b : buttons){
+            
             b.setOpen(invOpen);
+            
         }
         for(Tile t: activeTiles){
             t.Update(allObjects);
