@@ -50,6 +50,13 @@ public class CityGame extends Game{
         activeTiles= new ArrayList<Tile>();
         tiles= new Tile[854/32][632/32];
         buttons=new ArrayList<Button>();
+        
+        buttons.add(new Button(new Vector2(900,100),new Vector2(900,-20),0.1));
+        
+        buttons.add(new Button(new Vector2(900,200),new Vector2(900,-20),0.1));
+        
+        buttons.add(new Button(new Vector2(900,300),new Vector2(900,-20),0.1));
+        
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
                 tiles[i][j]=new Tile(new Vector2(i*32, j*32));
@@ -107,7 +114,7 @@ public class CityGame extends Game{
                 selection.unselect();
                 selection =(Tile)tiles[i][j];
                 selection.select();
-                invOpen = false;
+                //invOpen = false;
             }
 
             if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
@@ -164,7 +171,7 @@ public class CityGame extends Game{
             wo.Draw(batch);
         }
         for (Button b: buttons){
-            //TODO: button drawing
+            b.draw(batch);
         }
         batch.Draw(Background, new Vector2(835/2,611/2), 0);
         
