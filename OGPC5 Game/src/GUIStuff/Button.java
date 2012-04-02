@@ -67,7 +67,7 @@ public class Button {
         }
     }
     public void draw(ImageCollection batch){
-        batch.addToCollection(sprite,1,button);
+        batch.Draw(sprite,pos,1);
     }
 }
 
