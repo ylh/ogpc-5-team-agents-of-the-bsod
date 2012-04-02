@@ -100,12 +100,12 @@ public class CityGame extends Game{
             Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
 
             if (selection == null) {
-                selection = (Tile) tiles[i][j];
+                selection = (Tile)tiles[i][j];
                 selection.select();
                 invOpen = true;
             } else {
                 selection.unselect();
-                selection = (Tile) tiles[i][j];
+                selection =(Tile)tiles[i][j];
                 selection.select();
                 invOpen = false;
             }
@@ -117,7 +117,7 @@ public class CityGame extends Game{
                     Road.setNeighbors(tiles, i, j);
                     activeTiles.add(tiles[i][j]);
                     if ((i + 1) >= tiles.length) {
-                        //spawnController.add();
+                        //ADD SPAWNER CODE
                     }
                 }
             }
@@ -167,6 +167,7 @@ public class CityGame extends Game{
             //TODO: button drawing
         }
         batch.Draw(Background, new Vector2(835/2,611/2), 0);
+        
         for(Tile t: activeTiles){
             t.Draw(batch);
         }

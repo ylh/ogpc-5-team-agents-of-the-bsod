@@ -179,11 +179,15 @@ public class Road extends Tile {
         }
     }
     
+    public void changeShape(String newSpritePath){
+        sprite = new Image2D(newSpritePath);
+    }
+    
     public static void setNeighbors(Tile[][] t, int i, int j){        
         try {
             if (t[i][j - 1] instanceof Tile) {
                 if (t[i][j - 1] instanceof Road) {
-                    t[i][j-1] = new Road(new Vector2(i*32,(j-1)*32),Road.returnSprite(Road.setRoadShape(t,i,j-1)));
+                    ((Road)t[i][j-1]).changeShape(Road.returnSprite(Road.setRoadShape(t,i,j-1)));
                 }
             }            
         } catch (Exception e) {            
@@ -191,7 +195,7 @@ public class Road extends Tile {
         try {
             if (t[i][j + 1] instanceof Tile) {
                 if (t[i][j + 1] instanceof Road) {
-                    t[i][j+1] = new Road(new Vector2(i*32,(j+1)*32),Road.returnSprite(Road.setRoadShape(t,i,j+1)));
+                    ((Road)t[i][j+1]).changeShape(Road.returnSprite(Road.setRoadShape(t,i,j+1)));
                 }
             }            
         } catch (Exception e) {            
@@ -199,7 +203,7 @@ public class Road extends Tile {
         try {
             if (t[i+1][j] instanceof Tile) {
                 if (t[i+1][j] instanceof Road) {
-                    t[i+1][j] = new Road(new Vector2((i+1)*32,j*32),Road.returnSprite(Road.setRoadShape(t,i+1,j)));
+                    ((Road)t[i+1][j]).changeShape(Road.returnSprite(Road.setRoadShape(t,i+1,j)));
                 }
             }            
         } catch (Exception e) {            
@@ -207,7 +211,7 @@ public class Road extends Tile {
         try {
             if (t[i-1][j] instanceof Tile) {
                 if (t[i-1][j] instanceof Road) {
-                    t[i-1][j] = new Road(new Vector2((i-1)*32,j*32),Road.returnSprite(Road.setRoadShape(t,i-1,j)));
+                    ((Road)t[i-1][j]).changeShape(Road.returnSprite(Road.setRoadShape(t,i-1,j)));
                 }
             }            
         } catch (Exception e) {            
