@@ -29,6 +29,8 @@ import java.util.ArrayList;
  */
 public class CityGame extends Game{
     
+    public static int globalCount=0;
+    
     ArrayList<WorldObject> allObjects;
     public Tile[][] tiles;
     public ArrayList<Tile> activeTiles;
@@ -65,6 +67,7 @@ public class CityGame extends Game{
                 tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
             }
         }
+        
     }
 
     @Override
@@ -81,6 +84,7 @@ public class CityGame extends Game{
 
     @Override
     public void Update() {
+        globalCount=0;
         
         //Makes it really slow...
 //        if(firstRun){
@@ -95,6 +99,7 @@ public class CityGame extends Game{
         
         for(WorldObject wo: allObjects){
             wo.Update(allObjects);
+            globalCount++;
         }
         
         for(Button b : buttons){
@@ -103,15 +108,17 @@ public class CityGame extends Game{
                 invOpen = false;
                 selection=null;
             }
-            
+            globalCount++;
         }
         for(Button b : buttons){
             
             b.setOpen(invOpen);
-            
+            globalCount++;
         }
+        
         for(Tile t: activeTiles){
             t.Update(allObjects);
+            globalCount++;
         }
         
         if (mouse.isPressed(Mouse.LEFT_BUTTON)&&mouse.location().getX()<854) {
@@ -194,9 +201,11 @@ public class CityGame extends Game{
     public void Draw(Graphics g) {
         for(WorldObject wo: allObjects){
             wo.Draw(batch);
+            globalCount++;
         }
         for (Button b: buttons){
             b.draw(batch);
+            globalCount++;
         }
         
         
@@ -204,15 +213,18 @@ public class CityGame extends Game{
         
         for(Tile t: activeTiles){
             t.Draw(batch);
+            globalCount++;
         }
         
         for(Road r : roads){
             r.Draw(batch);
+            globalCount++;
         }
         
         if(selection!=null){
             selection.Draw(batch);
         }
+        System.out.println(globalCount);
     }
     
     public void addToWorldObjects(WorldObject wo){
