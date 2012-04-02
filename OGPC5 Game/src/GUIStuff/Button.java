@@ -28,11 +28,11 @@ public class Button {
     public Button(Vector2 op, Vector2 cp, double ms) {
         openpos = op;
         closepos = cp;
-        pos = cp;
+        pos = cp.clone();
         movespeed = ms;
         sprite=new Image2D("Game Resources/Sprites/GUIs/BlueBox.png");
         open = false;
-        button = new Rect(pos, 48, 16);
+        button = new Rect(pos, 100, 32);
     }
 
     
@@ -46,23 +46,32 @@ public class Button {
         double dy;
         if (open) {
             targetpos = openpos.clone();
+            
         } else {
             targetpos = closepos.clone();
         }
+        System.out.print( targetpos.getY());
         //smooth glidey motion!
         dy = targetpos.getY() - pos.getY();
         dy *= movespeed;
         pos.dY(dy);
         //reset the bounding box
-        button = new Rect(pos, 48, 16);
+        button = new Rect(pos, 100, 32);
     }
+
     public boolean isPressed(Mouse mouse) {
-        if (open &&
-                mouse.isPressed(Mouse.LEFT_BUTTON) && 
-                button.contains(mouse.location().getX(), mouse.location().getY())){
-            return true;
-        }
-        else{
+        if (open
+                && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+            Vector2 q = mouse.location().clone();
+            q.subtract(pos);
+            if (q.getX() > -50 && q.getX() < 50 && q.getY() > -16 && q.getY() < 16) {
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
             return false;
         }
     }
