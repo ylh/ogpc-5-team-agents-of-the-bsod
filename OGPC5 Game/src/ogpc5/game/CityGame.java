@@ -38,13 +38,14 @@ public class CityGame extends Game{
     public boolean invOpen=false;
     Image2D Background= new Image2D("Game Resources/Sprites/GUIs/Background.PNG");
     
-    //LOOK FOR ROAD STUFF IN ROAD CLASS
+    boolean firstRun;
     
     
     Tile selection;
 
     @Override
     public void InitializeAndLoad() {
+        firstRun=true;
         this.gameSpeed=32;
         allObjects= new ArrayList<WorldObject>();
         activeTiles= new ArrayList<Tile>();
@@ -59,10 +60,9 @@ public class CityGame extends Game{
         
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
-                tiles[i][j]=new Tile(new Vector2(i*32, j*32));
+                tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
             }
         }
-        
     }
 
     @Override
@@ -79,6 +79,17 @@ public class CityGame extends Game{
 
     @Override
     public void Update() {
+        
+        //Makes it really slow...
+//        if(firstRun){
+//            int i=13, j=18;
+//            Vector2 roadPos = new Vector2((i * 32), (j * 32));
+//            tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
+//            Road.setNeighbors(tiles, i, j);
+//            activeTiles.add(tiles[i][j]);
+//            firstRun=false;
+//        }
+//        firstRun=false;
         
         for(WorldObject wo: allObjects){
             wo.Update(allObjects);
@@ -133,6 +144,11 @@ public class CityGame extends Game{
                     }
                 }
             }
+            if(b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)){
+                activeTiles.remove(tiles[i][j]);
+                Road.setNeighbors(tiles, i, j);
+                tiles[i][j]=new Tile(new Vector2(i*32, j*32));
+            }
         }
         
 //        for (int i = 0; i < tiles.length; i++) {
@@ -178,6 +194,8 @@ public class CityGame extends Game{
         for (Button b: buttons){
             b.draw(batch);
         }
+        
+        
         batch.Draw(Background, new Vector2(835/2,611/2), 0);
         
         for(Tile t: activeTiles){
