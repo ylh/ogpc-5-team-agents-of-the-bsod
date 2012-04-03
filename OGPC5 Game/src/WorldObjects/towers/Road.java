@@ -21,9 +21,9 @@ import ogpc5.game.CityGame;
  */
 public class Road extends Tile {
     
-    protected Mouse mouse = new Mouse();
-    protected CityGame city = new CityGame(); 
     protected Vector2 spritePos;
+    
+    //Static Variables
     private static final int ROAD_UP_RIGHT = 0;
     private static final int ROAD_UP_LEFT= 1;
     private static final int ROAD_DOWN_RIGHT = 2;
