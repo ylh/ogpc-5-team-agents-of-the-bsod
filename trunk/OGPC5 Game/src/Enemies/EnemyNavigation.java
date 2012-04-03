@@ -16,7 +16,7 @@ public class EnemyNavigation extends Thread {
     int goalY;
     int spawnX;
     int spawnY;
-    ArrayList route = new ArrayList();
+    ArrayList<Vector2> route = new ArrayList();
     
     public EnemyNavigation(Tile[][] t, String navName, int i, int j, int k, int r){
         super(navName);
@@ -29,7 +29,9 @@ public class EnemyNavigation extends Thread {
     
     @Override
     public void run(){
-        route = findPath();        
+        synchronized(this){            
+        route = findPath(); 
+        }       
     }
     
     private double scoreRoad(int i, int j){
@@ -98,8 +100,8 @@ public class EnemyNavigation extends Thread {
         return new Vector2(highX,highY);
     }
     
-    private ArrayList findPath(){
-        ArrayList path = new ArrayList();
+    private ArrayList<Vector2> findPath(){
+        ArrayList<Vector2> path = new ArrayList();
         
         int currentX = spawnX;
         int currentY = spawnY;

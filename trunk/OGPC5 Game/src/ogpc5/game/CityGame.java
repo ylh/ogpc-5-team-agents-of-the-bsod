@@ -4,6 +4,7 @@
  */
 package ogpc5.game;
 
+import Enemies.Enemy;
 import Enemies.Spawner;
 import GUIStuff.Button;
 import GUIStuff.Tile;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Nekel_Seyew, Tsutton14, and Peter Cowal
+ * @author Nekel_Seyew, tsutton14, and Peter Cowal
  */
 public class CityGame extends Game{
     
@@ -159,6 +160,7 @@ public class CityGame extends Game{
                 roads.remove(tiles[i][j]);
                 Road.setNeighbors(tiles, i, j);
                 tiles[i][j]=new Tile(new Vector2(i*32, j*32));
+                resetPaths();
             }
         }
         
@@ -225,6 +227,15 @@ public class CityGame extends Game{
             selection.Draw(batch);
         }
         System.out.println(globalCount);
+    }
+    
+    private void resetPaths(){
+        for(WorldObject b: allObjects){
+            if (b instanceof Enemy){
+                Enemy e = (Enemy)b;
+                e.setEnemyPath(tiles);
+            }
+        }
     }
     
     public void addToWorldObjects(WorldObject wo){
