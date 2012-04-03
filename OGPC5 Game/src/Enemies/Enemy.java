@@ -4,6 +4,7 @@
  */
 package Enemies;
 
+import GUIStuff.Tile;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author pcowal15, Nekel_Seyew
+ * @author pcowal15, Nekel_Seyew, tsutton14
  */
 public class Enemy extends WorldObject {
     /**
@@ -35,6 +36,11 @@ public class Enemy extends WorldObject {
      */
     int id;
     
+    Tile[][] tiles; //Map from which the enemy works
+    
+    ArrayList<Vector2> path; //Enemy path
+    
+    
     /**
      * The Constructor for the enemy class. Because enemies all act similarly, They all have similar inputs. 
      * This is the Generic Constructor
@@ -44,16 +50,18 @@ public class Enemy extends WorldObject {
      * @param pos the starting position of the enemy
      * @param path the String path for the enemy's default static sprite
      */
-    public Enemy(double Speed, double Health, double Armor, Vector2 pos, String path) {
+    public Enemy(double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t) {
         super(pos, 1, path);
         speed = Speed;
         health = Health;
         armor = Armor;
         danger = 0;
+        tiles = t;
+        setEnemyPath(t);
         id=Enemy.GENERIC;
     }
-    public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path){
-        this(Speed, Health, Armor, pos, path);
+    public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
+        this(Speed, Health, Armor, pos, path, t);
         id=type;
     }
     /**
@@ -101,6 +109,41 @@ public class Enemy extends WorldObject {
     public void Draw(ImageCollection batch) {
 //        batch.addToCollection(sprite,1,position);
         batch.Draw(sprite, position, 1);
+    }
+    
+    public void setEnemyPath(Tile[][] t) {
+        EnemyNavigation pathCreator = new EnemyNavigation(t, "Default", 0, 0, 320, 320); //Actual spawn and goal values will be changed and hard-coded 
+        pathCreator.start();
+        if (!pathCreator.isAlive()) {
+            path = pathCreator.getPath();
+        }
+    }
+    
+    public void followPath(int i){
+        if(i < path.size()){            
+            for(int counter = i; counter <path.size(); counter++){
+                move((int)(path.get(i).getX()*32-16),(int)(path.get(i).getY()*32-16));
+            }
+        }
+    }
+    
+    private void move(int i, int j){
+        int goalX = (i+1)*32-16;
+        int goalY = (j+1)*32-16;
+        while(position.getX() != goalX && position.getY() != goalY){
+            if(position.getX()>goalX){
+                position.setX(position.getX()-1);
+            }
+            else if (position.getX()<goalX){
+                position.setX(position.getX()+1);
+            }
+            if(position.getY()>goalY){
+                position.setY(position.getY()-1);
+            }
+            else if (position.getY()<goalY){
+                position.setY(position.getY()+1);
+            }
+        }
     }
     
     /**
