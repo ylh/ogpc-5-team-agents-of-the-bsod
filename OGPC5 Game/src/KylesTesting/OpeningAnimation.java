@@ -23,6 +23,7 @@ public class OpeningAnimation {
     int type;
     
     public OpeningAnimation(Vector2 pos, int type){
+        position=pos;
         this.type=type;
         loadAnimation(type);
     }
@@ -37,7 +38,7 @@ public class OpeningAnimation {
     
     private void loadAnimation(int t){
         if(t==JAVA){
-            a=new Animation(18,10000,position,100);
+            a=new Animation(18,10,position,100);
             addJavaCell(1);
             addJavaCell(2);
             addJavaCell(3);
