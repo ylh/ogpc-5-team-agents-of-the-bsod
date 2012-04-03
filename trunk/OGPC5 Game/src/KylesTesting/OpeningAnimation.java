@@ -37,10 +37,67 @@ public class OpeningAnimation {
     
     private void loadAnimation(int t){
         if(t==JAVA){
-            
+            a=new Animation(18,10000,position,100);
+            addJavaCell(1);
+            addJavaCell(2);
+            addJavaCell(3);
+            addJavaCell(4);
+            addJavaCell(5);
+            addJavaCell(6);
+            addJavaCell(7);
+            addJavaCell(8);
+            addJavaCell(9);
+            addJavaCell(9);
+            addJavaCell(8);
+            addJavaCell(7);
+            addJavaCell(6);
+            addJavaCell(5);
+            addJavaCell(4);
+            addJavaCell(3);
+            addJavaCell(2);
+            addJavaCell(1);
         }else if(t==AOTBSOD){
-            
+            a=new Animation(33,10000,position,50);
+            addBSODCell(1);
+            addBSODCell(1);
+            addBSODCell(1);
+            addBSODCell(1);
+            addBSODCell(1);
+            addBSODCell(2);
+            addBSODCell(3);
+            addBSODCell(2);
+            addBSODCell(3);
+            addBSODCell(4);
+            addBSODCell(5);
+            addBSODCell(6);
+            addBSODCell(7);
+            addBSODCell(8);
+            addBSODCell(9);
+            addBSODCell(8);
+            addBSODCell(9);
+            addBSODCell(8);
+            addBSODCell(9);
+            addBSODCell(8);
+            addBSODCell(9);
+            addBSODCell(8);
+            addBSODCell(9);
+            addBSODCell(8);
+            addBSODCell(7);
+            addBSODCell(6);
+            addBSODCell(5);
+            addBSODCell(10);
+            addBSODCell(11);
+            addBSODCell(12);
+            addBSODCell(13);
+            addBSODCell(14);
+            addBSODCell(15);//33
         }
+    }
+    private void addJavaCell(int t){
+        a.addCell("Game Resources/Sprites/Opening Animation/JAVA/java"+t+".png");
+    }
+    private void addBSODCell(int t){
+        a.addCell("Game Resources/Sprites/Opening Animation/AOFBSOD/computer"+t+".png");
     }
     
 }
