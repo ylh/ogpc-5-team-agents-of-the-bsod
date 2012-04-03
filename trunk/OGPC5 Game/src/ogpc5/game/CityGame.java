@@ -9,6 +9,7 @@ import Enemies.Spawner;
 import GUIStuff.Button;
 import GUIStuff.Tile;
 import Game.Game;
+import KylesTesting.OpeningAnimation;
 import Utilities.Image2D;
 import Utilities.Mouse;
 import Utilities.Rect;
@@ -42,7 +43,19 @@ public class CityGame extends Game{
     public boolean invOpen=false;
     Image2D Background= new Image2D("Game Resources/Sprites/GUIs/Background.PNG");
     
+    //opening animation controlls
     boolean firstRun;
+    boolean JAVA=true;
+    boolean firstwait=false;
+    boolean secondwait=false;
+    boolean AOTBSOD=false;
+    double start;
+    double javaLength=18*100;
+    double aLength=33*75;
+    double first=1000;
+    double second=1000;
+    OpeningAnimation java;
+    OpeningAnimation aotbsod;
     
     
     Tile selection;
@@ -68,6 +81,9 @@ public class CityGame extends Game{
                 tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
             }
         }
+        java=new OpeningAnimation(new Vector2(970/2,640/2), OpeningAnimation.JAVA);
+        aotbsod=new OpeningAnimation(new Vector2(970/2,640/2), OpeningAnimation.AOTBSOD);
+        start=System.currentTimeMillis();
         
     }
 
@@ -87,7 +103,35 @@ public class CityGame extends Game{
     public void Update() {
         globalCount=0;
         
-        //Makes it really slow...
+        if(firstRun){
+            double time=System.currentTimeMillis();
+            if(JAVA){
+                if(time-start>=javaLength){
+                    JAVA=false;
+                    firstwait=true;
+                    start=time;
+                }
+            }else if(firstwait){
+                if(time-start>=first){
+                    firstwait=false;
+                    AOTBSOD=true;
+                    start=time;
+                }
+            }
+            else if(AOTBSOD){
+                if(time-start>=aLength){
+                    AOTBSOD=false;
+                    secondwait=true;
+                    start=time;
+                }
+            }else if(secondwait){
+                if(time-start>=second){
+                    firstRun=false;
+                    secondwait=false;
+                }
+            }
+        } else {
+            //Makes it really slow...
 //        if(firstRun){
 //            int i=13, j=18;
 //            Vector2 roadPos = new Vector2((i * 32), (j * 32));
@@ -97,72 +141,72 @@ public class CityGame extends Game{
 //            firstRun=false;
 //        }
 //        firstRun=false;
-        
-        for(WorldObject wo: allObjects){
-            wo.Update(allObjects);
-            globalCount++;
-        }
-        
-        for(Button b : buttons){
-            b.glide();
-            if (b.isPressed(mouse)){
-                invOpen = false;
-                selection=null;
-            }
-            globalCount++;
-        }
-        for(Button b : buttons){
-            
-            b.setOpen(invOpen);
-            globalCount++;
-        }
-        
-        for(Tile t: activeTiles){
-            t.Update(allObjects);
-            globalCount++;
-        }
-        
-        if (mouse.isPressed(Mouse.LEFT_BUTTON)&&mouse.location().getX()<854) {
-            invOpen = true;
-            int x = (int) mouse.location().getX();
-            int y = (int) mouse.location().getY();
 
-            int i = x / 32;
-            int j = y / 32;
-
-            Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
-
-            if (selection == null) {
-                selection = (Tile)tiles[i][j];
-                selection.select();
-                
-            } else {
-                selection.unselect();
-                selection =(Tile)tiles[i][j];
-                selection.select();
-                //invOpen = false;
+            for (WorldObject wo : allObjects) {
+                wo.Update(allObjects);
+                globalCount++;
             }
 
-            if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
-                if (!(tiles[i][j] instanceof Road)) {
-                    Vector2 roadPos = new Vector2((i * 32), (j * 32));
-                    tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
-                    Road.setNeighbors(tiles, i, j);
-                    roads.add((Road)tiles[i][j]);
-                    //activeTiles.add(tiles[i][j]);
-                    if ((i + 1) >= tiles.length) {
-                        //ADD SPAWNER CODE
+            for (Button b : buttons) {
+                b.glide();
+                if (b.isPressed(mouse)) {
+                    invOpen = false;
+                    selection = null;
+                }
+                globalCount++;
+            }
+            for (Button b : buttons) {
+
+                b.setOpen(invOpen);
+                globalCount++;
+            }
+
+            for (Tile t : activeTiles) {
+                t.Update(allObjects);
+                globalCount++;
+            }
+
+            if (mouse.isPressed(Mouse.LEFT_BUTTON) && mouse.location().getX() < 854) {
+                invOpen = true;
+                int x = (int) mouse.location().getX();
+                int y = (int) mouse.location().getY();
+
+                int i = x / 32;
+                int j = y / 32;
+
+                Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
+
+                if (selection == null) {
+                    selection = (Tile) tiles[i][j];
+                    selection.select();
+
+                } else {
+                    selection.unselect();
+                    selection = (Tile) tiles[i][j];
+                    selection.select();
+                    //invOpen = false;
+                }
+
+                if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                    if (!(tiles[i][j] instanceof Road)) {
+                        Vector2 roadPos = new Vector2((i * 32), (j * 32));
+                        tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
+                        Road.setNeighbors(tiles, i, j);
+                        roads.add((Road) tiles[i][j]);
+                        //activeTiles.add(tiles[i][j]);
+                        if ((i + 1) >= tiles.length) {
+                            //ADD SPAWNER CODE
+                        }
                     }
                 }
+                if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                    //activeTiles.remove(tiles[i][j]);
+                    roads.remove(tiles[i][j]);
+                    Road.setNeighbors(tiles, i, j);
+                    tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
+                    resetPaths();
+                }
             }
-            if(b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)){
-                //activeTiles.remove(tiles[i][j]);
-                roads.remove(tiles[i][j]);
-                Road.setNeighbors(tiles, i, j);
-                tiles[i][j]=new Tile(new Vector2(i*32, j*32));
-                resetPaths();
-            }
-        }
         
 //        for (int i = 0; i < tiles.length; i++) {
 //            for (int j = 0; j < tiles[i].length; j++) {
@@ -197,36 +241,47 @@ public class CityGame extends Game{
 //
 //            }
 //        }
+        }
     }
 
     @Override
     public void Draw(Graphics g) {
-        for(WorldObject wo: allObjects){
-            wo.Draw(batch);
-            globalCount++;
+        if(firstRun){
+            this.setBackground(Color.black);
+            if(JAVA){
+                java.draw(batch);
+            }else if(AOTBSOD){
+                aotbsod.draw(batch);
+            }
+        } else {
+            this.setBackground(Color.white);
+            for (WorldObject wo : allObjects) {
+                wo.Draw(batch);
+                globalCount++;
+            }
+            for (Button b : buttons) {
+                b.draw(batch);
+                globalCount++;
+            }
+
+
+            batch.Draw(Background, new Vector2(835 / 2, 611 / 2), 0);
+
+            for (Tile t : activeTiles) {
+                t.Draw(batch);
+                globalCount++;
+            }
+
+            for (Road r : roads) {
+                r.Draw(batch);
+                globalCount++;
+            }
+
+            if (selection != null) {
+                selection.Draw(batch);
+            }
+            System.out.println(globalCount);
         }
-        for (Button b: buttons){
-            b.draw(batch);
-            globalCount++;
-        }
-        
-        
-        batch.Draw(Background, new Vector2(835/2,611/2), 0);
-        
-        for(Tile t: activeTiles){
-            t.Draw(batch);
-            globalCount++;
-        }
-        
-        for(Road r : roads){
-            r.Draw(batch);
-            globalCount++;
-        }
-        
-        if(selection!=null){
-            selection.Draw(batch);
-        }
-        System.out.println(globalCount);
     }
     
     private void resetPaths(){
