@@ -57,7 +57,7 @@ public class OpeningAnimation {
             addJavaCell(2);
             addJavaCell(1);
         }else if(t==AOTBSOD){
-            a=new Animation(33,10000,position,50);
+            a=new Animation(33,10000,position,75);
             addBSODCell(1);
             addBSODCell(1);
             addBSODCell(1);
