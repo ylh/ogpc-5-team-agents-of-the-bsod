@@ -57,6 +57,8 @@ public class CityGame extends Game{
     OpeningAnimation java;
     OpeningAnimation aotbsod;
     
+    boolean makeFirstRoad=true;
+    
     
     Tile selection;
 
@@ -132,15 +134,14 @@ public class CityGame extends Game{
             }
         } else {
             //Makes it really slow...
-//        if(firstRun){
-//            int i=13, j=18;
-//            Vector2 roadPos = new Vector2((i * 32), (j * 32));
-//            tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
-//            Road.setNeighbors(tiles, i, j);
-//            activeTiles.add(tiles[i][j]);
-//            firstRun=false;
-//        }
-//        firstRun=false;
+        if(makeFirstRoad){
+            int i=13, j=18;
+            Vector2 roadPos = new Vector2((i * 32), (j * 32));
+            tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
+            Road.setNeighbors(tiles, i, j);
+            activeTiles.add(tiles[i][j]);
+            makeFirstRoad=false;
+        }
 
             for (WorldObject wo : allObjects) {
                 wo.Update(allObjects);
