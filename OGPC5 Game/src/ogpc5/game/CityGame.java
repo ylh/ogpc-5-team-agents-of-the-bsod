@@ -57,11 +57,11 @@ public class CityGame extends Game{
         tiles= new Tile[854/32][632/32];
         buttons=new ArrayList<Button>();
         
-        buttons.add(new Button(new Vector2(900,100),new Vector2(900,-20),0.1));
+        buttons.add(new Button(new Vector2(900,100),new Vector2(900,-40),0.1));
         
-        buttons.add(new Button(new Vector2(900,200),new Vector2(900,-20),0.1));
+        buttons.add(new Button(new Vector2(900,200),new Vector2(900,-40),0.1));
         
-        buttons.add(new Button(new Vector2(900,300),new Vector2(900,-20),0.1));
+        buttons.add(new Button(new Vector2(900,300),new Vector2(900,-40),0.1));
         
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
