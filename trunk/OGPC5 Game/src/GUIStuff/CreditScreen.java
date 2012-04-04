@@ -6,6 +6,7 @@ package GUIStuff;
 
 import Utilities.ImageCollection;
 import Utilities.KeyBoard;
+import Utilities.Mouse;
 import Utilities.Vector2;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -130,7 +131,7 @@ public class CreditScreen {
         }
     }
     
-    public boolean isDone(KeyBoard k){
-        return k.isKeyDown(KeyEvent.VK_SPACE) || done;
+    public boolean isDone(KeyBoard k, Mouse m){
+        return k.isKeyDown(KeyEvent.VK_SPACE) ||m.isPressed(Mouse.LEFT_BUTTON) || done;
     }
 }
