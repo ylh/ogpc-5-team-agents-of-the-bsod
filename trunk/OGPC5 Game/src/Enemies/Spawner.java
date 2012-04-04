@@ -32,10 +32,8 @@ public class Spawner {
 
     public void update(){
         double time=System.currentTimeMillis();
-        if(time- lastTime >= timeToWait){
-            double prob= Math.random()*100;
+        if(time- lastTime >= timeToWait){            
             int position=0;
-            //NOT EFFICIENT. GAH!!!!!!!
             for(int i=0; i<=11; i++){
                 double d=quota*(EnemyProbabilityTable.getProbability(i)/100.0);
                 for(int j=0; j<(int)d; j++){
@@ -58,32 +56,45 @@ public class Spawner {
            lastTime=time;
         }
     }
-    //TODO: finish this
+    
     private void addEnemy(int enemy, int position){//add the given enemy at the given location.
+        Enemy e;
         switch(enemy){
             case Enemy.ARSONIST:
+                e = new Enemy(Enemy.ARSONIST, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.CRIMINAL:
+                e = new Enemy(Enemy.CRIMINAL, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.EARTHQUACKE:
+                e = new Enemy(Enemy.EARTHQUACKE, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.EDUCATION:
+                e = new Enemy(Enemy.EDUCATION, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.FIRE:
+                e = new Enemy(Enemy.FIRE, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.FLOOD:
+                e = new Enemy(Enemy.FLOOD, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.GANGS:
+                e = new Enemy(Enemy.GANGS, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.GENERIC:
+                e = new Enemy(Enemy.GENERIC, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.GRAFITTI:
+                e = new Enemy(Enemy.GRAFITTI, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.SMOG:
+                e = new Enemy(Enemy.SMOG, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.TRASH:
+                e = new Enemy(Enemy.TRASH, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             case Enemy.WATER_POLUTION:
+                e = new Enemy(Enemy.WATER_POLUTION, 1, 10, 0, new Vector2((position+1)*32-16,19*32-16), "Game Resources/Sprites/PlaceHolderEnemy", theGame.tiles);
                 break;
             default:
                 break;
