@@ -14,6 +14,8 @@ import KylesTesting.OpeningAnimation;
 import Utilities.Image2D;
 import Utilities.Mouse;
 import Utilities.Rect;
+import Utilities.Sound;
+import Utilities.SoundFile;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
 import WorldObjects.towers.Road;
@@ -55,6 +57,8 @@ public class CityGame extends Game{
     double second=1000;
     OpeningAnimation java;
     OpeningAnimation aotbsod;
+    SoundFile aww;
+    boolean awwStarted=false;
     
     //Main Menu
     boolean mainMenu=false;
@@ -99,6 +103,7 @@ public class CityGame extends Game{
         
         creds= new MenuButton(new Vector2(970/2, 300), MenuButton.CREDITS);
         start = new MenuButton(new Vector2(970/2, 500), MenuButton.START);
+        aww=new SoundFile("Game Resources/Sound/AwwComeon.wav",1);
         
         creditScreen= new CreditScreen();
         
@@ -136,6 +141,10 @@ public class CityGame extends Game{
                 }
             }
             else if(AOTBSOD){
+                if(time-startTime>=750 && !awwStarted){
+                    awwStarted=true;
+                    aww.start();
+                }
                 if(time-startTime>=aLength || keyboard.isKeyDown(KeyEvent.VK_SPACE) || mouse.isPressed(Mouse.LEFT_BUTTON)){
                     AOTBSOD=false;
                     secondwait=true;
@@ -146,6 +155,7 @@ public class CityGame extends Game{
                     firstRun=false;
                     secondwait=false;
                     mainMenu=true;
+                    aww=new SoundFile("Game Resources/Sound/AwwComeon.wav",1);
                 }
             }
         }else if(mainMenu){
