@@ -123,7 +123,7 @@ public class CityGame extends Game{
         if(firstRun){
             double time=System.currentTimeMillis();
             if(JAVA){
-                if(time-startTime>=javaLength || keyboard.isKeyDown(KeyEvent.VK_SPACE)){
+                if(time-startTime>=javaLength || keyboard.isKeyDown(KeyEvent.VK_SPACE)|| mouse.isPressed(Mouse.LEFT_BUTTON)){
                     JAVA=false;
                     firstwait=true;
                     startTime=time;
@@ -136,7 +136,7 @@ public class CityGame extends Game{
                 }
             }
             else if(AOTBSOD){
-                if(time-startTime>=aLength || keyboard.isKeyDown(KeyEvent.VK_SPACE)){
+                if(time-startTime>=aLength || keyboard.isKeyDown(KeyEvent.VK_SPACE) || mouse.isPressed(Mouse.LEFT_BUTTON)){
                     AOTBSOD=false;
                     secondwait=true;
                     startTime=time;
@@ -161,7 +161,7 @@ public class CityGame extends Game{
             }
         }else if(credits){
             creditScreen.update();
-            if(creditScreen.isDone(keyboard)){
+            if(creditScreen.isDone(keyboard, mouse)){
                 credits=false;
                 creditScreen=new CreditScreen();
                 mainMenu=true;
