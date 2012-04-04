@@ -283,9 +283,9 @@ public class CityGame extends Game{
             
             //money drawing
             if (money < 0) {
-                batch.DrawString(new Vector2(850, 30), "Money: " + money, Color.red, 10);
+                batch.DrawString(new Vector2(850, 30), "Money: $" + money, Color.red, 10);
             } else {
-                batch.DrawString(new Vector2(850, 30), "Money: " + money, Color.black, 10);
+                batch.DrawString(new Vector2(850, 30), "Money: $" + money, Color.black, 10);
             }
             
             batch.Draw(Background, new Vector2(835 / 2, 611 / 2), 0);
