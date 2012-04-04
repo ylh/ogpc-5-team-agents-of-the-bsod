@@ -5,8 +5,9 @@
 package ogpc5.game;
 
 import Enemies.Enemy;
-import Enemies.Spawner;
 import GUIStuff.Button;
+import GUIStuff.CreditScreen;
+import GUIStuff.MenuButton;
 import GUIStuff.Tile;
 import Game.Game;
 import KylesTesting.OpeningAnimation;
@@ -14,14 +15,12 @@ import Utilities.Image2D;
 import Utilities.Mouse;
 import Utilities.Rect;
 import Utilities.Vector2;
-import Utilities.KeyBoard;
 import WorldObjects.WorldObject;
 import WorldObjects.towers.Road;
-import WorldObjects.towers.Tower;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -49,7 +48,7 @@ public class CityGame extends Game{
     boolean firstwait=false;
     boolean secondwait=false;
     boolean AOTBSOD=false;
-    double start;
+    double startTime;
     double javaLength=18*100;
     double aLength=33*75;
     double first=1000;
@@ -57,6 +56,16 @@ public class CityGame extends Game{
     OpeningAnimation java;
     OpeningAnimation aotbsod;
     
+    //Main Menu
+    boolean mainMenu=false;
+    MenuButton creds;
+    MenuButton start;
+    //credits
+    boolean credits;
+    CreditScreen creditScreen;
+    
+    
+    //PreGame
     boolean makeFirstRoad=true;
     
     
@@ -71,6 +80,7 @@ public class CityGame extends Game{
         roads= new ArrayList<Road>();
         tiles= new Tile[854/32][632/32];
         buttons=new ArrayList<Button>();
+        money=0;
         
         buttons.add(new Button(new Vector2(900,100),new Vector2(900,-40),0.1));
         
@@ -85,7 +95,12 @@ public class CityGame extends Game{
         }
         java=new OpeningAnimation(new Vector2(970/2,640/2), OpeningAnimation.JAVA);
         aotbsod=new OpeningAnimation(new Vector2(970/2,640/2), OpeningAnimation.AOTBSOD);
-        start=System.currentTimeMillis();
+        startTime=System.currentTimeMillis();
+        
+        creds= new MenuButton(new Vector2(970/2, 300), MenuButton.CREDITS);
+        start = new MenuButton(new Vector2(970/2, 500), MenuButton.START);
+        
+        creditScreen= new CreditScreen();
         
     }
 
@@ -108,40 +123,58 @@ public class CityGame extends Game{
         if(firstRun){
             double time=System.currentTimeMillis();
             if(JAVA){
-                if(time-start>=javaLength){
+                if(time-startTime>=javaLength || keyboard.isKeyDown(KeyEvent.VK_SPACE)){
                     JAVA=false;
                     firstwait=true;
-                    start=time;
+                    startTime=time;
                 }
             }else if(firstwait){
-                if(time-start>=first){
+                if(time-startTime>=first){
                     firstwait=false;
                     AOTBSOD=true;
-                    start=time;
+                    startTime=time;
                 }
             }
             else if(AOTBSOD){
-                if(time-start>=aLength){
+                if(time-startTime>=aLength || keyboard.isKeyDown(KeyEvent.VK_SPACE)){
                     AOTBSOD=false;
                     secondwait=true;
-                    start=time;
+                    startTime=time;
                 }
             }else if(secondwait){
-                if(time-start>=second){
+                if(time-startTime>=second){
                     firstRun=false;
                     secondwait=false;
+                    mainMenu=true;
                 }
             }
+        }else if(mainMenu){
+            creds.update(mouse);
+            start.update(mouse);
+            if(start.isPressed(mouse)){
+                mainMenu=false;
+            }
+            if(creds.isPressed(mouse)){
+                mainMenu=false;
+                credits=true;
+                creditScreen.start();
+            }
+        }else if(credits){
+            creditScreen.update();
+            if(creditScreen.isDone(keyboard)){
+                credits=false;
+                creditScreen=new CreditScreen();
+                mainMenu=true;
+            }
         } else {
-            //Makes it really slow...
-        if(makeFirstRoad){
-            int i=13, j=18;
-            Vector2 roadPos = new Vector2((i * 32), (j * 32));
-            tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
-            Road.setNeighbors(tiles, i, j);
-            activeTiles.add(tiles[i][j]);
-            makeFirstRoad=false;
-        }
+            if (makeFirstRoad) {
+                int i = 13, j = 18;
+                Vector2 roadPos = new Vector2((i * 32), (j * 32));
+                tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
+                Road.setNeighbors(tiles, i, j);
+                activeTiles.add(tiles[i][j]);
+                makeFirstRoad = false;
+            }
 
             for (WorldObject wo : allObjects) {
                 wo.Update(allObjects);
@@ -198,6 +231,7 @@ public class CityGame extends Game{
                         if ((i + 1) >= tiles.length) {
                             //ADD SPAWNER CODE
                         }
+                        money-=5;
                     }
                 }
                 if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
@@ -206,43 +240,10 @@ public class CityGame extends Game{
                     Road.setNeighbors(tiles, i, j);
                     tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
                     resetPaths();
+                    money-=5;
                 }
-            }
-        
-//        for (int i = 0; i < tiles.length; i++) {
-//            for (int j = 0; j < tiles[i].length; j++) {
-//                Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
-//                double x= mouse.location().getX();
-//                double y=mouse.location().getY();
-//                if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
-//                    if (!(tiles[i][j] instanceof Road)) {
-//                        Vector2 roadPos = new Vector2(i * 32, j * 32);
-//                        tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
-//                        Road.setNeighbors(tiles, i, j);
-//                        if ((i + 1) >= tiles.length) {
-//                            //spawnController.add();
-//                        }
-//                    }
-//                }
-//
-//                if (mouse.isPressed(Mouse.LEFT_BUTTON) && b.contains(x, y)) {
-//                    if (selection == null) {
-//                        selection = (Tile) tiles[i][j];
-//                        selection.select();
-//                        invOpen = true;
-//                    } else {
-//                        selection.unselect();
-//                        selection = (Tile) tiles[i][j];
-//                        selection.select();
-//                        invOpen = false;
-//                    }
-//                }
-//                
-//                tiles[i][j].Update(allObjects);
-//
-//            }
-//        }
-        }
+            }//End of mouse pressed
+        }// End of Main Game Else
     }
 
     @Override
@@ -254,6 +255,11 @@ public class CityGame extends Game{
             }else if(AOTBSOD){
                 aotbsod.draw(batch);
             }
+        }else if(mainMenu){
+            creds.draw(batch);
+            start.draw(batch);
+        }else if(credits){
+            creditScreen.draw(batch);
         } else {
             this.setBackground(Color.white);
             for (WorldObject wo : allObjects) {
@@ -264,8 +270,14 @@ public class CityGame extends Game{
                 b.draw(batch);
                 globalCount++;
             }
-
-
+            
+            //money drawing
+            if (money < 0) {
+                batch.DrawString(new Vector2(850, 30), "Money: " + money, Color.red, 10);
+            } else {
+                batch.DrawString(new Vector2(850, 30), "Money: " + money, Color.black, 10);
+            }
+            
             batch.Draw(Background, new Vector2(835 / 2, 611 / 2), 0);
 
             for (Tile t : activeTiles) {
@@ -282,7 +294,7 @@ public class CityGame extends Game{
                 selection.Draw(batch);
             }
             System.out.println(globalCount);
-        }
+        }//End of Main Game Else
     }
     
     private void resetPaths(){
