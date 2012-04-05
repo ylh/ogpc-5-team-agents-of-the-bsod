@@ -38,7 +38,7 @@ public class ClosingAnimation {
     
     private void loadAnimation(int t){
         if(t==CLUB){
-            a=new Animation(20,10,position,200);
+            a=new Animation(20,10,position,500);
             a.addCell("Game Resources/Sprites/Credits/Club1.jpg");
             a.addCell("Game Resources/Sprites/Credits/Club2.jpg");
             a.addCell("Game Resources/Sprites/Credits/Club3.jpg");

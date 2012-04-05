@@ -4,6 +4,7 @@
  */
 package GUIStuff;
 
+import KylesTesting.ClosingAnimation;
 import Utilities.ImageCollection;
 import Utilities.KeyBoard;
 import Utilities.Mouse;
@@ -31,7 +32,8 @@ public class CreditScreen {
     double startTimer;
     int counter=0;
     boolean done;
-    boolean endinground=false;;
+    boolean endinground=false;
+    ClosingAnimation finalPic;
     
     public CreditScreen(){
         kyle= new Credit("Kyle Sweeney: Project Manager, Lead Programmer", new Vector2(50,0));
@@ -46,6 +48,7 @@ public class CreditScreen {
         oracle= new Credit("Made Using Java(c) by Oracle", new Vector2(50, 0));
         aotbsod=new Credit("An Agents of the BSoD Production 2012(c)", new Vector2(340,0));
         credits= new ArrayList<Credit>();
+        finalPic= new ClosingAnimation(new Vector2(500,250),ClosingAnimation.CLUB);
         
         credits.add(kyle);
         done=false;
@@ -128,6 +131,9 @@ public class CreditScreen {
     public void draw(ImageCollection batch){
         for(Credit c: credits){
             c.draw(batch);
+        }
+        if(endinground){
+            finalPic.draw(batch);
         }
     }
     
