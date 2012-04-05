@@ -16,9 +16,11 @@ import java.util.ArrayList;
  *
  * @author Taylor Sutton & Peter Cowal
  * WHAT!? pcowal15 totally did more work than tsutton14 on this!!!
+ * Let's not get petty about this...-Nekel_Seyew
  */
 public abstract class Tower extends MasterTile {
 
+    protected int cost;
     protected int bonus;
     protected double damage;  //Base damage dealt
     protected double health;
@@ -48,9 +50,16 @@ public abstract class Tower extends MasterTile {
         projspeed=10;
         speed=10;
         loaded=0;
+        cost=0;
+        loadAnimation();
+        loadStats();
     }
 
     public abstract Animation getAnimation();
+    
+    public int getCost(){
+        return cost;
+    }
 
     @Override
     public void Update(ArrayList<WorldObject> wol) {
@@ -60,8 +69,7 @@ public abstract class Tower extends MasterTile {
     }
 
     @Override
-    public void Draw(ImageCollection batch) {
-    }
+    public abstract void Draw(ImageCollection batch);
 
     public int getBonus() {
         return bonus;
@@ -143,4 +151,7 @@ public abstract class Tower extends MasterTile {
             }
         }
     }
+    
+    protected abstract void loadAnimation();
+    protected abstract void loadStats();
 }

@@ -7,6 +7,8 @@ package WorldObjects.towers;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
+import WorldObjects.WorldObject;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,12 +16,13 @@ import Utilities.Vector2;
  */
 public class Store extends Tower {
     
-    public Store(Vector2 pos, int dir, String spritePath, int high, int width){
-        super(pos,spritePath,high,width);
-        loadAnimation();
+    public Store(Vector2 pos, int high, int width){
+        super(pos,"",high,width);
+        cost=700;
     }
     
-    private void loadAnimation(){
+    @Override
+    protected void loadAnimation(){
         ani= new Animation(1, 20, position, 200);
         ani.addCell("Game Resources/Sprites/placeHold.png");
     }
@@ -32,6 +35,16 @@ public class Store extends Tower {
     @Override
     public void Draw(ImageCollection batch){
         ani.Draw(batch);
+    }
+    
+    public void Update(ArrayList<WorldObject> wo){
+        super.Update(wo);
+        
+    }
+
+    @Override
+    protected void loadStats() {
+        
     }
     
 }
