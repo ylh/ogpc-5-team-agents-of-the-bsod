@@ -19,4 +19,8 @@ public class MultiTileCell extends Tile{
         super(pos);
         theMaster=master;
     }
+    
+    public MasterTile getMaster(){
+        return theMaster;
+    }
 }

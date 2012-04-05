@@ -47,6 +47,9 @@ public class Bullet extends WorldObject {
         this.position.dX(velocity.getX());
         this.position.dY(velocity.getY());
         this.distance+=1/speed;
+        if(HasReachedTarget()){
+            HitTarget();
+        }
     }
     public boolean HasReachedTarget(){
         return distance>1;

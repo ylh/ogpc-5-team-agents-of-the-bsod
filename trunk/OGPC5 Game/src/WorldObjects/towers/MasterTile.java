@@ -6,6 +6,8 @@ package WorldObjects.towers;
 
 import GUIStuff.Tile;
 import Utilities.Vector2;
+import WorldObjects.WorldObject;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,9 +26,19 @@ public class MasterTile extends Tile{
                 if(suboordinates[r][c]==this){
                     continue;
                 }else{
-                    suboordinates[r][c]= new MultiTileCell(new Vector2(pos.getX()+32*(r+1), pos.getY()+32*(c+1)),this);
+                    suboordinates[r][c]= new MultiTileCell(new Vector2(pos.getX()+32*(r), pos.getY()+32*(c)),this);
                 }
             }
         }
     }
+    
+    public MasterTile getMaster(){
+        return this;
+    }
+    
+    @Override
+    public void Update(ArrayList<WorldObject> wol) {
+        
+    }
+    
 }

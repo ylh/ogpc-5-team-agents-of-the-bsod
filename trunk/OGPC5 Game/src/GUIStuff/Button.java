@@ -10,7 +10,7 @@ import Utilities.Mouse;
 import Utilities.Rect;
 import Utilities.Vector2;
 import WorldObjects.towers.Tower;
-import WorldObjects.towers.Tower1;
+import WorldObjects.towers.GenericTower;
 /**
  *
  * @author pcowal15
