@@ -11,6 +11,7 @@ import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
 import java.util.ArrayList;
+import ogpc5.game.CityGame;
 
 /**
  *
@@ -38,6 +39,11 @@ public abstract class Tower extends MasterTile {
     protected int bx2;
     protected int by1;
     protected int by2;
+    
+    //Stuff For gameplay Updating
+    boolean isNearHouse;
+    boolean isNearFactory;
+    boolean isNearStore;
 
     public Tower(Vector2 pos,String spritePath, int high, int wide) {
         super(pos,high,wide);
@@ -152,6 +158,8 @@ public abstract class Tower extends MasterTile {
         }
     }
     
+    
+    protected abstract void updateGameStats(CityGame theGame);
     protected abstract void loadAnimation();
     protected abstract void loadStats();
 }

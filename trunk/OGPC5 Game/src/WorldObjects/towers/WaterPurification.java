@@ -7,6 +7,7 @@ package WorldObjects.towers;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
+import ogpc5.game.CityGame;
 
 /**
  *
@@ -36,6 +37,11 @@ public class WaterPurification extends Tower{
 
     @Override
     protected void loadStats() {
+        
+    }
+
+    @Override
+    protected void updateGameStats(CityGame theGame) {
         
     }
     
