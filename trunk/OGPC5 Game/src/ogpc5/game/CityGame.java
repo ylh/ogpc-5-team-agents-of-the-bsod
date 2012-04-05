@@ -42,6 +42,8 @@ public class CityGame extends Game{
     public ArrayList<Road> roads;
     public double money;
     public double score;
+    public double happiness;
+    public double polution;
     public boolean invOpen=false;
     Image2D Background= new Image2D("Game Resources/Sprites/GUIs/Background.PNG");
     
