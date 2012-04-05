@@ -25,12 +25,12 @@ public class Button {
     boolean open;
     Image2D sprite;
 
-    public Button(Vector2 op, Vector2 cp, double ms) {
+    public Button(String sp, Vector2 op, Vector2 cp, double ms) {
         openpos = op;
         closepos = cp;
         pos = cp.clone();
         movespeed = ms;
-        sprite=new Image2D("Game Resources/Sprites/GUIs/BlueBox.png");
+        sprite=new Image2D(sp);
         open = false;
         button = new Rect(pos, 100, 32);
     }
@@ -56,7 +56,7 @@ public class Button {
         dy *= movespeed;
         pos.dY(dy);
         //reset the bounding box
-        button = new Rect(pos, 100, 32);
+        button = new Rect(pos, 32, 32);
     }
 
     public boolean isPressed(Mouse mouse) {
@@ -64,7 +64,7 @@ public class Button {
                 && mouse.isPressed(Mouse.LEFT_BUTTON)) {
             Vector2 q = mouse.location().clone();
             q.subtract(pos);
-            if (q.getX() > -50 && q.getX() < 50 && q.getY() > -16 && q.getY() < 16) {
+            if (q.getX() > -16 && q.getX() < 16 && q.getY() > -16 && q.getY() < 16) {
 
                 return true;
             } else {
