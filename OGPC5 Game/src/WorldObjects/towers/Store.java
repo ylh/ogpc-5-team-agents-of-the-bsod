@@ -14,8 +14,8 @@ import Utilities.Vector2;
  */
 public class Store extends Tower {
     
-    public Store(Vector2 pos, int dir, String spritePath){
-        super(pos,spritePath);
+    public Store(Vector2 pos, int dir, String spritePath, int high, int width){
+        super(pos,spritePath,high,width);
         loadAnimation();
     }
     

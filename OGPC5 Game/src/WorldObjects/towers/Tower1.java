@@ -13,7 +13,7 @@ import Utilities.Vector2;
  */
 public class Tower1 extends Tower{
     Tower1(Vector2 pos,String spritePath) {
-        super(pos,spritePath);
+        super(pos,spritePath,1,1);
     }
     @Override
     public Animation getAnimation() {
