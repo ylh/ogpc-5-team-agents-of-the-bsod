@@ -7,6 +7,7 @@ package WorldObjects.towers;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
+import ogpc5.game.CityGame;
 
 /**
  *
@@ -34,6 +35,11 @@ public class GenericTower extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
+        
+    }
+
+    @Override
+    protected void updateGameStats(CityGame theGame) {
         
     }
     

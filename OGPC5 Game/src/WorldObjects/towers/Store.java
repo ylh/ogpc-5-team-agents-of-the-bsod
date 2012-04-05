@@ -9,6 +9,7 @@ import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
 import java.util.ArrayList;
+import ogpc5.game.CityGame;
 
 /**
  *
@@ -45,6 +46,11 @@ public class Store extends Tower {
     @Override
     protected void loadStats() {
         
+    }
+
+    @Override
+    protected void updateGameStats(CityGame theGame) {
+       
     }
     
 }
