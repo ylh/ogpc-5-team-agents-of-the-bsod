@@ -59,10 +59,12 @@ public class Enemy extends WorldObject {
         tiles = t;
         setEnemyPath(t);
         id=Enemy.GENERIC;
+        System.out.println("Enemy Created");
     }
     public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
         this(Speed, Health, Armor, pos, path, t);
         id=type;
+        System.out.println("Enemy Created");
     }
     /**
      * The method called on the enemy when a projectile hits it

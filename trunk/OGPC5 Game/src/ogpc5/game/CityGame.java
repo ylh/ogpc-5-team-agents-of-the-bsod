@@ -5,6 +5,7 @@
 package ogpc5.game;
 
 import Enemies.Enemy;
+import Enemies.Spawner;
 import GUIStuff.Button;
 import GUIStuff.CreditScreen;
 import GUIStuff.MenuButton;
@@ -74,6 +75,8 @@ public class CityGame extends Game{
     
     
     Tile selection;
+    
+    Spawner spawn = new Spawner((long)1000,this);
 
     @Override
     public void InitializeAndLoad() {
@@ -105,8 +108,7 @@ public class CityGame extends Game{
         start = new MenuButton(new Vector2(970/2, 500), MenuButton.START);
         aww=new SoundFile("Game Resources/Sound/AwwComeon.wav",1);
         
-        creditScreen= new CreditScreen();
-        
+        creditScreen= new CreditScreen();        
     }
 
     @Override
@@ -123,8 +125,7 @@ public class CityGame extends Game{
 
     @Override
     public void Update() {
-        globalCount=0;
-        
+        globalCount=0;        
         if(firstRun){
             double time=System.currentTimeMillis();
             if(JAVA){
@@ -184,10 +185,16 @@ public class CityGame extends Game{
                 Road.setNeighbors(tiles, i, j);
                 activeTiles.add(tiles[i][j]);
                 makeFirstRoad = false;
+                spawn.addLocation(0,new Vector2(13*32+16,18*32+16));
             }
-
-            for (WorldObject wo : allObjects) {
+            spawn.update();
+            
+            for(int i=0; i<allObjects.size(); i++){
+                WorldObject wo=allObjects.get(i);
                 wo.Update(allObjects);
+                if(wo instanceof Enemy && wo.getPosition().getY()<0){
+                    allObjects.remove(wo);
+                }
                 globalCount++;
             }
 
