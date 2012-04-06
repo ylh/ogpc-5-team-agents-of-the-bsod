@@ -39,7 +39,7 @@ public class GenericTower extends Tower{
     }
 
     @Override
-    protected void updateGameStats(CityGame theGame) {
+    public void updateGameStats(CityGame theGame) {
         
     }
     

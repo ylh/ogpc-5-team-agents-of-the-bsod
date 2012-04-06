@@ -159,7 +159,7 @@ public abstract class Tower extends MasterTile {
     }
     
     
-    protected abstract void updateGameStats(CityGame theGame);
+    public abstract void updateGameStats(CityGame theGame);
     protected abstract void loadAnimation();
     protected abstract void loadStats();
 }
