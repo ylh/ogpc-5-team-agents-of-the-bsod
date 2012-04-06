@@ -20,6 +20,7 @@ import Utilities.SoundFile;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
 import WorldObjects.towers.Road;
+import WorldObjects.towers.Tower;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -62,7 +63,6 @@ public class CityGame extends Game{
     OpeningAnimation aotbsod;
     SoundFile aww;
     boolean awwStarted=false;
-    Tile BottomRoad;
     
     //Main Menu
     boolean mainMenu=false;
@@ -75,6 +75,10 @@ public class CityGame extends Game{
     
     //PreGame
     boolean makeFirstRoad=true;
+    
+    //Main game needed
+    Tile BottomRoad;
+    double UpdateAllStart;
     
     
     Tile selection;
@@ -111,7 +115,8 @@ public class CityGame extends Game{
         start = new MenuButton(new Vector2(970/2, 500), MenuButton.START);
         aww=new SoundFile("Game Resources/Sound/AwwComeon.wav",1);
         
-        creditScreen= new CreditScreen();        
+        creditScreen= new CreditScreen();     
+        UpdateAllStart=startTime;//Convienience, means nothing really....
     }
 
     @Override
@@ -181,6 +186,7 @@ public class CityGame extends Game{
                 mainMenu=true;
             }
         } else {
+            
             if (makeFirstRoad) {
                 int i = 13, j = 18;
                 Vector2 roadPos = new Vector2((i * 32), (j * 32));
@@ -201,6 +207,9 @@ public class CityGame extends Game{
                 globalCount++;
             }
             
+            /*
+             * Just code for getting view into the game without breaking anything when debugging.
+             */
             if(keyboard.isKeyDown(KeyEvent.VK_SPACE)){
                 int i=0;
             }
@@ -218,9 +227,12 @@ public class CityGame extends Game{
                 b.setOpen(invOpen);
                 globalCount++;
             }
-
+            double thisLoopTime=System.currentTimeMillis();
             for (Tile t : activeTiles) {
                 t.Update(allObjects);
+                if(thisLoopTime-this.UpdateAllStart>=30000){
+                    ((Tower)t).updateGameStats(this);
+                }
                 globalCount++;
             }
 

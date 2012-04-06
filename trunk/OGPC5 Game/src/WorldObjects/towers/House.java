@@ -41,7 +41,7 @@ public class House extends Tower{
     }
 
     @Override
-    protected void updateGameStats(CityGame theGame) {
+    public void updateGameStats(CityGame theGame) {
         
     }
     
