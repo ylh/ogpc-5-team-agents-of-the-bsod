@@ -62,6 +62,7 @@ public class CityGame extends Game{
     OpeningAnimation aotbsod;
     SoundFile aww;
     boolean awwStarted=false;
+    Tile BottomRoad;
     
     //Main Menu
     boolean mainMenu=false;
@@ -78,7 +79,7 @@ public class CityGame extends Game{
     
     Tile selection;
     
-    Spawner spawn = new Spawner((long)1000,this);
+    Spawner spawn = new Spawner(100000,this, new Vector2(13*32+16,18*32+16));
 
     @Override
     public void InitializeAndLoad() {
@@ -187,7 +188,7 @@ public class CityGame extends Game{
                 Road.setNeighbors(tiles, i, j);
                 activeTiles.add(tiles[i][j]);
                 makeFirstRoad = false;
-                spawn.addLocation(0,new Vector2(13*32+16,18*32+16));
+                BottomRoad=tiles[i][j];
             }
             spawn.update();
             
@@ -198,6 +199,10 @@ public class CityGame extends Game{
                     allObjects.remove(wo);
                 }
                 globalCount++;
+            }
+            
+            if(keyboard.isKeyDown(KeyEvent.VK_SPACE)){
+                int i=0;
             }
 
             for (Button b : buttons) {
@@ -254,12 +259,14 @@ public class CityGame extends Game{
                     }
                 }
                 if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
-                    //activeTiles.remove(tiles[i][j]);
-                    roads.remove(tiles[i][j]);
-                    Road.setNeighbors(tiles, i, j);
-                    tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
-                    resetPaths();
-                    money-=5;
+                    if (!(tiles[i][j] == BottomRoad)) {
+                        //activeTiles.remove(tiles[i][j]);
+                        roads.remove(tiles[i][j]);
+                        Road.setNeighbors(tiles, i, j);
+                        tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
+                        resetPaths();
+                        money -= 5;
+                    }
                 }
             }//End of mouse pressed
         }// End of Main Game Else
