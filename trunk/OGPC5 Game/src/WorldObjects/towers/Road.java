@@ -165,17 +165,17 @@ public class Road extends Tile {
     
     public static String returnSprite(int i){  //Returns proper image according to orientation
         switch(i){
-            case 0: return "Game Resources/Sprites/CurvedRoadRight.png";
-            case 1: return "Game Resources/Sprites/CurvedRoadLeft.png";
-            case 2: return "Game Resources/Sprites/CurvedRoadRightDown.png";
-            case 3: return "Game Resources/Sprites/CurvedRoadLeftDown.png";
-            case 4: return "Game Resources/Sprites/TRight.png";
-            case 5: return "Game Resources/Sprites/OmniSection.png";
-            case 6: return "Game Resources/Sprites/TLeft.png";
-            case 7: return "Game Resources/Sprites/TDown.png";
-            case 8: return "Game Resources/Sprites/TUp.png";
-            case 9: return "Game Resources/Sprites/BasicHorizontal.png";
-            default: return "Game Resources/Sprites/BasicRoad.png";                
+            case 0: return "Game Resources/Sprites/Roads/CurvedRoadRight.png";
+            case 1: return "Game Resources/Sprites/Roads/CurvedRoadLeft.png";
+            case 2: return "Game Resources/Sprites/Roads/CurvedRoadRightDown.png";
+            case 3: return "Game Resources/Sprites/Roads/CurvedRoadLeftDown.png";
+            case 4: return "Game Resources/Sprites/Roads/TRight.png";
+            case 5: return "Game Resources/Sprites/Roads/OmniSection.png";
+            case 6: return "Game Resources/Sprites/Roads/TLeft.png";
+            case 7: return "Game Resources/Sprites/Roads/TDown.png";
+            case 8: return "Game Resources/Sprites/Roads/TUp.png";
+            case 9: return "Game Resources/Sprites/Roads/BasicHorizontal.png";
+            default: return "Game Resources/Sprites/Roads/BasicRoad.png";                
         }
     }
     

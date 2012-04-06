@@ -60,8 +60,7 @@ public class Button {
     }
 
     public boolean isPressed(Mouse mouse) {
-        if (open
-                && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+        if (open && mouse.isPressed(Mouse.LEFT_BUTTON)) {
             Vector2 q = mouse.location().clone();
             q.subtract(pos);
             if (q.getX() > -16 && q.getX() < 16 && q.getY() > -16 && q.getY() < 16) {
