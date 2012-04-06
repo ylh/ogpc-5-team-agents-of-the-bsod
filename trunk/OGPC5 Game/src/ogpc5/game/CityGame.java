@@ -83,10 +83,11 @@ public class CityGame extends Game{
     
     Tile selection;
     
-    Spawner spawn = new Spawner(100000,this, new Vector2(13*32+16,18*32+16));
+    Spawner spawn; 
 
     @Override
     public void InitializeAndLoad() {
+        //Core features creation.
         firstRun=true;
         this.gameSpeed=32;
         allObjects= new ArrayList<WorldObject>();
@@ -94,29 +95,41 @@ public class CityGame extends Game{
         roads= new ArrayList<Road>();
         tiles= new Tile[854/32][632/32];
         buttons=new ArrayList<Button>();
+        
+        //Game Score Variables
         money=0;
+        score=0;
+        polution=0;
+        happiness=0;
         
+        //The buttons
         buttons.add(new Button("Game Resources/Sprites/GUIS/BlueBox.png",new Vector2(900,100),new Vector2(900,-40),0.1));
-        
         buttons.add(new Button("Game Resources/Sprites/GUIS/RedBox.png",new Vector2(900,200),new Vector2(900,-40),0.1));
-        
         buttons.add(new Button("Game Resources/Sprites/GUIS/BlueBox.png",new Vector2(900,300),new Vector2(900,-40),0.1));
         
+        //Makes the Grid non-null
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
                 tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
             }
         }
+        
+        //Creating the opening animation.
         java=new OpeningAnimation(new Vector2(970/2,640/2), OpeningAnimation.JAVA);
         aotbsod=new OpeningAnimation(new Vector2(970/2,640/2), OpeningAnimation.AOTBSOD);
         startTime=System.currentTimeMillis();
         
+        //Creates the Main Menu
         creds= new MenuButton(new Vector2(970/2, 300), MenuButton.CREDITS);
         start = new MenuButton(new Vector2(970/2, 500), MenuButton.START);
         aww=new SoundFile("Game Resources/Sound/AwwComeon.wav",1);
         
-        creditScreen= new CreditScreen();     
+        //Creates the credits
+        creditScreen= new CreditScreen();
+       
+        //For the main game
         UpdateAllStart=startTime;//Convienience, means nothing really....
+        spawn = new Spawner((1000)*100,this, new Vector2(13*32+16,18*32+16));
     }
 
     @Override
@@ -192,7 +205,7 @@ public class CityGame extends Game{
                 Vector2 roadPos = new Vector2((i * 32), (j * 32));
                 tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
                 Road.setNeighbors(tiles, i, j);
-                activeTiles.add(tiles[i][j]);
+                roads.add((Road)tiles[i][j]);
                 makeFirstRoad = false;
                 BottomRoad=tiles[i][j];
             }
@@ -203,6 +216,7 @@ public class CityGame extends Game{
                 wo.Update(allObjects);
                 if(wo instanceof Enemy && wo.getPosition().getY()<0){
                     allObjects.remove(wo);
+                    score-=((Enemy)wo).getScore();
                 }
                 globalCount++;
             }
@@ -227,12 +241,16 @@ public class CityGame extends Game{
                 b.setOpen(invOpen);
                 globalCount++;
             }
+            //Needed because we can't have it in the loop
             double thisLoopTime=System.currentTimeMillis();
             for (Tile t : activeTiles) {
                 t.Update(allObjects);
+                
+                //For updating score, happiness, polution, and money
                 if(thisLoopTime-this.UpdateAllStart>=30000){
                     ((Tower)t).updateGameStats(this);
                 }
+                
                 globalCount++;
             }
 
@@ -281,6 +299,9 @@ public class CityGame extends Game{
                     }
                 }
             }//End of mouse pressed
+            
+            //Updates the score
+            score=this.getScore();
         }// End of Main Game Else
     }
 
@@ -315,7 +336,24 @@ public class CityGame extends Game{
             } else {
                 batch.DrawString(new Vector2(850, 30), "Money: $" + money, Color.black, 10);
             }
+            //Polution
+            batch.DrawString(new Vector2(850, 45), "Polution: "+polution, Color.red, 10);
+            //Score
+            if(score<0){
+                batch.DrawString(new Vector2(850, 75), "Score: "+score, Color.red, 10);
+            }else{
+                batch.DrawString(new Vector2(850, 75), "Score: "+score, Color.black, 10);
+            }
+            //Happiness
+            if(happiness<0){
+                batch.DrawString(new Vector2(850, 60), "Happiness: "+happiness, Color.red, 10);
+            }else{
+                batch.DrawString(new Vector2(850, 60), "Happiness: "+happiness, Color.black, 10);
+            }
             
+            batch.DrawString(new Vector2(835, 600), "Next Round: "+(int)this.spawn.getRemainingTime()/1000 +" s", Color.black, 10);
+            
+            //the Background Grid
             batch.Draw(Background, new Vector2(835 / 2, 611 / 2), 0);
 
             for (Tile t : activeTiles) {
@@ -331,6 +369,7 @@ public class CityGame extends Game{
             if (selection != null) {
                 selection.Draw(batch);
             }
+            //Pure Debugging
             System.out.println(globalCount);
         }//End of Main Game Else
     }
@@ -342,6 +381,13 @@ public class CityGame extends Game{
                 e.setEnemyPath(tiles);
             }
         }
+    }
+    /**
+     * Sort of self explanitory
+     * @return the score.
+     */
+    private double getScore(){
+        return score+(money-polution)*happiness*0.1;
     }
     
     public void addToWorldObjects(WorldObject wo){

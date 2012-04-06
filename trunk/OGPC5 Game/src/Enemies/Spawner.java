@@ -17,6 +17,7 @@ public class Spawner {
     private double lastTime;
     private boolean isSpawning;
     CityGame theGame;
+    boolean firstUpdate;
     
     //spawning variables
     private int quota;
@@ -25,6 +26,7 @@ public class Spawner {
     private double spawnLast;
     
     public Spawner(long waitTime, CityGame theGame, Vector2 loc){
+        firstUpdate=true;
         timeToWait=waitTime;
         this.theGame=theGame;
         lastTime=0;
@@ -39,6 +41,10 @@ public class Spawner {
 
     public void update(){
         double time=System.currentTimeMillis();
+        if(firstUpdate){
+            this.runFirstUpdate();
+            firstUpdate=false;
+        }
         if(!isSpawning && time- lastTime >= timeToWait){
             isSpawning=true;
             for(int i=0; i<11; i++){
@@ -58,25 +64,17 @@ public class Spawner {
                 location++;
             }
         }
-        
-        
-        
-//        double time=System.currentTimeMillis();
-//        double innerTimerA=System.currentTimeMillis();
-//        if(time- lastTime >= timeToWait){            
-//            for(int i=0; i<=11; i++){
-//                double innerTimerB = System.currentTimeMillis();;
-//                if (innerTimerB - innerTimerA >= 500) {
-//                    double d = quota * (EnemyProbabilityTable.getProbability(i) / 100.0);
-//                    for (int j = 0; j < (int) d; j++) {
-//                        addEnemy(i);
-//                    }
-//                    innerTimerA = innerTimerB;
-//                }
-//            }
-//            quota+=2;
-//           lastTime=time;
-//        }
+    }
+    
+    private void runFirstUpdate(){
+        lastTime=System.currentTimeMillis();
+    }
+    
+    public double getRemainingTime(){
+        if(isSpawning){
+            return 0;
+        }
+        return timeToWait-(System.currentTimeMillis()-lastTime);
     }
     
     private void addEnemy(int enemy){//add the given enemy at the given location.

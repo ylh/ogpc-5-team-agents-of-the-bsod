@@ -35,6 +35,10 @@ public class Enemy extends WorldObject {
      * The type ID for the enemy
      */
     int id;
+    /**
+     * The score the enemy is worth
+     */
+    int score;
     
     Tile[][] tiles; //Map from which the enemy works
     
@@ -57,6 +61,7 @@ public class Enemy extends WorldObject {
         armor = Armor;
         danger = 0;
         tiles = t;
+        score=10;
         setEnemyPath(t);
         id=Enemy.GENERIC;
         System.out.println("Enemy Created");
@@ -77,6 +82,13 @@ public class Enemy extends WorldObject {
         speed/=sdamage;
         armor=Math.max(0,armor-adamage);
         health-=Math.max(0,damage-armor);
+    }
+    /**
+     * Used for obtaining the score of the enemy
+     * @return the score the enemy is worth
+     */
+    public int getScore(){
+        return score;
     }
     /**
      * Figures out if the health is below 1, and therefor, dead
