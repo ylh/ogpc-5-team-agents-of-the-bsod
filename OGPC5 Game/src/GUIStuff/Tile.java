@@ -39,7 +39,7 @@ public class Tile extends WorldObject{
         if(isSelected){
             batch.fillRect(position, 32, 32, Color.blue, 2);
             batch.drawRect(position, 32, 32, Color.blue, 100);
-            batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.red, direction);
+            batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
         }
     }
 
