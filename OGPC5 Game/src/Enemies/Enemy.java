@@ -110,7 +110,7 @@ public class Enemy extends WorldObject {
     @Override
     public void Draw(ImageCollection batch) {
 //        batch.addToCollection(sprite,1,position);
-        batch.Draw(sprite, position, 1);
+        batch.Draw(sprite, position, 5);
     }
     
     public void setEnemyPath(Tile[][] t) {

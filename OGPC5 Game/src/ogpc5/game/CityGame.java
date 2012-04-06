@@ -96,11 +96,11 @@ public class CityGame extends Game{
         buttons=new ArrayList<Button>();
         money=0;
         
-        buttons.add(new Button("Game Resources/Sprites/SamSprites/Towers/Factory/3factory32x32.png",new Vector2(900,100),new Vector2(900,-40),0.1));
+        buttons.add(new Button("Game Resources/Sprites/GUIS/BlueBox.png",new Vector2(900,100),new Vector2(900,-40),0.1));
         
-        buttons.add(new Button("Game Resources/Sprites/SamSprites/Towers/Factory/3factory32x32.png",new Vector2(900,200),new Vector2(900,-40),0.1));
+        buttons.add(new Button("Game Resources/Sprites/GUIS/RedBox.png",new Vector2(900,200),new Vector2(900,-40),0.1));
         
-        buttons.add(new Button("Game Resources/Sprites/SamSprites/Towers/Factory/3factory32x32.png",new Vector2(900,300),new Vector2(900,-40),0.1));
+        buttons.add(new Button("Game Resources/Sprites/GUIS/BlueBox.png",new Vector2(900,300),new Vector2(900,-40),0.1));
         
         for(int i=0; i<tiles.length; i++){
             for(int j=0; j<tiles[i].length; j++){
