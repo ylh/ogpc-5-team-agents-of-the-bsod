@@ -15,7 +15,6 @@ import KylesTesting.OpeningAnimation;
 import Utilities.Image2D;
 import Utilities.Mouse;
 import Utilities.Rect;
-import Utilities.Sound;
 import Utilities.SoundFile;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
