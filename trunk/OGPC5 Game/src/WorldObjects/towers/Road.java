@@ -55,7 +55,7 @@ public class Road extends Tile {
 //        dp.dX(16);        
 //        dp.dY(16);
 //        batch.addToCollection(sprite, 20, dp);
-        batch.Draw(sprite, spritePos, 20);
+        batch.Draw(sprite, spritePos, 1);
     }
     
     
