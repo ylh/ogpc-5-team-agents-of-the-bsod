@@ -24,8 +24,10 @@ public class Button {
     double movespeed; //you want a value less than 0.5
     boolean open;
     Image2D sprite;
+    int id;
 
-    public Button(String sp, Vector2 op, Vector2 cp, double ms) {
+    public Button(int i, String sp, Vector2 op, Vector2 cp, double ms) {
+        id=i;
         openpos = op;
         closepos = cp;
         pos = cp.clone();
@@ -38,6 +40,9 @@ public class Button {
     
     public void setOpen(boolean o){
         open=o;
+    }
+    public int id(){
+        return id;
     }
 
     public void glide() {

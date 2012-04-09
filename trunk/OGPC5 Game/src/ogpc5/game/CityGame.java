@@ -8,6 +8,7 @@ import Enemies.Enemy;
 import Enemies.Spawner;
 import GUIStuff.Button;
 import GUIStuff.CreditScreen;
+import GUIStuff.Draggable;
 import GUIStuff.MenuButton;
 import GUIStuff.Tile;
 import Game.Game;
@@ -31,10 +32,9 @@ import java.util.ArrayList;
  *
  * @author Nekel_Seyew, tsutton14, and Peter Cowal
  */
-public class CityGame extends Game{
-    
-    public static int globalCount=0;
-    
+public class CityGame extends Game {
+
+    public static int globalCount = 0;
     ArrayList<WorldObject> allObjects;
     public Tile[][] tiles;
     public ArrayList<Tile> activeTiles;
@@ -44,194 +44,190 @@ public class CityGame extends Game{
     public double score;
     public double happiness;
     public double polution;
-    public boolean invOpen=false;
-    Image2D Background= new Image2D("Game Resources/Sprites/GUIs/Background.PNG");
-    
+    public boolean invOpen = false;
+    Image2D Background = new Image2D("Game Resources/Sprites/GUIs/Background.PNG");
+    public int buttonPressed;
+    public Draggable drag;
     //opening animation controlls
     boolean firstRun;
-    boolean JAVA=true;
-    boolean firstwait=false;
-    boolean secondwait=false;
-    boolean AOTBSOD=false;
+    boolean JAVA = true;
+    boolean firstwait = false;
+    boolean secondwait = false;
+    boolean AOTBSOD = false;
     double startTime;
-    double javaLength=18*50;
-    double aLength=33*50;
-    double first=1000;
-    double second=1000;
+    double javaLength = 18 * 50;
+    double aLength = 33 * 50;
+    double first = 1000;
+    double second = 1000;
     OpeningAnimation java;
     OpeningAnimation aotbsod;
     SoundFile aww;
-    boolean awwStarted=false;
-    
+    boolean awwStarted = false;
     //Main Menu
-    boolean mainMenu=false;
+    boolean mainMenu = false;
     MenuButton creds;
     MenuButton start;
     //credits
     boolean credits;
     CreditScreen creditScreen;
-    
-    
     //PreGame
-    boolean makeFirstRoad=true;
-    
+    boolean makeFirstRoad = true;
     //Main game needed
     Tile BottomRoad;
     double UpdateAllStart;
-    
-    
     Tile selection;
-    
-    Spawner spawn; 
+    Spawner spawn;
 
     @Override
     public void InitializeAndLoad() {
         //Core features creation.
-        firstRun=true;
-        this.gameSpeed=32;
-        allObjects= new ArrayList<WorldObject>();
-        activeTiles= new ArrayList<Tile>();
-        roads= new ArrayList<Road>();
-        tiles= new Tile[854/32][632/32];
-        buttons=new ArrayList<Button>();
-        
+        firstRun = true;
+        this.gameSpeed = 32;
+        allObjects = new ArrayList<WorldObject>();
+        activeTiles = new ArrayList<Tile>();
+        roads = new ArrayList<Road>();
+        tiles = new Tile[854 / 32][632 / 32];
+        buttons = new ArrayList<Button>();
+        drag=null;
+
         //Game Score Variables
-        money=0;
-        score=0;
-        polution=0;
-        happiness=0;
-        
+        money = 0;
+        score = 0;
+        polution = 0;
+        happiness = 0;
+
         //The buttons
-        buttons.add(new Button("Game Resources/Sprites/GUIS/BlueBox.png",new Vector2(900,100),new Vector2(900,-40),0.1));
-        buttons.add(new Button("Game Resources/Sprites/GUIS/RedBox.png",new Vector2(900,200),new Vector2(900,-40),0.1));
-        buttons.add(new Button("Game Resources/Sprites/GUIS/BlueBox.png",new Vector2(900,300),new Vector2(900,-40),0.1));
-        
+        buttons.add(new Button(1, "Game Resources/Sprites/GUIS/BlueBox.png", new Vector2(900, 100), new Vector2(900, -40), 0.1));
+        buttons.add(new Button(2, "Game Resources/Sprites/GUIS/RedBox.png", new Vector2(900, 200), new Vector2(900, -40), 0.1));
+        buttons.add(new Button(3, "Game Resources/Sprites/GUIS/deleteButton.png", new Vector2(900, 300), new Vector2(900, -40), 0.1));
+
         //Makes the Grid non-null
-        for(int i=0; i<tiles.length; i++){
-            for(int j=0; j<tiles[i].length; j++){
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
                 tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
             }
         }
-        
+
         //Creating the opening animation.
-        java=new OpeningAnimation(new Vector2(970/2,640/2), OpeningAnimation.JAVA);
-        aotbsod=new OpeningAnimation(new Vector2(970/2,640/2), OpeningAnimation.AOTBSOD);
-        startTime=System.currentTimeMillis();
-        
+        java = new OpeningAnimation(new Vector2(970 / 2, 640 / 2), OpeningAnimation.JAVA);
+        aotbsod = new OpeningAnimation(new Vector2(970 / 2, 640 / 2), OpeningAnimation.AOTBSOD);
+        startTime = System.currentTimeMillis();
+
         //Creates the Main Menu
-        creds= new MenuButton(new Vector2(970/2, 300), MenuButton.CREDITS);
-        start = new MenuButton(new Vector2(970/2, 500), MenuButton.START);
-        aww=new SoundFile("Game Resources/Sound/AwwComeon.wav",1);
-        
+        creds = new MenuButton(new Vector2(970 / 2, 300), MenuButton.CREDITS);
+        start = new MenuButton(new Vector2(970 / 2, 500), MenuButton.START);
+        aww = new SoundFile("Game Resources/Sound/AwwComeon.wav", 1);
+
         //Creates the credits
-        creditScreen= new CreditScreen();
-       
+        creditScreen = new CreditScreen();
+
         //For the main game
-        UpdateAllStart=startTime;//Convienience, means nothing really....
-        spawn = new Spawner((1000)*100,this, new Vector2(13*32+16,18*32+16));
+        UpdateAllStart = startTime;//Convienience, means nothing really....
+        spawn = new Spawner((1000) * 100, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
     }
 
     @Override
     public void UnloadContent() {
-        
     }
-    
+
     @Override
-    public void run(){
+    public void run() {
 //        super.Run();
-        this.base.theGUI.setSize(new Dimension(970,640));
+        this.base.theGUI.setSize(new Dimension(970, 640));
         this.base.theGUI.setResizable(false);
     }
 
     @Override
     public void Update() {
-        globalCount=0;        
-        if(firstRun){
-            double time=System.currentTimeMillis();
-            if(JAVA){
-                if(time-startTime>=javaLength || keyboard.isKeyDown(KeyEvent.VK_SPACE)|| mouse.isPressed(Mouse.LEFT_BUTTON)){
-                    JAVA=false;
-                    firstwait=true;
-                    startTime=time;
+        globalCount = 0;
+        if (firstRun) {
+            double time = System.currentTimeMillis();
+            if (JAVA) {
+                if (time - startTime >= javaLength || keyboard.isKeyDown(KeyEvent.VK_SPACE) || mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                    JAVA = false;
+                    firstwait = true;
+                    startTime = time;
                 }
-            }else if(firstwait){
-                if(time-startTime>=first){
-                    firstwait=false;
-                    AOTBSOD=true;
-                    startTime=time;
+            } else if (firstwait) {
+                if (time - startTime >= first) {
+                    firstwait = false;
+                    AOTBSOD = true;
+                    startTime = time;
                 }
-            }
-            else if(AOTBSOD){
-                if(time-startTime>=750 && !awwStarted){
-                    awwStarted=true;
+            } else if (AOTBSOD) {
+                if (time - startTime >= 750 && !awwStarted) {
+                    awwStarted = true;
                     aww.start();
                 }
-                if(time-startTime>=aLength || keyboard.isKeyDown(KeyEvent.VK_SPACE) || mouse.isPressed(Mouse.LEFT_BUTTON)){
-                    AOTBSOD=false;
-                    secondwait=true;
-                    startTime=time;
+                if (time - startTime >= aLength || keyboard.isKeyDown(KeyEvent.VK_SPACE) || mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                    AOTBSOD = false;
+                    secondwait = true;
+                    startTime = time;
                 }
-            }else if(secondwait){
-                if(time-startTime>=second){
-                    firstRun=false;
-                    secondwait=false;
-                    mainMenu=true;
-                    aww=new SoundFile("Game Resources/Sound/AwwComeon.wav",1);
+            } else if (secondwait) {
+                if (time - startTime >= second) {
+                    firstRun = false;
+                    secondwait = false;
+                    mainMenu = true;
+                    aww = new SoundFile("Game Resources/Sound/AwwComeon.wav", 1);
                 }
             }
-        }else if(mainMenu){
+        } else if (mainMenu) {
             creds.update(mouse);
             start.update(mouse);
-            if(start.isPressed(mouse)){
-                mainMenu=false;
+            if (start.isPressed(mouse)) {
+                mainMenu = false;
             }
-            if(creds.isPressed(mouse)){
-                mainMenu=false;
-                credits=true;
+            if (creds.isPressed(mouse)) {
+                mainMenu = false;
+                credits = true;
                 creditScreen.start();
             }
-        }else if(credits){
+        } else if (credits) {
             creditScreen.update();
-            if(creditScreen.isDone(keyboard, mouse)){
-                credits=false;
-                creditScreen=new CreditScreen();
-                mainMenu=true;
+            if (creditScreen.isDone(keyboard, mouse)) {
+                credits = false;
+                creditScreen = new CreditScreen();
+                mainMenu = true;
             }
         } else {
-            
+
             if (makeFirstRoad) {
                 int i = 13, j = 18;
                 Vector2 roadPos = new Vector2((i * 32), (j * 32));
                 tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
                 Road.setNeighbors(tiles, i, j);
-                roads.add((Road)tiles[i][j]);
+                roads.add((Road) tiles[i][j]);
                 makeFirstRoad = false;
-                BottomRoad=tiles[i][j];
+                BottomRoad = tiles[i][j];
             }
             spawn.update();
-            
-            for(int i=0; i<allObjects.size(); i++){
-                WorldObject wo=allObjects.get(i);
+
+            for (int i = 0; i < allObjects.size(); i++) {
+                WorldObject wo = allObjects.get(i);
                 wo.Update(allObjects);
-                if(wo instanceof Enemy && wo.getPosition().getY()<0){
+                if (wo instanceof Enemy && wo.getPosition().getY() < 0) {
                     allObjects.remove(wo);
-                    score-=((Enemy)wo).getScore();
+                    score -= ((Enemy) wo).getScore();
                 }
                 globalCount++;
             }
-            
+
             /*
              * Just code for getting view into the game without breaking anything when debugging.
              */
-            if(keyboard.isKeyDown(KeyEvent.VK_SPACE)){
-                int i=0;
+            if (keyboard.isKeyDown(KeyEvent.VK_SPACE)) {
+                int i = 0;
             }
+
+            buttonPressed = 0;
 
             for (Button b : buttons) {
                 b.glide();
                 if (b.isPressed(mouse)) {
                     invOpen = false;
-                    selection = null;
+
+                    buttonPressed = b.id();
                 }
                 globalCount++;
             }
@@ -240,16 +236,24 @@ public class CityGame extends Game{
                 b.setOpen(invOpen);
                 globalCount++;
             }
+            if (buttonPressed==3){
+                drag=new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png",mouse.location().clone());
+            }
             //Needed because we can't have it in the loop
-            double thisLoopTime=System.currentTimeMillis();
+            if (drag!=null) drag.update(mouse);
+            
+            if (!mouse.isPressed(Mouse.LEFT_BUTTON)){
+                drag=null;
+            }
+            double thisLoopTime = System.currentTimeMillis();
             for (Tile t : activeTiles) {
                 t.Update(allObjects);
-                
+
                 //For updating score, happiness, polution, and money
-                if(thisLoopTime-this.UpdateAllStart>=30000){
-                    ((Tower)t).updateGameStats(this);
+                if (thisLoopTime - this.UpdateAllStart >= 30000) {
+                    ((Tower) t).updateGameStats(this);
                 }
-                
+
                 globalCount++;
             }
 
@@ -284,7 +288,8 @@ public class CityGame extends Game{
                         if ((i + 1) >= tiles.length) {
                             //ADD SPAWNER CODE
                         }
-                        money-=5;
+                        money -= 5;
+                        selection = null;
                     }
                 }
                 if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
@@ -295,28 +300,29 @@ public class CityGame extends Game{
                         tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
                         resetPaths();
                         money -= 5;
+                        selection = null;
                     }
                 }
             }//End of mouse pressed
-            
+
             //Updates the score
-            score=this.getScore();
+            score = this.getScore();
         }// End of Main Game Else
     }
 
     @Override
     public void Draw(Graphics g) {
-        if(firstRun){
+        if (firstRun) {
             this.setBackground(Color.black);
-            if(JAVA){
+            if (JAVA) {
                 java.draw(batch);
-            }else if(AOTBSOD){
+            } else if (AOTBSOD) {
                 aotbsod.draw(batch);
             }
-        }else if(mainMenu){
+        } else if (mainMenu) {
             creds.draw(batch);
             start.draw(batch);
-        }else if(credits){
+        } else if (credits) {
             creditScreen.draw(batch);
         } else {
             this.setBackground(Color.white);
@@ -328,7 +334,8 @@ public class CityGame extends Game{
                 b.draw(batch);
                 globalCount++;
             }
-            
+            if (drag!=null) drag.draw(batch);
+
             //money drawing
             if (money < 0) {
                 batch.DrawString(new Vector2(850, 30), "Money: $" + money, Color.red, 10);
@@ -336,22 +343,22 @@ public class CityGame extends Game{
                 batch.DrawString(new Vector2(850, 30), "Money: $" + money, Color.black, 10);
             }
             //Polution
-            batch.DrawString(new Vector2(850, 45), "Polution: "+polution, Color.red, 10);
+            batch.DrawString(new Vector2(850, 45), "Polution: " + polution, Color.red, 10);
             //Score
-            if(score<0){
-                batch.DrawString(new Vector2(850, 75), "Score: "+score, Color.red, 10);
-            }else{
-                batch.DrawString(new Vector2(850, 75), "Score: "+score, Color.black, 10);
+            if (score < 0) {
+                batch.DrawString(new Vector2(850, 75), "Score: " + score, Color.red, 10);
+            } else {
+                batch.DrawString(new Vector2(850, 75), "Score: " + score, Color.black, 10);
             }
             //Happiness
-            if(happiness<0){
-                batch.DrawString(new Vector2(850, 60), "Happiness: "+happiness, Color.red, 10);
-            }else{
-                batch.DrawString(new Vector2(850, 60), "Happiness: "+happiness, Color.black, 10);
+            if (happiness < 0) {
+                batch.DrawString(new Vector2(850, 60), "Happiness: " + happiness, Color.red, 10);
+            } else {
+                batch.DrawString(new Vector2(850, 60), "Happiness: " + happiness, Color.black, 10);
             }
-            
-            batch.DrawString(new Vector2(835, 600), "Next Round: "+(int)this.spawn.getRemainingTime()/1000 +" s", Color.black, 10);
-            
+
+            batch.DrawString(new Vector2(835, 600), "Next Round: " + (int) this.spawn.getRemainingTime() / 1000 + " s", Color.black, 10);
+
             //the Background Grid
             batch.Draw(Background, new Vector2(835 / 2, 611 / 2), 0);
 
@@ -372,40 +379,41 @@ public class CityGame extends Game{
             System.out.println(globalCount);
         }//End of Main Game Else
     }
-    
-    private void resetPaths(){
-        for(WorldObject b: allObjects){
-            if (b instanceof Enemy){
-                Enemy e = (Enemy)b;
+
+    private void resetPaths() {
+        for (WorldObject b : allObjects) {
+            if (b instanceof Enemy) {
+                Enemy e = (Enemy) b;
                 e.setEnemyPath(tiles);
             }
         }
     }
+
     /**
-     * Sort of self explanitory
+     * Sort of self explanatory
      * @return the score.
      */
-    private double getScore(){
-        return score+(money-polution)*happiness*0.1;
-    }
-    
-    public void addToWorldObjects(WorldObject wo){
-        allObjects.add(wo);
-    }
-    
-    public static Rect getRectangle(Image2D i2d){
-        return new Rect((int)(i2d.getPosition().getX()-i2d.getIconWidth()/2), 
-                (int)(i2d.getPosition().getY()-i2d.getIconHeight()/2), 
-                i2d.getIconWidth(), i2d.getIconHeight());
-    }
-    
-    private void save(){
-        String path="Game Resources/Saved Files/";
-        File allSavedFiles= new File(path+"SavedFilesHead.txt");
-    }
-    private void load(){
-        String path="Game Resources/Saved Files/";
-        File allSavedFiles= new File(path+"SavedFilesHead.txt");
+    private double getScore() {
+        return score + (money - polution) * happiness * 0.1;
     }
 
+    public void addToWorldObjects(WorldObject wo) {
+        allObjects.add(wo);
+    }
+
+    public static Rect getRectangle(Image2D i2d) {
+        return new Rect((int) (i2d.getPosition().getX() - i2d.getIconWidth() / 2),
+                (int) (i2d.getPosition().getY() - i2d.getIconHeight() / 2),
+                i2d.getIconWidth(), i2d.getIconHeight());
+    }
+
+    private void save() {
+        String path = "Game Resources/Saved Files/";
+        File allSavedFiles = new File(path + "SavedFilesHead.txt");
+    }
+
+    private void load() {
+        String path = "Game Resources/Saved Files/";
+        File allSavedFiles = new File(path + "SavedFilesHead.txt");
+    }
 }
