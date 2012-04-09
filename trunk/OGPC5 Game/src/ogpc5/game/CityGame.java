@@ -46,6 +46,7 @@ public class CityGame extends Game {
     public double polution;
     public boolean invOpen = false;
     Image2D Background = new Image2D("Game Resources/Sprites/GUIs/Background.PNG");
+    Image2D bgtexture = new Image2D("Game Resources/Sprites/bgtexture.png");
     public int buttonPressed;
     public Draggable drag;
     //opening animation controlls
@@ -364,7 +365,8 @@ public class CityGame extends Game {
             batch.DrawString(new Vector2(835, 600), "Next Round: " + (int) this.spawn.getRemainingTime() / 1000 + " s", Color.black, 10);
 
             //the Background Grid
-            batch.Draw(Background, new Vector2(835 / 2, 611 / 2), 0);
+            batch.Draw(Background, new Vector2(835 / 2, 611 / 2), 1);
+            batch.Draw(bgtexture, new Vector2(970 / 2, 611 / 2), 0);
 
             for (Tile t : activeTiles) {
                 t.Draw(batch);
