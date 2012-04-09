@@ -4,6 +4,7 @@
  */
 package WorldObjects.towers;
 
+import Enemies.Enemy;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
@@ -43,6 +44,11 @@ public class House extends Tower{
     @Override
     public void updateGameStats(CityGame theGame) {
         
+    }
+
+    @Override
+    protected Bullet setEnemyBulletHitting(Enemy e) {
+        return new Bullet(position, damage, adamage, sdamage, projspeed, e);
     }
     
 }

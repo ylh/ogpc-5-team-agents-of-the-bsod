@@ -84,6 +84,13 @@ public class Enemy extends WorldObject {
         health-=Math.max(0,damage-armor);
     }
     /**
+     * gets the ID of the ENEMY
+     * @return this instance's id
+     */
+    public int getID(){
+        return id;
+    }
+    /**
      * Used for obtaining the score of the enemy
      * @return the score the enemy is worth
      */
