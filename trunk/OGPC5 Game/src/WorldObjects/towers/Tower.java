@@ -152,7 +152,8 @@ public abstract class Tower extends MasterTile {
             }
 
             if (target != null) {
-                wo.add(new Bullet(position, damage, adamage, sdamage, projspeed, target));
+                Bullet t=setEnemyBulletHitting((Enemy)target);
+                wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
                 loaded+=speed;
             }
         }
@@ -162,4 +163,5 @@ public abstract class Tower extends MasterTile {
     public abstract void updateGameStats(CityGame theGame);
     protected abstract void loadAnimation();
     protected abstract void loadStats();
+    protected abstract Bullet setEnemyBulletHitting(Enemy e);
 }
