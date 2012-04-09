@@ -38,7 +38,7 @@ public class OpeningAnimation {
     
     private void loadAnimation(int t){
         if(t==JAVA){
-            a=new Animation(18,10,position,200);
+            a=new Animation(18,10,position,50);
             addJavaCell(1);
             addJavaCell(2);
             addJavaCell(3);
@@ -58,7 +58,7 @@ public class OpeningAnimation {
             addJavaCell(2);
             addJavaCell(1);
         }else if(t==AOTBSOD){
-            a=new Animation(33,10000,position,150);
+            a=new Animation(33,10000,position,50);
             addBSODCell(1);
             addBSODCell(1);
             addBSODCell(1);

@@ -54,8 +54,8 @@ public class CityGame extends Game{
     boolean secondwait=false;
     boolean AOTBSOD=false;
     double startTime;
-    double javaLength=18*200;
-    double aLength=33*150;
+    double javaLength=18*50;
+    double aLength=33*50;
     double first=1000;
     double second=1000;
     OpeningAnimation java;
