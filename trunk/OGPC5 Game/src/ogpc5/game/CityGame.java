@@ -97,8 +97,8 @@ public class CityGame extends Game {
         happiness = 0;
 
         //The buttons
-        buttons.add(new Button(1, "Game Resources/Sprites/GUIS/BlueBox.png", new Vector2(900, 100), new Vector2(900, -40), 0.1));
-        buttons.add(new Button(2, "Game Resources/Sprites/GUIS/RedBox.png", new Vector2(900, 200), new Vector2(900, -40), 0.1));
+        buttons.add(new Button(1, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", new Vector2(900, 100), new Vector2(900, -40), 0.1));
+        buttons.add(new Button(2, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", new Vector2(900, 200), new Vector2(900, -40), 0.1));
         buttons.add(new Button(3, "Game Resources/Sprites/GUIS/deleteButton.png", new Vector2(900, 300), new Vector2(900, -40), 0.1));
 
         //Makes the Grid non-null
@@ -236,8 +236,12 @@ public class CityGame extends Game {
                 b.setOpen(invOpen);
                 globalCount++;
             }
-            if (buttonPressed==3){
+            if (buttonPressed==1){
                 drag=new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png",mouse.location().clone());
+                
+            }
+            if (buttonPressed==2){
+                drag=new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png",mouse.location().clone());
             }
             //Needed because we can't have it in the loop
             if (drag!=null) drag.update(mouse);
@@ -258,7 +262,7 @@ public class CityGame extends Game {
             }
 
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && mouse.location().getX() < 854) {
-                invOpen = true;
+                if (drag==null)invOpen = true;
                 int x = (int) mouse.location().getX();
                 int y = (int) mouse.location().getY();
 
