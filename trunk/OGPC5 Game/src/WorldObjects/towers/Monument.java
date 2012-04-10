@@ -48,7 +48,12 @@ public class Monument extends Tower{
 
     @Override
     protected Bullet setEnemyBulletHitting(Enemy e) {
-        return null;
+        if(e.getID()==Enemy.SMOG){
+            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
+        }else if(e.getID()==Enemy.ARSONIST){
+            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
+        }
+        return new Bullet(position.clone(), damage, adamage, sdamage, projspeed, e);
     }
     
 }

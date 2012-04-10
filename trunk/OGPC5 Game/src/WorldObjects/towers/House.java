@@ -48,7 +48,7 @@ public class House extends Tower{
 
     @Override
     protected Bullet setEnemyBulletHitting(Enemy e) {
-        return new Bullet(position, damage, adamage, sdamage, projspeed, e);
+        return new Bullet(position.clone(), damage, adamage, sdamage, projspeed, e);
     }
     
 }

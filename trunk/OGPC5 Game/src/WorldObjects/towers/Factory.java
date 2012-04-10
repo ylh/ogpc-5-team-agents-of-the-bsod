@@ -49,10 +49,10 @@ public class Factory extends Tower{
     @Override
     protected Bullet setEnemyBulletHitting(Enemy e) {
         if(e.getID()==Enemy.SMOG){
-            return new Bullet(position, damage/2, adamage, sdamage, projspeed, e);
+            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
         }
         
-        return new Bullet(position, damage, adamage, sdamage, projspeed, e);
+        return new Bullet(position.clone(), damage, adamage, sdamage, projspeed, e);
     }
     
 }

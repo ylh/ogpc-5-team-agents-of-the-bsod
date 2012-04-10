@@ -48,7 +48,13 @@ public class RecyclingCenter extends Tower{
 
     @Override
     protected Bullet setEnemyBulletHitting(Enemy e) {
-        return null;
+        if(e.getID()==Enemy.TRASH){
+            return new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
+        }else if(e.getID()==Enemy.WATER_POLUTION){
+            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
+        }
+        
+        return new Bullet(position.clone(), damage, adamage, sdamage, projspeed, e);
     }
     
 }
