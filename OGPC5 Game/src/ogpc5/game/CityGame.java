@@ -303,7 +303,7 @@ public class CityGame extends Game {
                     }
                 }
                 if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
-                    if (!(tiles[i][j] == BottomRoad)) {
+                    if (!(tiles[i][j] == BottomRoad) && (tiles[i][j] instanceof Road)) {
                         //activeTiles.remove(tiles[i][j]);
                         roads.remove(tiles[i][j]);
                         Road.setNeighbors(tiles, i, j);
@@ -311,6 +311,17 @@ public class CityGame extends Game {
 //                        resetPaths();
                         money -= 5;
                         selection = null;
+                    }
+                    if((tiles[i][j] instanceof Tile) && !(tiles[i][j] == BottomRoad)){
+                        if(activeTiles.contains(tiles[i][j])){
+                            activeTiles.remove(tiles[i][j]);
+                            money -= 5;
+                            selection = null;
+                            Road.setNeighbors(tiles, i, j);//just to be safe
+                            tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
+                        }else{
+                            //DO NOTHING!!!!
+                        }
                     }
                 }
             }//End of mouse pressed

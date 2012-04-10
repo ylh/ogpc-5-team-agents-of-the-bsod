@@ -65,7 +65,7 @@ public class Enemy extends WorldObject {
         score=10;
         id=Enemy.GENERIC;
         System.out.println("Enemy Created");
-        pathCreator = new EnemyNavigation(t, "Default", 10, 10, 0, 0); //Actual spawn and goal values will be changed and hard-coded
+        pathCreator = new EnemyNavigation(t, "Default", 10, 0); //Actual spawn and goal values will be changed and hard-coded
         setEnemyPath();
     }
     public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
