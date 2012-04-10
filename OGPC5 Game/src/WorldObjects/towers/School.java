@@ -48,7 +48,19 @@ public class School extends Tower{
 
     @Override
     protected Bullet setEnemyBulletHitting(Enemy e) {
-        return null;
+        if(e.getID()==Enemy.GANGS){
+            return new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
+        }else if(e.getID()==Enemy.ARSONIST){
+            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
+        }else if(e.getID()==Enemy.CRIMINAL){
+            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
+        }else if(e.getID()==Enemy.GRAFITTI){
+            return new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
+        }else if(e.getID()==Enemy.EDUCATION){
+            return new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
+        }
+        
+        return new Bullet(position.clone(), damage, adamage, sdamage, projspeed, e);
     }
     
 }
