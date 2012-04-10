@@ -44,6 +44,7 @@ public class Enemy extends WorldObject {
     
     ArrayList<Vector2> path; //Enemy path
     
+    public EnemyNavigation pathCreator;    
     
     /**
      * The Constructor for the enemy class. Because enemies all act similarly, They all have similar inputs. 
@@ -62,9 +63,10 @@ public class Enemy extends WorldObject {
         danger = 0;
         tiles = t;
         score=10;
-        setEnemyPath(t);
         id=Enemy.GENERIC;
         System.out.println("Enemy Created");
+        pathCreator = new EnemyNavigation(t, "Default", 10, 10, 0, 0); //Actual spawn and goal values will be changed and hard-coded
+        setEnemyPath();
     }
     public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
         this(Speed, Health, Armor, pos, path, t);
@@ -132,11 +134,14 @@ public class Enemy extends WorldObject {
         batch.Draw(sprite, position, 5);
     }
     
-    public void setEnemyPath(Tile[][] t) {
-        EnemyNavigation pathCreator = new EnemyNavigation(t, "Default", 0, 0, 320, 320); //Actual spawn and goal values will be changed and hard-coded 
-        pathCreator.start();
+    public void setEnemyPath() {                 
+        pathCreator.start();        
+    }
+    
+    public void updatePath(){
         if (!pathCreator.isAlive()) {
             path = pathCreator.getPath();
+            System.out.println(path);
         }
     }
     

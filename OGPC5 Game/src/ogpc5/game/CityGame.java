@@ -125,7 +125,7 @@ public class CityGame extends Game {
 
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
-        spawn = new Spawner((1000) * 100, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        spawn = new Spawner((1000) * 5, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
     }
 
     @Override
@@ -208,9 +208,13 @@ public class CityGame extends Game {
             for (int i = 0; i < allObjects.size(); i++) {
                 WorldObject wo = allObjects.get(i);
                 wo.Update(allObjects);
-                if (wo instanceof Enemy && wo.getPosition().getY() < 0) {
-                    allObjects.remove(wo);
-                    score -= ((Enemy) wo).getScore();
+                if (wo instanceof Enemy) {
+                    Enemy e = (Enemy)wo;
+                    e.updatePath();
+                    if(wo.getPosition().getY()<0){
+                        allObjects.remove(wo);
+                        score -= ((Enemy)wo).getScore();                        
+                    }
                 }
                 globalCount++;
             }
@@ -304,7 +308,7 @@ public class CityGame extends Game {
                         roads.remove(tiles[i][j]);
                         Road.setNeighbors(tiles, i, j);
                         tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
-                        resetPaths();
+//                        resetPaths();
                         money -= 5;
                         selection = null;
                     }
@@ -387,14 +391,14 @@ public class CityGame extends Game {
         }//End of Main Game Else
     }
 
-    private void resetPaths() {
-        for (WorldObject b : allObjects) {
-            if (b instanceof Enemy) {
-                Enemy e = (Enemy) b;
-                e.setEnemyPath(tiles);
-            }
-        }
-    }
+//    private void resetPaths() {
+//        for (WorldObject b : allObjects) {
+//            if (b instanceof Enemy) {
+//                Enemy e = (Enemy) b;
+//                e.updatePath();
+//            }
+//        }
+//    }
 
     /**
      * Sort of self explanatory
