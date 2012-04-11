@@ -210,11 +210,11 @@ public class CityGame extends Game {
                 WorldObject wo = allObjects.get(i);
                 wo.Update(allObjects);
                 if (wo instanceof Enemy) {
-                    Enemy e = (Enemy)wo;
+                    Enemy e = (Enemy) wo;
                     e.updatePath();
-                    if(wo.getPosition().getY()<0){
+                    if (wo.getPosition().getY() < 0) {
                         allObjects.remove(wo);
-                        score -= ((Enemy)wo).getScore();                        
+                        score -= ((Enemy) wo).getScore();
                     }
                 }
                 globalCount++;
@@ -243,19 +243,21 @@ public class CityGame extends Game {
                 b.setOpen(invOpen);
                 globalCount++;
             }
-            if (buttonPressed==1){
-                drag=new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png",mouse.location().clone());
-                
+            if (buttonPressed == 1) {
+                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", mouse.location().clone());
+
             }
-            if (buttonPressed==2){
-                drag=new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png",mouse.location().clone());
+            if (buttonPressed == 2) {
+                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", mouse.location().clone());
             }
             //Needed because we can't have it in the loop
-            if (drag!=null) drag.update(mouse);
-            
-            
-            if (!mouse.isPressed(Mouse.LEFT_BUTTON)){
-                drag=null;
+            if (drag != null) {
+                drag.update(mouse);
+            }
+
+
+            if (!mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                drag = null;
             }
             double thisLoopTime = System.currentTimeMillis();
             for (Tile t : activeTiles) {
@@ -270,60 +272,71 @@ public class CityGame extends Game {
             }
 
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && mouse.location().getX() < 854) {
-                if (drag==null)invOpen = true;
-                int x = (int) mouse.location().getX();
-                int y = (int) mouse.location().getY();
-
-                int i = x / 32;
-                int j = y / 32;
-
-                Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
-
-                if (selection == null) {
-                    selection = (Tile) tiles[i][j];
-                    selection.select();
-
-                } else {
-                    selection.unselect();
-                    selection = (Tile) tiles[i][j];
-                    selection.select();
-                    //invOpen = false;
-                }
-
-                if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
-                    if (!(tiles[i][j] instanceof Road)) {
-                        Vector2 roadPos = new Vector2((i * 32), (j * 32));
-                        tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
-                        Road.setNeighbors(tiles, i, j);
-                        roads.add((Road) tiles[i][j]);
-                        //activeTiles.add(tiles[i][j]);
-                        if ((i + 1) >= tiles.length) {
-                            //ADD SPAWNER CODE
-                        }
-                        money -= 5;
-                        selection = null;
+                try {
+                    if (drag == null) {
+                        invOpen = true;
                     }
-                }
-                if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
-                    if (!(tiles[i][j] == BottomRoad) && (tiles[i][j] instanceof Road)) {
-                        //activeTiles.remove(tiles[i][j]);
-                        roads.remove(tiles[i][j]);
-                        Road.setNeighbors(tiles, i, j);
-                        tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
-//                        resetPaths();
-                        money -= 5;
-                        selection = null;
+                    int x = (int) mouse.location().getX();
+                    int y = (int) mouse.location().getY();
+
+                    int i = x / 32;
+                    int j = y / 32;
+
+                    Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
+
+                    if (selection == null) {
+                        selection = (Tile) tiles[i][j];
+                        selection.select();
+
+                    } else {
+                        selection.unselect();
+                        selection = (Tile) tiles[i][j];
+                        selection.select();
+                        //invOpen = false;
                     }
-                    if((tiles[i][j] instanceof Tile) && !(tiles[i][j] == BottomRoad)){
-                        if(activeTiles.contains(tiles[i][j])){
-                            activeTiles.remove(tiles[i][j]);
+
+                    if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                        if (!(tiles[i][j] instanceof Road)) {
+                            Vector2 roadPos = new Vector2((i * 32), (j * 32));
+                            tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
+                            Road.setNeighbors(tiles, i, j);
+                            roads.add((Road) tiles[i][j]);
+                            //activeTiles.add(tiles[i][j]);
+                            if ((i + 1) >= tiles.length) {
+                                //ADD SPAWNER CODE
+                            }
                             money -= 5;
                             selection = null;
-                            Road.setNeighbors(tiles, i, j);//just to be safe
-                            tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
-                        }else{
-                            //DO NOTHING!!!!
                         }
+                    }
+                    if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                        if (!(tiles[i][j] == BottomRoad) && (tiles[i][j] instanceof Road)) {
+                            //activeTiles.remove(tiles[i][j]);
+                            roads.remove(tiles[i][j]);
+                            Road.setNeighbors(tiles, i, j);
+                            tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
+                            Road.setNeighbors(tiles, i, j);
+//                        resetPaths();
+                            money -= 5;
+                            selection = null;
+                        }
+                        if ((tiles[i][j] instanceof Tile) && !(tiles[i][j] == BottomRoad)) {
+                            if (activeTiles.contains(tiles[i][j])) {
+                                activeTiles.remove(tiles[i][j]);
+                                money -= 5;
+                                selection = null;
+                                Road.setNeighbors(tiles, i, j);//just to be safe
+                                tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
+                            } else {
+                                //DO NOTHING!!!!
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    if(e instanceof ArrayIndexOutOfBoundsException){
+                        //Do nothing
+                    }else{
+                        e.printStackTrace();
                     }
                 }
             }//End of mouse pressed
