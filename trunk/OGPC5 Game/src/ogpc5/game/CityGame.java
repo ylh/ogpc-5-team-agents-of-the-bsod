@@ -137,6 +137,7 @@ public class CityGame extends Game {
 //        super.Run();
         this.base.theGUI.setSize(new Dimension(970, 640));
         this.base.theGUI.setResizable(false);
+        this.base.theGUI.setTitle("Urban Towers");
     }
 
     @Override
