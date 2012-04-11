@@ -252,6 +252,7 @@ public class CityGame extends Game {
             //Needed because we can't have it in the loop
             if (drag!=null) drag.update(mouse);
             
+            
             if (!mouse.isPressed(Mouse.LEFT_BUTTON)){
                 drag=null;
             }
