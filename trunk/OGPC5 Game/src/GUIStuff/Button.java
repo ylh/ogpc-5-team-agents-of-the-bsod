@@ -25,6 +25,10 @@ public class Button {
     boolean open;
     Image2D sprite;
     int id;
+
+    
+
+
     /**
      * This is the button.
      * @param i The id for the button.
@@ -33,6 +37,7 @@ public class Button {
      * @param cp The closed position of the button.
      * @param ms How fast the button goes.
      */
+
     public Button(int i, String sp, Vector2 op, Vector2 cp, double ms) {
         id=i;
         openpos = op;
@@ -75,7 +80,14 @@ public class Button {
         //System.out.print( targetpos.getY());
         //smooth glidey motion!
         dy = targetpos.getY() - pos.getY();
-        dy *= movespeed;
+        if (dy>0){
+            dy *= movespeed;
+        }
+        else{
+            dy = pos.getY()-openpos.getY();
+            dy *= movespeed*2;
+            dy-=4;
+        }
         pos.dY(dy);
         //reset the bounding box
         button = new Rect(pos, 32, 32);
