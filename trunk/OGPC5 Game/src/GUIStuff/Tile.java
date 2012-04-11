@@ -5,6 +5,7 @@
 package GUIStuff;
 
 import Utilities.Animation;
+import Utilities.Image2D;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 public class Tile extends WorldObject{
     
     private boolean isSelected;
+    Image2D selection;
+    Vector2 offset;
 
     /**
      *This is a default constructor.
@@ -26,6 +29,8 @@ public class Tile extends WorldObject{
      */
     public Tile(Vector2 pos){
         super(pos, 0, "");
+        selection=new Image2D("Game Resources/Sprites/GUIs/transpSquare.png");
+        offset=new Vector2(16,16);
     }
     /**
      * This selects this tile.
@@ -54,8 +59,11 @@ public class Tile extends WorldObject{
     @Override
     public void Draw(ImageCollection batch){
         if(isSelected){
-            batch.fillRect(position, 32, 32, Color.blue, 2);
-            batch.drawRect(position, 32, 32, Color.blue, 100);
+            Vector2 pos = position.clone();
+            pos.add(offset);
+            //batch.fillRect(position, 32, 32, Color.blue, 2);
+            //batch.drawRect(position, 32, 32, Color.blue, 100);
+            batch.Draw(selection,pos,100);
             batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
         }
     }
