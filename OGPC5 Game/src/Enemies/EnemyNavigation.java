@@ -14,9 +14,9 @@ public class EnemyNavigation extends Thread {
     Tile[][] tiles;
     int goalX;
     int goalY;
-    int spawnX;
-    int spawnY;
-    ArrayList<Vector2> route = new ArrayList<Vector2>();
+    int startX, startY;
+    boolean paused, destroy;
+    ArrayList<ArrayList<Vector2>> pathHolder = new ArrayList<ArrayList<Vector2>>();
     
     public EnemyNavigation(Tile[][] t, String navName, int i, int j){
         super(navName);
@@ -27,7 +27,25 @@ public class EnemyNavigation extends Thread {
     
     @Override
     public void run(){
-        synchronized(this){ 
+        synchronized(this){
+            possiblePaths();
+            while(true){
+                if(!paused){
+                    if(destroy){
+                        destroyPath(startX, startY);
+                    }
+                    else{
+                        possiblePaths(startX, startY);
+                    }
+                }
+                else{
+                    try{
+                        wait();
+                    }
+                    catch(Exception e){
+                    }
+                }
+            }
         }       
     }
     
@@ -103,6 +121,8 @@ public class EnemyNavigation extends Thread {
         int currentX = i;
         int currentY = j;
         
+        path.add(new Vector2(currentX, currentY));
+        
         while(currentX != goalX && currentY != goalY){
             Vector2 v = new Vector2();
             v = checkSurrounding(currentX, currentY);
@@ -114,14 +134,65 @@ public class EnemyNavigation extends Thread {
         return path;        
     }
     
-    public void setPath(int startX, int startY){
-        route = findPath(startX, startY);
+    public ArrayList getPath(int i, int j){
+        synchronized (this) {
+            if (tiles[i][j] instanceof Road) {
+                for (int k = 0; k < pathHolder.size(); k++) {
+                    if (pathHolder.get(k).get(0).getX() == i && pathHolder.get(k).get(0).getY() == j) {
+                        return pathHolder.get(k);
+                    }
+                }
+            }
+            return pathHolder.get(0);
+        }
     }
     
-    public ArrayList getPath(){
-        synchronized(this){            
-        return route;
+    public void possiblePaths(){
+        for(int i = 0; i < tiles.length; i++){
+            for(int j = 0; j < tiles[0].length; j++){
+                if(tiles[i][j] instanceof Road){                    
+                    ArrayList<Vector2> route = new ArrayList<Vector2>();
+                    route = findPath(i,j);
+                    pathHolder.add(route);
+                }
+            }
         }
+    }
+    
+    public void possiblePaths(int i, int j){
+        if(tiles[i][j] instanceof Road){
+            ArrayList<Vector2> route = new ArrayList<Vector2>();
+            route = findPath(i,j);
+            pathHolder.add(route);
+        }
+    }
+    
+    public void destroyPath(int i, int j){
+        if(tiles[i][j] instanceof Road){
+            for(int k = 0; k < pathHolder.size(); k++){
+                if(pathHolder.get(k).get(0).getX() == i && pathHolder.get(k).get(0).getY() == j){
+                    pathHolder.remove(k);
+                }
+            }
+        }
+    }
+    
+    public void pause() {
+        this.paused=true;
+    }
+
+    public void recalculatePath(int i, int j, boolean b) {
+        synchronized (this) {
+            this.paused = false;
+            this.startX = i;
+            this.startY = j;
+            this.destroy = b;            
+            this.notify();
+        }
+    } 
+    
+    public boolean isPaused(){
+        return this.paused;
     }
 
     
