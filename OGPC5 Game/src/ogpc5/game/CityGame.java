@@ -211,7 +211,7 @@ public class CityGame extends Game {
                 wo.Update(allObjects);
                 if (wo instanceof Enemy) {
                     Enemy e = (Enemy) wo;
-                    e.updatePath();
+                    e.updatePath2(tiles);
                     if (wo.getPosition().getY() < 0) {
                         allObjects.remove(wo);
                         score -= ((Enemy) wo).getScore();

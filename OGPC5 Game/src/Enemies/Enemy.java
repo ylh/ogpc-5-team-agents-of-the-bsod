@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @author pcowal15, Nekel_Seyew, tsutton14
  */
 public class Enemy extends WorldObject {
+    Vector2 velocity;
     /**
      * The Speed the enemy travels at
      */
@@ -45,7 +46,7 @@ public class Enemy extends WorldObject {
     ArrayList<Vector2> path; //Enemy path
     
     public EnemyNavigation pathCreator;    
-    
+    public EnemyNavigation2 pathCreator2;
     /**
      * The Constructor for the enemy class. Because enemies all act similarly, They all have similar inputs. 
      * This is the Generic Constructor
@@ -58,6 +59,7 @@ public class Enemy extends WorldObject {
     public Enemy(double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t) {
         super(pos, 1, path);
         speed = Speed;
+        velocity=new Vector2(0,-speed);
         health = Health;
         armor = Armor;
         danger = 0;
@@ -67,6 +69,7 @@ public class Enemy extends WorldObject {
         System.out.println("Enemy Created");
         pathCreator = new EnemyNavigation(t, "Default", 10, 0); //Actual spawn and goal values will be changed and hard-coded
         setEnemyPath();
+        pathCreator2 = new EnemyNavigation2(t);
     }
     public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
         this(Speed, Health, Armor, pos, path, t);
@@ -121,7 +124,15 @@ public class Enemy extends WorldObject {
     @Override
     public void Update(ArrayList<WorldObject> wol) {
         //we'll want to change this in the future when we add roads
-        position.add(new Vector2(0,-speed));
+        if (snapped()){
+            pathCreator2.update(position);
+            int decision=pathCreator2.decide(position);
+            if (decision==0) velocity= new Vector2(0,-speed);
+            if (decision==1) velocity= new Vector2(speed,0);
+            if (decision==2) velocity= new Vector2(0,speed);
+            if (decision==3) velocity= new Vector2(-speed,0);
+        }
+        position.add(velocity);
         danger+=speed;
     }
     /**
@@ -143,6 +154,9 @@ public class Enemy extends WorldObject {
             path = pathCreator.getPath();
             System.out.println(path);
         }
+    }
+    public void updatePath2(Tile[][] t){
+        pathCreator2 = new EnemyNavigation2(t);
     }
     
     public void followPath(int i){
@@ -170,6 +184,16 @@ public class Enemy extends WorldObject {
                 position.setY(position.getY()+1);
             }
         }
+    }
+    public boolean snapped(){
+        if (Math.floor(position.getX()/32)==Math.round(position.getX())/32){
+            if (Math.floor(position.getY()/32)==Math.round(position.getY())/32){
+                position=new Vector2(Math.round(position.getX()),Math.round(position.getY()));
+                return true;
+            }
+            else return false;
+        }
+        else return false;
     }
     
     /**
