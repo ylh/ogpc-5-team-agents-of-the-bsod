@@ -96,7 +96,8 @@ public class EnemyNavigation2 {
             }
             else if (values[i]==min){
                 n++;
-                if (Math.random()<1/(n+1)){
+                double m=(double)n;
+                if (Math.random()<=1/m){
                     minDir=i;
                 }
             }
