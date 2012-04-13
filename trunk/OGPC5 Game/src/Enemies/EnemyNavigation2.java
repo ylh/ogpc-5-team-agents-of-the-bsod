@@ -37,7 +37,7 @@ public class EnemyNavigation2 {
             for(int j=0;j<t[0].length; j++){
                
                 if (t[i][j] instanceof Road){
-                    //Vegeta, what does the scouter say about his power level???
+                    //Vegeta, what does the scouter say about his power level?!?
                     if (visits[i][j]>9000){
                         //IT'S OVER NINE THOUSANDDDDDD!!!1!11!!!1!!!!!!111!!!one!!
                         visits[i][j]=0;
