@@ -16,6 +16,9 @@ public class EnemyNavigation2 {
     int[][]visits;
     int x;
     int y;
+    
+    double lastVisit;
+    
     public EnemyNavigation2(Tile[][] t){
         visits=new int[t.length][t[0].length];
         for(int i=0;i < t.length; i++){

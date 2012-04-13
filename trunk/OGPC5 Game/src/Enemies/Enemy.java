@@ -68,7 +68,7 @@ public class Enemy extends WorldObject {
         id=Enemy.GENERIC;
         System.out.println("Enemy Created");
 //        setEnemyPath();
-//        pathCreator2 = new EnemyNavigation2(t);
+        pathCreator2 = new EnemyNavigation2(t);
     }
     public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
         this(Speed, Health, Armor, pos, path, t);
@@ -123,16 +123,16 @@ public class Enemy extends WorldObject {
     @Override
     public void Update(ArrayList<WorldObject> wol) {
         //we'll want to change this in the future when we add roads
-//        if (snapped()){
-//            pathCreator2.update(position);
-//            int decision=pathCreator2.decide(position);
-//            if (decision==0) velocity= new Vector2(0,-speed);
-//            if (decision==1) velocity= new Vector2(speed,0);
-//            if (decision==2) velocity= new Vector2(0,speed);
-//            if (decision==3) velocity= new Vector2(-speed,0);
-//        }
-//        position.add(velocity);
-//        danger+=speed;
+        if (snapped()){
+            pathCreator2.update(position);
+            int decision=pathCreator2.decide(position);
+            if (decision==0) velocity= new Vector2(0,-speed);
+            if (decision==1) velocity= new Vector2(speed,0);
+            if (decision==2) velocity= new Vector2(0,speed);
+            if (decision==3) velocity= new Vector2(-speed,0);
+        }
+        position.add(velocity);
+        danger+=speed;
     }
     /**
      * Draws the enemy at it's current location
@@ -148,13 +148,14 @@ public class Enemy extends WorldObject {
         pathCreator.start();        
     }
     
-    public void updatePath(EnemyNavigation){
-            path = pathCreator.getPath();
-            System.out.println(path);        
-    }
-//    public void updatePath2(Tile[][] t){
-//        pathCreator2 = new EnemyNavigation2(t);
+//    public void updatePath(EnemyNavigation en) {
+//        pathCreator = en;
+//        path = pathCreator.getPath();
+//        System.out.println(path);     
 //    }
+    public void updatePath2(Tile[][] t){
+        pathCreator2 = new EnemyNavigation2(t);
+    }
     
     public void followPath(int i){
         if(i < path.size()){            
@@ -182,16 +183,16 @@ public class Enemy extends WorldObject {
             }
         }
     }
-//    public boolean snapped(){
-//        if (Math.floor(position.getX()/32)==Math.round(position.getX())/32){
-//            if (Math.floor(position.getY()/32)==Math.round(position.getY())/32){
-//                position=new Vector2(Math.round(position.getX()),Math.round(position.getY()));
-//                return true;
-//            }
-//            else return false;
-//        }
-//        else return false;
-//    }
+    public boolean snapped(){
+        if (Math.floor(position.getX()/32)==Math.round(position.getX())/32){
+            if (Math.floor(position.getY()/32)==Math.round(position.getY())/32){
+                position=new Vector2(Math.round(position.getX()),Math.round(position.getY()));
+                return true;
+            }
+            else return false;
+        }
+        else return false;
+    }
     
     /**
      * The Static ID for a Generic Enemy
