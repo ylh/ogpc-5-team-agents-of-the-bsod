@@ -69,6 +69,7 @@ public class Enemy extends WorldObject {
         System.out.println("Enemy Created");
 //        setEnemyPath();
         pathCreator2 = new EnemyNavigation2(t);
+        pathCreator2.update(position);
     }
     public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
         this(Speed, Health, Armor, pos, path, t);
