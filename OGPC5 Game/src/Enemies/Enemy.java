@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author pcowal15, Nekel_Seyew, tsutton14
  */
 public class Enemy extends WorldObject {
-    Vector2 velocity;
+    Vector2 targetPos;
     /**
      * The Speed the enemy travels at
      */
@@ -59,7 +59,7 @@ public class Enemy extends WorldObject {
     public Enemy(double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t) {
         super(pos, 1, path);
         speed = Speed;
-        velocity=new Vector2(0,-speed);
+        targetPos=new Vector2(pos.getX(),pos.getY()-32);
         health = Health;
         armor = Armor;
         danger = 0;
@@ -126,12 +126,26 @@ public class Enemy extends WorldObject {
         if (snapped()){
             pathCreator2.update(position);
             int decision=pathCreator2.decide(position);
-            if (decision==0) velocity= new Vector2(0,-speed);
-            if (decision==1) velocity= new Vector2(speed,0);
-            if (decision==2) velocity= new Vector2(0,speed);
-            if (decision==3) velocity= new Vector2(-speed,0);
+            Vector2 q= new Vector2();
+            if (decision==0) q= new Vector2(0,-32);
+            if (decision==1) q= new Vector2(32,0);
+            if (decision==2) q= new Vector2(0,32);
+            if (decision==3) q= new Vector2(-32,0);
+            q.add(position);
+            targetPos=q;
         }
-        position.add(velocity);
+        if (position.getX()<targetPos.getX()){
+            position.setX(Math.min(position.getX()+speed, targetPos.getX()));
+        }
+        else{
+            position.setX(Math.max(position.getX()-speed, targetPos.getX()));
+        }
+        if (position.getY()<targetPos.getY()){
+            position.setY(Math.min(position.getY()+speed, targetPos.getY()));
+        }
+        else{
+            position.setY(Math.max(position.getY()-speed, targetPos.getY()));
+        }
         danger+=speed;
     }
     /**
@@ -154,7 +168,7 @@ public class Enemy extends WorldObject {
 //        System.out.println(path);     
 //    }
     public void updatePath2(Tile[][] t){
-        pathCreator2 = new EnemyNavigation2(t);
+        pathCreator2.reset(t);
     }
     
     public void followPath(int i){
@@ -184,12 +198,8 @@ public class Enemy extends WorldObject {
         }
     }
     public boolean snapped(){
-        if (Math.floor(position.getX()/32)==Math.round(position.getX())/32){
-            if (Math.floor(position.getY()/32)==Math.round(position.getY())/32){
-                position=new Vector2(Math.round(position.getX()),Math.round(position.getY()));
-                return true;
-            }
-            else return false;
+        if (position.getX()==targetPos.getX() && position.getY()==targetPos.getY()){
+            return true;
         }
         else return false;
     }
