@@ -160,7 +160,7 @@ public class Enemy extends WorldObject {
     }
     
     public void setEnemyPath(EnemyNavigation e) {                 
-        path = e.getPath(((int)position.getX())/32, ((int)position.getY())/32);        
+        path = e.findPath(((int)position.getX())/32, ((int)position.getY())/32);        
     }
     
 //    public void updatePath(EnemyNavigation en) {

@@ -28,12 +28,26 @@ public class taylorEnemy extends Enemy{
 //        pathCreator2 = new EnemyNavigation2(t);
 //        pathCreator2.update(position);
     }
-    
-    @Override
-    public void setEnemyPath(EnemyNavigation e) {                 
-        path = e.getPath(((int)position.getX())/32, ((int)position.getY())/32);        
+    public taylorEnemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
+        this(Speed, Health, Armor, pos, path, t);
+        id=type;
+        System.out.println("Enemy Created");
     }
     
+    @Override
+    public void setEnemyPath(EnemyNavigation e) {
+        synchronized (this) {
+            try {                
+                System.out.println("Setting");
+                e.notify();
+                path = e.findPath(((int) position.getX()) / 32, ((int) position.getY()) / 32);
+            } catch (Exception d) {
+                System.out.println("Failed setting");
+            }
+        }        
+    }
+    
+    @Override
     public void followPath(int i){
         if(i < path.size()){            
             for(int counter = i; counter <path.size(); counter++){
