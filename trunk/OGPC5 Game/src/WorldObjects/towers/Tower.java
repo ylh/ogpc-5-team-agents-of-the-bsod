@@ -50,7 +50,7 @@ public abstract class Tower extends Tile {
     public Tower(Vector2 pos,String spritePath, int high, int wide) {
         super(pos);
         //sets default values so it'll work properly
-        damage=10;
+        damage=1;
         health=10;
         range=100;
         adamage=0;
