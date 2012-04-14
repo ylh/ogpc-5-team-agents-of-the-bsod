@@ -46,7 +46,7 @@ public class Enemy extends WorldObject {
     ArrayList<Vector2> path; //Enemy path
     
     public EnemyNavigation pathCreator;    
-    public EnemyNavigation2 pathCreator2;
+//    public EnemyNavigation2 pathCreator2;
     /**
      * The Constructor for the enemy class. Because enemies all act similarly, They all have similar inputs. 
      * This is the Generic Constructor
@@ -68,8 +68,8 @@ public class Enemy extends WorldObject {
         id=Enemy.GENERIC;
         System.out.println("Enemy Created");
 //        setEnemyPath();
-        pathCreator2 = new EnemyNavigation2(t);
-        pathCreator2.update(position);
+//        pathCreator2 = new EnemyNavigation2(t);
+//        pathCreator2.update(position);
     }
     public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
         this(Speed, Health, Armor, pos, path, t);
@@ -124,30 +124,30 @@ public class Enemy extends WorldObject {
     @Override
     public void Update(ArrayList<WorldObject> wol) {
         //we'll want to change this in the future when we add roads
-        if (snapped()){
-            pathCreator2.update(position);
-            int decision=pathCreator2.decide(position);
-            Vector2 q= new Vector2();
-            if (decision==0) q= new Vector2(0,-32);
-            if (decision==1) q= new Vector2(32,0);
-            if (decision==2) q= new Vector2(0,32);
-            if (decision==3) q= new Vector2(-32,0);
-            q.add(position);
-            targetPos=q;
-        }
-        if (position.getX()<targetPos.getX()){
-            position.setX(Math.min(position.getX()+speed, targetPos.getX()));
-        }
-        else{
-            position.setX(Math.max(position.getX()-speed, targetPos.getX()));
-        }
-        if (position.getY()<targetPos.getY()){
-            position.setY(Math.min(position.getY()+speed, targetPos.getY()));
-        }
-        else{
-            position.setY(Math.max(position.getY()-speed, targetPos.getY()));
-        }
-        danger+=speed;
+//        if (snapped()){
+//            pathCreator2.update(position);
+//            int decision=pathCreator2.decide(position);
+//            Vector2 q= new Vector2();
+//            if (decision==0) q= new Vector2(0,-32);
+//            if (decision==1) q= new Vector2(32,0);
+//            if (decision==2) q= new Vector2(0,32);
+//            if (decision==3) q= new Vector2(-32,0);
+//            q.add(position);
+//            targetPos=q;
+//        }
+//        if (position.getX()<targetPos.getX()){
+//            position.setX(Math.min(position.getX()+speed, targetPos.getX()));
+//        }
+//        else{
+//            position.setX(Math.max(position.getX()-speed, targetPos.getX()));
+//        }
+//        if (position.getY()<targetPos.getY()){
+//            position.setY(Math.min(position.getY()+speed, targetPos.getY()));
+//        }
+//        else{
+//            position.setY(Math.max(position.getY()-speed, targetPos.getY()));
+//        }
+//        danger+=speed;
     }
     /**
      * Draws the enemy at it's current location
@@ -159,8 +159,8 @@ public class Enemy extends WorldObject {
         batch.Draw(sprite, position, 5);
     }
     
-    public void setEnemyPath() {                 
-        pathCreator.start();        
+    public void setEnemyPath(EnemyNavigation e) {                 
+        path = e.getPath(((int)position.getX())/32, ((int)position.getY())/32);        
     }
     
 //    public void updatePath(EnemyNavigation en) {
@@ -168,9 +168,9 @@ public class Enemy extends WorldObject {
 //        path = pathCreator.getPath();
 //        System.out.println(path);     
 //    }
-    public void updatePath2(Tile[][] t){
-        pathCreator2.reset(t);
-    }
+//    public void updatePath2(Tile[][] t){
+//        pathCreator2.reset(t);
+//    }
     
     public void followPath(int i){
         if(i < path.size()){            

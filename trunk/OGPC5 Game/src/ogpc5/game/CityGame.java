@@ -81,6 +81,7 @@ public class CityGame extends Game {
     Spawner spawn;
     //I've added a comment!!!
     EnemyNavigation navigator;
+    boolean resetEnemies = true;
 
     @Override
     public void InitializeAndLoad() {
@@ -127,9 +128,10 @@ public class CityGame extends Game {
 
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
-        spawn = new Spawner((1000) * 100, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        spawn = new Spawner((1000) * 5, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
         
         navigator = new EnemyNavigation(tiles, "Default", 10, 10);
+        navigator.start();
     }
 
     @Override
@@ -215,7 +217,11 @@ public class CityGame extends Game {
                 wo.Update(allObjects);
                 if (wo instanceof Enemy) {
                     Enemy e = (Enemy) wo;
-                    e.updatePath2(tiles);
+                    if(resetEnemies){
+                        e.setEnemyPath(navigator);
+                        System.out.println("Set path!");
+                        resetEnemies = false;
+                    }
                     if (wo.getPosition().getY() < 0) {
                         allObjects.remove(wo);
                         score -= ((Enemy) wo).getScore();
@@ -306,6 +312,7 @@ public class CityGame extends Game {
                             Road.setNeighbors(tiles, i, j);
                             roads.add((Road) tiles[i][j]);
                             navigator.recalculatePath(i, j, false);
+                            resetEnemies = true;
                             //activeTiles.add(tiles[i][j]);
                             if ((i + 1) >= tiles.length) {
                                 //ADD SPAWNER CODE
@@ -322,6 +329,7 @@ public class CityGame extends Game {
                             tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
                             Road.setNeighbors(tiles, i, j);
                             navigator.recalculatePath(i, j, true);
+                            resetEnemies = true;
 //                        resetPaths();
                             money -= 5;
                             selection = null;
@@ -333,6 +341,7 @@ public class CityGame extends Game {
                                 selection = null;
                                 Road.setNeighbors(tiles, i, j);//just to be safe
                                 tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
+                                navigator.recalculatePath(i, j, true);
                             } else {
                                 //DO NOTHING!!!!
                             }
