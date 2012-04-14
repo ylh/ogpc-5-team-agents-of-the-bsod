@@ -23,6 +23,8 @@ public class EnemyNavigation extends Thread {
         tiles = t;
         goalX = i;
         goalY = j;
+        pathHolder = new ArrayList<ArrayList<Vector2>>();
+        pathHolder.add(new ArrayList<Vector2>());
     }
     
     @Override

@@ -39,7 +39,7 @@ public class CityGame extends Game {
     public static int globalCount = 0;
     ArrayList<WorldObject> allObjects;
     public Tile[][] tiles;
-    public ArrayList<Tile> activeTiles;
+    public ArrayList<Tower> activeTiles;
     public ArrayList<Button> buttons;
     public ArrayList<Road> roads;
     public double money;
@@ -90,7 +90,7 @@ public class CityGame extends Game {
         firstRun = true;
         this.gameSpeed = 32;
         allObjects = new ArrayList<WorldObject>();
-        activeTiles = new ArrayList<Tile>();
+        activeTiles = new ArrayList<Tower>();
         roads = new ArrayList<Road>();
         tiles = new Tile[854 / 32][632 / 32];
         buttons = new ArrayList<Button>();
@@ -129,9 +129,9 @@ public class CityGame extends Game {
 
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
-        spawn = new Spawner((1000) * 5, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        spawn = new Spawner((1000) * 100, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
         
-        navigator = new EnemyNavigation(tiles, "Default", 10, 10);
+        //navigator = new EnemyNavigation(tiles, "Default", 10, 10);
     }
 
     @Override
@@ -219,7 +219,7 @@ public class CityGame extends Game {
                 if (wo instanceof taylorEnemy) {
                     taylorEnemy e = (taylorEnemy) wo;
                     if(resetEnemies){
-                        e.setEnemyPath(navigator);
+                        //e.setEnemyPath(navigator);
                         System.out.println("Set path!");
                         resetEnemies = false;
                     }
@@ -255,28 +255,33 @@ public class CityGame extends Game {
                 globalCount++;
             }
             if (buttonPressed == 1) {
-                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", mouse.location().clone(),Tower.HOUSE);
+                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", mouse.location().clone(),Tower.GENERIC);
 
             }
             if (buttonPressed == 2) {
-                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", mouse.location().clone(), Tower.POLICE_FIRE_STATION);
+                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", mouse.location().clone(), Tower.GENERIC);
             }
             //Needed because we can't have it in the loop
             if (drag != null) {
                 drag.update(mouse);
             }
-
-
             if (!mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                if(drag!=null){
+                    int x=((int)mouse.location().getX())/32;
+                    int y=((int)mouse.location().getY())/32;
+                    tiles[x][y]=drag.getTower(new Rect(x,y,32,32));
+                    this.activeTiles.add((Tower)tiles[x][y]);
+                }
                 drag = null;
             }
+            
             double thisLoopTime = System.currentTimeMillis();
-            for (Tile t : activeTiles) {
+            for (Tower t : activeTiles) {
                 t.Update(allObjects);
 
                 //For updating score, happiness, polution, and money
                 if (thisLoopTime - this.UpdateAllStart >= 30000) {
-                    ((Tower) t).updateGameStats(this);
+                    t.updateGameStats(this);
                 }
 
                 globalCount++;

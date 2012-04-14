@@ -19,8 +19,8 @@ import java.util.ArrayList;
  */
 public class Tile extends WorldObject{
     
-    private boolean isSelected;
-    Image2D selection;
+    protected boolean isSelected;
+    protected Image2D selection;
     Vector2 offset;
 
     /**
