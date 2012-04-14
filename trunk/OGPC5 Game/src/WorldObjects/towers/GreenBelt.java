@@ -33,7 +33,14 @@ public class GreenBelt extends Tower{
 
     @Override
     protected void loadStats() {
-        
+        damage=12;
+        health=150;
+        range=144*Math.sqrt(2);
+        adamage=1;
+        projspeed=10;//not correct
+        speed=10;//not done
+        this.moneyBonus=-1;
+        this.happyBonus=7;
     }
 
     @Override

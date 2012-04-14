@@ -18,7 +18,7 @@ public class School extends Tower{
 
     public School(Vector2 pos, int high, int wide){
         super(pos,"", high, wide);  
-        cost=600;
+        cost=700;
     }
     
     @Override
@@ -33,7 +33,14 @@ public class School extends Tower{
 
     @Override
     protected void loadStats() {
-        
+        damage=15;
+        health=250;
+        range=112*Math.sqrt(2);
+        adamage=5;
+        projspeed=10;//not correct
+        speed=10;//not done
+        this.moneyBonus=-3;
+        this.happyBonus=2;
     }
 
     @Override
