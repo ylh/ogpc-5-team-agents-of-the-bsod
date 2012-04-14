@@ -34,7 +34,6 @@ public class taylorEnemy extends Enemy{
         System.out.println("Enemy Created");
     }
     
-    @Override
     public void setEnemyPath(EnemyNavigation e) {
         synchronized (this) {
             try {                

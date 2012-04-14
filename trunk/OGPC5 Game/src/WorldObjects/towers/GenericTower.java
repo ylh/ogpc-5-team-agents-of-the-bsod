@@ -8,6 +8,7 @@ import Enemies.Enemy;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
+import java.awt.Color;
 import ogpc5.game.CityGame;
 
 /**
@@ -15,7 +16,7 @@ import ogpc5.game.CityGame;
  * @author pcowal15
  */
 public class GenericTower extends Tower{
-    GenericTower(Vector2 pos,String spritePath) {
+    public GenericTower(Vector2 pos,String spritePath) {
         super(pos,spritePath,1,1);
     }
     @Override
@@ -25,7 +26,7 @@ public class GenericTower extends Tower{
 
     @Override
     protected void loadAnimation() {
-        ani= new Animation(1, 20, position, 200);
+        ani= new Animation(1, 5, position, 200);
         ani.addCell("Game Resources/Sprites/placeHold.png");
     }
 
@@ -35,8 +36,9 @@ public class GenericTower extends Tower{
     }
 
     @Override
-    public void Draw(ImageCollection batch) {
-        
+    public void Draw(ImageCollection batch){
+        super.Draw(batch);
+        ani.Draw(batch);
     }
 
     @Override

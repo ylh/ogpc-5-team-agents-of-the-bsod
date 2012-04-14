@@ -9,7 +9,7 @@ import Utilities.ImageCollection;
 import Utilities.Mouse;
 import Utilities.Rect;
 import Utilities.Vector2;
-import WorldObjects.towers.Tower;
+import WorldObjects.towers.*;
 import ogpc5.game.CityGame;
 
 /**
@@ -41,7 +41,40 @@ public class Draggable {
     }
     
     public Tower getTower(Rect pos){
-        return null;
+        Tower t=null;
+        Vector2 placingPos=new Vector2(pos.x*32 +16, pos.y*32 +16);
+        switch(id){
+            case Tower.FACTORY:
+                t= new Factory(placingPos,1,1);
+                break;
+            case Tower.GREEN_BELT:
+                t=new GreenBelt(placingPos,1,1);
+                break;
+            case Tower.HOUSE:
+                t= new House(placingPos,1,1);
+                break;
+            case Tower.MONUMENT:
+                t= new Monument(placingPos,1,1);
+                break;
+            case Tower.POLICE_FIRE_STATION:
+                t= new PoliceFire(placingPos,1,1);
+                break;
+            case Tower.RECYCLING_CENTER:
+                t= new RecyclingCenter(placingPos,1,1);
+                break;
+            case Tower.SCHOOL:
+                t= new School(placingPos,1,1);
+                break;
+            case Tower.STORE:
+                t= new Store(placingPos,1,1);
+            case Tower.GENERIC:
+                t= new GenericTower(placingPos,"");
+                break;
+            default:
+                t= new GenericTower(placingPos,"");
+                break;
+        }
+        return t;
     }
     
 }

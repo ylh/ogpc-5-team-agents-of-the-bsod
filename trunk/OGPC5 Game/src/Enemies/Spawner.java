@@ -117,7 +117,7 @@ public class Spawner {
                 e = new taylorEnemy(Enemy.WATER_POLUTION, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             default:
-                e = new taylorEnemy(1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
         }
         theGame.addToWorldObjects(e);

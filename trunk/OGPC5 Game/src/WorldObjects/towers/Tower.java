@@ -10,6 +10,7 @@ import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
+import java.awt.Color;
 import java.util.ArrayList;
 import ogpc5.game.CityGame;
 
@@ -19,7 +20,7 @@ import ogpc5.game.CityGame;
  * WHAT!? pcowal15 totally did more work than tsutton14 on this!!!
  * Let's not get petty about this...-Nekel_Seyew
  */
-public abstract class Tower extends MasterTile {
+public abstract class Tower extends Tile {
 
     protected int cost;
     protected int moneyBonus;
@@ -47,7 +48,7 @@ public abstract class Tower extends MasterTile {
     boolean isNearStore;
 
     public Tower(Vector2 pos,String spritePath, int high, int wide) {
-        super(pos,high,wide);
+        super(pos);
         //sets default values so it'll work properly
         damage=10;
         health=10;
@@ -76,7 +77,14 @@ public abstract class Tower extends MasterTile {
     }
 
     @Override
-    public abstract void Draw(ImageCollection batch);
+    public void Draw(ImageCollection batch){
+        if(isSelected){
+            //batch.fillRect(position, 32, 32, Color.blue, 2);
+            //batch.drawRect(position, 32, 32, Color.blue, 100);
+            batch.Draw(selection,position,100);
+            batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
+        }
+    }
 
     public int getmoneyBonus() {
         return moneyBonus;
