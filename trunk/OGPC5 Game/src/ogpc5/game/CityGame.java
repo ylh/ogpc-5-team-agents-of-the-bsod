@@ -131,7 +131,6 @@ public class CityGame extends Game {
         spawn = new Spawner((1000) * 5, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
         
         navigator = new EnemyNavigation(tiles, "Default", 10, 10);
-        navigator.start();
     }
 
     @Override
@@ -206,7 +205,8 @@ public class CityGame extends Game {
                 Vector2 roadPos = new Vector2((i * 32), (j * 32));
                 tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
                 Road.setNeighbors(tiles, i, j);
-                roads.add((Road) tiles[i][j]);
+                roads.add((Road) tiles[i][j]);                
+                navigator.start();
                 makeFirstRoad = false;
                 BottomRoad = tiles[i][j];
             }

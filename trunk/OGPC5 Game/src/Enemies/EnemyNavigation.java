@@ -28,7 +28,6 @@ public class EnemyNavigation extends Thread {
     @Override
     public void run(){
         synchronized(this){
-            possiblePaths();
             System.out.println("Ran");
             System.out.println(pathHolder.get(0));
             pause();
@@ -84,7 +83,7 @@ public class EnemyNavigation extends Thread {
             if (tiles[i][j + 1] instanceof Tile) {
                 if (tiles[i][j + 1] instanceof Road) {
                     if(scoreRoad(i,j+1)>=highScore){
-                        highScore = scoreRoad(i,j-1);
+                        highScore = scoreRoad(i,j+1);
                         highX = i;
                         highY = j+1;
                     }
@@ -96,7 +95,7 @@ public class EnemyNavigation extends Thread {
             if (tiles[i+1][j] instanceof Tile) {
                 if (tiles[i+1][j] instanceof Road) {
                     if(scoreRoad(i+1,j)>=highScore){
-                        highScore = scoreRoad(i,j-1);
+                        highScore = scoreRoad(i+1,j);
                         highX = i+1;
                         highY = j;
                     }
@@ -108,7 +107,7 @@ public class EnemyNavigation extends Thread {
             if (tiles[i-1][j] instanceof Tile) {
                 if (tiles[i-1][j] instanceof Road) {
                     if(scoreRoad(i-1,j)>=highScore){
-                        highScore = scoreRoad(i,j-1);
+                        highScore = scoreRoad(i-1,j);
                         highX = i-1;
                         highY = j;
                     }
