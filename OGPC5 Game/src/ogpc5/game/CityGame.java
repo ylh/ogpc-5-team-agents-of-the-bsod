@@ -248,11 +248,11 @@ public class CityGame extends Game {
                 globalCount++;
             }
             if (buttonPressed == 1) {
-                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", mouse.location().clone());
+                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", mouse.location().clone(),Tower.HOUSE);
 
             }
             if (buttonPressed == 2) {
-                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", mouse.location().clone());
+                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", mouse.location().clone(), Tower.POLICE_FIRE_STATION);
             }
             //Needed because we can't have it in the loop
             if (drag != null) {

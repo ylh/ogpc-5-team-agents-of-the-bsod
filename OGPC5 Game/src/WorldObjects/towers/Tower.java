@@ -22,7 +22,8 @@ import ogpc5.game.CityGame;
 public abstract class Tower extends MasterTile {
 
     protected int cost;
-    protected int bonus;
+    protected int moneyBonus;
+    protected int happyBonus;
     protected double damage;  //Base damage dealt
     protected double health;
     protected double range;  
@@ -77,12 +78,20 @@ public abstract class Tower extends MasterTile {
     @Override
     public abstract void Draw(ImageCollection batch);
 
-    public int getBonus() {
-        return bonus;
+    public int getmoneyBonus() {
+        return moneyBonus;
     }
 
-    public void setBonus(int b) {
-        bonus = b;
+    public int getHappyBonus() {
+        return happyBonus;
+    }
+
+    public void setHappyBonus(int happyBonus) {
+        this.happyBonus = happyBonus;
+    }
+
+    public void setmoneyBonus(int b) {
+        moneyBonus = b;
     }
 
     public double getDamage() {
@@ -164,4 +173,15 @@ public abstract class Tower extends MasterTile {
     protected abstract void loadAnimation();
     protected abstract void loadStats();
     protected abstract Bullet setEnemyBulletHitting(Enemy e);
+    
+    public static final int GENERIC=0;
+    public static final int FACTORY=1;
+    public static final int HOUSE=2;
+    public static final int GREEN_BELT=3;
+    public static final int MONUMENT=4;
+    public static final int POLICE_FIRE_STATION=5;
+    public static final int RECYCLING_CENTER=6;
+    public static final int SCHOOL=7;
+    public static final int STORE=8;
+    public static final int WATER_PURIFICATION_CENTER=9;
 }

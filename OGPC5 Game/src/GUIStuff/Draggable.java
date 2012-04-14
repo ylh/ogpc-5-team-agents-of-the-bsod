@@ -7,7 +7,10 @@ package GUIStuff;
 import Utilities.Image2D;
 import Utilities.ImageCollection;
 import Utilities.Mouse;
+import Utilities.Rect;
 import Utilities.Vector2;
+import WorldObjects.towers.Tower;
+import ogpc5.game.CityGame;
 
 /**
  *
@@ -18,10 +21,10 @@ public class Draggable {
     Image2D sprite;
     double movespeed = 0.5;
     int id;
-    public Draggable(String sp,Vector2 p){
+    public Draggable(String sp,Vector2 p, int ID){
         sprite=new Image2D(sp);
         pos=p;
-        
+        id=ID;
     }
     public void update(Mouse m){
         double x1=pos.getX();
@@ -35,6 +38,10 @@ public class Draggable {
     }
     public void draw(ImageCollection batch){
         batch.Draw(sprite,pos,1000);
+    }
+    
+    public Tower getTower(Rect pos){
+        return null;
     }
     
 }

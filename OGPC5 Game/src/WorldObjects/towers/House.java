@@ -33,7 +33,13 @@ public class House extends Tower{
 
     @Override
     protected void loadStats() {
-        
+        damage=5;
+        health=100;
+        range=80*Math.sqrt(2);
+        adamage=0;
+        sdamage=0;
+        projspeed=10;//not correct
+        speed=10;//not done
     }
 
     @Override
