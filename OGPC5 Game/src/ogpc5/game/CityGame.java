@@ -209,7 +209,7 @@ public class CityGame extends Game {
                 roads.add((Road) tiles[i][j]);
                 makeFirstRoad = false;
                 BottomRoad = tiles[i][j];                
-                navigator.start();
+                //navigator.start();
             }
             spawn.update();
 
@@ -311,7 +311,7 @@ public class CityGame extends Game {
                         //invOpen = false;
                     }
 
-                    if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                    if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)&&keyboard.isKeyUp('d')) {
                         if (!(tiles[i][j] instanceof Road)) {
                             Vector2 roadPos = new Vector2((i * 32), (j * 32));
                             tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
@@ -326,7 +326,7 @@ public class CityGame extends Game {
                             selection = null;
                         }
                     }
-                    if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+                    if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r')) {
                         if (!(tiles[i][j] == BottomRoad) && (tiles[i][j] instanceof Road)) {
                             //activeTiles.remove(tiles[i][j]);
                             roads.remove(tiles[i][j]);
