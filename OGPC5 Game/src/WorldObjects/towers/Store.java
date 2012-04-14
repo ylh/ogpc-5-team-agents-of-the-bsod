@@ -20,7 +20,7 @@ public class Store extends Tower {
     
     public Store(Vector2 pos, int high, int width){
         super(pos,"",high,width);
-        cost=700;
+        cost=650;
     }
     
     @Override
@@ -46,7 +46,14 @@ public class Store extends Tower {
 
     @Override
     protected void loadStats() {
-        
+        damage=10;
+        health=200;
+        range=112*Math.sqrt(2);
+        adamage=0;
+        projspeed=10;//not correct
+        speed=10;//not done
+        this.moneyBonus=10;
+        this.happyBonus=2;
     }
 
     @Override

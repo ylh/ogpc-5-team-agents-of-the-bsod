@@ -33,7 +33,14 @@ public class Monument extends Tower{
 
     @Override
     protected void loadStats() {
-        
+        damage=1;
+        health=1000;
+        range=48*Math.sqrt(2);
+        adamage=10;
+        projspeed=10;//not correct
+        speed=10;//not done
+        this.moneyBonus=35;
+        this.happyBonus=7;
     }
 
     @Override

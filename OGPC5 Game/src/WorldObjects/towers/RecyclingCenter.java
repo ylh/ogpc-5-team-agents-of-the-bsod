@@ -38,7 +38,14 @@ public class RecyclingCenter extends Tower{
 
     @Override
     protected void loadStats() {
-        
+        damage=10;
+        health=150;
+        range=112*Math.sqrt(2);
+        adamage=0;
+        projspeed=10;//not correct
+        speed=10;//not done
+        this.moneyBonus=-2;
+        this.happyBonus=0;
     }
 
     @Override
