@@ -81,40 +81,40 @@ public class Spawner {
         Enemy e = null;
         switch(enemy){
             case Enemy.ARSONIST:
-                e = new Enemy(Enemy.ARSONIST, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.ARSONIST, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.CRIMINAL:
-                e = new Enemy(Enemy.CRIMINAL, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.CRIMINAL, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.EARTHQUACKE:
-                e = new Enemy(Enemy.EARTHQUACKE, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.EARTHQUACKE, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.EDUCATION:
-                e = new Enemy(Enemy.EDUCATION, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.EDUCATION, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.FIRE:
-                e = new Enemy(Enemy.FIRE, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.FIRE, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.FLOOD:
-                e = new Enemy(Enemy.FLOOD, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.FLOOD, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.GANGS:
-                e = new Enemy(Enemy.GANGS, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.GANGS, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.GENERIC:
-                e = new Enemy(Enemy.GENERIC, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.GENERIC, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.GRAFITTI:
-                e = new Enemy(Enemy.GRAFITTI, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.GRAFITTI, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.SMOG:
-                e = new Enemy(Enemy.SMOG, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.SMOG, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.TRASH:
-                e = new Enemy(Enemy.TRASH, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.TRASH, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.WATER_POLUTION:
-                e = new Enemy(Enemy.WATER_POLUTION, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.WATER_POLUTION, 1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             default:
                 e = new taylorEnemy(1, 10, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);

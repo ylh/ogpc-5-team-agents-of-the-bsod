@@ -33,12 +33,11 @@ public class EnemyNavigation extends Thread {
             pause();
             while(true){
                 if(!paused){
+                    System.out.println("Got here!");
                     if(destroy){
-                        destroyPath(startX, startY);
                         pause();
                     }
                     else{
-                        possiblePaths(startX, startY);
                         pause();
                     }
                 }
@@ -119,7 +118,7 @@ public class EnemyNavigation extends Thread {
         return new Vector2(highX,highY);
     }
     
-    private ArrayList<Vector2> findPath(int i, int j){
+    public ArrayList<Vector2> findPath(int i, int j){
         ArrayList<Vector2> path = new ArrayList();
         
         int currentX = i;
@@ -136,49 +135,6 @@ public class EnemyNavigation extends Thread {
         }
         
         return path;        
-    }
-    
-    public ArrayList getPath(int i, int j){
-        synchronized (this) {
-            if (tiles[i][j] instanceof Road) {
-                for (int k = 0; k < pathHolder.size(); k++) {
-                    if (pathHolder.get(k).get(0).getX() == i && pathHolder.get(k).get(0).getY() == j) {
-                        return pathHolder.get(k);
-                    }
-                }
-            }
-            return pathHolder.get(0);
-        }
-    }
-    
-    public void possiblePaths(){
-        for(int i = 0; i < tiles.length; i++){
-            for(int j = 0; j < tiles[0].length; j++){
-                if(tiles[i][j] instanceof Road){                    
-                    ArrayList<Vector2> route = new ArrayList<Vector2>();
-                    route = findPath(i,j);
-                    pathHolder.add(route);
-                }
-            }
-        }
-    }
-    
-    public void possiblePaths(int i, int j){
-        if(tiles[i][j] instanceof Road){
-            ArrayList<Vector2> route = new ArrayList<Vector2>();
-            route = findPath(i,j);
-            pathHolder.add(route);
-        }
-    }
-    
-    public void destroyPath(int i, int j){
-        if(tiles[i][j] instanceof Road){
-            for(int k = 0; k < pathHolder.size(); k++){
-                if(pathHolder.get(k).get(0).getX() == i && pathHolder.get(k).get(0).getY() == j){
-                    pathHolder.remove(k);
-                }
-            }
-        }
     }
     
     public void pause() {
