@@ -29,13 +29,18 @@ public class EnemyNavigation extends Thread {
     public void run(){
         synchronized(this){
             possiblePaths();
+            System.out.println("Ran");
+            System.out.println(pathHolder.get(0));
+            pause();
             while(true){
                 if(!paused){
                     if(destroy){
                         destroyPath(startX, startY);
+                        pause();
                     }
                     else{
                         possiblePaths(startX, startY);
+                        pause();
                     }
                 }
                 else{
