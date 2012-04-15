@@ -70,9 +70,13 @@ public class CityGame extends Game {
     boolean mainMenu = false;
     MenuButton creds;
     MenuButton start;
+    SoundFile mainMenuSong;
+    boolean turnOnMenuSong=true;
     //credits
     boolean credits;
     CreditScreen creditScreen;
+    SoundFile creditSong;
+    boolean turnOnCreditSong=true;
     //PreGame
     boolean makeFirstRoad = true;
     //Main game needed
@@ -118,14 +122,16 @@ public class CityGame extends Game {
         java = new OpeningAnimation(new Vector2(970 / 2, 640 / 2), OpeningAnimation.JAVA);
         aotbsod = new OpeningAnimation(new Vector2(970 / 2, 640 / 2), OpeningAnimation.AOTBSOD);
         startTime = System.currentTimeMillis();
+        aww = new SoundFile("Game Resources/Sound/AwwComeon.wav", 1);
 
         //Creates the Main Menu
         creds = new MenuButton(new Vector2(970 / 2, 300), MenuButton.CREDITS);
         start = new MenuButton(new Vector2(970 / 2, 500), MenuButton.START);
-        aww = new SoundFile("Game Resources/Sound/AwwComeon.wav", 1);
+        mainMenuSong= new SoundFile("Game Resources/Sound/urban towers.wav",3);
 
         //Creates the credits
         creditScreen = new CreditScreen();
+        creditSong=new SoundFile("Game Resources/Sound/creditsong.wav",2);
 
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
@@ -149,8 +155,8 @@ public class CityGame extends Game {
     @Override
     public void Update() {
         globalCount = 0;
+        double time = System.currentTimeMillis();
         if (firstRun) {
-            double time = System.currentTimeMillis();
             if (JAVA) {
                 if (time - startTime >= javaLength || keyboard.isKeyDown(KeyEvent.VK_SPACE) || mouse.isPressed(Mouse.LEFT_BUTTON)) {
                     JAVA = false;
@@ -179,25 +185,45 @@ public class CityGame extends Game {
                     secondwait = false;
                     mainMenu = true;
                     aww = new SoundFile("Game Resources/Sound/AwwComeon.wav", 1);
+                    startTime=time;
                 }
             }
         } else if (mainMenu) {
             creds.update(mouse);
             start.update(mouse);
+            if(turnOnMenuSong && time-startTime>300){
+                mainMenuSong.start();
+                turnOnMenuSong=false;
+            }
             if (start.isPressed(mouse)) {
+                mainMenuSong.kill();
+                mainMenuSong= new SoundFile("Game Resources/Sound/urban towers.wav",3);
                 mainMenu = false;
+                turnOnMenuSong=true;
             }
             if (creds.isPressed(mouse)) {
+                mainMenuSong.kill();
+                mainMenuSong= new SoundFile("Game Resources/Sound/urban towers.wav",3);
+                turnOnMenuSong=true;
                 mainMenu = false;
                 credits = true;
                 creditScreen.start();
+                startTime=time;
             }
         } else if (credits) {
-            creditScreen.update();
+            if(turnOnCreditSong && time-startTime>300){
+                creditSong.start();
+                turnOnCreditSong=false;
+            }
+                creditScreen.update();
             if (creditScreen.isDone(keyboard, mouse)) {
+                creditSong.kill();
                 credits = false;
+                turnOnCreditSong=true;
+                creditSong=new SoundFile("Game Resources/Sound/creditsong.wav",2);
                 creditScreen = new CreditScreen();
                 mainMenu = true;
+                startTime=time;
             }
         } else {
 
@@ -328,6 +354,7 @@ public class CityGame extends Game {
                     }
                     if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r')) {
                         if (!(tiles[i][j] == BottomRoad) && (tiles[i][j] instanceof Road)) {
+                            new SoundFile("Game Resources/Sound/destroy1.wav",1).start();
                             //activeTiles.remove(tiles[i][j]);
                             roads.remove(tiles[i][j]);
                             Road.setNeighbors(tiles, i, j);
@@ -340,6 +367,7 @@ public class CityGame extends Game {
                         }
                         if ((tiles[i][j] instanceof Tile) && !(tiles[i][j] == BottomRoad)) {
                             if (activeTiles.contains(tiles[i][j])) {
+                                new SoundFile("Game Resources/Sound/destroy1.wav",1).start();
                                 activeTiles.remove(tiles[i][j]);
                                 money -= 5;
                                 selection = null;

@@ -30,6 +30,7 @@ public class CreditScreen {
     Credit aotbsod;
     ArrayList<Credit> credits;
     double startTimer;
+    double theEndStart;
     int counter=0;
     boolean done;
     boolean endinground=false;
@@ -56,6 +57,7 @@ public class CreditScreen {
     
     public void start(){
         startTimer=System.currentTimeMillis();
+        theEndStart=startTimer;
     }
     
     public void update(){
@@ -114,17 +116,16 @@ public class CreditScreen {
                     break;
             }
         }
-        
-        for(Credit c: credits){
-            if(c==aotbsod && aotbsod.getY()>=570 && !endinground){
+        for (Credit c : credits) {
+            if (c == aotbsod && aotbsod.getY() >= 570 && !endinground) {
                 c.stop();
-                endinground=true;
-                startTimer=System.currentTimeMillis();
+                endinground = true;
+                startTimer = System.currentTimeMillis();
             }
             c.update();
         }
-        if(time-startTimer>=10000 && endinground){
-            done=true;
+        if (time - startTimer >= 10000 && endinground) {
+            done = true;
         }
     }
     
@@ -138,6 +139,6 @@ public class CreditScreen {
     }
     
     public boolean isDone(KeyBoard k, Mouse m){
-        return k.isKeyDown(KeyEvent.VK_SPACE) ||m.isPressed(Mouse.LEFT_BUTTON) || done;
+        return (k.isKeyDown(KeyEvent.VK_SPACE) ||m.isPressed(Mouse.LEFT_BUTTON) || done) && (System.currentTimeMillis()-theEndStart>=100);
     }
 }
