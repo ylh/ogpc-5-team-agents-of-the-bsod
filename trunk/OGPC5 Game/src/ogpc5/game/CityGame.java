@@ -21,6 +21,7 @@ import Utilities.Rect;
 import Utilities.SoundFile;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
+import WorldObjects.towers.Bullet;
 import WorldObjects.towers.Road;
 import WorldObjects.towers.Tower;
 import java.awt.Color;
@@ -135,7 +136,7 @@ public class CityGame extends Game {
 
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
-        spawn = new Spawner((1000) * 100, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        spawn = new Spawner((1000) * 3, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
         
         //navigator = new EnemyNavigation(tiles, "Default", 10, 10);
     }
@@ -252,6 +253,20 @@ public class CityGame extends Game {
                     if (wo.getPosition().getY() < 0) {
                         allObjects.remove(wo);
                         score -= ((Enemy) wo).getScore();
+                    }
+                }
+                if (wo instanceof Enemy) {
+                    Enemy e=(Enemy)wo;
+                    if (e.isDead()){
+                        wo=null;
+                    }
+                if (wo instanceof Bullet) {
+                    Bullet b=(Bullet)wo;
+                    System.out.print("It's a bullet!");
+                    if (b.HasReachedTarget()){
+                        b.HitTarget();
+                        
+                        }
                     }
                 }
                 globalCount++;

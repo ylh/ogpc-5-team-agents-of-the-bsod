@@ -84,9 +84,10 @@ public class Enemy extends WorldObject {
      */
     public void Hit(double damage,double adamage,double sdamage)
     {
-        speed/=sdamage;
+        speed/=(sdamage+1);
         armor=Math.max(0,armor-adamage);
         health-=Math.max(0,damage-armor);
+        
     }
     /**
      * gets the ID of the ENEMY
@@ -108,7 +109,9 @@ public class Enemy extends WorldObject {
      */
     public boolean isDead()
     {
+        
         return health<1;
+        
     }
     /**
      * Used for determining the danger rating of this instance of the enemy
