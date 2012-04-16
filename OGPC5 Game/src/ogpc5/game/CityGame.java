@@ -257,6 +257,7 @@ public class CityGame extends Game {
                 }
                 if (wo instanceof Enemy) {
                     Enemy e=(Enemy)wo;
+                    e.updatePath2(tiles);
                     if (e.isDead()){
                         wo=null;
                     }
