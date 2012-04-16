@@ -23,6 +23,8 @@ public class Road extends Tile {
     
     protected Vector2 spritePos;
     
+    protected boolean inPath;
+    
     //Static Variables
     private static final int ROAD_UP_RIGHT = 0;
     private static final int ROAD_UP_LEFT= 1;
@@ -216,5 +218,13 @@ public class Road extends Tile {
             }            
         } catch (Exception e) {            
         }  
+    }
+    
+    public boolean getInPath(){
+        return inPath;
+    }
+    
+    public void setInPath(boolean b){
+        inPath = b;
     }
 }
