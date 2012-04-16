@@ -57,7 +57,7 @@ public abstract class Tower extends Tile {
         sdamage=0;
         projspeed=10;
         speed=10;
-        loaded=0;
+        loaded=-10;
         cost=0;
         loadAnimation();
         loadStats();
@@ -150,28 +150,32 @@ public abstract class Tower extends Tile {
         if (loaded < 0) {
 
 
-            double minDistance = range;
+            double maxDanger = 0;
 
             Vector2 displacement = new Vector2(range, 0);
             double distance;
             WorldObject target = null;
             for (WorldObject w : wo) {
                 if (w instanceof Enemy) {
-                    displacement = w.getPosition();
+                    
+                    displacement = w.getPosition().clone();
                     displacement.subtract(position);
                     distance = displacement.length();
+                    Enemy e=(Enemy)w;
 
-                    if (distance < minDistance) {
+                    if (distance < range && e.getDanger()>maxDanger) {
                         target = w;
-                        minDistance = distance;
+                        maxDanger = e.getDanger();
                     }
                 }
             }
 
             if (target != null) {
-                Bullet t=setEnemyBulletHitting((Enemy)target);
+                //Bullet t=setEnemyBulletHitting((Enemy)target);
+                Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
                 wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
-                loaded+=speed;
+                
+                loaded=speed;
             }
         }
     }
