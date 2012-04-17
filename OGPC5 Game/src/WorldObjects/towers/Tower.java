@@ -34,6 +34,7 @@ public abstract class Tower extends Tile {
     protected double speed;  //lower is faster- any value <=1 fires every frame.
     protected double loaded;  //used to compute firing times.
     Animation ani;
+    protected boolean rangeSelected=false;
     /*
      * Coordinates for bounding box
      */
@@ -84,6 +85,9 @@ public abstract class Tower extends Tile {
             batch.Draw(selection,position,100);
             batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
         }
+        if(rangeSelected){
+            
+        }
     }
 
     public int getmoneyBonus() {
@@ -112,6 +116,19 @@ public abstract class Tower extends Tile {
 
     public double getSpeedDamage() {
         return sdamage;
+    }
+    
+    @Override
+    public void select(Tile[][] t){
+        isSelected=true;
+        int x=((int)position.getX())/32;
+        int y= ((int)position.getY())/32;
+    }
+    @Override
+    public void unselect(Tile[][] t){
+        isSelected=false;
+        int x=((int)position.getX())/32;
+        int y= ((int)position.getY())/32;
     }
 
     public void Hit(double damage, double adamage, double sdamage) {

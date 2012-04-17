@@ -349,12 +349,12 @@ public class CityGame extends Game {
 
                     if (selection == null) {
                         selection = (Tile) tiles[i][j];
-                        selection.select();
+                        selection.select(tiles);
 
                     } else {
-                        selection.unselect();
+                        selection.unselect(tiles);
                         selection = (Tile) tiles[i][j];
-                        selection.select();
+                        selection.select(tiles);
                         //invOpen = false;
                     }
 
