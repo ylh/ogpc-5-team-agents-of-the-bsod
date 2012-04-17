@@ -35,7 +35,7 @@ public class Tile extends WorldObject{
     /**
      * This selects this tile.
      */
-    public void select(){
+    public void select(Tile[][] t){
         isSelected=true;
     }
     /**
@@ -48,10 +48,9 @@ public class Tile extends WorldObject{
     /**
      * This de-selects the tile.
      */
-    public void unselect(){
+    public void unselect(Tile[][] t){
         isSelected=false;
     }
-    
     /**
      * This draws the tile. It also draws a highlighting rectangle.
      * @param batch The batch is the image collection used by the game.
