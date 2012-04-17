@@ -9,6 +9,7 @@ import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
 import java.util.ArrayList;
+import ogpc5.game.CityGame;
 
 /**
  *
@@ -207,6 +208,10 @@ public class Enemy extends WorldObject {
         else return false;
     }
     
+    
+    public void die(CityGame theGame){
+        theGame.score+=this.score;
+    }
     /**
      * The Static ID for a Generic Enemy
      */

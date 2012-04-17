@@ -136,7 +136,7 @@ public class CityGame extends Game {
 
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
-        spawn = new Spawner((1000) * 3, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        spawn = new Spawner((1000) * 100, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
         
         //navigator = new EnemyNavigation(tiles, "Default", 10, 10);
     }
@@ -259,7 +259,8 @@ public class CityGame extends Game {
                     Enemy e = (Enemy) wo;
                     e.updatePath2(tiles);
                     if (e.isDead()) {
-                        wo = null;
+                        e.die(this);
+                        allObjects.remove(e);
                     }
                 }
                 
@@ -312,8 +313,10 @@ public class CityGame extends Game {
                 if(drag!=null){
                     int x=((int)mouse.location().getX())/32;
                     int y=((int)mouse.location().getY())/32;
-                    tiles[x][y]=drag.getTower(new Rect(x,y,32,32));
-                    this.activeTiles.add((Tower)tiles[x][y]);
+                    if (!(tiles[x][y] instanceof Road)) {
+                        tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
+                        this.activeTiles.add((Tower) tiles[x][y]);
+                    }
                 }
                 drag = null;
             }
@@ -330,6 +333,7 @@ public class CityGame extends Game {
                 globalCount++;
             }
 
+            //Mouse update methods in grid
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && mouse.location().getX() < 854) {
                 try {
                     if (drag == null) {
