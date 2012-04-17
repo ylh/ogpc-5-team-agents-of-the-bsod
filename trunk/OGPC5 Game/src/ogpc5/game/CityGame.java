@@ -287,7 +287,7 @@ public class CityGame extends Game {
             for (Button b : buttons) {
                 b.glide();
                 if (b.isPressed(mouse)) {
-                    invOpen = false;
+                    
 
                     buttonPressed = b.id();
                 }
@@ -306,6 +306,9 @@ public class CityGame extends Game {
                 drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", mouse.location().clone(), Tower.GENERIC);
             }
             //Needed because we can't have it in the loop
+            if (buttonPressed == 3) {
+                invOpen = false;
+            }
             if (drag != null) {
                 drag.update(mouse);
             }
@@ -316,6 +319,7 @@ public class CityGame extends Game {
                     if (!(tiles[x][y] instanceof Road)) {
                         tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
                         this.activeTiles.add((Tower) tiles[x][y]);
+                        new SoundFile("Game Resources/Sound/build.wav",1).start();
                     }
                 }
                 drag = null;
@@ -371,6 +375,7 @@ public class CityGame extends Game {
                             }
                             money -= 5;
                             selection = null;
+                            
                         }
                     }
                     if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r')) {
