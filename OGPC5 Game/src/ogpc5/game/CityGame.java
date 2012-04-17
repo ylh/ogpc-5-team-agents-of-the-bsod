@@ -256,17 +256,19 @@ public class CityGame extends Game {
                     }
                 }
                 if (wo instanceof Enemy) {
-                    Enemy e=(Enemy)wo;
+                    Enemy e = (Enemy) wo;
                     e.updatePath2(tiles);
-                    if (e.isDead()){
-                        wo=null;
+                    if (e.isDead()) {
+                        wo = null;
                     }
+                }
+                
                 if (wo instanceof Bullet) {
-                    Bullet b=(Bullet)wo;
-                    System.out.print("It's a bullet!");
-                    if (b.HasReachedTarget()){
+                    Bullet b = (Bullet) wo;
+                    System.out.println("It's a bullet!");
+                    if (b.HasReachedTarget()) {
                         b.HitTarget();
-                        }
+                        allObjects.remove(b);
                     }
                 }
                 globalCount++;
