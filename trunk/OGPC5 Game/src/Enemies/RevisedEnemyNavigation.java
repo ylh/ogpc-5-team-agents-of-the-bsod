@@ -3,87 +3,204 @@ package Enemies;
 import GUIStuff.Tile;
 import Utilities.Vector2;
 import WorldObjects.towers.Road;
-import java.util.ArrayList;
 
 /**
  *
  * @author tsutton14
  */
 public class RevisedEnemyNavigation extends Thread {
-    
+
     Tile[][] tiles;
-    Vector2 goalPos;
-    ArrayList<Road> pathRoads = new ArrayList<Road>();
-    
-    public RevisedEnemyNavigation(Tile[][] tiles, Vector2 goalPos){
+    Vector2 startPos;
+    int direction;
+    private final int UP = 0;
+    private final int RIGHT = 1;
+    private final int LEFT = 2;
+    private final int DOWN = 3;
+
+    public RevisedEnemyNavigation(Tile[][] tiles, Vector2 startPos, int direction) {
         this.tiles = tiles;
-        this.goalPos = goalPos;
+        this.startPos = startPos;
+        this.direction = direction;
     }
-    
+
     @Override
-    public void run(){
-        
+    public void run() {
+        checkInPath();
     }
-    
-    public void checkInPath(Vector2 startRoad){
-        int x = (int)startRoad.getX();
-        int y = (int)startRoad.getY();
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[0].length; j++) {
-                if(tiles[i][j] instanceof Road){
-                    Road r1 = (Road)tiles[i][j];
-                    r1.setInPath(false);
-                    if(pathRoads.contains(r1)){
-                        pathRoads.remove(r1);
+
+    public void checkInPath() {
+        int x = (int) startPos.getX();
+        int y = (int) startPos.getY();
+        if (direction == UP) {
+            if (y - 1 >= 0) {
+                for (int i = y - 1; i >= 0; i--) {
+                    if (tiles[x][i] instanceof Road) {
+                        Road r = (Road) tiles[x][i];
+                        if (!r.getInPath()) {
+                            r.setInPath(true);
+                            if (i - 1 >= 0) {
+                                if (tiles[x][i - 1] instanceof Road) {
+                                    needBranch(x, i - 1, UP);
+                                } else {
+                                    break;
+                                }
+                            }
+                        } else {
+                            break;
+                        }
                     }
                 }
             }
         }
-        if(tiles[x][y] instanceof Road){
-            Road r = (Road)tiles[x][y];
-            r.setInPath(true);
-            pathRoads.add(r);
-            if (x < tiles.length) {
-                if (isRoad(new Vector2(startRoad.getX()+1, startRoad.getY()))) {
-                    Road r2 = (Road)tiles[x+1][y];
-                    r2.setInPath(true);
-                    pathRoads.add(r2);
-                }
-            }
-            if (x > 0) {
-                if (isRoad(new Vector2(startRoad.getX()-1, startRoad.getY()))) {
-                    Road r2 = (Road)tiles[x-1][y];
-                    r2.setInPath(true);
-                    pathRoads.add(r2);
-                }
-            }
-            if (y < tiles[0].length) {
-                if (isRoad(new Vector2(startRoad.getX(), startRoad.getY()+1))) {
-                    Road r2 = (Road)tiles[x][y+1];
-                    r2.setInPath(true);
-                    pathRoads.add(r2);
-                }
-            }
-            if (y > 0) {
-                if (isRoad(new Vector2(startRoad.getX(), startRoad.getY()-1))) {
-                    Road r2 = (Road)tiles[x][y-1];
-                    r2.setInPath(true);
-                    pathRoads.add(r2);
+        if (direction == RIGHT) {
+            if (x + 1 >= 0) {
+                for (int i = x + 1; i < tiles.length; i++) {
+                    if (tiles[i][y] instanceof Road) {
+                        Road r = (Road) tiles[i][y];
+                        if (!r.getInPath()) {
+                            r.setInPath(true);
+                            if (i + 1 < tiles.length) {
+                                if (tiles[i + 1][y] instanceof Road) {
+                                    needBranch(i + 1, y, RIGHT);
+                                } else {
+                                    break;
+                                }
+                            }
+
+                        } else {
+                            break;
+                        }
+                    }
                 }
             }
         }
-        
-        for(Road r3 : pathRoads){
-            Vector2 v = new Vector2((int)r3.getPosition().getX()/32,(int)r3.getPosition().getY()/32);
-            checkInPath(v);
+        if (direction == DOWN) {
+            if (y + 1 < tiles[0].length) {
+                for (int i = y + 1; i >= 0; i++) {
+                    if (tiles[x][i] instanceof Road) {
+                        Road r = (Road) tiles[x][i];
+                        if (!r.getInPath()) {
+                            r.setInPath(true);
+                            if (i + 1 < tiles[0].length) {
+                                if (tiles[x][i + 1] instanceof Road) {
+                                    needBranch(x, i + 1, DOWN);
+                                } else {
+                                    break;
+                                }
+                            }
+
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (direction == LEFT) {
+            if (x - 1 >= 0) {
+                for (int i = x - 1; i < tiles.length; i++) {
+                    if (tiles[i][y] instanceof Road) {
+                        Road r = (Road) tiles[i][y];
+                        if (!r.getInPath()) {
+                            r.setInPath(true);
+                            if (i - 1 >= 0) {
+                                if (tiles[i - 1][y] instanceof Road) {
+                                    needBranch(i - 1, y, LEFT);
+                                } else {
+                                    break;
+                                }
+                            }
+
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
-    
-    private boolean isRoad(Vector2 targetPos){
-        if(tiles[(int)targetPos.getX()][(int)targetPos.getY()] instanceof Road){
-            return true;
+
+    public void needBranch(int x, int y, int currentDirection) {
+        if (currentDirection == UP) {
+            if (tiles[x + 1][y] instanceof Road) {
+                Road r = (Road) tiles[x + 1][y];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x + 1, y), RIGHT);
+                }
+            }
+            if (tiles[x - 1][y] instanceof Road) {
+                Road r = (Road) tiles[x - 1][y];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x - 1, y), LEFT);
+                }
+            }
+            if (tiles[x][y + 1] instanceof Road) {
+                Road r = (Road) tiles[x][y + 1];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x, y + 1), DOWN);
+                }
+            }
         }
-        else return false;
+        if (currentDirection == RIGHT) {
+            if (tiles[x - 1][y] instanceof Road) {
+                Road r = (Road) tiles[x - 1][y];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x - 1, y), LEFT);
+                }
+            }
+            if (tiles[x][y + 1] instanceof Road) {
+                Road r = (Road) tiles[x][y + 1];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x, y + 1), DOWN);
+                }
+            }
+            if (tiles[x][y - 1] instanceof Road) {
+                Road r = (Road) tiles[x][y - 1];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x, y - 1), UP);
+                }
+            }
+        }
+        if (currentDirection == DOWN) {
+            if (tiles[x - 1][y] instanceof Road) {
+                Road r = (Road) tiles[x - 1][y];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x - 1, y), LEFT);
+                }
+            }
+            if (tiles[x][y - 1] instanceof Road) {
+                Road r = (Road) tiles[x][y - 1];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x, y - 1), UP);
+                }
+            }
+            if (tiles[x + 1][y] instanceof Road) {
+                Road r = (Road) tiles[x + 1][y];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x + 1, y), RIGHT);
+                }
+            }
+        }
+        if (currentDirection == LEFT) {
+            if (tiles[x][y - 1] instanceof Road) {
+                Road r = (Road) tiles[x][y - 1];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x, y - 1), UP);
+                }
+            }
+            if (tiles[x + 1][y] instanceof Road) {
+                Road r = (Road) tiles[x + 1][y];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x + 1, y), RIGHT);
+                }
+            }
+            if (tiles[x][y + 1] instanceof Road) {
+                Road r = (Road) tiles[x][y + 1];
+                if (!r.getInPath()) {
+                    RevisedEnemyNavigation nav = new RevisedEnemyNavigation(tiles, new Vector2(x, y + 1), DOWN);
+                }
+            }
+        }
     }
-    
 }
