@@ -91,7 +91,7 @@ public abstract class Tower extends Tile {
             //batch.fillRect(position, 32, 32, Color.blue, 2);
             //batch.drawRect(position, 32, 32, Color.blue, 100);
             batch.Draw(selection,position,100);
-            batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
+            batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+0.5)+", Y:"+(position.getY()/32+0.5), Color.black, direction);
         }
         if(rangeSelected){
             batch.Draw(rSelectSprite, position, 500);
