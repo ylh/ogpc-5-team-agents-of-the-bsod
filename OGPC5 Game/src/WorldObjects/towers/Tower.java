@@ -7,6 +7,7 @@ package WorldObjects.towers;
 import Enemies.Enemy;
 import GUIStuff.Tile;
 import Utilities.Animation;
+import Utilities.Image2D;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
@@ -35,6 +36,7 @@ public abstract class Tower extends Tile {
     protected double loaded;  //used to compute firing times.
     Animation ani;
     protected boolean rangeSelected=false;
+    protected Image2D rSelectSprite;
     /*
      * Coordinates for bounding box
      */
@@ -60,6 +62,7 @@ public abstract class Tower extends Tile {
         speed=10;
         loaded=-10;
         cost=0;
+        rSelectSprite=new Image2D("Game Resources/Sprites.GUIs/RangeSelect.png");
         loadAnimation();
         loadStats();
     }
@@ -86,7 +89,7 @@ public abstract class Tower extends Tile {
             batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
         }
         if(rangeSelected){
-            
+            batch.Draw(rSelectSprite, position, 100);
         }
     }
 
@@ -121,14 +124,53 @@ public abstract class Tower extends Tile {
     @Override
     public void select(Tile[][] t){
         isSelected=true;
-        int x=((int)position.getX())/32;
-        int y= ((int)position.getY())/32;
+        ArrayList<Tower> rt=getRangedTowers(t);
+        for(Tower l: rt){
+            l.rangeSelected=true;
+        }
     }
     @Override
     public void unselect(Tile[][] t){
         isSelected=false;
+        ArrayList<Tower> rt=getRangedTowers(t);
+        for(Tower l: rt){
+            l.rangeSelected=false;
+        }
+    }
+    
+    public ArrayList<Tower> getRangedTowers(Tile[][] t){
+        ArrayList<Tower> rt= new ArrayList<Tower>();
         int x=((int)position.getX())/32;
         int y= ((int)position.getY())/32;
+        int max=getBlockDistance(range);
+        for(int i=x-max; i<max*2+1; i++){
+            for (int j=y-max; j<max*2+1; j++){
+                if(t[i][j]==this){
+                    continue;
+                }else{
+                    rt.add((Tower)t[i][j]);
+                }
+            }
+        }
+        return rt;
+    }
+    protected int getBlockDistance(double range){
+        int numBlocks=0;
+        double s2= Math.sqrt(2);
+        if(range == 16*s2){
+            numBlocks=0;
+        }else if(range ==48*s2){
+            numBlocks=1;
+        }else if(range == 80*s2){
+            numBlocks=2;
+        }else if(range == 112*s2){
+            numBlocks=3;
+        }else if(range == 144*s2){
+            numBlocks=4;
+        }else if(range == 176*s2){
+            numBlocks=5;
+        }
+        return numBlocks;
     }
 
     public void Hit(double damage, double adamage, double sdamage) {
