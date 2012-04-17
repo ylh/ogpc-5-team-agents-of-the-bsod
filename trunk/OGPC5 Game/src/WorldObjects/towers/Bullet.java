@@ -76,7 +76,7 @@ public class Bullet extends WorldObject {
         if(spriteAnimation!=null){
             //spriteAnimation.Draw(batch);
         }
-        if (distance>1){
+        if (distance<1){
             Image2D i = new Image2D("Game Resources/Sprites/particle.png");
             batch.Draw(i,position,100);
         }
