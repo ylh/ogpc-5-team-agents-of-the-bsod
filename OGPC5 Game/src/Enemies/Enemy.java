@@ -82,8 +82,7 @@ public class Enemy extends WorldObject {
      * @param adamage the amount of damage the armor rating takes
      * @param sdamage the amount of damage the speed rating takes
      */
-    public void Hit(double damage,double adamage,double sdamage)
-    {
+    public void Hit(double damage,double adamage,double sdamage){
         speed/=(sdamage+1);
         armor=Math.max(0,armor-adamage);
         health-=Math.max(0,damage-armor);
