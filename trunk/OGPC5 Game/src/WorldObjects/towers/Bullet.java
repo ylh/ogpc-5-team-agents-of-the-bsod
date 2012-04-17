@@ -51,6 +51,7 @@ public class Bullet extends WorldObject {
         this.position=new Vector2(sx+distance*(ex-sx),sy+distance*(ey-sy));
         this.distance+=1/speed;
         
+        
     }
     public boolean HasReachedTarget(){
         return distance>1;
@@ -75,7 +76,7 @@ public class Bullet extends WorldObject {
         if(spriteAnimation!=null){
             //spriteAnimation.Draw(batch);
         }
-        if (distance<1){
+        if (distance>1){
             Image2D i = new Image2D("Game Resources/Sprites/particle.png");
             batch.Draw(i,position,100);
         }
