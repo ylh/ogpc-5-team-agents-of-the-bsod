@@ -37,6 +37,7 @@ public abstract class Tower extends Tile {
     Animation ani;
     protected boolean rangeSelected=false;
     protected Image2D rSelectSprite;
+    ArrayList<Tile> rangeSelectedTiles;
     /*
      * Coordinates for bounding box
      */
@@ -55,14 +56,14 @@ public abstract class Tower extends Tile {
         //sets default values so it'll work properly
         damage=1;
         health=10;
-        range=100;
+        range=112*Math.sqrt(2);
         adamage=0;
         sdamage=0;
         projspeed=10;
         speed=10;
         loaded=-10;
         cost=0;
-        rSelectSprite=new Image2D("Game Resources/Sprites.GUIs/RangeSelect.png");
+        rangeSelectedTiles=new ArrayList<Tile>();
         loadAnimation();
         loadStats();
     }
@@ -82,6 +83,10 @@ public abstract class Tower extends Tile {
 
     @Override
     public void Draw(ImageCollection batch){
+        for(Tile t: rangeSelectedTiles){
+            t.Draw(batch);
+            CityGame.globalCount++;
+        }
         if(isSelected){
             //batch.fillRect(position, 32, 32, Color.blue, 2);
             //batch.drawRect(position, 32, 32, Color.blue, 100);
@@ -89,7 +94,7 @@ public abstract class Tower extends Tile {
             batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
         }
         if(rangeSelected){
-            batch.Draw(rSelectSprite, position, 100);
+            batch.Draw(rSelectSprite, position, 500);
         }
     }
 
@@ -124,31 +129,36 @@ public abstract class Tower extends Tile {
     @Override
     public void select(Tile[][] t){
         isSelected=true;
-        ArrayList<Tower> rt=getRangedTowers(t);
-        for(Tower l: rt){
-            l.rangeSelected=true;
+        ArrayList<Tile> rt=getRangedTowers(t);
+        for(Tile l: rt){
+            l.rangeSelect();
         }
+        rangeSelectedTiles.clear();
+        rangeSelectedTiles.addAll(rt);
     }
     @Override
     public void unselect(Tile[][] t){
         isSelected=false;
-        ArrayList<Tower> rt=getRangedTowers(t);
-        for(Tower l: rt){
-            l.rangeSelected=false;
+        ArrayList<Tile> rt=getRangedTowers(t);
+        for(Tile l: rt){
+            l.rangeUnselect();
         }
+        rangeSelectedTiles.clear();
     }
     
-    public ArrayList<Tower> getRangedTowers(Tile[][] t){
-        ArrayList<Tower> rt= new ArrayList<Tower>();
+    public ArrayList<Tile> getRangedTowers(Tile[][] t){
+        ArrayList<Tile> rt= new ArrayList<Tile>();
         int x=((int)position.getX())/32;
         int y= ((int)position.getY())/32;
         int max=getBlockDistance(range);
-        for(int i=x-max; i<max*2+1; i++){
-            for (int j=y-max; j<max*2+1; j++){
-                if(t[i][j]==this){
+        int r=x-max;
+        int c=y-max;
+        for(int i=0; i<max*2+1; i++){
+            for (int j=0; j<max*2+1; j++){
+                if(t[r+i][c+j]==this){
                     continue;
                 }else{
-                    rt.add((Tower)t[i][j]);
+                    rt.add(t[r+i][c+j]);
                 }
             }
         }

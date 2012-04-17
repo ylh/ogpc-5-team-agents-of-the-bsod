@@ -21,6 +21,8 @@ public class Tile extends WorldObject{
     
     protected boolean isSelected;
     protected Image2D selection;
+    protected boolean rangeSelected=false;
+    protected Image2D rSelectSprite;
     Vector2 offset;
 
     /**
@@ -30,6 +32,7 @@ public class Tile extends WorldObject{
     public Tile(Vector2 pos){
         super(pos, 0, "");
         selection=new Image2D("Game Resources/Sprites/GUIs/transpSquare.png");
+        rSelectSprite=new Image2D("Game Resources/Sprites.GUIs/RangeSelect.png");
         offset=new Vector2(16,16);
     }
     /**
@@ -51,6 +54,13 @@ public class Tile extends WorldObject{
     public void unselect(Tile[][] t){
         isSelected=false;
     }
+    
+    public void rangeSelect(){
+        rangeSelected=true;
+    }
+    public void rangeUnselect(){
+        rangeSelected=false;
+    }
     /**
      * This draws the tile. It also draws a highlighting rectangle.
      * @param batch The batch is the image collection used by the game.
@@ -64,6 +74,9 @@ public class Tile extends WorldObject{
             //batch.drawRect(position, 32, 32, Color.blue, 100);
             batch.Draw(selection,pos,100);
             batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
+        }
+        if(rangeSelected){
+            batch.Draw(rSelectSprite, position, 100);
         }
     }
 
