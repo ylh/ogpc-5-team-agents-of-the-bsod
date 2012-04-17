@@ -266,7 +266,6 @@ public class CityGame extends Game {
                     System.out.print("It's a bullet!");
                     if (b.HasReachedTarget()){
                         b.HitTarget();
-                        
                         }
                     }
                 }
