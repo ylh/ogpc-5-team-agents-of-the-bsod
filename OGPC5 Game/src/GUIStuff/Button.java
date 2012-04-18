@@ -18,13 +18,15 @@ import WorldObjects.towers.GenericTower;
 public class Button {
 
     Vector2 pos;
-    Vector2 openpos;
-    Vector2 closepos;
+    double travel;
+    double openY;
+    double closeY;
     Rect button;
     double movespeed; //you want a value less than 0.5
     boolean open;
     Image2D sprite;
     int id;
+    String spriteString;
 
     
 
@@ -38,15 +40,17 @@ public class Button {
      * @param ms How fast the button goes.
      */
 
-    public Button(int i, String sp, Vector2 op, Vector2 cp, double ms) {
+    public Button(int i, String sp, double x,double y) {
         id=i;
-        openpos = op;
-        closepos = cp;
-        pos = cp.clone();
-        movespeed = ms;
+        openY = y;
+        closeY = y-300;
+        pos = new Vector2(x,closeY);
+        movespeed = 0.05;
+        travel=0;
         sprite=new Image2D(sp);
         open = false;
         button = new Rect(pos, 100, 32);
+        spriteString=sp;
     }
 
     /**
@@ -69,28 +73,19 @@ public class Button {
      */
     public void glide() {
         //open or closed?
-        Vector2 targetpos;
-        double dy;
         if (open) {
-            targetpos = openpos.clone();
+            travel=Math.min(1,travel+movespeed);
             
         } else {
-            targetpos = closepos.clone();
+            travel=Math.max(0,travel-movespeed);
         }
         //System.out.print( targetpos.getY());
         //smooth glidey motion!
-        dy = targetpos.getY() - pos.getY();
-        if (dy>0){
-            dy *= movespeed;
-        }
-        else{
-            dy = pos.getY()-openpos.getY();
-            dy *= movespeed*2;
-            dy-=4;
-        }
-        pos.dY(dy);
+        pos=new Vector2(pos.getX(),openY+(1-travel)*(1-travel)*(closeY-openY));
+        //pos=new Vector2(pos.getX(),closeY+travel*(openY-closeY));
         //reset the bounding box
         button = new Rect(pos, 32, 32);
+        
     }
     /**
      * This tells the game if the button is clicked on.
@@ -117,7 +112,13 @@ public class Button {
      * @param batch 
      */
     public void draw(ImageCollection batch){
-        batch.Draw(sprite,pos,10000);
+        batch.Draw(sprite,pos,100);
+    }
+    public String getPath(){
+        return spriteString;
+    }
+    public Image2D getSprite(){
+        return sprite;
     }
 }
 
