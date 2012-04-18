@@ -8,7 +8,7 @@ import Utilities.Vector2;
 import ogpc5.game.CityGame;
 
 /**
- *
+ * Creates enemies at the beginning of the track
  * @author Nekel-Seyew
  */
 public class Spawner {
