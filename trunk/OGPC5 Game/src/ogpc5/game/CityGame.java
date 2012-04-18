@@ -108,10 +108,8 @@ public class CityGame extends Game {
         happiness = 0;
 
         //The buttons
-        buttons.add(new Button(1, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", new Vector2(900, 100), new Vector2(900, -40), 0.1));
-        buttons.add(new Button(2, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", new Vector2(900, 200), new Vector2(900, -40), 0.1));
-        buttons.add(new Button(3, "Game Resources/Sprites/GUIS/deleteButton.png", new Vector2(900, 300), new Vector2(900, -40), 0.1));
-
+        addButtons();
+        
         //Makes the Grid non-null
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
@@ -266,7 +264,7 @@ public class CityGame extends Game {
                 
                 if (wo instanceof Bullet) {
                     Bullet b = (Bullet) wo;
-                    System.out.println("It's a bullet!");
+                    //System.out.println("It's a bullet!");
                     if (b.HasReachedTarget()) {
                         b.HitTarget();
                         allObjects.remove(b);
@@ -282,7 +280,7 @@ public class CityGame extends Game {
                 int i = 0;
             }
 
-            buttonPressed = 0;
+            buttonPressed = -2;
 
             for (Button b : buttons) {
                 b.glide();
@@ -298,15 +296,11 @@ public class CityGame extends Game {
                 b.setOpen(invOpen);
                 globalCount++;
             }
-            if (buttonPressed == 1) {
-                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", mouse.location().clone(),Tower.GENERIC);
-
-            }
-            if (buttonPressed == 2) {
-                drag = new Draggable("Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", mouse.location().clone(), Tower.GENERIC);
+            if (buttonPressed >= 1){
+                drag=new Draggable(buttons.get(buttonPressed).getPath(),mouse.location(),buttonPressed);
             }
             //Needed because we can't have it in the loop
-            if (buttonPressed == 3) {
+            if (buttonPressed == -1) {
                 invOpen = false;
             }
             if (drag != null) {
@@ -589,5 +583,26 @@ public class CityGame extends Game {
     private void load() {
         String path = "Game Resources/Saved Files/";
         File allSavedFiles = new File(path + "SavedFilesHead.txt");
+    }
+    public void addButtons(){
+        //factory
+        buttons.add(new Button(Tower.FACTORY, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", 880, 100));
+        //button 2
+        buttons.add(new Button(Tower.GREEN_BELT, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", 920,100));
+        //button 3
+        buttons.add(new Button(Tower.HOUSE, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 880, 140));
+        //button 4
+        buttons.add(new Button(Tower.MONUMENT, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 140));
+        //button 5
+        buttons.add(new Button(Tower.POLICE_FIRE_STATION, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 880, 180));
+        //button 6
+        buttons.add(new Button(Tower.RECYCLING_CENTER, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 180));
+        //button 7
+        buttons.add(new Button(Tower.SCHOOL, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 880, 220));
+        //button 8
+        buttons.add(new Button(Tower.WATER_PURIFICATION_CENTER, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 220));
+        //delete
+        buttons.add(new Button(-1, "Game Resources/Sprites/GUIS/deleteButton.png", 900, 260));
+
     }
 }
