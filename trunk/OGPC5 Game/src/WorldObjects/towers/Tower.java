@@ -35,8 +35,6 @@ public abstract class Tower extends Tile {
     protected double speed;  //lower is faster- any value <=1 fires every frame.
     protected double loaded;  //used to compute firing times.
     Animation ani;
-    protected boolean rangeSelected=false;
-    protected Image2D rSelectSprite;
     ArrayList<Tile> rangeSelectedTiles;
     /*
      * Coordinates for bounding box
