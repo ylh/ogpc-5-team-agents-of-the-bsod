@@ -26,7 +26,7 @@ public class Bullet extends WorldObject {
     double adamage;
     double sdamage;
     double speed;
-    
+    double arc;
     /**
      * Constructor for the bullet class.
      * @param pos the starting position for the bullet
@@ -42,7 +42,7 @@ public class Bullet extends WorldObject {
         this.speed=velocity;
         startPos=pos.clone();
         this.target=t;
-        
+        arc=0;
         Vector2 endPoint=t.getPosition().clone();
         
         this.distance=0;
@@ -57,7 +57,7 @@ public class Bullet extends WorldObject {
         double sy=startPos.getY();
         double ex=target.getPosition().getX();
         double ey=target.getPosition().getY();
-        this.position=new Vector2(sx+distance*(ex-sx),sy+distance*(ey-sy));
+        this.position=new Vector2(sx+distance*(ex-sx),sy+distance*(ey-sy)-4*arc*distance*(1-distance));
         this.distance+=1/speed;
         
         
