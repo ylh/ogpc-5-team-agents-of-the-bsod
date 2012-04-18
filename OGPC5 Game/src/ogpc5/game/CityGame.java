@@ -511,35 +511,6 @@ public class CityGame extends Game {
                             Road r2 = (Road) tiles[x + 1][y];
                             r2.setInPath(true);
                         }
-                        if (x - 1 >= 0) {
-                            if (tiles[x - 1][y] instanceof Road) {
-                                Road r2 = (Road) tiles[x - 1][y];
-                                r2.setInPath(true);
-                            }
-                        }
-                        if (y + 1 < tiles[0].length) {
-                            if (tiles[x][y + 1] instanceof Road) {
-                                Road r2 = (Road) tiles[x][y + 1];
-                                r2.setInPath(true);
-                            }
-                        }
-                        if (y - 1 >= 0) {
-                            if (tiles[x][y - 1] instanceof Road) {
-                                Road r2 = (Road) tiles[x][y - 1];
-                                r2.setInPath(true);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (deleting) {
-            Road r = (Road) tiles[x][y];
-            if (r.getInPath()) {
-                if (x + 1 < tiles.length) {
-                    if (tiles[x + 1][y] instanceof Road) {
-                        Road r2 = (Road) tiles[x + 1][y];
-                        r2.setInPath(true);
                     }
                     if (x - 1 >= 0) {
                         if (tiles[x - 1][y] instanceof Road) {
@@ -558,11 +529,88 @@ public class CityGame extends Game {
                             Road r2 = (Road) tiles[x][y - 1];
                             r2.setInPath(true);
                         }
+                    }
 
+                }
+            }
+        }
+        if (deleting) {
+            if (tiles[x][y] instanceof Road) {
+                Road r = (Road) tiles[x][y];
+                if (x + 1 < tiles.length) {
+                    if (tiles[x + 1][y] instanceof Road) {
+                        Road r2 = (Road) tiles[x + 1][y];
+                        if (stillPath(x + 2, y) || stillPath(x + 1, y - 1) || stillPath(x + 1, y + 1)) {
+                            r2.setInPath(true);
+                        } else {
+                            r2.setInPath(false);
+                        }
+                    }
+                }
+                if (x - 1 >= 0) {
+                    if (tiles[x - 1][y] instanceof Road) {
+                        Road r2 = (Road) tiles[x - 1][y];
+                        if (stillPath(x - 2, y) || stillPath(x + 1, y - 1) || stillPath(x + 1, y + 1)) {
+                            r2.setInPath(true);
+                        } else {
+                            r2.setInPath(false);
+                        }
+                    }
+                }
+                if (y + 1 < tiles[0].length) {
+                    if (tiles[x][y + 1] instanceof Road) {
+                        Road r2 = (Road) tiles[x][y + 1];
+                        if (stillPath(x + 1, y) || stillPath(x - 1, y) || stillPath(x, y + 2)) {
+                            r2.setInPath(true);
+                        } else {
+                            r2.setInPath(false);
+                        }
+                    }
+                }
+                if (y - 1 >= 0) {
+                    if (tiles[x][y - 1] instanceof Road) {
+                        Road r2 = (Road) tiles[x][y - 1];
+                        if (stillPath(x + 1, y) || stillPath(x - 1, y) || stillPath(x, y - 2)) {
+                            r2.setInPath(true);
+                        } else {
+                            r2.setInPath(false);
+                        }
                     }
                 }
             }
         }
+    }
+    
+        public boolean stillPath(int x, int y){
+        if(x >= 0 && x < tiles.length && y >= 0 && y < tiles[0].length){
+            if(tiles[x][y] instanceof Road){
+                Road r1;
+                Road r2;
+                Road r3;
+                Road r4;
+                boolean path1 = false, path2 = false, path3 = false, path4 = false;
+                if(x - 1 >= 0){
+                    r1 = (Road)tiles[x-1][y];
+                    path1 = r1.getInPath();
+                }
+                if(x + 1 < tiles.length){
+                    r2 = (Road)tiles[x+1][y];
+                    path2 = r2.getInPath();
+                }   
+                if(y - 1 >= 0){
+                    r3 = (Road)tiles[x][y-1];
+                    path3 = r3.getInPath();
+                }   
+                if(y + 1 < tiles[0].length){
+                    r4 = (Road)tiles[x][y+1];
+                    path4 = r4.getInPath();
+                }   
+                if(path1 || path2 || path3 || path4){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void addToWorldObjects(WorldObject wo) {
