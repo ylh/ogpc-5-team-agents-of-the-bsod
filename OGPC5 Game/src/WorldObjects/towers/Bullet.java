@@ -27,6 +27,15 @@ public class Bullet extends WorldObject {
     double sdamage;
     double speed;
     
+    /**
+     * Constructor for the bullet class.
+     * @param pos the starting position for the bullet
+     * @param damage the amount of damage the bullet will inflict
+     * @param adamage the amount of armor damage the bullet will inflict
+     * @param sdamage the amount of speed damage the bullet will inflict
+     * @param velocity the velocity the bullet travels at
+     * @param t the Target of the bullet
+     */
     public Bullet(Vector2 pos, double damage,double adamage,double sdamage, double velocity, WorldObject t){
         super(pos.clone(), -1, "Hi there");
         loadAnimation();
@@ -53,6 +62,10 @@ public class Bullet extends WorldObject {
         
         
     }
+    /**
+     * Determines if the bullet has reached its target.
+     * @return if reached target
+     */
     public boolean HasReachedTarget(){
         return distance>1;
         //return false;

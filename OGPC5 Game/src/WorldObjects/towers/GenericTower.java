@@ -12,10 +12,16 @@ import java.awt.Color;
 import ogpc5.game.CityGame;
 
 /**
- *
+ * A generic tower class, used primarily for testing purposes
  * @author pcowal15
  */
 public class GenericTower extends Tower{
+    
+    /**
+     * 
+     * @param pos
+     * @param spritePath 
+     */
     public GenericTower(Vector2 pos,String spritePath) {
         super(pos,spritePath,1,1);
     }
@@ -46,6 +52,11 @@ public class GenericTower extends Tower{
         
     }
 
+    /**
+     * 
+     * @param e
+     * @return 
+     */
     @Override
     protected Bullet setEnemyBulletHitting(Enemy e) {
         return null;
