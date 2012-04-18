@@ -83,7 +83,7 @@ public class EnemyNavigation2 {
         int n = 0;
         int[] values = new int[4];
         try {
-            values[0] = visits[x][y - 1]-1;
+            values[0] = visits[x][y - 1];
             if (values[0] < 9000) {
                 n++;
             }
