@@ -43,7 +43,7 @@ public class CityGame extends Game {
     public ArrayList<Tower> activeTiles;
     public ArrayList<Button> buttons;
     public ArrayList<Road> roads;
-    public double money;
+    public double money = 9000000;
     public double score;
     public double happiness;
     public double polution;
@@ -310,7 +310,8 @@ public class CityGame extends Game {
                 if(drag!=null){
                     int x=((int)mouse.location().getX())/32;
                     int y=((int)mouse.location().getY())/32;
-                    if (!(tiles[x][y] instanceof Road)) {
+                    if (!(tiles[x][y] instanceof Road) && !(tiles[x][x] instanceof Tower) 
+                            && x<tiles.length && y<tiles[0].length && x>-1 && y>-1) {
                         tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
                         this.activeTiles.add((Tower) tiles[x][y]);
                         new SoundFile("Game Resources/Sound/build.wav",1).start();
@@ -320,11 +321,18 @@ public class CityGame extends Game {
             }
             
             double thisLoopTime = System.currentTimeMillis();
+            boolean updateAll=false;
+            if (thisLoopTime - this.UpdateAllStart >= 30000) {
+                updateAll = true;
+                UpdateAllStart = thisLoopTime;
+            } else {
+                updateAll = false;
+            }
             for (Tower t : activeTiles) {
                 t.Update(allObjects);
 
                 //For updating score, happiness, polution, and money
-                if (thisLoopTime - this.UpdateAllStart >= 30000) {
+                if (updateAll) {
                     t.updateGameStats(this);
                 }
 
@@ -401,7 +409,7 @@ public class CityGame extends Game {
                     }
                 } catch (Exception e) {
                     if(e instanceof ArrayIndexOutOfBoundsException){
-                        //Do nothing
+                        e.printStackTrace();
                     }else{
                         e.printStackTrace();
                     }
@@ -638,7 +646,7 @@ public class CityGame extends Game {
         //button 2
         buttons.add(new Button(Tower.GREEN_BELT, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", 920,100));
         //button 3
-        buttons.add(new Button(Tower.HOUSE, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 880, 140));
+        buttons.add(new Button(Tower.HOUSE, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", 880, 140));
         //button 4
         buttons.add(new Button(Tower.MONUMENT, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 140));
         //button 5
