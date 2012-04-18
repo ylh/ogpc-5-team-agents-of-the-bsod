@@ -28,7 +28,15 @@ public class House extends Tower{
 
     @Override
     protected void loadAnimation() {
-        
+        ani = new Animation(8,10, position,100);
+        ani.addCell("Game Resources/Sprites/Liam's Sprites/Towers/House/House1-1.png");
+        ani.addCell("Game Resources/Sprites/Liam's Sprites/Towers/House/House1-2.png");
+        ani.addCell("Game Resources/Sprites/Liam's Sprites/Towers/House/House1-3.png");
+        ani.addCell("Game Resources/Sprites/Liam's Sprites/Towers/House/House1-4.png");
+        ani.addCell("Game Resources/Sprites/Liam's Sprites/Towers/House/House1-5.png");
+        ani.addCell("Game Resources/Sprites/Liam's Sprites/Towers/House/House1-3.png");
+        ani.addCell("Game Resources/Sprites/Liam's Sprites/Towers/House/House1-2.png");
+        ani.addCell("Game Resources/Sprites/Liam's Sprites/Towers/House/House1-1.png");
     }
 
     @Override
@@ -37,7 +45,7 @@ public class House extends Tower{
         health=100;
         range=80*Math.sqrt(2);
         adamage=0;
-        projspeed=10;//not correct
+        projspeed=10;//num of frames to reach enemy
         speed=10;//not done
         this.moneyBonus=1;
         this.happyBonus=3;
@@ -45,12 +53,13 @@ public class House extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
-        
+        ani.Draw(batch);
     }
 
     @Override
     public void updateGameStats(CityGame theGame) {
-        
+        theGame.money+=moneyBonus;
+        theGame.happiness+=happyBonus;
     }
 
     @Override
