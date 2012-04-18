@@ -42,6 +42,8 @@ public class Enemy extends WorldObject {
      */
     int score;
     
+    int dir;
+    
     Tile[][] tiles; //Map from which the enemy works
     
     ArrayList<Vector2> path; //Enemy path
@@ -129,12 +131,12 @@ public class Enemy extends WorldObject {
         //we'll want to change this in the future when we add roads
         if (snapped()){
             pathCreator2.update(position);
-            int decision=pathCreator2.decide(position);
+            dir=pathCreator2.decide(position,dir);
             Vector2 q= new Vector2();
-            if (decision==0) q= new Vector2(0,-32);
-            if (decision==1) q= new Vector2(32,0);
-            if (decision==2) q= new Vector2(0,32);
-            if (decision==3) q= new Vector2(-32,0);
+            if (dir==0) q= new Vector2(0,-32);
+            if (dir==1) q= new Vector2(32,0);
+            if (dir==2) q= new Vector2(0,32);
+            if (dir==3) q= new Vector2(-32,0);
             q.add(position);
             targetPos=q;
         }
