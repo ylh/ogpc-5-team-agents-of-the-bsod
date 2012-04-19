@@ -85,7 +85,6 @@ public class CityGame extends Game {
     double UpdateAllStart;
     Tile selection;
     Spawner spawn;
-    //I've added a comment!!!
     EnemyNavigation navigator;
     boolean resetEnemies = true;
 
@@ -489,18 +488,9 @@ public class CityGame extends Game {
                 selection.Draw(batch);
             }
             //Pure Debugging
-            System.out.println(globalCount);
+            //System.out.println(globalCount);
         }//End of Main Game Else
     }
-
-//    private void resetPaths() {
-//        for (WorldObject b : allObjects) {
-//            if (b instanceof Enemy) {
-//                Enemy e = (Enemy) b;
-//                e.updatePath();
-//            }
-//        }
-//    }
 
     /**
      * Sort of self explanatory
@@ -664,7 +654,7 @@ public class CityGame extends Game {
     }
     
     public boolean insideBounds(int x, int y){
-        return (x>0 && x<833) && (y>0 && y<607);
+        return (x>0 && x<830) && (y>0 && y<600);
     }
     public boolean insideBounds(Vector2 pos){
         int x=(int)pos.getX();
