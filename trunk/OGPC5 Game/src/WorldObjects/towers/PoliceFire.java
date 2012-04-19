@@ -28,7 +28,8 @@ public class PoliceFire extends Tower{
 
     @Override
     protected void loadAnimation() {
-        
+        ani = new Animation(1,10, position,100);
+        ani.addCell("Game Resources/Sprites/August/Police Station 32x32.png");
     }
 
     @Override
@@ -45,7 +46,7 @@ public class PoliceFire extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
-        
+        ani.Draw(batch);
     }
 
     @Override

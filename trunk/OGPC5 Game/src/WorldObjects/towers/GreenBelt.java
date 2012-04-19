@@ -28,6 +28,8 @@ public class GreenBelt extends Tower{
 
     @Override
     protected void loadAnimation() {
+        ani = new Animation(1,10, position,100);
+        ani.addCell("Game Resources/Sprites/Liam's Sprites/Towers/Park/park2-1.png");
         
     }
 
@@ -45,7 +47,7 @@ public class GreenBelt extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
-        
+        ani.Draw(batch);
     }
 
     @Override

@@ -651,7 +651,7 @@ public class CityGame extends Game {
         //button 6
         buttons.add(new Button(Tower.RECYCLING_CENTER, "Game Resources/Sprites/August/Recycling Center.png", 920, 180));
         //button 7
-        //buttons.add(new Button(Tower.SCHOOL, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 880, 220));
+        buttons.add(new Button(Tower.STORE, "Game Resources/Sprites/August/Supermarket 32x32.png", 880, 220));
         //button 8
         //buttons.add(new Button(Tower.WATER_PURIFICATION_CENTER, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 220));
         //delete
