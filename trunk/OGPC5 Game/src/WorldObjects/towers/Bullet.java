@@ -76,6 +76,9 @@ public class Bullet extends WorldObject {
         if (target instanceof Enemy){
             e=(Enemy)target;
             e.Hit(damage,adamage,sdamage);
+            damage=0;
+            adamage=0;
+            sdamage=0;
         }
         else if (target instanceof Tower){
             //this.target=(Tower)target;

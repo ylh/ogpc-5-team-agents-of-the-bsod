@@ -279,14 +279,17 @@ public class CityGame extends Game {
                 int i = 0;
             }
 
-            buttonPressed = -2;
+            
 
             for (Button b : buttons) {
                 b.glide();
                 if (b.isPressed(mouse)) {
-                    
-
-                    buttonPressed = b.id();
+                    if (b.id()>-1 && drag==null){
+                    drag=new Draggable(b.getPath(),mouse.location(),b.id());
+                    }
+                    else if (b.id()==-1){
+                        invOpen=false;
+                    }
                 }
                 globalCount++;
             }
@@ -295,8 +298,8 @@ public class CityGame extends Game {
                 b.setOpen(invOpen);
                 globalCount++;
             }
-            if (buttonPressed >= 1 && drag==null){
-                drag=new Draggable(buttons.get(buttonPressed).getPath(),mouse.location(),buttonPressed);
+            if (buttonPressed >= 0 && drag==null){
+                
             }
             //Needed because we can't have it in the loop
             if (buttonPressed == -1) {
