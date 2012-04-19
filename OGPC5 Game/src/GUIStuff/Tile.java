@@ -72,7 +72,7 @@ public class Tile extends WorldObject{
             pos.add(offset);
             //batch.fillRect(position, 32, 32, Color.blue, 2);
             //batch.drawRect(position, 32, 32, Color.blue, 100);
-            batch.Draw(selection,pos,100);
+            batch.Draw(selection,pos,500);
             batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
         }
         if(rangeSelected){
