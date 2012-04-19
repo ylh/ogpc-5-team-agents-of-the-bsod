@@ -145,20 +145,24 @@ public abstract class Tower extends Tile {
     }
     
     public ArrayList<Tile> getRangedTowers(Tile[][] t){
-        ArrayList<Tile> rt= new ArrayList<Tile>();
-        int x=((int)position.getX())/32;
-        int y= ((int)position.getY())/32;
-        int max=getBlockDistance(range);
-        int r=x-max;
-        int c=y-max;
-        for(int i=0; i<max*2+1; i++){
-            for (int j=0; j<max*2+1; j++){
-                if(t[r+i][c+j]==this){
-                    continue;
-                }else{
-                    rt.add(t[r+i][c+j]);
+        ArrayList<Tile> rt = new ArrayList<Tile>();
+        int x = ((int) position.getX()) / 32;
+        int y = ((int) position.getY()) / 32;
+        int max = getBlockDistance(range);
+        int r = x - max;
+        int c = y - max;
+        try {
+            for (int i = 0; i < max * 2 + 1; i++) {
+                for (int j = 0; j < max * 2 + 1; j++) {
+                    if (t[r + i][c + j] == this) {
+                        continue;
+                    } else {
+                        rt.add(t[r + i][c + j]);
+                    }
                 }
             }
+        } catch (Exception e) {
+            
         }
         return rt;
     }
