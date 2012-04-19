@@ -43,7 +43,7 @@ public class CityGame extends Game {
     public ArrayList<Tower> activeTiles;
     public ArrayList<Button> buttons;
     public ArrayList<Road> roads;
-    public double money = 9000000;
+    public double money = 100;
     public double score;
     public double happiness;
     public double polution;
