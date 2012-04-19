@@ -28,7 +28,11 @@ public class Factory extends Tower{
 
     @Override
     protected void loadAnimation() {
-        
+        ani = new Animation(4,10, position,100);
+        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory1_32x32.png");
+        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory2_32x32.png");
+        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory3_32x32.png");
+        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory32x32.png");
     }
 
     @Override
@@ -45,7 +49,7 @@ public class Factory extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
-        
+        ani.Draw(batch);
     }
 
     @Override
