@@ -88,7 +88,7 @@ public abstract class Tower extends Tile {
         if(isSelected){
             //batch.fillRect(position, 32, 32, Color.blue, 2);
             //batch.drawRect(position, 32, 32, Color.blue, 100);
-            batch.Draw(selection,position,100);
+            batch.Draw(selection,position,500);
             batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+0.5)+", Y:"+(position.getY()/32+0.5), Color.black, direction);
         }
         if(rangeSelected){
@@ -137,8 +137,7 @@ public abstract class Tower extends Tile {
     @Override
     public void unselect(Tile[][] t){
         isSelected=false;
-        ArrayList<Tile> rt=getRangedTowers(t);
-        for(Tile l: rt){
+        for(Tile l: rangeSelectedTiles){
             l.rangeUnselect();
         }
         rangeSelectedTiles.clear();
