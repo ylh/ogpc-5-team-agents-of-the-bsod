@@ -322,13 +322,13 @@ public class CityGame extends Game {
                 drag = null;
             }
             
+            
+            //ORDER HERE COUTNS!!!
             double thisLoopTime = System.currentTimeMillis();
             boolean updateAll=false;
             if (thisLoopTime - this.UpdateAllStart >= 30000) {
                 updateAll = true;
                 UpdateAllStart = thisLoopTime;
-            } else {
-                updateAll = false;
             }
             for (Tower t : activeTiles) {
                 t.Update(allObjects);
@@ -340,6 +340,12 @@ public class CityGame extends Game {
 
                 globalCount++;
             }
+            if(updateAll){
+                score=getScore();
+                updateAll=false;
+            }
+            
+            
 
             //Mouse update methods in grid, the 832 should be most left pixel of the grid
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && insideBounds(mouse.location())) {
@@ -417,9 +423,6 @@ public class CityGame extends Game {
                     }
                 }
             }//End of mouse pressed
-
-            //Updates the score
-            score = this.getScore();
         }// End of Main Game Else
     }
 
