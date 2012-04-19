@@ -13,6 +13,15 @@ import Utilities.Vector2;
  */
 public class taylorEnemy extends Enemy{
     
+    /**
+     * 
+     * @param Speed enemy speed
+     * @param Health how much health the enemy has
+     * @param Armor how much armor the enemy has
+     * @param pos the position of the enemy
+     * @param path the file path of the enemy
+     * @param t the main Tile[][] array
+     */
     public taylorEnemy(double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t) {
         super(Speed, Health, Armor, pos, path, t);
         speed = Speed;
@@ -24,16 +33,28 @@ public class taylorEnemy extends Enemy{
         score=10;
         id=Enemy.GENERIC;
         System.out.println("Enemy Created");
-//        setEnemyPath();
-//        pathCreator2 = new EnemyNavigation2(t);
-//        pathCreator2.update(position);
     }
+    
+    /**
+     * 
+     * @param type the kind of enemy
+     * @param Speed enemy speed
+     * @param Health how much health the enemy has
+     * @param Armor how much armor the enemy has
+     * @param pos the position of the enemy
+     * @param path the file path of the enemy
+     * @param t the main Tile[][] array
+     */
     public taylorEnemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
         this(Speed, Health, Armor, pos, path, t);
         id=type;
         System.out.println("Enemy Created");
     }
     
+    /**
+     * Attempts to access a nonexistent Thread to set the enemy's path
+     * @param e the existing (so to speak) navigation Thread
+     */
     public void setEnemyPath(EnemyNavigation e) {
         synchronized (this) {
             try {                
@@ -46,7 +67,10 @@ public class taylorEnemy extends Enemy{
         }        
     }
     
-    @Override
+    /**
+     * Follows a given path
+     * @param i starting point on the path
+     */
     public void followPath(int i){
         if(i < path.size()){            
             for(int counter = i; counter <path.size(); counter++){
@@ -55,6 +79,11 @@ public class taylorEnemy extends Enemy{
         }
     }
     
+    /**
+     * Moves towards a target Road
+     * @param i target Road x value
+     * @param j target Road y value
+     */
     private void move(int i, int j){
         int goalX = (i+1)*32-16;
         int goalY = (j+1)*32-16;

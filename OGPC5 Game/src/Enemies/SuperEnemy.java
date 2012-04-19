@@ -23,6 +23,17 @@ public class SuperEnemy extends Enemy{
     ArrayList<Tile> explored;
     int[][] scores;
     
+    /**
+     * 
+     * @param Speed the speed of the enemy
+     * @param Health how much health the enemy has
+     * @param Armor how much armor the enemy has
+     * @param pos the starting position
+     * @param path the enemy's file path
+     * @param t the main Tile[][] array
+     * @param startR starting x value
+     * @param startC starting y value
+     */
     public SuperEnemy(double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t, int startR, int startC){
         super(Speed, Health, Armor, pos, path, t);
         startX=startR;
@@ -48,6 +59,10 @@ public class SuperEnemy extends Enemy{
         prepareAStar(t);
     }
     
+    /**
+     * Adds main array Tiles to frontier
+     * @param t Main Tile[][] array
+     */
     private void prepareAStar(Tile[][] t){
         for(int i=0; i<t.length; i++){
             for(int j=0; j<t[i].length; j++){

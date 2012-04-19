@@ -6,7 +6,7 @@ import WorldObjects.towers.Road;
 import java.util.ArrayList;
 
 /**
- *
+ *Not functional
  * @author tsutton14
  */
 public class EnemyNavigation extends Thread {
@@ -18,6 +18,13 @@ public class EnemyNavigation extends Thread {
     boolean paused, destroy;
     ArrayList<ArrayList<Vector2>> pathHolder = new ArrayList<ArrayList<Vector2>>();
     
+    /**
+     * 
+     * @param t the main Tile[][] array
+     * @param navName the name of the Thread
+     * @param i the target x value
+     * @param j the target y value
+     */
     public EnemyNavigation(Tile[][] t, String navName, int i, int j){
         super(navName);
         tiles = t;
@@ -27,6 +34,9 @@ public class EnemyNavigation extends Thread {
         pathHolder.add(new ArrayList<Vector2>());
     }
     
+    /**
+     * Currently effectively does nothing
+     */
     @Override
     public void run(){
         synchronized(this){
@@ -54,6 +64,12 @@ public class EnemyNavigation extends Thread {
         }       
     }
     
+    /**
+     * Scores a Road based upon its distance from the goal
+     * @param i current x coordinate
+     * @param j current y coordinate
+     * @return the favorability of a Road
+     */
     private double scoreRoad(int i, int j){
         double score;
         
@@ -62,7 +78,12 @@ public class EnemyNavigation extends Thread {
         return score;
     }
         
-    
+    /**
+     * Finds the most favorable road adjacent to the current road
+     * @param i current x value
+     * @param j current y value
+     * @return returns the location of the highest scored road
+     */
     private Vector2 checkSurrounding(int i, int j){                
         int highX = 0;
         int highY = 0;
@@ -120,6 +141,12 @@ public class EnemyNavigation extends Thread {
         return new Vector2(highX,highY);
     }
     
+    /**
+     * Finds the best path from a given position
+     * @param i current x value
+     * @param j current y value
+     * @return returns a list of target Road locations
+     */
     public ArrayList<Vector2> findPath(int i, int j){
         ArrayList<Vector2> path = new ArrayList();
         
@@ -139,10 +166,19 @@ public class EnemyNavigation extends Thread {
         return path;        
     }
     
+    /**
+     * Pauses this thread
+     */
     public void pause() {
         this.paused=true;
     }
 
+    /**
+     * Recalculates all paths
+     * @param i current x value
+     * @param j current y value
+     * @param b should be destroyed
+     */
     public void recalculatePath(int i, int j, boolean b) {
         synchronized (this) {
             this.paused = false;
@@ -153,6 +189,10 @@ public class EnemyNavigation extends Thread {
         }
     } 
     
+    /**
+     * Determines if this Thread is paused
+     * @return if the Thread is paused
+     */
     public boolean isPaused(){
         return this.paused;
     }

@@ -58,6 +58,7 @@ public class Enemy extends WorldObject {
      * @param Armor the armor rating of the enemy
      * @param pos the starting position of the enemy
      * @param path the String path for the enemy's default static sprite
+     * @param t the main Tile[][] array
      */
     public Enemy(double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t) {
         super(pos, 1, path);
@@ -74,6 +75,17 @@ public class Enemy extends WorldObject {
         pathCreator2 = new EnemyNavigation2(t);
         pathCreator2.update(position);
     }
+    
+    /**
+     * 
+     * @param type designates the kind of enemy
+     * @param Speed how fast the enemy moves per turn
+     * @param Health how much health the enemy has
+     * @param Armor the armor rating of the enemy
+     * @param pos the starting position of the enemy
+     * @param path the String path for the enemy's default static sprite
+     * @param t the main Tile[][] array
+     */
     public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
         this(Speed, Health, Armor, pos, path, t);
         id=type;
@@ -128,7 +140,6 @@ public class Enemy extends WorldObject {
      */
     @Override
     public void Update(ArrayList<WorldObject> wol) {
-        //we'll want to change this in the future when we add roads
         if (snapped()){
             pathCreator2.update(position);
             dir=pathCreator2.decide(position,dir);
@@ -164,45 +175,18 @@ public class Enemy extends WorldObject {
         batch.Draw(sprite, position, 5);
     }
     
-    public void setEnemyPath(EnemyNavigation e) {                 
-        path = e.findPath(((int)position.getX())/32, ((int)position.getY())/32);        
-    }
-    
-//    public void updatePath(EnemyNavigation en) {
-//        pathCreator = en;
-//        path = pathCreator.getPath();
-//        System.out.println(path);     
-//    }
+    /**
+     * Resets pathCreator2's visited array to reflect the main Tile[][] array
+     * @param t the main Tile[][] array
+     */
     public void updatePath2(Tile[][] t){
         pathCreator2.reset(t);
     }
     
-    public void followPath(int i){
-        if(i < path.size()){            
-            for(int counter = i; counter <path.size(); counter++){
-                move((int)(path.get(i).getX()*32-16),(int)(path.get(i).getY()*32-16));
-            }
-        }
-    }
-    
-    private void move(int i, int j){
-        int goalX = (i+1)*32-16;
-        int goalY = (j+1)*32-16;
-        while(position.getX() != goalX && position.getY() != goalY){
-            if(position.getX()>goalX){
-                position.setX(position.getX()-1);
-            }
-            else if (position.getX()<goalX){
-                position.setX(position.getX()+1);
-            }
-            if(position.getY()>goalY){
-                position.setY(position.getY()-1);
-            }
-            else if (position.getY()<goalY){
-                position.setY(position.getY()+1);
-            }
-        }
-    }
+    /**
+     * Determines if a unit's position is equal to its target position
+     * @return whether or not the unit's position has reached the target position
+     */
     public boolean snapped(){
         if (position.getX()==targetPos.getX() && position.getY()==targetPos.getY()){
             return true;
@@ -210,7 +194,10 @@ public class Enemy extends WorldObject {
         else return false;
     }
     
-    
+    /**
+     * Rewards the player for the destruction of an enemy
+     * @param theGame the game that is running
+     */
     public void die(CityGame theGame){
         theGame.score+=this.score;
     }

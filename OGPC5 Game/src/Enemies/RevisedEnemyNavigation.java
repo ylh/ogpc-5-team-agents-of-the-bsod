@@ -18,7 +18,14 @@ public class RevisedEnemyNavigation extends Thread {
     private final int LEFT = 2;
     private final int DOWN = 3;
     boolean deleting;
-
+    
+    /**
+     * A navigation system that creates one dimensional threads to check if Roads remain in paths
+     * @param tiles main Tile[][] array
+     * @param startPos starting position
+     * @param direction the direction the Thread is checking
+     * @param deleting if the Thread is spawned by a deletion or creation
+     */
     public RevisedEnemyNavigation(Tile[][] tiles, Vector2 startPos, int direction, boolean deleting) {
         this.tiles = tiles;
         this.startPos = startPos;
@@ -26,11 +33,17 @@ public class RevisedEnemyNavigation extends Thread {
         this.deleting = deleting;
     }
 
+    /**
+     * Calls checkInPath() and then dies
+     */
     @Override
     public void run() {
         checkInPath();
     }
 
+    /**
+     * Determines if a path and its subsidiaries are part of a path
+     */
     public void checkInPath() {
         int x = (int) startPos.getX();
         int y = (int) startPos.getY();
@@ -226,6 +239,12 @@ public class RevisedEnemyNavigation extends Thread {
         }
     }
 
+    /**
+     * Determines if a current RevisedEnemyNavigation Thread needs to spawn another in a different direction
+     * @param x x value of current Road being checked
+     * @param y y value of current Road being checked
+     * @param currentDirection the direction of the Thread attempting to spawn branches
+     */
     public void needBranch(int x, int y, int currentDirection) {
         if (currentDirection == UP) {
             if (tiles[x + 1][y] instanceof Road) {
@@ -384,6 +403,12 @@ public class RevisedEnemyNavigation extends Thread {
         }
     }
     
+        /**
+     * Determines if a Road is still part of a path if a deletion occurs
+     * @param x current x value of Road being checked
+     * @param y current y value of Road being checked
+     * @return if the Road is still part of a path
+     */
         public boolean stillPath(int x, int y){
         if(x >= 0 && x < tiles.length && y >= 0 && y < tiles[0].length){
             if(tiles[x][y] instanceof Road){

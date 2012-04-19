@@ -25,6 +25,12 @@ public class Spawner {
     private int location=0;
     private double spawnLast;
     
+    /**
+     * 
+     * @param waitTime how long between waves
+     * @param theGame the current game running
+     * @param loc position of Spawner
+     */
     public Spawner(long waitTime, CityGame theGame, Vector2 loc){
         firstUpdate=true;
         timeToWait=waitTime;
@@ -39,6 +45,9 @@ public class Spawner {
         }
     }
 
+    /**
+     * Determines how many of each enemy to create and when
+     */
     public void update(){
         double time=System.currentTimeMillis();
         if(firstUpdate){
@@ -66,10 +75,17 @@ public class Spawner {
         }
     }
     
+    /**
+     * Sets the initial time to properly arrange waves
+     */
     private void runFirstUpdate(){
         lastTime=System.currentTimeMillis();
     }
     
+    /**
+     * Determines how long until the next wave
+     * @return 
+     */
     public double getRemainingTime(){
         if(isSpawning){
             return 0;
@@ -77,7 +93,11 @@ public class Spawner {
         return timeToWait-(System.currentTimeMillis()-lastTime);
     }
     
-    private void addEnemy(int enemy){//add the given enemy at the given location.
+    /**
+     * Adds a given type of enemy at a specified location (the Spawner) location
+     * @param enemy the enemy type 
+     */
+    private void addEnemy(int enemy){
         Enemy e = null;
         switch(enemy){
             case Enemy.ARSONIST:
