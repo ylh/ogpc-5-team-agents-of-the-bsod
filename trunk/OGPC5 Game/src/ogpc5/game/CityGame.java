@@ -295,7 +295,7 @@ public class CityGame extends Game {
                 b.setOpen(invOpen);
                 globalCount++;
             }
-            if (buttonPressed >= 1){
+            if (buttonPressed >= 1 && drag==null){
                 drag=new Draggable(buttons.get(buttonPressed).getPath(),mouse.location(),buttonPressed);
             }
             //Needed because we can't have it in the loop
@@ -309,7 +309,7 @@ public class CityGame extends Game {
                 if(drag!=null){
                     int x=((int)mouse.location().getX())/32;
                     int y=((int)mouse.location().getY())/32;
-                    if (insideBounds(x,y)&&!(tiles[x][y] instanceof Road) && !(tiles[x][x] instanceof Tower) 
+                    if (insideBounds(x,y)&&!(tiles[x][y] instanceof Road) && !(tiles[x][y] instanceof Tower) 
                             && x<tiles.length && y<tiles[0].length && x>-1 && y>-1) {
                         tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
                         this.activeTiles.add((Tower) tiles[x][y]);
@@ -633,21 +633,21 @@ public class CityGame extends Game {
     }
     public void addButtons(){
         //factory
-        buttons.add(new Button(Tower.FACTORY, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", 880, 100));
+        buttons.add(new Button(Tower.FACTORY, "Game Resources/Sprites/SamSprites/Towers/Factory/3factory32x32.png", 880, 100));
         //button 2
-        buttons.add(new Button(Tower.GREEN_BELT, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", 920,100));
+        buttons.add(new Button(Tower.GREEN_BELT, "Game Resources/Sprites/Liam's Sprites/Towers/Park/park2-1.png", 920,100));
         //button 3
         buttons.add(new Button(Tower.HOUSE, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", 880, 140));
         //button 4
-        buttons.add(new Button(Tower.MONUMENT, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 140));
+        buttons.add(new Button(Tower.MONUMENT, "Game Resources/Sprites/SamSprites/Towers/Monuments/monument0.png", 920, 140));
         //button 5
-        buttons.add(new Button(Tower.POLICE_FIRE_STATION, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 880, 180));
+        buttons.add(new Button(Tower.POLICE_FIRE_STATION, "Game Resources/Sprites/August/Police Station 32x32.png", 880, 180));
         //button 6
-        buttons.add(new Button(Tower.RECYCLING_CENTER, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 180));
+        buttons.add(new Button(Tower.RECYCLING_CENTER, "Game Resources/Sprites/August/Recycling Center.png", 920, 180));
         //button 7
-        buttons.add(new Button(Tower.SCHOOL, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 880, 220));
+        //buttons.add(new Button(Tower.SCHOOL, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 880, 220));
         //button 8
-        buttons.add(new Button(Tower.WATER_PURIFICATION_CENTER, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 220));
+        //buttons.add(new Button(Tower.WATER_PURIFICATION_CENTER, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 220));
         //delete
         buttons.add(new Button(-1, "Game Resources/Sprites/GUIS/deleteButton.png", 900, 260));
 
