@@ -39,7 +39,7 @@ public class Monument extends Tower{
         range=48*Math.sqrt(2);
         adamage=10;
         projspeed=10;//not correct
-        speed=10;//not done
+        speed=200;//not done
         this.moneyBonus=35;
         this.happyBonus=7;
     }

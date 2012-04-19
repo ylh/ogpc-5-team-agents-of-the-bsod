@@ -34,12 +34,12 @@ public class PoliceFire extends Tower{
 
     @Override
     protected void loadStats() {
-        damage=35;
+        damage=1000;
         health=500;
         range=80*Math.sqrt(2);
-        adamage=3;
+        adamage=100;
         projspeed=10;//not correct
-        speed=10;//not done
+        speed=200;//not done
         this.moneyBonus=-2;
         this.happyBonus=1;
     }

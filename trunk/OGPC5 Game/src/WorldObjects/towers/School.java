@@ -37,8 +37,8 @@ public class School extends Tower{
         health=250;
         range=112*Math.sqrt(2);
         adamage=5;
-        projspeed=10;//not correct
-        speed=10;//not done
+        projspeed=5;//not correct
+        speed=4;//not done
         this.moneyBonus=-3;
         this.happyBonus=2;
     }
