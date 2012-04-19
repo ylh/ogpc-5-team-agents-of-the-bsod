@@ -310,7 +310,7 @@ public class CityGame extends Game {
                 if(drag!=null){
                     int x=((int)mouse.location().getX())/32;
                     int y=((int)mouse.location().getY())/32;
-                    if (!(tiles[x][y] instanceof Road) && !(tiles[x][x] instanceof Tower) 
+                    if (insideBounds(x,y)&&!(tiles[x][y] instanceof Road) && !(tiles[x][x] instanceof Tower) 
                             && x<tiles.length && y<tiles[0].length && x>-1 && y>-1) {
                         tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
                         this.activeTiles.add((Tower) tiles[x][y]);
@@ -339,8 +339,8 @@ public class CityGame extends Game {
                 globalCount++;
             }
 
-            //Mouse update methods in grid
-            if (mouse.isPressed(Mouse.LEFT_BUTTON) && mouse.location().getX() < 854) {
+            //Mouse update methods in grid, the 832 should be most left pixel of the grid
+            if (mouse.isPressed(Mouse.LEFT_BUTTON) && insideBounds(mouse.location())) {
                 try {
                     if (drag == null) {
                         invOpen = true;
@@ -446,6 +446,7 @@ public class CityGame extends Game {
                 globalCount++;
             }
             if (drag!=null) drag.draw(batch);
+            batch.DrawString(new Vector2(850, 400), "MX: "+mouse.location().getX()+" MY: "+mouse.location().getY(), Color.red, 40);
 
             //money drawing
             if (money < 0) {
@@ -660,5 +661,14 @@ public class CityGame extends Game {
         //delete
         buttons.add(new Button(-1, "Game Resources/Sprites/GUIS/deleteButton.png", 900, 260));
 
+    }
+    
+    public boolean insideBounds(int x, int y){
+        return (x>0 && x<833) && (y>0 && y<607);
+    }
+    public boolean insideBounds(Vector2 pos){
+        int x=(int)pos.getX();
+        int y=(int)pos.getY();
+        return insideBounds(x,y);
     }
 }
