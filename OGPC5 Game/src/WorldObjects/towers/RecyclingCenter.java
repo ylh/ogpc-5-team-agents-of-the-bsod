@@ -28,12 +28,13 @@ public class RecyclingCenter extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
-        
+        ani.Draw(batch);
     }
 
     @Override
     protected void loadAnimation() {
-        
+        ani = new Animation(1,10, position,100);
+        ani.addCell("Game Resources/Sprites/August/Recycling Center.png");
     }
 
     @Override

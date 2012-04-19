@@ -26,7 +26,7 @@ public class Store extends Tower {
     @Override
     protected void loadAnimation(){
         ani= new Animation(1, 20, position, 200);
-        ani.addCell("Game Resources/Sprites/placeHold.png");
+        ani.addCell("Game Resources/Sprites/August/Supermarket 32x32.png");
     }
 
     @Override

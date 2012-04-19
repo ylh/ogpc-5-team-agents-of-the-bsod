@@ -28,7 +28,8 @@ public class Monument extends Tower{
 
     @Override
     protected void loadAnimation() {
-        
+        ani = new Animation(1,10, position,100);
+        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Monuments/monument0.png");
     }
 
     @Override
@@ -45,7 +46,7 @@ public class Monument extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
-        
+        ani.Draw(batch);
     }
 
     @Override
