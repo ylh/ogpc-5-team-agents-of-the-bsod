@@ -49,6 +49,7 @@ public class Enemy extends WorldObject {
     
     int dir;
     int healthDisplay;
+    int armorDisplay;
     
     Tile[][] tiles; //Map from which the enemy works
     
@@ -82,6 +83,7 @@ public class Enemy extends WorldObject {
         pathCreator2 = new EnemyNavigation2(t);
         pathCreator2.update(position);
         healthDisplay=0;
+        armorDisplay=6;
     }
     
     /**
@@ -110,6 +112,9 @@ public class Enemy extends WorldObject {
         armor=Math.max(0,armor-adamage);
         health-=Math.max(0,damage-armor);
         healthDisplay=20;
+        if (armor>0){
+            armorDisplay=1;
+        }
         
     }
     /**
@@ -174,6 +179,7 @@ public class Enemy extends WorldObject {
         }
         danger+=speed;
         healthDisplay--;
+        armorDisplay++;
     }
     /**
      * Draws the enemy at it's current location
@@ -186,7 +192,11 @@ public class Enemy extends WorldObject {
         if (healthDisplay>0){
             int h=(int)(health/maxhealth*13);
             Image2D healthBar=new Image2D("Game Resources/Sprites/Status/Health/health"+h+".png");
-            batch.Draw(healthBar, position,6);
+            batch.Draw(healthBar, position,7);
+        }
+        if (armorDisplay<6){
+            Image2D shield=new Image2D("Game Resources/Sprites/Status/Shield/shield"+armorDisplay+".png");
+            batch.Draw(shield, position,6);
         }
     }
     

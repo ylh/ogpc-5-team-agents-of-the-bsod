@@ -25,6 +25,7 @@ public class Button {
     double movespeed; //you want a value less than 0.5
     boolean open;
     Image2D sprite;
+    Image2D overlay;
     int id;
     String spriteString;
 
@@ -51,6 +52,7 @@ public class Button {
         open = false;
         button = new Rect(pos, 100, 32);
         spriteString=sp;
+        overlay=new Image2D("Game Resources/Sprites/GUIs/Icon overlay.png");
     }
 
     /**
@@ -113,6 +115,7 @@ public class Button {
      */
     public void draw(ImageCollection batch){
         batch.Draw(sprite,pos,400);
+        batch.Draw(overlay, pos,410);
     }
     public String getPath(){
         return spriteString;
