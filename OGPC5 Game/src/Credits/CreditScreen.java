@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUIStuff;
+package Credits;
 
 import KylesTesting.ClosingAnimation;
 import Utilities.ImageCollection;
 import Utilities.KeyBoard;
 import Utilities.Mouse;
 import Utilities.Vector2;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class CreditScreen {
     boolean done;
     boolean endinground=false;
     ClosingAnimation finalPic;
+    ArrayList<BackgroundStar> bgs= new ArrayList<BackgroundStar>();
     
     public CreditScreen(){
         kyle= new Credit("Kyle Sweeney: Project Manager, Lead Programmer", new Vector2(50,0));
@@ -53,6 +55,7 @@ public class CreditScreen {
         
         credits.add(kyle);
         done=false;
+        this.MakeBackgroundStars();
     }
     
     public void start(){
@@ -136,9 +139,21 @@ public class CreditScreen {
         if(endinground){
             finalPic.draw(batch);
         }
+        for(BackgroundStar bs : bgs){
+            bs.Draw(batch);
+        }
     }
     
     public boolean isDone(KeyBoard k, Mouse m){
         return (k.isKeyDown(KeyEvent.VK_SPACE) ||m.isPressed(Mouse.LEFT_BUTTON) || done) && (System.currentTimeMillis()-theEndStart>=100);
+    }
+    
+    public void MakeBackgroundStars(){
+        Toolkit t = Toolkit.getDefaultToolkit();
+        double height=t.getScreenSize().height;
+        double width=t.getScreenSize().width;
+        for(int i=0; i<120; i++){
+            bgs.add(new BackgroundStar(new Vector2(Math.random()*width, Math.random()*height),Math.random()*10000000));//JTW
+        }
     }
 }
