@@ -5,6 +5,7 @@
 package Enemies;
 
 import GUIStuff.Tile;
+import Utilities.Image2D;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
@@ -26,6 +27,10 @@ public class Enemy extends WorldObject {
      */
     double health;
     /**
+     * The maximum health of the enemy
+     */
+    double maxhealth;
+    /**
      * The armor rating of the enemy
      */
     double armor;
@@ -43,6 +48,7 @@ public class Enemy extends WorldObject {
     int score;
     
     int dir;
+    int healthDisplay;
     
     Tile[][] tiles; //Map from which the enemy works
     
@@ -65,6 +71,7 @@ public class Enemy extends WorldObject {
         speed = Speed;
         targetPos=new Vector2(pos.getX(),pos.getY()-32);
         health = Health;
+        maxhealth= Health;
         armor = Armor;
         danger = 0;
         tiles = t;
@@ -74,6 +81,7 @@ public class Enemy extends WorldObject {
 //        setEnemyPath();
         pathCreator2 = new EnemyNavigation2(t);
         pathCreator2.update(position);
+        healthDisplay=0;
     }
     
     /**
@@ -101,6 +109,7 @@ public class Enemy extends WorldObject {
         speed/=(sdamage+1);
         armor=Math.max(0,armor-adamage);
         health-=Math.max(0,damage-armor);
+        healthDisplay=20;
         
     }
     /**
@@ -164,6 +173,7 @@ public class Enemy extends WorldObject {
             position.setY(Math.max(position.getY()-speed, targetPos.getY()));
         }
         danger+=speed;
+        healthDisplay--;
     }
     /**
      * Draws the enemy at it's current location
@@ -173,6 +183,11 @@ public class Enemy extends WorldObject {
     public void Draw(ImageCollection batch) {
 //        batch.addToCollection(sprite,1,position);
         batch.Draw(sprite, position, 5);
+        if (healthDisplay>0){
+            int h=(int)(health/maxhealth*13);
+            Image2D healthBar=new Image2D("Game Resources/Sprites/Status/Health/health"+h+".png");
+            batch.Draw(healthBar, position,6);
+        }
     }
     
     /**
