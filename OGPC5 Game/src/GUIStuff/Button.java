@@ -112,7 +112,7 @@ public class Button {
      * @param batch 
      */
     public void draw(ImageCollection batch){
-        batch.Draw(sprite,pos,100);
+        batch.Draw(sprite,pos,400);
     }
     public String getPath(){
         return spriteString;
