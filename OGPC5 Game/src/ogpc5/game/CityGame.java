@@ -321,6 +321,7 @@ public class CityGame extends Game {
                             && x<tiles.length && y<tiles[0].length && x>-1 && y>-1) {
                         tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
                         this.activeTiles.add((Tower) tiles[x][y]);
+                        money-=((Tower)tiles[x][y]).getCost();
                         new SoundFile("Game Resources/Sound/build.wav",1).start();
                     }
                 }
@@ -396,13 +397,11 @@ public class CityGame extends Game {
                     if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r')) {
                         if (!(tiles[i][j] == BottomRoad) && (tiles[i][j] instanceof Road)) {
                             new SoundFile("Game Resources/Sound/destroy1.wav",1).start();
-                            //activeTiles.remove(tiles[i][j]);
                             roads.remove(tiles[i][j]);
                             Road.setNeighbors(tiles, i, j);
                             tiles[i][j] = new Tile(new Vector2(i * 32, j * 32));
                             Road.setNeighbors(tiles, i, j);
                             resetEnemies = true;
-//                        resetPaths();
                             money -= 5;
                             selection = null;
                         }
@@ -458,7 +457,6 @@ public class CityGame extends Game {
                 globalCount++;
             }
             if (drag!=null) drag.draw(batch);
-            batch.DrawString(new Vector2(850, 400), "MX: "+mouse.location().getX()+" MY: "+mouse.location().getY(), Color.red, 40);
 
             //money drawing
             if (money < 0) {
@@ -467,7 +465,7 @@ public class CityGame extends Game {
                 batch.DrawString(new Vector2(850, 30), "Money: $" + money, Color.black, 10);
             }
             //Polution
-            batch.DrawString(new Vector2(850, 45), "Polution: " + polution, Color.red, 10);
+            batch.DrawString(new Vector2(850, 45), "Pollution: " + polution, Color.red, 10);
             //Score
             if (score < 0) {
                 batch.DrawString(new Vector2(850, 75), "Score: " + score, Color.red, 10);
