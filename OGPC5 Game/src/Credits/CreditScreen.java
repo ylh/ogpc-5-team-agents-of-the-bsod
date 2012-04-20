@@ -41,13 +41,13 @@ public class CreditScreen {
     
     public CreditScreen(){
         kyle= new Credit("Kyle Sweeney: Project Manager, Lead Programmer", new Vector2(50,0));
-        peter= new Credit("Peter Cowal: Programmer, Artistic and Music Contributer", new Vector2(50,0));
+        peter= new Credit("Peter Cowal: Programmer, Artistic and Music Contributor", new Vector2(50,0));
         august=new Credit("August Lindgren-Ruby: Lead Artist", new Vector2(50,0));
-        liam=new Credit("Liam Mahoney: Artistic Contributer", new Vector2(50,0));
-        sam=new Credit("Sam Strba: Artistic Contributer", new Vector2(50,0));
+        liam=new Credit("Liam Mahoney: Artistic Contributor", new Vector2(50,0));
+        sam=new Credit("Sam Strba: Artistic Contributor", new Vector2(50,0));
         taylor=new Credit("Taylor Sutton: Programmer", new Vector2(50,0));
-        thane=new Credit("Thane Meyer: Documentation Engineer, Music Contributer", new Vector2(50,0));
-        yestin = new Credit("Yestin Harrison: Artistic Contributer", new Vector2(50,0));
+        thane=new Credit("Thane Meyer: Documentation Engineer, Music Contributor", new Vector2(50,0));
+        yestin = new Credit("Yestin Harrison: Artistic Contributor", new Vector2(50,0));
         MrCowal=new Credit("Mr. Vince Cowal: Coach Extraordinaire", new Vector2(50,0));
         Jesuit=new Credit("Jesuit High School: Our Wonderful School", new Vector2(50,0));
         oracle= new Credit("Made Using Java(c) by Oracle", new Vector2(50, 0));
