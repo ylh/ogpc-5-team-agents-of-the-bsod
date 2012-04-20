@@ -160,7 +160,7 @@ public class CreditScreen {
         double height=t.getScreenSize().height;
         double width=t.getScreenSize().width;
         for(int i=0; i<120; i++){
-            bgs.add(new BackgroundStar(new Vector2(Math.random()*width, Math.random()*height),Math.random()*10000000));//JTW
+            bgs.add(new BackgroundStar(new Vector2(Math.random()*width, Math.random()*height),Math.random()*100000));//JTW
         }
     }
 }
