@@ -9,7 +9,7 @@ import Enemies.EnemyNavigation;
 import Enemies.Spawner;
 import Enemies.taylorEnemy;
 import GUIStuff.Button;
-import GUIStuff.CreditScreen;
+import Credits.CreditScreen;
 import GUIStuff.Draggable;
 import GUIStuff.MenuButton;
 import GUIStuff.Tile;
