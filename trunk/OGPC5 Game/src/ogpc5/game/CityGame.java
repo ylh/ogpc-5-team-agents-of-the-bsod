@@ -504,7 +504,7 @@ public class CityGame extends Game {
      * @return the score.
      */
     private double getScore() {
-        return score + (money - polution) * happiness * 0.1;
+        return score + (money +happiness + polution)/3;
     }
     
     private void adjustInPath(boolean deleting, int x, int y) {
@@ -661,7 +661,7 @@ public class CityGame extends Game {
     }
     
     public boolean insideBounds(int x, int y){
-        return (x>0 && x<830) && (y>0 && y<600);
+        return (x>=0 && x<830) && (y>=0 && y<600);
     }
     public boolean insideBounds(Vector2 pos){
         int x=(int)pos.getX();
