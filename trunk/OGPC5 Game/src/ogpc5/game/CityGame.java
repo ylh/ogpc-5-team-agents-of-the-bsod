@@ -258,6 +258,7 @@ public class CityGame extends Game {
                     if (e.isDead()) {
                         e.die(this);
                         allObjects.remove(e);
+                        new SoundFile("Game Resources/Sound/destroy2.wav",1).start();
                     }
                 }
                 
