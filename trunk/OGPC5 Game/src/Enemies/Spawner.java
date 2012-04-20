@@ -4,6 +4,7 @@
  */
 package Enemies;
 
+import Utilities.SoundFile;
 import Utilities.Vector2;
 import ogpc5.game.CityGame;
 
@@ -56,6 +57,7 @@ public class Spawner {
         }
         if(!isSpawning && time- lastTime >= timeToWait){
             isSpawning=true;
+            new SoundFile("Game Resources/Sound/ominous.wav",1).start();
             for(int i=0; i<11; i++){
                 thisRoundQuota[i]=quota*(EnemyProbabilityTable.getProbability(i)/100.0);
             }
