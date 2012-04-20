@@ -25,6 +25,7 @@ public class CreditScreen {
     Credit sam;
     Credit taylor;
     Credit thane;
+    Credit yestin;
     Credit MrCowal;
     Credit Jesuit;
     Credit oracle;
@@ -40,16 +41,17 @@ public class CreditScreen {
     
     public CreditScreen(){
         kyle= new Credit("Kyle Sweeney: Project Manager, Lead Programmer", new Vector2(50,0));
-        peter= new Credit("Peter Cowal: Programmer, Artistic Contributer", new Vector2(50,0));
-        august=new Credit("August Lindgren-Ruby: Artistic and Music Contributer", new Vector2(50,0));
+        peter= new Credit("Peter Cowal: Programmer, Artistic and Music Contributer", new Vector2(50,0));
+        august=new Credit("August Lindgren-Ruby: Lead Artist", new Vector2(50,0));
         liam=new Credit("Liam Mahoney: Artistic Contributer", new Vector2(50,0));
         sam=new Credit("Sam Strba: Artistic Contributer", new Vector2(50,0));
         taylor=new Credit("Taylor Sutton: Programmer", new Vector2(50,0));
         thane=new Credit("Thane Meyer: Documentation Engineer, Music Contributer", new Vector2(50,0));
+        yestin = new Credit("Yestin Harrison: Artistic Contributer", new Vector2(50,0));
         MrCowal=new Credit("Mr. Vince Cowal: Coach Extraordinaire", new Vector2(50,0));
         Jesuit=new Credit("Jesuit High School: Our Wonderful School", new Vector2(50,0));
         oracle= new Credit("Made Using Java(c) by Oracle", new Vector2(50, 0));
-        aotbsod=new Credit("An Agents of the BSoD Production 2012(c)", new Vector2(340,0));
+        aotbsod=new Credit("An Agents of the BSoD Production (c)2012", new Vector2(340,0));
         credits= new ArrayList<Credit>();
         finalPic= new ClosingAnimation(new Vector2(500,250),ClosingAnimation.CLUB);
         
@@ -98,21 +100,26 @@ public class CreditScreen {
                     startTimer=time;
                     break;
                 case 6:
-                    credits.add(MrCowal);
+                    credits.add(yestin);
                     counter++;
                     startTimer=time;
                     break;
                 case 7:
-                    credits.add(Jesuit);
+                    credits.add(MrCowal);
                     counter++;
                     startTimer=time;
                     break;
                 case 8:
-                    credits.add(oracle);
+                    credits.add(Jesuit);
                     counter++;
                     startTimer=time;
                     break;
                 case 9:
+                    credits.add(oracle);
+                    counter++;
+                    startTimer=time;
+                    break;
+                case 10:
                     credits.add(aotbsod);
                     counter++;
                     startTimer=time;
