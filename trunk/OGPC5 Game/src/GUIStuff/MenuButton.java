@@ -32,7 +32,7 @@ public class MenuButton {
         if(selected){
             batch.Draw(scrolled, position, 15);
         }else{
-            batch.Draw(normal, position, type);
+            batch.Draw(normal, position, 15);
         }
     }
     

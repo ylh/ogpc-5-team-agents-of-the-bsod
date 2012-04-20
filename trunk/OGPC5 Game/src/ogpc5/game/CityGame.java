@@ -12,6 +12,7 @@ import GUIStuff.Button;
 import Credits.CreditScreen;
 import GUIStuff.Draggable;
 import GUIStuff.MenuButton;
+import GUIStuff.ScrollingBackground;
 import GUIStuff.Tile;
 import Game.Game;
 import KylesTesting.OpeningAnimation;
@@ -50,6 +51,8 @@ public class CityGame extends Game {
     public boolean invOpen = false;
     Image2D Background = new Image2D("Game Resources/Sprites/GUIs/Background.PNG");
     Image2D bgtexture = new Image2D("Game Resources/Sprites/bgtexture.png");
+    ScrollingBackground menuClouds=new ScrollingBackground("Game Resources/Sprites/Title Screen/gray-dee-ent.png",0.25);
+    Image2D menuBackground=new Image2D("Game Resources/Sprites/Title Screen/tauers.png");
     public int buttonPressed;
     public Draggable drag;
     //opening animation controlls
@@ -123,8 +126,8 @@ public class CityGame extends Game {
         aww = new SoundFile("Game Resources/Sound/AwwComeon.wav", 1);
 
         //Creates the Main Menu
-        creds = new MenuButton(new Vector2(250, 500), MenuButton.CREDITS);
-        start = new MenuButton(new Vector2(750, 500), MenuButton.START);
+        creds = new MenuButton(new Vector2(485, 500), MenuButton.CREDITS);
+        start = new MenuButton(new Vector2(485, 450), MenuButton.START);
         mainMenuSong= new SoundFile("Game Resources/Sound/urban towers.wav",3);
 
         //Creates the credits
@@ -189,6 +192,7 @@ public class CityGame extends Game {
         } else if (mainMenu) {
             creds.update(mouse);
             start.update(mouse);
+            menuClouds.scroll();
             if(turnOnMenuSong && time-startTime>300){
                 mainMenuSong.start();
                 turnOnMenuSong=false;
@@ -437,8 +441,10 @@ public class CityGame extends Game {
                 aotbsod.draw(batch);
             }
         } else if (mainMenu) {
+            batch.Draw(menuBackground,new Vector2(485,320),10);
             creds.draw(batch);
             start.draw(batch);
+            menuClouds.draw(batch); 
         } else if (credits) {
             creditScreen.draw(batch);
         } else {
