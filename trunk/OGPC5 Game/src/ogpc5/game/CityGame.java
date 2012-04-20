@@ -123,8 +123,8 @@ public class CityGame extends Game {
         aww = new SoundFile("Game Resources/Sound/AwwComeon.wav", 1);
 
         //Creates the Main Menu
-        creds = new MenuButton(new Vector2(970 / 2, 300), MenuButton.CREDITS);
-        start = new MenuButton(new Vector2(970 / 2, 500), MenuButton.START);
+        creds = new MenuButton(new Vector2(250, 500), MenuButton.CREDITS);
+        start = new MenuButton(new Vector2(750, 500), MenuButton.START);
         mainMenuSong= new SoundFile("Game Resources/Sound/urban towers.wav",3);
 
         //Creates the credits
