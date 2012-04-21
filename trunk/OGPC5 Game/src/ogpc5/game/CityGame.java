@@ -137,7 +137,7 @@ public class CityGame extends Game {
 
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
-        spawn = new Spawner((1000) * 100, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        spawn = new Spawner((1000) * 5, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
         
         //navigator = new EnemyNavigation(tiles, "Default", 10, 10);
     }
