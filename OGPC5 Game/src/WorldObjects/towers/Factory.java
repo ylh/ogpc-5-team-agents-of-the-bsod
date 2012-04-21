@@ -55,7 +55,7 @@ public class Factory extends Tower{
 
     @Override
     public void updateGameStats(CityGame theGame) {
-        theGame.polution-=100;
+        theGame.polution+=100;
         theGame.money+=moneyBonus;
         theGame.happiness+=happyBonus;
     }

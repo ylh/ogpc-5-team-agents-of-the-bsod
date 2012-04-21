@@ -53,7 +53,7 @@ public class GreenBelt extends Tower{
 
     @Override
     public void updateGameStats(CityGame theGame) {
-        
+        theGame.polution-=20;
     }
 
     @Override
