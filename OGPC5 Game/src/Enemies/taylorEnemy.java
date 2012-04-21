@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author kyle
+ * @author tsutton14
  */
 public class taylorEnemy extends Enemy{
     
@@ -145,7 +145,7 @@ public class taylorEnemy extends Enemy{
                 }
                 break;
             case Enemy.GRAFITTI:
-                a = new Animation(19, 5, this.position, 200);
+                a = new Animation(19, 5, this.position, 50);
                 for(int i = 0; i <= 18; i++){
                     String s = "Game Resources/Sprites/SamSprites/Enemies/Grafitti/graffiti";
                     s += i + ".png";
@@ -156,6 +156,14 @@ public class taylorEnemy extends Enemy{
                 a = new Animation(2, 5, this.position, 300);
                 a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png");
                 a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-2.png");
+                break;
+            case Enemy.WATER_POLUTION:
+                a = new Animation(9, 5, this.position, 300);
+                for(int i = 0; i <= 8; i++){
+                    String s = "Game Resources/Sprites/SamSprites/Enemies/WaterPolution/waterPollution";
+                    s += i + ".png";
+                    a.addCell(s);
+                }
                 break;
             default:
                 a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
