@@ -320,10 +320,12 @@ public class CityGame extends Game {
                     int y=((int)mouse.location().getY())/32;
                     if (insideBounds(x,y)&&!(tiles[x][y] instanceof Road) && !(tiles[x][y] instanceof Tower) 
                             && x<tiles.length && y<tiles[0].length && x>-1 && y>-1) {
-                        tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
-                        this.activeTiles.add((Tower) tiles[x][y]);
-                        money-=((Tower)tiles[x][y]).getCost();
-                        new SoundFile("Game Resources/Sound/build.wav",1).start();
+                        if (money > -5000) {
+                            tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
+                            this.activeTiles.add((Tower) tiles[x][y]);
+                            money -= ((Tower) tiles[x][y]).getCost();
+                            new SoundFile("Game Resources/Sound/build.wav", 1).start();
+                        }
                     }
                 }
                 drag = null;
@@ -379,23 +381,19 @@ public class CityGame extends Game {
                         //invOpen = false;
                     }
 
-                    if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)&&keyboard.isKeyUp('d')) {
+                    if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)&&keyboard.isKeyUp('d') && money > -5000) {
                         if (!(tiles[i][j] instanceof Road)) {
                             Vector2 roadPos = new Vector2((i * 32), (j * 32));
                             tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
                             Road.setNeighbors(tiles, i, j);
                             roads.add((Road) tiles[i][j]);
                             resetEnemies = true;
-                            //activeTiles.add(tiles[i][j]);
-                            if ((i + 1) >= tiles.length) {
-                                //ADD SPAWNER CODE
-                            }
                             money -= 5;
                             selection = null;
                             
                         }
                     }
-                    if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r')) {
+                    if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r') && money> -5000) {
                         if (!(tiles[i][j] == BottomRoad) && (tiles[i][j] instanceof Road)) {
                             new SoundFile("Game Resources/Sound/destroy1.wav",1).start();
                             roads.remove(tiles[i][j]);
