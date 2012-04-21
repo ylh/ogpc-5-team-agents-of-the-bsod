@@ -5,6 +5,8 @@
 package Enemies;
 
 import GUIStuff.Tile;
+import Utilities.Animation;
+import Utilities.ImageCollection;
 import Utilities.Vector2;
 
 /**
@@ -13,6 +15,7 @@ import Utilities.Vector2;
  */
 public class taylorEnemy extends Enemy{
     
+    Animation a;    
     /**
      * 
      * @param Speed enemy speed
@@ -33,6 +36,7 @@ public class taylorEnemy extends Enemy{
         score=10;
         id=Enemy.GENERIC;
         System.out.println("Enemy Created");
+        chooseAnimation();
     }
     
     /**
@@ -49,6 +53,7 @@ public class taylorEnemy extends Enemy{
         this(Speed, Health, Armor, pos, path, t);
         id=type;
         System.out.println("Enemy Created");
+        chooseAnimation();
     }
     
     /**
@@ -101,6 +106,61 @@ public class taylorEnemy extends Enemy{
                 position.setY(position.getY()+1);
             }
         }
+    }
+    
+    private void chooseAnimation(){
+        switch(id){
+            case Enemy.ARSONIST: 
+                a = new Animation(8, 5, this.position, 500);
+                for(int i = 0; i <= 7; i++){
+                    String s = "Game Resources/Sprites/SamSprites/Enemies/Arsonist/arsonist";
+                    s += i + ".png";
+                    a.addCell(s);
+                }
+                break;
+            case Enemy.EARTHQUACKE:
+                a = new Animation(2, 5, this.position, 500);
+                a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-1.png");
+                a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-2.png");
+                break;
+            case Enemy.FIRE:
+                a = new Animation(4, 5, this.position, 500);
+                for(int i = 0; i <= 3; i++){
+                    String s = "Game Resources/Sprites/SamSprites/Enemies/Fire/fire";
+                    s += i + ".png";
+                    a.addCell(s);
+                }
+                break;
+            case Enemy.FLOOD:
+                a = new Animation(10, 5, this.position, 500);
+                for(int i = 0; i <= 9; i++){
+                    String s = "Game Resources/Sprites/SamSprites/Enemies/Flood/flood";
+                    s += i + ".png";
+                    a.addCell(s);
+                }
+                break;
+            case Enemy.GRAFITTI:
+                a = new Animation(19, 5, this.position, 200);
+                for(int i = 0; i <= 18; i++){
+                    String s = "Game Resources/Sprites/SamSprites/Enemies/Grafitti/graffiti";
+                    s += i + ".png";
+                    a.addCell(s);
+                }
+                break;
+            case Enemy.SMOG:
+                a = new Animation(2, 5, this.position, 500);
+                a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png");
+                a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-2.png");
+                break;
+            default:
+                a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
+                a.addCell("Game Resources/Sprites/PlaceHolderEnemy.png");
+        }
+    }
+    
+    @Override
+    public void Draw(ImageCollection batch){
+        a.Draw(batch);
     }
     
     

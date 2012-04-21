@@ -100,25 +100,26 @@ public class Spawner {
      * @param enemy the enemy type 
      */
     private void addEnemy(int enemy){
+        System.out.println("Enemy Type: " + enemy);
         Enemy e = null;
         switch(enemy){
             case Enemy.ARSONIST:
-                e = new taylorEnemy(Enemy.ARSONIST, 1, 1000, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.ARSONIST, 1, 1000, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Enemies/Arsonist/arsonist0.png", theGame.tiles);
                 break;
             case Enemy.CRIMINAL:
                 e = new taylorEnemy(Enemy.CRIMINAL, 1, 1000, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.EARTHQUACKE:
-                e = new taylorEnemy(Enemy.EARTHQUACKE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.EARTHQUACKE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-1.png", theGame.tiles);
                 break;
             case Enemy.EDUCATION:
                 e = new taylorEnemy(Enemy.EDUCATION, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.FIRE:
-                e = new taylorEnemy(Enemy.FIRE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.FIRE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Fire/fire0.png", theGame.tiles);
                 break;
             case Enemy.FLOOD:
-                e = new taylorEnemy(Enemy.FLOOD, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.FLOOD, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Flood/flood0.png", theGame.tiles);
                 break;
             case Enemy.GANGS:
                 e = new taylorEnemy(Enemy.GANGS, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
@@ -127,10 +128,10 @@ public class Spawner {
                 e = new taylorEnemy(Enemy.GENERIC, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case Enemy.GRAFITTI:
-                e = new taylorEnemy(Enemy.GRAFITTI, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.GRAFITTI, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Grafitti/graffiti0.png", theGame.tiles);
                 break;
             case Enemy.SMOG:
-                e = new taylorEnemy(Enemy.SMOG, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new taylorEnemy(Enemy.SMOG, 1, 50, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png", theGame.tiles);
                 break;
             case Enemy.TRASH:
                 e = new taylorEnemy(Enemy.TRASH, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
