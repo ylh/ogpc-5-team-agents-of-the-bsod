@@ -82,6 +82,11 @@ public class CityGame extends Game {
     CreditScreen creditScreen;
     SoundFile creditSong;
     boolean turnOnCreditSong=true;
+    //Tutorial
+    boolean startTutorial=false;
+    boolean tutorial=false;
+    MenuButton skip;
+    MenuButton yes;
     //PreGame
     boolean makeFirstRoad = true;
     //Main game needed
@@ -138,6 +143,10 @@ public class CityGame extends Game {
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
         spawn = new Spawner((1000) * 5, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        
+        //TutorialStart
+        skip = new MenuButton(new Vector2(485, 500), MenuButton.SKIP);
+        yes = new MenuButton(new Vector2(485, 350), MenuButton.YES);
         
         //navigator = new EnemyNavigation(tiles, "Default", 10, 10);
     }
@@ -203,6 +212,7 @@ public class CityGame extends Game {
                 mainMenuSong= new SoundFile("Game Resources/Sound/urban towers.wav",3);
                 mainMenu = false;
                 turnOnMenuSong=true;
+                startTutorial=true;
             }
             if (creds.isPressed(mouse)) {
                 mainMenuSong.kill();
@@ -227,6 +237,12 @@ public class CityGame extends Game {
                 creditScreen = new CreditScreen();
                 mainMenu = true;
                 startTime=time;
+            }
+        }else if(startTutorial){
+            yes.update(mouse);
+            skip.update(mouse);
+            if(skip.isPressed(mouse)){
+                startTutorial=false;
             }
         } else {
 
@@ -440,6 +456,10 @@ public class CityGame extends Game {
             menuClouds.draw(batch); 
         } else if (credits) {
             creditScreen.draw(batch);
+        }else if(startTutorial){
+            skip.draw(batch);
+            yes.draw(batch);
+            batch.DrawString(new Vector2(50,100), "Would you like a tutorial?", Color.CYAN, 5, ImageCollection.FONT_DIALOG, ImageCollection.FONT_NORMAL, 28);
         } else {
             this.setBackground(Color.white);
             for (WorldObject wo : allObjects) {
