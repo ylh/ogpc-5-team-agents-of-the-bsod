@@ -8,6 +8,8 @@ import GUIStuff.Tile;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
+import WorldObjects.WorldObject;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +17,8 @@ import Utilities.Vector2;
  */
 public class taylorEnemy extends Enemy{
     
-    Animation a;    
+    Animation a;
+    Animation earthquake1, earthquake2, earthquake3, earthquake4, smog1, smog2, smog3, smog4;
     /**
      * 
      * @param Speed enemy speed
@@ -37,6 +40,7 @@ public class taylorEnemy extends Enemy{
         id=Enemy.GENERIC;
         System.out.println("Enemy Created");
         chooseAnimation();
+        initializeAnimations();
     }
     
     /**
@@ -54,6 +58,7 @@ public class taylorEnemy extends Enemy{
         id=type;
         System.out.println("Enemy Created");
         chooseAnimation();
+        initializeAnimations();
     }
     
     /**
@@ -119,7 +124,7 @@ public class taylorEnemy extends Enemy{
                 }
                 break;
             case Enemy.EARTHQUACKE:
-                a = new Animation(2, 5, this.position, 500);
+                a = new Animation(2, 5, this.position, 300);
                 a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-1.png");
                 a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-2.png");
                 break;
@@ -148,7 +153,7 @@ public class taylorEnemy extends Enemy{
                 }
                 break;
             case Enemy.SMOG:
-                a = new Animation(2, 5, this.position, 500);
+                a = new Animation(2, 5, this.position, 300);
                 a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png");
                 a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-2.png");
                 break;
@@ -163,6 +168,92 @@ public class taylorEnemy extends Enemy{
         a.Draw(batch);
     }
     
+        @Override
+    public void Update(ArrayList<WorldObject> wol) {
+        if (snapped()){
+            pathCreator2.update(position);
+            dir=pathCreator2.decide(position,dir);
+            Vector2 q= new Vector2();
+            if (dir==0) q= new Vector2(0,-32);
+            if (dir==1) q= new Vector2(32,0);
+            if (dir==2) q= new Vector2(0,32);
+            if (dir==3) q= new Vector2(-32,0);
+            q.add(position);
+            targetPos=q;
+        }
+        if (position.getX()<targetPos.getX()){
+            position.setX(Math.min(position.getX()+speed, targetPos.getX()));
+        }
+        else{
+            position.setX(Math.max(position.getX()-speed, targetPos.getX()));
+        }
+        if (position.getY()<targetPos.getY()){
+            position.setY(Math.min(position.getY()+speed, targetPos.getY()));
+        }
+        else{
+            position.setY(Math.max(position.getY()-speed, targetPos.getY()));
+        }
+        alterAnimationDirection();
+        danger+=speed;
+        healthDisplay--;
+        armorDisplay++;
+    }
+        
+    private void alterAnimationDirection() {
+        if (id == Enemy.EARTHQUACKE) {
+            if(dir == 0){
+                a = earthquake1;
+            }
+            if(dir == 1){
+                a = earthquake3;
+            }
+            if(dir == 2){
+                a = earthquake2;
+            }
+            if(dir == 3){
+                a = earthquake4;
+            }
+        }else if(id == Enemy.SMOG){
+            if(dir == 0){
+                a = smog1;
+            }
+            if(dir == 1){
+                a = smog3;
+            }
+            if(dir == 2){
+                a = smog2;
+            }
+            if(dir == 3){
+                a = smog4;
+            }
+        }
+    }
     
+    private void initializeAnimations(){
+            earthquake1 = new Animation(2, 5, this.position, 300);
+            earthquake1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-1.png");
+            earthquake1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-2.png");
+            earthquake2 = new Animation(2, 5, this.position, 300);
+            earthquake2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-1.png");
+            earthquake2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-2.png");
+            earthquake3 = new Animation(2, 5, this.position, 300);
+            earthquake3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVR1-1.png");
+            earthquake3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVR1-2.png");
+            earthquake4 = new Animation(2, 5, this.position, 300);
+            earthquake4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVL1-1.png");
+            earthquake4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVL1-2.png");
+            smog1 = new Animation(2, 5, this.position, 300);
+            smog1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVU1-1.png");
+            smog1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVU1-2.png");
+            smog2 = new Animation(2, 5, this.position, 300);
+            smog2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVD1-1.png");
+            smog2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVD1-2.png");
+            smog3 = new Animation(2, 5, this.position, 300);
+            smog3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogR1-1.png");
+            smog3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogR1-2.png");
+            smog4 = new Animation(2, 5, this.position, 300);
+            smog4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png");
+            smog4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-2.png");
+    }
     
 }
