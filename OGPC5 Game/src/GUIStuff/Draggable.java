@@ -67,7 +67,7 @@ public class Draggable {
                 break;
             case Tower.STORE:
                 t= new Store(placingPos,1,1);
-                
+                break;
             case Tower.GENERIC:
                 t= new GenericTower(placingPos,"");
                 break;
