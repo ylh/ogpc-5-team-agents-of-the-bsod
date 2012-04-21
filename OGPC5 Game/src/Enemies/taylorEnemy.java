@@ -165,6 +165,10 @@ public class taylorEnemy extends Enemy{
                     a.addCell(s);
                 }
                 break;
+            case Enemy.GANGS:
+                a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
+                a.addCell("Game Resources/Sprites/Yestin/gang.png");
+                break;
             default:
                 a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
                 a.addCell("Game Resources/Sprites/PlaceHolderEnemy.png");
