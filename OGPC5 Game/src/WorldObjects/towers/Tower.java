@@ -81,10 +81,10 @@ public abstract class Tower extends Tile {
 
     @Override
     public void Draw(ImageCollection batch){
-        for(Tile t: rangeSelectedTiles){
-            t.Draw(batch);
-            CityGame.globalCount++;
-        }
+//        for(Tile t: rangeSelectedTiles){
+//            t.Draw(batch);
+//            CityGame.globalCount++;
+//        }
         if(isSelected){
             //batch.fillRect(position, 32, 32, Color.blue, 2);
             //batch.drawRect(position, 32, 32, Color.blue, 100);
@@ -124,24 +124,24 @@ public abstract class Tower extends Tile {
         return sdamage;
     }
     
-    @Override
-    public void select(Tile[][] t){
-        isSelected=true;
-        ArrayList<Tile> rt=getRangedTowers(t);
-        for(Tile l: rt){
-            l.rangeSelect();
-        }
-        rangeSelectedTiles.clear();
-        rangeSelectedTiles.addAll(rt);
-    }
-    @Override
-    public void unselect(Tile[][] t){
-        isSelected=false;
-        for(Tile l: rangeSelectedTiles){
-            l.rangeUnselect();
-        }
-        rangeSelectedTiles.clear();
-    }
+//    @Override
+//    public void select(Tile[][] t){
+//        isSelected=true;
+//        ArrayList<Tile> rt=getRangedTowers(t);
+//        for(Tile l: rt){
+//            l.rangeSelect();
+//        }
+//        rangeSelectedTiles.clear();
+//        rangeSelectedTiles.addAll(rt);
+//    }
+//    @Override
+//    public void unselect(Tile[][] t){
+//        isSelected=false;
+//        for(Tile l: rangeSelectedTiles){
+//            l.rangeUnselect();
+//        }
+//        rangeSelectedTiles.clear();
+//    }
     
     public ArrayList<Tile> getRangedTowers(Tile[][] t){
         ArrayList<Tile> rt = new ArrayList<Tile>();

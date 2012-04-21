@@ -46,6 +46,7 @@ public class PoliceFire extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
+        super.Draw(batch);
         ani.Draw(batch);
     }
 
