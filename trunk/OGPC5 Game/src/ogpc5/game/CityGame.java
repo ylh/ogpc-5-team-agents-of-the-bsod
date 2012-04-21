@@ -278,13 +278,6 @@ public class CityGame extends Game {
                 globalCount++;
             }
 
-            /*
-             * Just code for getting view into the game without breaking anything when debugging.
-             */
-            if (keyboard.isKeyDown(KeyEvent.VK_SPACE)) {
-                int i = 0;
-            }
-
             
 
             for (Button b : buttons) {
@@ -355,7 +348,9 @@ public class CityGame extends Game {
             }
             
             
-
+            if (keyboard.isKeyDown(KeyEvent.VK_SPACE)) {
+                int i = 0;
+            }
             //Mouse update methods in grid, the 832 should be most left pixel of the grid
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && insideBounds(mouse.location())) {
                 try {
@@ -371,12 +366,12 @@ public class CityGame extends Game {
                     Rect b = new Rect(new Vector2(i * 32, j * 32), 32, 32);
 
                     if (selection == null) {
-                        selection = (Tile) tiles[i][j];
+                        selection = tiles[i][j];
                         selection.select(tiles);
 
                     } else {
                         selection.unselect(tiles);
-                        selection = (Tile) tiles[i][j];
+                        selection = tiles[i][j];
                         selection.select(tiles);
                         //invOpen = false;
                     }

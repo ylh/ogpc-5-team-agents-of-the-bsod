@@ -28,7 +28,7 @@ public class WaterPurification extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
-        
+        super.Draw(batch);
     }
 
     @Override

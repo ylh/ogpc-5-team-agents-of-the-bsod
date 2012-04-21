@@ -53,6 +53,7 @@ public class House extends Tower{
 
     @Override
     public void Draw(ImageCollection batch) {
+        super.Draw(batch);
         ani.Draw(batch);
     }
 
