@@ -58,7 +58,8 @@ public class Store extends Tower {
 
     @Override
     public void updateGameStats(CityGame theGame) {
-       
+       theGame.money+=moneyBonus;
+       theGame.happiness+=happyBonus;
     }
 
     @Override

@@ -137,7 +137,7 @@ public class CityGame extends Game {
 
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
-        spawn = new Spawner((1000) * 5, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        spawn = new Spawner((1000) * 100, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
         
         //navigator = new EnemyNavigation(tiles, "Default", 10, 10);
     }
@@ -240,7 +240,7 @@ public class CityGame extends Game {
                 BottomRoad = tiles[i][j];                
                 //navigator.start();
             }
-            spawn.update();
+            spawn.update(keyboard);
 
             for (int i = 0; i < allObjects.size(); i++) {
                 WorldObject wo = allObjects.get(i);

@@ -4,8 +4,10 @@
  */
 package Enemies;
 
+import Utilities.KeyBoard;
 import Utilities.SoundFile;
 import Utilities.Vector2;
+import java.awt.event.KeyEvent;
 import ogpc5.game.CityGame;
 
 /**
@@ -49,7 +51,7 @@ public class Spawner {
     /**
      * Determines how many of each enemy to create and when
      */
-    public void update(){
+    public void update(KeyBoard k){
         double time=System.currentTimeMillis();
         if(firstUpdate){
             this.runFirstUpdate();
