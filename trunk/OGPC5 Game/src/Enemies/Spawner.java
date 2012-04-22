@@ -64,6 +64,13 @@ public class Spawner {
                 thisRoundQuota[i]=quota*(EnemyProbabilityTable.getProbability(i)/100.0);
             }
         }
+        if(!isSpawning && k.isKeyDown(KeyEvent.VK_SPACE)){
+            isSpawning=true;
+            new SoundFile("Game Resources/Sound/ominous.wav",1).start();
+            for(int i=0; i<11; i++){
+                thisRoundQuota[i]=quota*(EnemyProbabilityTable.getProbability(i)/100.0);
+            }
+        }
         if(isSpawning && time-spawnLast >=500){
             if(location>=thisRoundQuota.length){
                 location=0;
