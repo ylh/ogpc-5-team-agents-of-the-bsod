@@ -474,24 +474,24 @@ public class CityGame extends Game {
 
             //money drawing
             if (money < 0) {
-                batch.DrawString(new Vector2(850, 30), "Money: $" + money, Color.ORANGE, 10, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
+                batch.DrawString(new Vector2(850, 30), "Money: $" + (int)money, Color.ORANGE, 10, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
             } else {
-                batch.DrawString(new Vector2(850, 30), "Money: $" + money, Color.black, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
+                batch.DrawString(new Vector2(850, 30), "Money: $" + (int)money, Color.black, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
             }
             //Polution
-            batch.DrawString(new Vector2(850, 45), "Pollution: " + polution, Color.ORANGE, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 10);
+            batch.DrawString(new Vector2(850, 45), "Pollution: " + (int)polution, Color.ORANGE, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 10);
             
             //Score
             if (score < 0) {
-                batch.DrawString(new Vector2(850, 75), "Score: " + score, Color.ORANGE, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
+                batch.DrawString(new Vector2(850, 75), "Score: " + (int)score, Color.ORANGE, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
             } else {
-                batch.DrawString(new Vector2(850, 75), "Score: " + score, Color.black, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
+                batch.DrawString(new Vector2(850, 75), "Score: " + (int)score, Color.black, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
             }
             //Happiness
             if (happiness < 0) {
-                batch.DrawString(new Vector2(850, 60), "Happiness: " + happiness, Color.ORANGE, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
+                batch.DrawString(new Vector2(850, 60), "Happiness: " + (int)happiness, Color.ORANGE, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
             } else {
-                batch.DrawString(new Vector2(850, 60), "Happiness: " + happiness, Color.black, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
+                batch.DrawString(new Vector2(850, 60), "Happiness: " + (int)happiness, Color.black, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
             }
 
             batch.DrawString(new Vector2(835, 600), "Next Round: " + (int) this.spawn.getRemainingTime() / 1000 + " s", Color.black, 10);
