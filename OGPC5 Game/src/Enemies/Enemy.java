@@ -188,14 +188,14 @@ public class Enemy extends WorldObject {
     @Override
     public void Draw(ImageCollection batch) {
 //        batch.addToCollection(sprite,1,position);
-        batch.Draw(sprite, position, 5);
+        //batch.Draw(sprite, position, 5);
         if (healthDisplay>0){
             int h=(int)(health/maxhealth*13);
             Image2D healthBar=new Image2D("Game Resources/Sprites/Status/Health/health"+h+".png");
             batch.Draw(healthBar, position,7);
         }
-        if (armorDisplay<6){
-            Image2D shield=new Image2D("Game Resources/Sprites/Status/Shield/shield"+armorDisplay+".png");
+        if (armorDisplay<13){
+            Image2D shield=new Image2D("Game Resources/Sprites/Status/Shield/shield"+(int)(armorDisplay/2)+".png");
             batch.Draw(shield, position,6);
         }
     }
