@@ -20,7 +20,7 @@ public class Store extends Tower {
     
     public Store(Vector2 pos, int high, int width){
         super(pos,"",high,width);
-        cost=650;
+        cost=65;
     }
     
     @Override

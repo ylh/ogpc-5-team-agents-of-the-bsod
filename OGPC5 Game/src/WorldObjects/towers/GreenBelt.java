@@ -18,7 +18,7 @@ public class GreenBelt extends Tower{
 
     public GreenBelt(Vector2 pos, int high, int wide){
         super(pos,"", high, wide);
-        cost=500;
+        cost=50;
     }
     
     @Override
@@ -54,6 +54,8 @@ public class GreenBelt extends Tower{
     @Override
     public void updateGameStats(CityGame theGame) {
         theGame.polution-=20;
+        theGame.happiness+=happyBonus;
+        theGame.money+=moneyBonus;
     }
 
     @Override

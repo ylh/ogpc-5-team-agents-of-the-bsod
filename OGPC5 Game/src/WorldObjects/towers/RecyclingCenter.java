@@ -18,7 +18,7 @@ public class RecyclingCenter extends Tower{
 
     public RecyclingCenter(Vector2 pos, int high, int wide){
         super(pos, "", high, wide);
-        cost=450;
+        cost=45;
     }
     
     @Override
@@ -52,7 +52,8 @@ public class RecyclingCenter extends Tower{
 
     @Override
     public void updateGameStats(CityGame theGame) {
-        
+        theGame.money+=moneyBonus;
+        theGame.happiness+=happyBonus;
     }
 
     @Override
