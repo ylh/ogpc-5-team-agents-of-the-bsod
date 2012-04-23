@@ -344,7 +344,7 @@ public class CityGame extends Game {
             //ORDER HERE COUTNS!!!
             double thisLoopTime = System.currentTimeMillis();
             boolean updateAll=false;
-            if (thisLoopTime - this.UpdateAllStart >= 30000) {
+            if (thisLoopTime - this.UpdateAllStart >= (1000) * 15) {
                 updateAll = true;
                 UpdateAllStart = thisLoopTime;
             }
