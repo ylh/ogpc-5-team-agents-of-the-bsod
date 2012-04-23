@@ -42,7 +42,7 @@ public class Spawner {
         pos= loc;
         quota=10;
         isSpawning=false;
-        thisRoundQuota=new double[11];
+        thisRoundQuota=new double[12];
         for(int i = 0; i<12; i++){            
             EnemyProbabilityTable.setProbability(i, 20);
         }
@@ -60,14 +60,14 @@ public class Spawner {
         if(!isSpawning && time- lastTime >= timeToWait){
             isSpawning=true;
             new SoundFile("Game Resources/Sound/ominous.wav",1).start();
-            for(int i=0; i<11; i++){
+            for(int i=0; i<12; i++){
                 thisRoundQuota[i]=quota*(EnemyProbabilityTable.getProbability(i)/100.0);
             }
         }
         if(!isSpawning && k.isKeyDown(KeyEvent.VK_SPACE)){
             isSpawning=true;
             new SoundFile("Game Resources/Sound/ominous.wav",1).start();
-            for(int i=0; i<11; i++){
+            for(int i=0; i<12; i++){
                 thisRoundQuota[i]=quota*(EnemyProbabilityTable.getProbability(i)/100.0);
             }
         }
