@@ -5,9 +5,11 @@
 package WorldObjects.towers;
 
 import Enemies.Enemy;
+import GUIStuff.Tile;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
+import java.util.ArrayList;
 import ogpc5.game.CityGame;
 
 /**
@@ -61,6 +63,19 @@ public class House extends Tower{
     public void updateGameStats(CityGame theGame) {
         theGame.money+=moneyBonus;
         theGame.happiness+=happyBonus;
+        
+        boolean factoryNear=false;
+        ArrayList<Tile> s=this.getRangedTowers(theGame.tiles);
+        for(Tile t : s){
+            if(t instanceof Factory){
+                factoryNear=true;
+            }
+        }
+        if(factoryNear){
+            theGame.happiness-=1;
+        }else{
+            theGame.polution+=2;
+        }
     }
 
     @Override
