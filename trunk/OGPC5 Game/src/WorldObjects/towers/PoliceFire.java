@@ -5,9 +5,11 @@
 package WorldObjects.towers;
 
 import Enemies.Enemy;
+import GUIStuff.Tile;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
+import java.util.ArrayList;
 import ogpc5.game.CityGame;
 
 /**
@@ -54,6 +56,13 @@ public class PoliceFire extends Tower{
     public void updateGameStats(CityGame theGame) {
         theGame.money+=moneyBonus;
         theGame.happiness+=happyBonus;
+        
+        ArrayList<Tile> s=this.getRangedTowers(theGame.tiles);
+        for(Tile t : s){
+            if(((Tower)t).health<100){
+                ((Tower)t).health+=5;
+            }
+        }
     }
 
     @Override

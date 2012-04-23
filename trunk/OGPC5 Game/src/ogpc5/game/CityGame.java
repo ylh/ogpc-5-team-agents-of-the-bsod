@@ -405,7 +405,7 @@ public class CityGame extends Game {
                         selection.select(tiles);
                         //invOpen = false;
                     }
-
+                    //road adding
                     if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)&&keyboard.isKeyUp('d') && money > -5000) {
                         if (!(tiles[i][j] instanceof Road)) {
                             Vector2 roadPos = new Vector2((i * 32), (j * 32));
@@ -415,7 +415,6 @@ public class CityGame extends Game {
                             resetEnemies = true;
                             money -= 5;
                             selection = null;
-                            
                         }
                     }
                     if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r') && money> -5000) {
@@ -538,6 +537,15 @@ public class CityGame extends Game {
      * @return the score.
      */
     private double getScore() {
+        boolean moneyBonus=false;
+        for(Tile[] t: tiles){
+            if(t[0] instanceof Road){
+                moneyBonus=true;
+            }
+        }
+        if(moneyBonus){
+            money+=money*0.2;
+        }
         return score + (money +happiness - polution)/3;
     }
 

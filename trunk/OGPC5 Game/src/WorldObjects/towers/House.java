@@ -74,7 +74,7 @@ public class House extends Tower{
         if(factoryNear){
             theGame.happiness-=1;
         }else{
-            theGame.polution+=2;
+            theGame.polution-=2;
         }
     }
 
