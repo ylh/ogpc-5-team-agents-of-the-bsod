@@ -538,7 +538,7 @@ public class CityGame extends Game {
      * @return the score.
      */
     private double getScore() {
-        return score + (money +happiness + polution)/3;
+        return score + (money +happiness - polution)/3;
     }
 
     public void addToWorldObjects(WorldObject wo) {
