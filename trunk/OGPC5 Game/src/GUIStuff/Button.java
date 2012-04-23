@@ -109,6 +109,9 @@ public class Button {
             return false;
         }
     }
+    public boolean canOpen(){
+        return travel==0;
+    }
     /**
      * This draws the new position of the sprite.
      * @param batch 

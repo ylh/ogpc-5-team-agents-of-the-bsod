@@ -186,6 +186,7 @@ public class taylorEnemy extends Enemy{
     
     @Override
     public void Draw(ImageCollection batch){
+        super.Draw(batch);
         a.Draw(batch);
     }
     

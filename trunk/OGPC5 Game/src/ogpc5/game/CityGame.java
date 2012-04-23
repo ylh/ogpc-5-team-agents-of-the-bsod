@@ -367,12 +367,16 @@ public class CityGame extends Game {
             if (keyboard.isKeyDown(KeyEvent.VK_SPACE)) {
                 int i = 0;
             }
+            if (mouse.isPressed(Mouse.LEFT_BUTTON) && !insideBounds(mouse.location())){
+                if (drag == null && buttons.get(0).canOpen()) {
+                        invOpen = true;
+                    }
+                selection=null;
+            }
             //Mouse update methods in grid, the 832 should be most left pixel of the grid
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && insideBounds(mouse.location())) {
                 try {
-                    if (drag == null) {
-                        invOpen = true;
-                    }
+                    
                     int x = (int) mouse.location().getX();
                     int y = (int) mouse.location().getY();
 
@@ -437,6 +441,7 @@ public class CityGame extends Game {
                     }
                 }
             }//End of mouse pressed
+            
         }// End of Main Game Else
     }
 
