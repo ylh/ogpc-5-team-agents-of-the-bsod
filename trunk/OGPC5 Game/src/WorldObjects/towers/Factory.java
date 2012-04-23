@@ -18,7 +18,7 @@ public class Factory extends Tower{
 
     public Factory(Vector2 pos, int high, int wide){
         super(pos,"", high, wide);  
-        cost=550;
+        cost=55;
     }
     
     @Override

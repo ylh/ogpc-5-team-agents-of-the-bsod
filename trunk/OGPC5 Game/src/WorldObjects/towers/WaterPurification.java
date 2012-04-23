@@ -18,7 +18,7 @@ public class WaterPurification extends Tower{
 
     public WaterPurification(Vector2 pos, int high, int wide){
         super(pos, "", high, wide);
-        cost=450;
+        cost=45;
     }
     
     @Override

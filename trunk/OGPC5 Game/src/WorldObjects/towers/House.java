@@ -18,7 +18,7 @@ public class House extends Tower{
 
     public House(Vector2 pos, int high, int wide){
         super(pos,"", high, wide);  
-        cost=300;
+        cost=30;
     }
     
     @Override
