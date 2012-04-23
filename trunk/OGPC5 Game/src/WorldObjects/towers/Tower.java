@@ -150,18 +150,21 @@ public abstract class Tower extends Tile {
         int max = getBlockDistance(range);
         int r = x - max;
         int c = y - max;
-        try {
-            for (int i = 0; i < max * 2 + 1; i++) {
-                for (int j = 0; j < max * 2 + 1; j++) {
+        for (int i = 0; i < max * 2 + 1; i++) {
+            for (int j = 0; j < max * 2 + 1; j++) {
+                try {
                     if (t[r + i][c + j] == this) {
                         continue;
                     } else {
                         rt.add(t[r + i][c + j]);
                     }
+                } catch (Exception e) {
+                    if (e instanceof ArrayIndexOutOfBoundsException) {
+                        continue;
+                    }
+                    continue;
                 }
             }
-        } catch (Exception e) {
-            
         }
         return rt;
     }
