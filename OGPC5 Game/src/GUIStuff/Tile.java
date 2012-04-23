@@ -32,7 +32,7 @@ public class Tile extends WorldObject{
     public Tile(Vector2 pos){
         super(pos, 0, "");
         selection=new Image2D("Game Resources/Sprites/GUIs/transpSquare.png");
-        rSelectSprite=new Image2D("Game Resources/Sprites.GUIs/RangeSelect.png");
+        rSelectSprite=new Image2D("Game Resources/Sprites/GUIs/RangeSelect.png");
         offset=new Vector2(16,16);
     }
     /**
@@ -76,7 +76,9 @@ public class Tile extends WorldObject{
             batch.DrawString(new Vector2(850,15), "X:"+(position.getX()/32+1)+", Y:"+(position.getY()/32+1), Color.black, direction);
         }
         if(rangeSelected){
-            batch.Draw(rSelectSprite, position, 100);
+            Vector2 pos =position.clone();
+            pos.add(offset);
+            batch.Draw(rSelectSprite, pos, 100);
         }
     }
 
