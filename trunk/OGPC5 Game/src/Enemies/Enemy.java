@@ -9,6 +9,8 @@ import Utilities.Image2D;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
+import WorldObjects.towers.Bullet;
+import WorldObjects.towers.Tower;
 import java.util.ArrayList;
 import ogpc5.game.CityGame;
 
@@ -16,7 +18,7 @@ import ogpc5.game.CityGame;
  *
  * @author pcowal15, Nekel_Seyew, tsutton14
  */
-public class Enemy extends WorldObject {
+public abstract class Enemy extends WorldObject {
     Vector2 targetPos;
     /**
      * The Speed the enemy travels at
@@ -38,6 +40,9 @@ public class Enemy extends WorldObject {
      * The danger rating of each enemy
      */
     double danger;
+    double range;
+    double loaded;
+    double fireSpeed;
     /**
      * The type ID for the enemy
      */
@@ -75,6 +80,9 @@ public class Enemy extends WorldObject {
         maxhealth= Health;
         armor = Armor;
         danger = 0;
+        range=10;
+        loaded=0;
+        fireSpeed=10;
         tiles = t;
         score=10;
         id=Enemy.GENERIC;
@@ -180,6 +188,40 @@ public class Enemy extends WorldObject {
         danger+=speed;
         healthDisplay--;
         armorDisplay++;
+        loaded--;
+    }
+    public void shoot(ArrayList<WorldObject> wo) {
+        if (loaded < 0) {
+
+
+            double minDistance = range;
+
+            Vector2 displacement = new Vector2(range, 0);
+            double distance;
+            WorldObject target = null;
+            for (WorldObject w : wo) {
+                if (w instanceof Tower) {
+                    
+                    displacement = w.getPosition().clone();
+                    displacement.subtract(position);
+                    distance = displacement.length();
+                    Tower t=(Tower)w;
+
+                    if (distance < range) {
+                        minDistance = distance;
+                        target=w;
+                    }
+                }
+            }
+
+            if (target != null) {
+                Bullet t=setTowerBulletHitting((Tower)target);
+                //Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
+                wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
+                
+                loaded=fireSpeed;
+            }
+        }
     }
     /**
      * Draws the enemy at it's current location
@@ -226,6 +268,7 @@ public class Enemy extends WorldObject {
     public void die(CityGame theGame){
         theGame.score+=this.score;
     }
+    public abstract Bullet setTowerBulletHitting(Tower t);
     /**
      * The Static ID for a Generic Enemy
      */
