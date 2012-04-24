@@ -96,6 +96,8 @@ public class CityGame extends Game {
     Spawner spawn;
     EnemyNavigation navigator;
     boolean resetEnemies = true;
+    boolean placingRoads=false;
+    boolean deleting=false;
 
     @Override
     public void InitializeAndLoad() {
@@ -298,12 +300,22 @@ public class CityGame extends Game {
 
             for (Button b : buttons) {
                 b.glide();
-                if (b.isPressed(mouse)) {
-                    if (b.id()>-1 && drag==null){
+                if (b.isPressed(mouse) && drag==null) {
+                    if (b.id()>-1 && b.id()<99){
                     drag=new Draggable(b.getPath(),mouse.location(),b.id());
+                    placingRoads=false;
+                    deleting=false;
                     }
                     else if (b.id()==-1){
                         invOpen=false;
+                    }
+                    else if (b.id()==99){
+                        placingRoads=!placingRoads;
+                        deleting=false;
+                    }
+                    else if (b.id()==100){
+                        placingRoads=false;
+                        deleting=!deleting;
                     }
                 }
                 globalCount++;
@@ -311,38 +323,40 @@ public class CityGame extends Game {
             for (Button b : buttons) {
 
                 b.setOpen(invOpen);
+                if (b.id()==99) b.toggle(placingRoads);
+                if (b.id()==100) b.toggle(deleting);
                 globalCount++;
             }
-            if (buttonPressed >= 0 && drag==null){
-                
-            }
+            
             //Needed because we can't have it in the loop
-            if (buttonPressed == -1) {
-                invOpen = false;
-            }
+            
+            
+            
             if (drag != null) {
                 drag.update(mouse);
             }
             if (!mouse.isPressed(Mouse.LEFT_BUTTON)) {
-                if(drag!=null){
-                    for(Tower T: activeTiles){
-                        T.unselect(tiles);
-                    }
-                    
-                    int x=((int)mouse.location().getX())/32;
-                    int y=((int)mouse.location().getY())/32;
-                    if (insideBounds(x,y)&&!(tiles[x][y] instanceof Road) && !(tiles[x][y] instanceof Tower) 
-                            && x<tiles.length && y<tiles[0].length && x>-1 && y>-1) {
-                        if (money > -5000) {
-                            tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
-                            this.activeTiles.add((Tower) tiles[x][y]);
-                            money -= ((Tower) tiles[x][y]).getCost();
-                            new SoundFile("Game Resources/Sound/build.wav", 1).start();
-                            
-                            if(selection!=null){
-                                selection.unselect(tiles);
-                                selection=tiles[x][y];
-                                selection.select(tiles);
+                if (drag != null) {
+                    if (insideBounds(mouse.location())) {
+                        for (Tower T : activeTiles) {
+                            T.unselect(tiles);
+                        }
+
+                        int x = ((int) mouse.location().getX()) / 32;
+                        int y = ((int) mouse.location().getY()) / 32;
+                        if (insideBounds(x, y) && !(tiles[x][y] instanceof Road) && !(tiles[x][y] instanceof Tower)
+                                && x < tiles.length && y < tiles[0].length && x > -1 && y > -1) {
+                            if (money > -5000) {
+                                tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
+                                this.activeTiles.add((Tower) tiles[x][y]);
+                                money -= ((Tower) tiles[x][y]).getCost();
+                                new SoundFile("Game Resources/Sound/build.wav", 1).start();
+
+                                if (selection != null) {
+                                    selection.unselect(tiles);
+                                    selection = tiles[x][y];
+                                    selection.select(tiles);
+                                }
                             }
                         }
                     }
@@ -380,9 +394,9 @@ public class CityGame extends Game {
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && !insideBounds(mouse.location())){
                 if (drag == null && buttons.get(0).canOpen()) {
                         invOpen = true;
-                    }
-                selection=null;
+                    }  
             }
+            
             //Mouse update methods in grid, the 832 should be most left pixel of the grid
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && insideBounds(mouse.location())) {
                 try {
@@ -406,7 +420,7 @@ public class CityGame extends Game {
                         //invOpen = false;
                     }
                     //road adding
-                    if (b.contains(x, y) && keyboard.isKeyDown('r') && mouse.isPressed(Mouse.LEFT_BUTTON)&&keyboard.isKeyUp('d') && money > -5000) {
+                    if (b.contains(x, y) && (keyboard.isKeyDown('r')||placingRoads) && mouse.isPressed(Mouse.LEFT_BUTTON)&&keyboard.isKeyUp('d') && money > -5000) {
                         if (!(tiles[i][j] instanceof Road)) {
                             Vector2 roadPos = new Vector2((i * 32), (j * 32));
                             tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
@@ -417,7 +431,7 @@ public class CityGame extends Game {
                             selection = null;
                         }
                     }
-                    if (b.contains(x, y) && keyboard.isKeyDown('d') && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r') && money> -5000) {
+                    if (b.contains(x, y) && (keyboard.isKeyDown('d')||deleting) && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r') && money> -5000) {
                         if (!(tiles[i][j] == BottomRoad) && (tiles[i][j] instanceof Road)) {
                             new SoundFile("Game Resources/Sound/destroy1.wav",1).start();
                             roads.remove(tiles[i][j]);
@@ -513,20 +527,35 @@ public class CityGame extends Game {
             //the Background Grid
             batch.Draw(Background, new Vector2(835 / 2, 611 / 2), 1);
             batch.Draw(bgtexture, new Vector2(970 / 2, 611 / 2), 0);
+            
+            if (selection != null) {
+                selection.Draw(batch);
+            }
 
             for (Tile t : activeTiles) {
-                t.Draw(batch);
+                if(t.isSelected()){
+                    t.unselect(tiles);
+                    t.Draw(batch);
+                    t.select(tiles);
+                }else{
+                    t.Draw(batch);
+                }
                 globalCount++;
             }
 
             for (Road r : roads) {
-                r.Draw(batch);
+                if(r.isSelected()){
+                    r.unselect(tiles);
+                    r.Draw(batch);
+                    r.select(tiles);
+                }else{
+                    r.Draw(batch);
+                }
+                
                 globalCount++;
             }
 
-            if (selection != null) {
-                selection.Draw(batch);
-            }
+            
             //Pure Debugging
             //System.out.println(globalCount);
         }//End of Main Game Else
@@ -584,9 +613,9 @@ public class CityGame extends Game {
         //button 7
         buttons.add(new Button(Tower.STORE, "Game Resources/Sprites/August/Supermarket 32x32.png", 880, 220));
         //button 8
-        //buttons.add(new Button(Tower.WATER_PURIFICATION_CENTER, "Game Resources/Sprites/Liam's Sprites/Towers/Police/save2.png", 920, 220));
+        buttons.add(new Button(99, "Game Resources/Sprites/Roads/CurvedRoadRightDown.png", 920, 220));
         //delete
-        buttons.add(new Button(-1, "Game Resources/Sprites/GUIS/deleteButton.png", 900, 260));
+        buttons.add(new Button(100, "Game Resources/Sprites/GUIS/deleteButton.png", 880, 260));
 
     }
     

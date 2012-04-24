@@ -28,6 +28,7 @@ public class Button {
     Image2D overlay;
     int id;
     String spriteString;
+    int timer;
 
     
 
@@ -53,6 +54,7 @@ public class Button {
         button = new Rect(pos, 100, 32);
         spriteString=sp;
         overlay=new Image2D("Game Resources/Sprites/GUIs/Icon overlay.png");
+        timer=0;
     }
 
     /**
@@ -87,6 +89,7 @@ public class Button {
         //pos=new Vector2(pos.getX(),closeY+travel*(openY-closeY));
         //reset the bounding box
         button = new Rect(pos, 32, 32);
+        timer=Math.max(timer-1,0);
         
     }
     /**
@@ -95,11 +98,11 @@ public class Button {
      * @return This tells the game if the button is opened or closed.
      */
     public boolean isPressed(Mouse mouse) {
-        if (open && mouse.isPressed(Mouse.LEFT_BUTTON)) {
+        if (open && mouse.isPressed(Mouse.LEFT_BUTTON) && timer==0) {
             Vector2 q = mouse.location().clone();
             q.subtract(pos);
             if (q.getX() > -16 && q.getX() < 16 && q.getY() > -16 && q.getY() < 16) {
-
+                timer=5;
                 return true;
             } else {
                 return false;
@@ -126,5 +129,16 @@ public class Button {
     public Image2D getSprite(){
         return sprite;
     }
+    public void toggle(boolean t) {
+
+        if (t) {
+            overlay = new Image2D("Game Resources/Sprites/GUIs/Icon overlay2.png");
+        } else {
+            overlay = new Image2D("Game Resources/Sprites/GUIs/Icon overlay.png");
+        }
+
+
+    }
+    
 }
 
