@@ -18,7 +18,7 @@ import ogpc5.game.CityGame;
  *
  * @author pcowal15, Nekel_Seyew, tsutton14
  */
-public abstract class Enemy extends WorldObject {
+public class Enemy extends WorldObject {
     Vector2 targetPos;
     /**
      * The Speed the enemy travels at
@@ -268,7 +268,9 @@ public abstract class Enemy extends WorldObject {
     public void die(CityGame theGame){
         theGame.score+=this.score;
     }
-    public abstract Bullet setTowerBulletHitting(Tower t);
+    public Bullet setTowerBulletHitting(Tower t){
+        return null;
+    }
     /**
      * The Static ID for a Generic Enemy
      */
