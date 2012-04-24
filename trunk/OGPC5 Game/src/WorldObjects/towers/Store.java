@@ -68,14 +68,15 @@ public class Store extends Tower {
 
     @Override
     protected Bullet setEnemyBulletHitting(Enemy e) {
+        String s="Game Resources/Sprites/Bullets/$.png";
         if(e.getID()==Enemy.GANGS){
-            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
+            return new Bullet(s,position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
         }else if(e.getID()==Enemy.CRIMINAL){
-            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
+            return new Bullet(s,position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
         }else if(e.getID()==Enemy.GRAFITTI){
-            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
+            return new Bullet(s,position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
         }
-        return new Bullet(position.clone(), damage, adamage, sdamage, projspeed, e);
+        return new Bullet(s,position.clone(), damage, adamage, sdamage, projspeed, e);
     }
     
 }

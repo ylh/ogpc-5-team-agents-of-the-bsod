@@ -49,7 +49,24 @@ public class Bullet extends WorldObject {
         this.damage=damage;
         this.adamage=adamage;
         this.sdamage=sdamage;
+        sprite=new Image2D("Game Resources/Sprites/particle.png");
     }
+    public Bullet(String s, Vector2 pos, double damage,double adamage,double sdamage, double velocity, WorldObject t){
+        super(pos.clone(), -1, "Hi there");
+        loadAnimation();
+        this.speed=velocity;
+        startPos=pos.clone();
+        this.target=t;
+        arc=0;
+        Vector2 endPoint=t.getPosition().clone();
+        
+        this.distance=0;
+        this.damage=damage;
+        this.adamage=adamage;
+        this.sdamage=sdamage;
+        sprite=new Image2D(s);
+    }
+    
 
     @Override
     public void Update(ArrayList<WorldObject> wol) {
@@ -62,6 +79,7 @@ public class Bullet extends WorldObject {
         
         
     }
+    
     /**
      * Determines if the bullet has reached its target.
      * @return if reached target
@@ -93,8 +111,7 @@ public class Bullet extends WorldObject {
             //spriteAnimation.Draw(batch);
         }
         if (distance<1){
-            Image2D i = new Image2D("Game Resources/Sprites/particle.png");
-            batch.Draw(i,position,100);
+            batch.Draw(sprite,position,100);
         }
     }
     
@@ -111,5 +128,4 @@ public class Bullet extends WorldObject {
     public double getSpeedDamage(){
         return sdamage;
     }
-    
 }

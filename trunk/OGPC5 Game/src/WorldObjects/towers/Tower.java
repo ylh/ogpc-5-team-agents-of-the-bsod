@@ -244,8 +244,8 @@ public abstract class Tower extends Tile {
             }
 
             if (target != null) {
-                //Bullet t=setEnemyBulletHitting((Enemy)target);
-                Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
+                Bullet t=setEnemyBulletHitting((Enemy)target);
+                //Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
                 wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
                 
                 loaded=speed;

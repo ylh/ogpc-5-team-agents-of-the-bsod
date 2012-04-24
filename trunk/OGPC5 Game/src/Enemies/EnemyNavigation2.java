@@ -118,7 +118,7 @@ public class EnemyNavigation2 {
             //DON'T GO HERE
             values[3] = 1000000;
         }
-        if (n == 4) {
+        if (n == 4 && visits[x][y]<4) {
             visits[x][y]-=1;
             return dir;
         } else {
