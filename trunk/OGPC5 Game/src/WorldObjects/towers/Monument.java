@@ -53,6 +53,9 @@ public class Monument extends Tower{
     @Override
     public void updateGameStats(CityGame theGame) {
         theGame.money+=moneyBonus;
+        if(theGame.moneyBonus){
+            theGame.money+=moneyBonus;
+        }
         theGame.happiness+=happyBonus;
     }
 

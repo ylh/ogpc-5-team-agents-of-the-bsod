@@ -62,6 +62,9 @@ public class House extends Tower{
     @Override
     public void updateGameStats(CityGame theGame) {
         theGame.money+=moneyBonus;
+        if(theGame.moneyBonus){
+             theGame.money+=moneyBonus;
+        }
         theGame.happiness+=happyBonus;
         
         boolean factoryNear=false;
