@@ -154,4 +154,18 @@ public class Spawner {
         }
         theGame.addToWorldObjects(e);
     }
+    
+    private void StartGameLoad(){
+        EnemyProbabilityTable.setProbability(Enemy.ARSONIST, 0);
+        EnemyProbabilityTable.setProbability(Enemy.CRIMINAL, 50);
+        EnemyProbabilityTable.setProbability(Enemy.EARTHQUACKE, 0);
+        EnemyProbabilityTable.setProbability(Enemy.EDUCATION, 0);
+        EnemyProbabilityTable.setProbability(Enemy.FIRE, 0);
+        EnemyProbabilityTable.setProbability(Enemy.FLOOD, 0);
+        EnemyProbabilityTable.setProbability(Enemy.GANGS, 0);
+        EnemyProbabilityTable.setProbability(Enemy.GRAFITTI, 0);
+        EnemyProbabilityTable.setProbability(Enemy.SMOG, 0);
+        EnemyProbabilityTable.setProbability(Enemy.TRASH, 50);
+        EnemyProbabilityTable.setProbability(Enemy.WATER_POLUTION, 0);
+    }
 }

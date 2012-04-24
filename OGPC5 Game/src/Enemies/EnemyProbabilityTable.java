@@ -5,7 +5,7 @@
 package Enemies;
 
 /**
- *
+ * Static class which allows for global access and manipulation of the probabilities of enemies appearing
  * @author Nekel_Seyew
  */
 public class EnemyProbabilityTable {
