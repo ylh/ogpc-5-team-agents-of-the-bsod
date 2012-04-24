@@ -98,6 +98,7 @@ public class CityGame extends Game {
     boolean resetEnemies = true;
     boolean placingRoads=false;
     boolean deleting=false;
+    public boolean moneyBonus=false;
 
     @Override
     public void InitializeAndLoad() {
@@ -364,7 +365,12 @@ public class CityGame extends Game {
                 drag = null;
             }
             
-            
+            //determines moneyBonus;
+            for (Tile[] t : tiles) {
+                if (t[0] instanceof Road) {
+                    moneyBonus = true;
+                }
+            }
             //ORDER HERE COUTNS!!!
             double thisLoopTime = System.currentTimeMillis();
             boolean updateAll=false;
@@ -566,15 +572,6 @@ public class CityGame extends Game {
      * @return the score.
      */
     private double getScore() {
-        boolean moneyBonus=false;
-        for(Tile[] t: tiles){
-            if(t[0] instanceof Road){
-                moneyBonus=true;
-            }
-        }
-        if(moneyBonus){
-            money+=money*0.2;
-        }
         return score + (money +happiness - polution)/3;
     }
 
