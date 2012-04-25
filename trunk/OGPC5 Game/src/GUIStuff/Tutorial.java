@@ -8,6 +8,7 @@ import Utilities.ImageCollection;
 import Utilities.KeyBoard;
 import Utilities.Mouse;
 import Utilities.Vector2;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -26,7 +27,16 @@ public class Tutorial {
     }
     
     public void Update(KeyBoard k, Mouse m){
+        next.update(m);
+        if(next.isPressed(m) || k.isKeyDown(KeyEvent.VK_SPACE)){
+            loadNext();
+        }
         
+        
+    }
+    
+    private void loadNext(){
+        screen++;
     }
     
 }

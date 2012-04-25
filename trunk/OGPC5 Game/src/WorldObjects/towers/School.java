@@ -28,7 +28,11 @@ public class School extends Tower{
 
     @Override
     protected void loadAnimation() {
-        
+        ani= new Animation(4,10,position, 100);
+        ani.addCell("Game Resources/Sprites/SamSprites/Towers/School/school0.png");
+        ani.addCell("Game Resources/Sprites/SamSprites/Towers/School/school1.png");
+        ani.addCell("Game Resources/Sprites/SamSprites/Towers/School/school2.png");
+        ani.addCell("Game Resources/Sprites/SamSprites/Towers/School/school3.png");
     }
 
     @Override
@@ -46,6 +50,7 @@ public class School extends Tower{
     @Override
     public void Draw(ImageCollection batch) {
         super.Draw(batch);
+        ani.Draw(batch);
     }
 
     @Override

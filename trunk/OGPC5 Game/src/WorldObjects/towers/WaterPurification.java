@@ -29,12 +29,13 @@ public class WaterPurification extends Tower{
     @Override
     public void Draw(ImageCollection batch) {
         super.Draw(batch);
+        ani.Draw(batch);
     }
 
     @Override
     protected void loadAnimation() {
-        ani = new Animation(6,10,position, 100);
-        for(int i=0; i<6; i++){
+        ani = new Animation(5,10,position, 100);
+        for(int i=1; i<6; i++){
             ani.addCell("Game Resources/Sprites/SamSprites/Towers/Water Purification/pureWater"+i+".png");
         }
     }
