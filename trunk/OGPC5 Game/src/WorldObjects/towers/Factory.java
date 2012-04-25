@@ -33,6 +33,11 @@ public class Factory extends Tower{
         ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory2_32x32.png");
         ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory3_32x32.png");
         ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory32x32.png");
+        
+//        ani= new Animation(21, 10, position, 100);
+//        for(int i=0; i<21; i++){
+//            ani.addCell("Game Resources/Sprites/August/ACME Corp/"+i+".png");
+//        }
     }
 
     @Override
