@@ -83,7 +83,7 @@ public abstract class AbstractEnemy extends WorldObject {
         maxhealth= Health;
         armor = Armor;
         danger = 0;
-        range=10;
+        range=100;
         loaded=0;
         fireSpeed=10;
         tiles = t;
@@ -127,6 +127,7 @@ public abstract class AbstractEnemy extends WorldObject {
             armorDisplay=1;
         }
         
+        
     }
     /**
      * gets the ID of the ENEMY
@@ -165,7 +166,6 @@ public abstract class AbstractEnemy extends WorldObject {
      */
     @Override
     public void Update(ArrayList<WorldObject> wol) {
-        shoot(wol);
         if (snapped()){
             pathCreator2.update(position);
             dir=pathCreator2.decide(position,dir);
@@ -194,7 +194,7 @@ public abstract class AbstractEnemy extends WorldObject {
         armorDisplay++;
         loaded--;
     }
-    public void shoot(ArrayList<WorldObject> wo) {
+    public void shoot(ArrayList<WorldObject> wo,ArrayList<Tower> towers) {
         //peter, what?
         if (loaded < 0) {
 
@@ -203,24 +203,26 @@ public abstract class AbstractEnemy extends WorldObject {
 
             Vector2 displacement = new Vector2(range, 0);
             double distance;
-            WorldObject target = null;
-            for (WorldObject w : wo) {
-                if (w instanceof Tower) {
-                    
-                    displacement = w.getPosition().clone();
+            Tower target = null;
+            
+            for (Tower s : towers) {
+                
+                if (s instanceof Tower) {
+                    displacement = s.getPosition().clone();
                     displacement.subtract(position);
                     distance = displacement.length();
-                    Tower t=(Tower)w;
+                    Tower t=s;
 
                     if (distance < range) {
                         minDistance = distance;
-                        target=w;
+                        target=t;
                     }
+                    
                 }
             }
 
             if (target != null) {
-                Bullet t=setTowerBulletHitting((Tower)target);
+                Bullet t=setTowerBulletHitting(target);
                 //Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
                 wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
                 

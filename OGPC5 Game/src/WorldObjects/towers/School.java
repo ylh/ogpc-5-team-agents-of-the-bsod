@@ -33,7 +33,7 @@ public class School extends Tower{
 
     @Override
     protected void loadStats() {
-        damage=15;
+        damage=6;
         health=250;
         range=112*Math.sqrt(2);
         adamage=5;

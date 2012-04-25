@@ -40,8 +40,8 @@ public class PoliceFire extends Tower{
         health=500;
         range=80*Math.sqrt(2);
         adamage=100;
-        projspeed=10;//not correct
-        speed=200;//not done
+        projspeed=20;
+        speed=200;
         this.moneyBonus=-2;
         this.happyBonus=1;
     }

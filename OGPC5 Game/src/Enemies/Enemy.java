@@ -57,6 +57,7 @@ public class Enemy extends AbstractEnemy{
         System.out.println("Enemy Created");
         chooseAnimation();
         initializeAnimations();
+        LoadStats();
     }
     
     private void chooseAnimation(){
@@ -118,17 +119,12 @@ public class Enemy extends AbstractEnemy{
             case AbstractEnemy.EDUCATION:
                 a = new Animation(20, 5, this.position, 300);
                 a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Bad Education/Bad Education.png");
-                for (int i = 2; i <= 20; i++) {
-                    if (i != 17) {
-                        String s = "Game Resources/Sprites/Liam's Sprites/Enemies/Bad Education/BE1-";
-                        s += i + ".png";
-                        a.addCell(s);
-                    }
+                for(int i = 2; i <= 20; i++){
+                    String s = "Game Resources/Sprites/Liam's Sprites/Enemies/Bad Education/BE1-";
+                    s += i + ".png";
+                    a.addCell(s);
                 }
                 break;
-            case AbstractEnemy.TRASH:
-                a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
-                a.addCell("Game Resources/Sprites/Yestin/trash.png");
             default:
                 a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
                 a.addCell("Game Resources/Sprites/PlaceHolderEnemy.png");
@@ -215,53 +211,54 @@ public class Enemy extends AbstractEnemy{
     }
     @Override
     public Bullet setTowerBulletHitting(Tower t) {
-        return new Bullet(this.position.clone(), this.damage, 0, 0, this.projSpeed, t);
+        return new Bullet(this.position.clone(), this.damage, 0, 0, 10, t);
+        
     }
 
     @Override
     public void LoadStats() {
         switch(id){
             case AbstractEnemy.ARSONIST:
-                load(2,(int)this.speed);
+                load(50,100);
                 break;
             case AbstractEnemy.EARTHQUACKE:
-                load(4,(int)this.speed);
+                load(4,1);
                 break;
             case AbstractEnemy.FIRE:
-                load(2,(int)this.speed);
+                load(5,10);
                 break;
             case AbstractEnemy.FLOOD:
-                load(3,(int)this.speed);
+                load(5,5);
                 break;
             case AbstractEnemy.GRAFITTI:
-                load(3,(int)this.speed);
+                load(5,10);
                 break;
             case AbstractEnemy.TRASH:
-                load(7,(int)this.speed);
+                load(7,10);
                 break;
             case AbstractEnemy.SMOG:
-                load(3,(int)this.speed);
+                load(2,5);
                 break;
             case AbstractEnemy.WATER_POLUTION:
-                load(5,(int)this.speed);
+                load(5,5);
                 break;
             case AbstractEnemy.CRIMINAL:
-                load(3,(int)this.speed);
+                load(15,30);
                 break;
             case AbstractEnemy.GANGS:
-                load(5,(int)this.speed);
+                load(10,20);
                 break;
             case AbstractEnemy.EDUCATION:
-                load(3,(int)this.speed);
+                load(3,5);
                 break;
             default:
-                load(1,(int)this.speed);
+                load(1,10);
                 break;
         }
     }
     
-    private void load(int damage, int projSpeed){
+    private void load(int damage, int fireSpeed){
         this.damage=damage;
-        this.projSpeed=projSpeed;
+        this.fireSpeed=fireSpeed;
     }
 }
