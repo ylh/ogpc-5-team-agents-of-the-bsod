@@ -24,6 +24,7 @@ public class MenuButton {
     public static final int START=1;
     public static final int SKIP=2;
     public static final int YES=3;
+    public static final int NEXT=4;
     
     public MenuButton(Vector2 pos, int type){
         position=pos;
@@ -62,6 +63,10 @@ public class MenuButton {
         if(type==SKIP){
             normal = new Image2D("Game Resources/Sprites/GUIs/SkipUnselect.png");
             scrolled = new Image2D("Game Resources/Sprites/GUIs/SkipSelect.png");
+        }
+        if(type==NEXT){
+            normal=new Image2D("Game Resources/Sprites/GUIs/nextSmall.png");
+            scrolled=new Image2D("Game Resources/Sprites/GUIs/nextLarge.png");
         }
     }
     
