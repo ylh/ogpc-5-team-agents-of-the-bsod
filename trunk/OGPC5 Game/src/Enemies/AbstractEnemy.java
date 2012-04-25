@@ -52,6 +52,9 @@ public abstract class AbstractEnemy extends WorldObject {
      */
     int score;
     
+    int damage;
+    int projSpeed;
+    
     int dir;
     int healthDisplay;
     int armorDisplay;
@@ -92,6 +95,7 @@ public abstract class AbstractEnemy extends WorldObject {
         pathCreator2.update(position);
         healthDisplay=0;
         armorDisplay=6;
+        LoadStats();
     }
     
     /**
@@ -107,7 +111,6 @@ public abstract class AbstractEnemy extends WorldObject {
     public AbstractEnemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
         this(Speed, Health, Armor, pos, path, t);
         id=type;
-        System.out.println("Enemy Created");
     }
     /**
      * The method called on the enemy when a projectile hits it
@@ -267,6 +270,9 @@ public abstract class AbstractEnemy extends WorldObject {
         theGame.score+=this.score;
     }
     public abstract Bullet setTowerBulletHitting(Tower t);
+    public abstract void LoadStats();
+    
+    
     /**
      * The Static ID for a Generic AbstractEnemy
      */
