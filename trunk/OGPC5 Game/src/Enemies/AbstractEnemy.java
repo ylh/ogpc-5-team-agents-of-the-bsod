@@ -165,6 +165,7 @@ public abstract class AbstractEnemy extends WorldObject {
      */
     @Override
     public void Update(ArrayList<WorldObject> wol) {
+        shoot(wol);
         if (snapped()){
             pathCreator2.update(position);
             dir=pathCreator2.decide(position,dir);
@@ -194,6 +195,7 @@ public abstract class AbstractEnemy extends WorldObject {
         loaded--;
     }
     public void shoot(ArrayList<WorldObject> wo) {
+        //peter, what?
         if (loaded < 0) {
 
 

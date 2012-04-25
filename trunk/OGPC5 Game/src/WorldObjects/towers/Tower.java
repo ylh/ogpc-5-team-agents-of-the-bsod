@@ -53,7 +53,7 @@ public abstract class Tower extends Tile {
         super(pos);
         //sets default values so it'll work properly
         damage=10;
-        health=10;
+        health=100;
         range=112*Math.sqrt(2);
         adamage=0;
         sdamage=0;
@@ -212,6 +212,9 @@ public abstract class Tower extends Tile {
 
     public void setHealth(double h) {
         health = h;
+    }
+    public boolean isDead(){
+        return health<=0;
     }
 
     protected void setBoundingBox() {
