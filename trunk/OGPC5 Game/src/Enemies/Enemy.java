@@ -125,6 +125,14 @@ public class Enemy extends AbstractEnemy{
                     a.addCell(s);
                 }
                 break;
+            case AbstractEnemy.TRASH:
+                a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
+                a.addCell("Game Resources/Sprites/Yestin/trash.png");
+                break;
+            case AbstractEnemy.CRIMINAL:
+                a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
+                a.addCell("Game Resources/Sprites/Yestin/criminal.png");
+                break;
             default:
                 a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
                 a.addCell("Game Resources/Sprites/PlaceHolderEnemy.png");
