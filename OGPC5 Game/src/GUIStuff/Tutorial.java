@@ -7,14 +7,18 @@ package GUIStuff;
 import Utilities.ImageCollection;
 import Utilities.KeyBoard;
 import Utilities.Mouse;
+import Utilities.Vector2;
 
 /**
  *
  * @author RomulusAaron
  */
 public class Tutorial {
+    MenuButton next;
+    int screen;
     public Tutorial(){
-        
+        next = new MenuButton(new Vector2(800,500), MenuButton.NEXT);
+        screen=1;
     }
     
     public void Draw(ImageCollection batch){
