@@ -187,9 +187,11 @@ public abstract class Tower extends Tile {
         return numBlocks;
     }
 
-    public void Hit(double damage, double adamage, double sdamage) {
-        speed /= sdamage;
+    public void Hit(double damage) {
         health -= Math.max(0, damage);
+    }
+    public void Hit(Bullet b){
+        Hit(b.damage);
     }
 
     public void setDamage(double s) {

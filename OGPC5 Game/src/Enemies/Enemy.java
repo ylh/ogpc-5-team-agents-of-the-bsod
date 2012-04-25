@@ -31,18 +31,7 @@ public class Enemy extends AbstractEnemy{
      * @param t the main Tile[][] array
      */
     public Enemy(double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t) {
-        super(Speed, Health, Armor, pos, path, t);
-        speed = Speed;
-        targetPos=new Vector2(pos.getX(),pos.getY()-32);
-        health = Health;
-        armor = Armor;
-        danger = 0;
-        tiles = t;
-        score=10;
-        id=AbstractEnemy.GENERIC;
-        System.out.println("Enemy Created");
-        chooseAnimation();
-        initializeAnimations();
+        this(AbstractEnemy.GENERIC, Speed, Health, Armor, pos, path,t);
     }
     
     /**
@@ -56,63 +45,18 @@ public class Enemy extends AbstractEnemy{
      * @param t the main Tile[][] array
      */
     public Enemy(int type, double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t){
-        this(Speed, Health, Armor, pos, path, t);
+        super(Speed, Health, Armor, pos, path, t);
+        speed = Speed;
+        targetPos=new Vector2(pos.getX(),pos.getY()-32);
+        health = Health;
+        armor = Armor;
+        danger = 0;
+        tiles = t;
+        score=10;
         id=type;
         System.out.println("Enemy Created");
         chooseAnimation();
         initializeAnimations();
-    }
-    
-    /**
-     * Attempts to access a nonexistent Thread to set the enemy's path
-     * @param e the existing (so to speak) navigation Thread
-     */
-    public void setEnemyPath(EnemyNavigation e) {
-        synchronized (this) {
-            try {                
-                System.out.println("Setting");
-                e.notify();
-                path = e.findPath(((int) position.getX()) / 32, ((int) position.getY()) / 32);
-            } catch (Exception d) {
-                System.out.println("Failed setting");
-            }
-        }        
-    }
-    
-    /**
-     * Follows a given path
-     * @param i starting point on the path
-     */
-    public void followPath(int i){
-        if(i < path.size()){            
-            for(int counter = i; counter <path.size(); counter++){
-                move((int)(path.get(i).getX()*32-16),(int)(path.get(i).getY()*32-16));
-            }
-        }
-    }
-    
-    /**
-     * Moves towards a target Road
-     * @param i target Road x value
-     * @param j target Road y value
-     */
-    private void move(int i, int j){
-        int goalX = (i+1)*32-16;
-        int goalY = (j+1)*32-16;
-        while(position.getX() != goalX && position.getY() != goalY){
-            if(position.getX()>goalX){
-                position.setX(position.getX()-1);
-            }
-            else if (position.getX()<goalX){
-                position.setX(position.getX()+1);
-            }
-            if(position.getY()>goalY){
-                position.setY(position.getY()-1);
-            }
-            else if (position.getY()<goalY){
-                position.setY(position.getY()+1);
-            }
-        }
     }
     
     private void chooseAnimation(){
@@ -228,34 +172,91 @@ public class Enemy extends AbstractEnemy{
         }
     }
     
-    private void initializeAnimations(){
-            earthquake1 = new Animation(2, 5, this.position, 300);
-            earthquake1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-1.png");
-            earthquake1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-2.png");
-            earthquake2 = new Animation(2, 5, this.position, 300);
-            earthquake2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-1.png");
-            earthquake2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-2.png");
-            earthquake3 = new Animation(2, 5, this.position, 300);
-            earthquake3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVR1-1.png");
-            earthquake3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVR1-2.png");
-            earthquake4 = new Animation(2, 5, this.position, 300);
-            earthquake4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVL1-1.png");
-            earthquake4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVL1-2.png");
-            smog1 = new Animation(2, 5, this.position, 300);
-            smog1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVU1-1.png");
-            smog1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVU1-2.png");
-            smog2 = new Animation(2, 5, this.position, 300);
-            smog2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVD1-1.png");
-            smog2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVD1-2.png");
-            smog3 = new Animation(2, 5, this.position, 300);
-            smog3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogR1-1.png");
-            smog3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogR1-2.png");
-            smog4 = new Animation(2, 5, this.position, 300);
-            smog4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png");
-            smog4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-2.png");
+    private void initializeAnimations() {
+        //EATHQUAKES
+        //Earthquack1
+        earthquake1 = new Animation(2, 5, this.position, 300);
+        earthquake1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-1.png");
+        earthquake1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVU1-2.png");
+        //Earthquake2
+        earthquake2 = new Animation(2, 5, this.position, 300);
+        earthquake2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-1.png");
+        earthquake2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-2.png");
+        //Earthquake3
+        earthquake3 = new Animation(2, 5, this.position, 300);
+        earthquake3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVR1-1.png");
+        earthquake3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVR1-2.png");
+        //Earthquake4
+        earthquake4 = new Animation(2, 5, this.position, 300);
+        earthquake4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVL1-1.png");
+        earthquake4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVL1-2.png");
+        //SMOGS
+        //Smog1
+        smog1 = new Animation(2, 5, this.position, 300);
+        smog1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVU1-1.png");
+        smog1.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVU1-2.png");
+        //Smog2
+        smog2 = new Animation(2, 5, this.position, 300);
+        smog2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVD1-1.png");
+        smog2.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogVD1-2.png");
+        //Smog3
+        smog3 = new Animation(2, 5, this.position, 300);
+        smog3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogR1-1.png");
+        smog3.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogR1-2.png");
+        //Smog4
+        smog4 = new Animation(2, 5, this.position, 300);
+        smog4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png");
+        smog4.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-2.png");
     }
     @Override
-    public Bullet setTowerBulletHitting(Tower t){
-        return null;
+    public Bullet setTowerBulletHitting(Tower t) {
+        return new Bullet(this.position.clone(), this.damage, 0, 0, this.projSpeed, t);
+    }
+
+    @Override
+    public void LoadStats() {
+        switch(id){
+            case AbstractEnemy.ARSONIST:
+                load(2,(int)this.speed);
+                break;
+            case AbstractEnemy.EARTHQUACKE:
+                load(4,(int)this.speed);
+                break;
+            case AbstractEnemy.FIRE:
+                load(2,(int)this.speed);
+                break;
+            case AbstractEnemy.FLOOD:
+                load(3,(int)this.speed);
+                break;
+            case AbstractEnemy.GRAFITTI:
+                load(3,(int)this.speed);
+                break;
+            case AbstractEnemy.TRASH:
+                load(7,(int)this.speed);
+                break;
+            case AbstractEnemy.SMOG:
+                load(3,(int)this.speed);
+                break;
+            case AbstractEnemy.WATER_POLUTION:
+                load(5,(int)this.speed);
+                break;
+            case AbstractEnemy.CRIMINAL:
+                load(3,(int)this.speed);
+                break;
+            case AbstractEnemy.GANGS:
+                load(5,(int)this.speed);
+                break;
+            case AbstractEnemy.EDUCATION:
+                load(3,(int)this.speed);
+                break;
+            default:
+                load(1,(int)this.speed);
+                break;
+        }
+    }
+    
+    private void load(int damage, int projSpeed){
+        this.damage=damage;
+        this.projSpeed=projSpeed;
     }
 }

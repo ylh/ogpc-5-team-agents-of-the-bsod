@@ -76,5 +76,10 @@ public class SuperEnemy extends AbstractEnemy{
     public Bullet setTowerBulletHitting(Tower t) {
         return null;
     }
+
+    @Override
+    public void LoadStats() {
+        
+    }
     
 }
