@@ -42,12 +42,12 @@ public class Factory extends Tower{
 
     @Override
     protected void loadStats() {
-        damage=5;
+        damage=25;
         health=200;
         range=48*Math.sqrt(2);
         adamage=0;
         projspeed=10;//not correct
-        speed=10;//not done
+        speed=15;//not done
         this.moneyBonus=8;
         this.happyBonus=-10;
     }

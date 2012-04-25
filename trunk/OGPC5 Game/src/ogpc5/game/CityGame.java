@@ -275,6 +275,7 @@ public class CityGame extends Game {
                         allObjects.remove(wo);
                         score -= ((AbstractEnemy) wo).getScore();
                     }
+                    e.shoot(allObjects, activeTiles);
                 }
                 if (wo instanceof AbstractEnemy) {
                     AbstractEnemy e = (AbstractEnemy) wo;

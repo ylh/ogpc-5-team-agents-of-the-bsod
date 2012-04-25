@@ -43,12 +43,12 @@ public class House extends Tower{
 
     @Override
     protected void loadStats() {
-        damage=3;
+        damage=5;
         health=100;
         range=80*Math.sqrt(2);
-        adamage=5;
+        adamage=2;
         projspeed=5;//num of frames to reach enemy
-        speed=10;//not done
+        speed=5;//not done
         this.moneyBonus=1;
         this.happyBonus=3;
     }
