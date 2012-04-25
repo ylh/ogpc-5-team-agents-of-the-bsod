@@ -378,14 +378,15 @@ public class CityGame extends Game {
                 updateAll = true;
                 UpdateAllStart = thisLoopTime;
             }
-            for (Tower t : activeTiles) {
+            for (int k = 0; k < activeTiles.size(); k++) {
+                Tower t = activeTiles.get(k);
                 t.Update(allObjects);
-
-                //For updating score, happiness, polution, and money
                 if (updateAll) {
                     t.updateGameStats(this);
                 }
-
+                if (t.isDead()) {
+                    activeTiles.remove(t);
+                }
                 globalCount++;
             }
             if(updateAll){
