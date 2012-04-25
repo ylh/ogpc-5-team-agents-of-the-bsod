@@ -118,12 +118,17 @@ public class Enemy extends AbstractEnemy{
             case AbstractEnemy.EDUCATION:
                 a = new Animation(20, 5, this.position, 300);
                 a.addCell("Game Resources/Sprites/Liam's Sprites/Enemies/Bad Education/Bad Education.png");
-                for(int i = 2; i <= 20; i++){
-                    String s = "Game Resources/Sprites/Liam's Sprites/Enemies/Bad Education/BE1-";
-                    s += i + ".png";
-                    a.addCell(s);
+                for (int i = 2; i <= 20; i++) {
+                    if (i != 17) {
+                        String s = "Game Resources/Sprites/Liam's Sprites/Enemies/Bad Education/BE1-";
+                        s += i + ".png";
+                        a.addCell(s);
+                    }
                 }
                 break;
+            case AbstractEnemy.TRASH:
+                a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
+                a.addCell("Game Resources/Sprites/Yestin/trash.png");
             default:
                 a = new Animation(1, 5, this.position, Integer.MAX_VALUE);
                 a.addCell("Game Resources/Sprites/PlaceHolderEnemy.png");
