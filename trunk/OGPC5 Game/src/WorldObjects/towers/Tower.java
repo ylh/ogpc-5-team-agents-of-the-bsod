@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import GUIStuff.Tile;
 import Utilities.Animation;
 import Utilities.Image2D;
@@ -229,12 +229,12 @@ public abstract class Tower extends Tile {
             double distance;
             WorldObject target = null;
             for (WorldObject w : wo) {
-                if (w instanceof Enemy) {
+                if (w instanceof AbstractEnemy) {
                     
                     displacement = w.getPosition().clone();
                     displacement.subtract(position);
                     distance = displacement.length();
-                    Enemy e=(Enemy)w;
+                    AbstractEnemy e=(AbstractEnemy)w;
 
                     if (distance < range && e.getDanger()>maxDanger) {
                         target = w;
@@ -244,7 +244,7 @@ public abstract class Tower extends Tile {
             }
 
             if (target != null) {
-                Bullet t=setEnemyBulletHitting((Enemy)target);
+                Bullet t=setEnemyBulletHitting((AbstractEnemy)target);
                 //Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
                 wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
                 
@@ -257,7 +257,7 @@ public abstract class Tower extends Tile {
     public abstract void updateGameStats(CityGame theGame);
     protected abstract void loadAnimation();
     protected abstract void loadStats();
-    protected abstract Bullet setEnemyBulletHitting(Enemy e);
+    protected abstract Bullet setEnemyBulletHitting(AbstractEnemy e);
     
     public static final int GENERIC=0;
     public static final int FACTORY=1;

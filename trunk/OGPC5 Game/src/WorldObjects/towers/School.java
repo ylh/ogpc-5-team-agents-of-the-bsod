@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
@@ -55,17 +55,17 @@ public class School extends Tower{
     }
 
     @Override
-    protected Bullet setEnemyBulletHitting(Enemy e) {
+    protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
         String s="Game Resources/Sprites/Bullets/apple.png";
-        if(e.getID()==Enemy.GANGS){
+        if(e.getID()==AbstractEnemy.GANGS){
             return new Bullet(s,position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
-        }else if(e.getID()==Enemy.ARSONIST){
+        }else if(e.getID()==AbstractEnemy.ARSONIST){
             return new Bullet(s,position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
-        }else if(e.getID()==Enemy.CRIMINAL){
+        }else if(e.getID()==AbstractEnemy.CRIMINAL){
             return new Bullet(s,position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
-        }else if(e.getID()==Enemy.GRAFITTI){
+        }else if(e.getID()==AbstractEnemy.GRAFITTI){
             return new Bullet(s,position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
-        }else if(e.getID()==Enemy.EDUCATION){
+        }else if(e.getID()==AbstractEnemy.EDUCATION){
             return new Bullet(s,position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
         }
         

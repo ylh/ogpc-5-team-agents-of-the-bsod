@@ -110,62 +110,62 @@ public class Spawner {
      */
     private void addEnemy(int enemy){
         System.out.println("Enemy Type: " + enemy);
-        Enemy e = null;
+        AbstractEnemy e = null;
         switch(enemy){
-            case Enemy.ARSONIST:
-                e = new taylorEnemy(Enemy.ARSONIST, 1, 1000, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Enemies/Arsonist/arsonist0.png", theGame.tiles);
+            case AbstractEnemy.ARSONIST:
+                e = new Enemy(AbstractEnemy.ARSONIST, 1, 1000, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Enemies/Arsonist/arsonist0.png", theGame.tiles);
                 break;
-            case Enemy.CRIMINAL:
-                e = new taylorEnemy(Enemy.CRIMINAL, 1, 1000, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+            case AbstractEnemy.CRIMINAL:
+                e = new Enemy(AbstractEnemy.CRIMINAL, 1, 1000, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
-            case Enemy.EARTHQUACKE:
-                e = new taylorEnemy(Enemy.EARTHQUACKE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-1.png", theGame.tiles);
+            case AbstractEnemy.EARTHQUACKE:
+                e = new Enemy(AbstractEnemy.EARTHQUACKE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-1.png", theGame.tiles);
                 break;
-            case Enemy.EDUCATION:
-                e = new taylorEnemy(Enemy.EDUCATION, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+            case AbstractEnemy.EDUCATION:
+                e = new Enemy(AbstractEnemy.EDUCATION, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
-            case Enemy.FIRE:
-                e = new taylorEnemy(Enemy.FIRE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Fire/fire0.png", theGame.tiles);
+            case AbstractEnemy.FIRE:
+                e = new Enemy(AbstractEnemy.FIRE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Fire/fire0.png", theGame.tiles);
                 break;
-            case Enemy.FLOOD:
-                e = new taylorEnemy(Enemy.FLOOD, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Flood/flood0.png", theGame.tiles);
+            case AbstractEnemy.FLOOD:
+                e = new Enemy(AbstractEnemy.FLOOD, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Flood/flood0.png", theGame.tiles);
                 break;
-            case Enemy.GANGS:
-                e = new taylorEnemy(Enemy.GANGS, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+            case AbstractEnemy.GANGS:
+                e = new Enemy(AbstractEnemy.GANGS, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
-            case Enemy.GENERIC:
-                e = new taylorEnemy(Enemy.GENERIC, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+            case AbstractEnemy.GENERIC:
+                e = new Enemy(AbstractEnemy.GENERIC, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
-            case Enemy.GRAFITTI:
-                e = new taylorEnemy(Enemy.GRAFITTI, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Grafitti/graffiti0.png", theGame.tiles);
+            case AbstractEnemy.GRAFITTI:
+                e = new Enemy(AbstractEnemy.GRAFITTI, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Grafitti/graffiti0.png", theGame.tiles);
                 break;
-            case Enemy.SMOG:
-                e = new taylorEnemy(Enemy.SMOG, 1, 50, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png", theGame.tiles);
+            case AbstractEnemy.SMOG:
+                e = new Enemy(AbstractEnemy.SMOG, 1, 50, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png", theGame.tiles);
                 break;
-            case Enemy.TRASH:
-                e = new taylorEnemy(Enemy.TRASH, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+            case AbstractEnemy.TRASH:
+                e = new Enemy(AbstractEnemy.TRASH, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
-            case Enemy.WATER_POLUTION:
-                e = new taylorEnemy(Enemy.WATER_POLUTION, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+            case AbstractEnemy.WATER_POLUTION:
+                e = new Enemy(AbstractEnemy.WATER_POLUTION, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             default:
-                e = new Enemy(1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.GENERIC, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
         }
         theGame.addToWorldObjects(e);
     }
     
     private void StartGameLoad(){
-        EnemyProbabilityTable.setProbability(Enemy.ARSONIST, 0);
-        EnemyProbabilityTable.setProbability(Enemy.CRIMINAL, 50);
-        EnemyProbabilityTable.setProbability(Enemy.EARTHQUACKE, 0);
-        EnemyProbabilityTable.setProbability(Enemy.EDUCATION, 0);
-        EnemyProbabilityTable.setProbability(Enemy.FIRE, 0);
-        EnemyProbabilityTable.setProbability(Enemy.FLOOD, 0);
-        EnemyProbabilityTable.setProbability(Enemy.GANGS, 0);
-        EnemyProbabilityTable.setProbability(Enemy.GRAFITTI, 0);
-        EnemyProbabilityTable.setProbability(Enemy.SMOG, 0);
-        EnemyProbabilityTable.setProbability(Enemy.TRASH, 50);
-        EnemyProbabilityTable.setProbability(Enemy.WATER_POLUTION, 0);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, 0);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.CRIMINAL, 50);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.EARTHQUACKE, 0);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.EDUCATION, 0);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.FIRE, 0);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.FLOOD, 0);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.GANGS, 0);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.GRAFITTI, 0);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.SMOG, 0);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.TRASH, 50);
+        EnemyProbabilityTable.setProbability(AbstractEnemy.WATER_POLUTION, 0);
     }
 }

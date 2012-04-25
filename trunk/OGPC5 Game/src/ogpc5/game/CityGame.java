@@ -4,10 +4,10 @@
  */
 package ogpc5.game;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import Enemies.EnemyNavigation;
 import Enemies.Spawner;
-import Enemies.taylorEnemy;
+import Enemies.Enemy;
 import GUIStuff.Button;
 import Credits.CreditScreen;
 import GUIStuff.Draggable;
@@ -264,8 +264,8 @@ public class CityGame extends Game {
             for (int i = 0; i < allObjects.size(); i++) {
                 WorldObject wo = allObjects.get(i);
                 wo.Update(allObjects);
-                if (wo instanceof taylorEnemy) {
-                    taylorEnemy e = (taylorEnemy) wo;
+                if (wo instanceof Enemy) {
+                    Enemy e = (Enemy) wo;
                     if(resetEnemies){
                         //e.setEnemyPath(navigator);
                         System.out.println("Set path!");
@@ -273,11 +273,11 @@ public class CityGame extends Game {
                     }
                     if (wo.getPosition().getY() < 0) {
                         allObjects.remove(wo);
-                        score -= ((Enemy) wo).getScore();
+                        score -= ((AbstractEnemy) wo).getScore();
                     }
                 }
-                if (wo instanceof Enemy) {
-                    Enemy e = (Enemy) wo;
+                if (wo instanceof AbstractEnemy) {
+                    AbstractEnemy e = (AbstractEnemy) wo;
                     e.updatePath2(tiles);
                     if (e.isDead()) {
                         e.die(this);

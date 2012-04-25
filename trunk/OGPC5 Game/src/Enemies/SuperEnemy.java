@@ -6,6 +6,7 @@ package Enemies;
 
 import GUIStuff.Tile;
 import Utilities.Vector2;
+import WorldObjects.towers.Bullet;
 import WorldObjects.towers.Road;
 import WorldObjects.towers.Tower;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author HAL-9000
  */
-public class SuperEnemy extends Enemy{
+public class SuperEnemy extends AbstractEnemy{
     
     int targetX, targetY;
     int startX, startY;
@@ -69,6 +70,11 @@ public class SuperEnemy extends Enemy{
                 frontier.add(t[i][j]);
             }
         }
+    }
+
+    @Override
+    public Bullet setTowerBulletHitting(Tower t) {
+        return null;
     }
     
 }

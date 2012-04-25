@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import GUIStuff.Tile;
 import Utilities.Animation;
 import Utilities.ImageCollection;
@@ -68,40 +68,40 @@ public class PoliceFire extends Tower{
     }
 
     @Override
-    protected Bullet setEnemyBulletHitting(Enemy e) {
+    protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
         Bullet b=null;
         switch(e.getID()){
-            case Enemy.SMOG:
+            case AbstractEnemy.SMOG:
                 b=new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
                 break; 
-            case Enemy.TRASH:
+            case AbstractEnemy.TRASH:
                 b=new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
                 break;
-            case Enemy.WATER_POLUTION:
+            case AbstractEnemy.WATER_POLUTION:
                 b=new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
                 break;
-            case Enemy.EDUCATION:
+            case AbstractEnemy.EDUCATION:
                 b= new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
                 break;
-            case Enemy.ARSONIST:
+            case AbstractEnemy.ARSONIST:
                 b=new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
                 break;
-            case Enemy.CRIMINAL:
+            case AbstractEnemy.CRIMINAL:
                 b=new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
                 break;
-            case Enemy.EARTHQUACKE:
+            case AbstractEnemy.EARTHQUACKE:
                 b=new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
                 break;
-            case Enemy.FIRE:
+            case AbstractEnemy.FIRE:
                 b=new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);;
                 break;
-            case Enemy.FLOOD:
+            case AbstractEnemy.FLOOD:
                 b=new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
                 break;
-            case Enemy.GANGS:
+            case AbstractEnemy.GANGS:
                 b=new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
                 break;
-            case Enemy.GRAFITTI:
+            case AbstractEnemy.GRAFITTI:
                 b=new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);;
                 break;
             default:

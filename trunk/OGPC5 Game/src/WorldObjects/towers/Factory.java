@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
@@ -64,8 +64,8 @@ public class Factory extends Tower{
     }
 
     @Override
-    protected Bullet setEnemyBulletHitting(Enemy e) {
-        if(e.getID()==Enemy.SMOG){
+    protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
+        if(e.getID()==AbstractEnemy.SMOG){
             return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
         }
         
