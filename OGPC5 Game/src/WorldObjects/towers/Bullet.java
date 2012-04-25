@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import Utilities.Animation;
 import Utilities.Image2D;
 import Utilities.ImageCollection;
@@ -89,10 +89,10 @@ public class Bullet extends WorldObject {
         //return false;
     }
     public void HitTarget(){
-        Enemy e;
+        AbstractEnemy e;
         Tower t;
-        if (target instanceof Enemy){
-            e=(Enemy)target;
+        if (target instanceof AbstractEnemy){
+            e=(AbstractEnemy)target;
             e.Hit(damage,adamage,sdamage);
             damage=0;
             adamage=0;

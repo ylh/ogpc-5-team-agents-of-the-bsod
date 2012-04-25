@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
@@ -59,15 +59,15 @@ public class GreenBelt extends Tower{
     }
 
     @Override
-    protected Bullet setEnemyBulletHitting(Enemy e) {
+    protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
         String s="Game Resources/Sprites/Bullets/leaf.png";
-        if(e.getID()==Enemy.SMOG){
+        if(e.getID()==AbstractEnemy.SMOG){
             return new Bullet(s,position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
-        }else if(e.getID()==Enemy.ARSONIST){
+        }else if(e.getID()==AbstractEnemy.ARSONIST){
             return new Bullet(s,position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
-        }else if(e.getID()==Enemy.FIRE){
+        }else if(e.getID()==AbstractEnemy.FIRE){
             return new Bullet(s,position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
-        }else if(e.getID()==Enemy.GRAFITTI){
+        }else if(e.getID()==AbstractEnemy.GRAFITTI){
             return new Bullet(s,position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
         }
         return new Bullet(s,position.clone(), damage, adamage, sdamage, projspeed, e);

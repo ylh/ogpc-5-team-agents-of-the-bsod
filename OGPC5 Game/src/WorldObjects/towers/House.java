@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import GUIStuff.Tile;
 import Utilities.Animation;
 import Utilities.ImageCollection;
@@ -82,7 +82,7 @@ public class House extends Tower{
     }
 
     @Override
-    protected Bullet setEnemyBulletHitting(Enemy e) {
+    protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
         return new Bullet(position.clone(), damage, adamage, sdamage, projspeed, e);
     }
     

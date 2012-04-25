@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
@@ -57,11 +57,11 @@ public class RecyclingCenter extends Tower{
     }
 
     @Override
-    protected Bullet setEnemyBulletHitting(Enemy e) {
+    protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
         String s="Game Resources/Sprites/Bullets/paper.png";
-        if(e.getID()==Enemy.TRASH){
+        if(e.getID()==AbstractEnemy.TRASH){
             return new Bullet(s,position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
-        }else if(e.getID()==Enemy.WATER_POLUTION){
+        }else if(e.getID()==AbstractEnemy.WATER_POLUTION){
             return new Bullet(s,position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
         }
         

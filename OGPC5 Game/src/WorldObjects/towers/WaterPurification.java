@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
@@ -54,10 +54,10 @@ public class WaterPurification extends Tower{
     }
 
     @Override
-    protected Bullet setEnemyBulletHitting(Enemy e) {
-        if(e.getID()==Enemy.TRASH){
+    protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
+        if(e.getID()==AbstractEnemy.TRASH){
             return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
-        }else if(e.getID()==Enemy.WATER_POLUTION){
+        }else if(e.getID()==AbstractEnemy.WATER_POLUTION){
             return new Bullet(position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
         }
         

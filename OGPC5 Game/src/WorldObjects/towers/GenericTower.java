@@ -4,7 +4,7 @@
  */
 package WorldObjects.towers;
 
-import Enemies.Enemy;
+import Enemies.AbstractEnemy;
 import Utilities.Animation;
 import Utilities.ImageCollection;
 import Utilities.Vector2;
@@ -58,7 +58,7 @@ public class GenericTower extends Tower{
      * @return 
      */
     @Override
-    protected Bullet setEnemyBulletHitting(Enemy e) {
+    protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
         return null;
     }
     
