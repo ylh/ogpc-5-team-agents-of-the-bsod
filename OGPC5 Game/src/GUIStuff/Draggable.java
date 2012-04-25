@@ -83,6 +83,9 @@ public class Draggable {
             case Tower.STORE:
                 t= new Store(placingPos,1,1);
                 break;
+            case Tower.WATER_PURIFICATION_CENTER:
+                t= new WaterPurification(placingPos,1,1);
+                break;
             case Tower.GENERIC:
                 t= new GenericTower(placingPos,"");
                 break;
