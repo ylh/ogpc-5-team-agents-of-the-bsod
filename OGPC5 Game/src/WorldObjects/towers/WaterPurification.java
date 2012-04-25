@@ -33,7 +33,10 @@ public class WaterPurification extends Tower{
 
     @Override
     protected void loadAnimation() {
-        
+        ani = new Animation(6,10,position, 100);
+        for(int i=0; i<6; i++){
+            ani.addCell("Game Resources/Sprites/SamSprites/Towers/Water Purification/pureWater"+i+".png");
+        }
     }
 
     @Override
