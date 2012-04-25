@@ -387,6 +387,9 @@ public class CityGame extends Game {
                 }
                 if (t.isDead()) {
                     activeTiles.remove(t);
+                    int x=(int)t.getPosition().getX()/32;
+                    int y=(int)t.getPosition().getY()/32;
+                    tiles[x][y]= new Tile(new Vector2(x * 32, y * 32));
                 }
                 globalCount++;
             }

@@ -227,40 +227,40 @@ public class Enemy extends AbstractEnemy{
     public void LoadStats() {
         switch(id){
             case AbstractEnemy.ARSONIST:
-                load(50,100);
+                load(25,500);
                 break;
             case AbstractEnemy.EARTHQUACKE:
-                load(4,1);
+                load(4,10);
                 break;
             case AbstractEnemy.FIRE:
-                load(5,10);
+                load(5,100);
                 break;
             case AbstractEnemy.FLOOD:
-                load(5,5);
+                load(5,50);
                 break;
             case AbstractEnemy.GRAFITTI:
-                load(5,10);
+                load(5,100);
                 break;
             case AbstractEnemy.TRASH:
-                load(7,10);
+                load(7,100);
                 break;
             case AbstractEnemy.SMOG:
-                load(2,5);
+                load(2,50);
                 break;
             case AbstractEnemy.WATER_POLUTION:
-                load(5,5);
+                load(5,50);
                 break;
             case AbstractEnemy.CRIMINAL:
-                load(15,30);
+                load(15,300);
                 break;
             case AbstractEnemy.GANGS:
-                load(10,20);
+                load(10,200);
                 break;
             case AbstractEnemy.EDUCATION:
-                load(3,5);
+                load(3,50);
                 break;
             default:
-                load(1,10);
+                load(1,20);
                 break;
         }
     }

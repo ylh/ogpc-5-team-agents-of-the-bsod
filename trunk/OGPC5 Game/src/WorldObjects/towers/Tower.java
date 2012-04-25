@@ -36,6 +36,8 @@ public abstract class Tower extends Tile {
     protected double loaded;  //used to compute firing times.
     Animation ani;
     ArrayList<Tile> rangeSelectedTiles;
+    boolean healthDisplay;
+    double maxHealth;
     /*
      * Coordinates for bounding box
      */
@@ -48,6 +50,7 @@ public abstract class Tower extends Tile {
     boolean isNearHouse;
     boolean isNearFactory;
     boolean isNearStore;
+    
 
     public Tower(Vector2 pos,String spritePath, int high, int wide) {
         super(pos);
@@ -62,8 +65,10 @@ public abstract class Tower extends Tile {
         loaded=-10;
         cost=0;
         rangeSelectedTiles=new ArrayList<Tile>();
+        healthDisplay=false;
         loadAnimation();
         loadStats();
+        maxHealth=health;
     }
 
     public abstract Animation getAnimation();
@@ -76,6 +81,7 @@ public abstract class Tower extends Tile {
     public void Update(ArrayList<WorldObject> wol) {
         loaded -= 1;
         shoot(wol);
+        
 
     }
 
@@ -93,6 +99,11 @@ public abstract class Tower extends Tile {
         }
         if(rangeSelected){
             batch.Draw(rSelectSprite, position, 500);
+        }
+        if(healthDisplay){
+            int h=(int)(health/maxHealth*13);
+            Image2D healthBar=new Image2D("Game Resources/Sprites/Status/Health/health"+h+".png");
+            batch.Draw(healthBar, position,505);
         }
     }
 
@@ -189,6 +200,7 @@ public abstract class Tower extends Tile {
 
     public void Hit(double damage) {
         health -= Math.max(0, damage);
+        healthDisplay=true;
     }
     public void Hit(Bullet b){
         Hit(b.damage);
