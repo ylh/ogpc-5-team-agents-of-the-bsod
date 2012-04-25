@@ -26,11 +26,21 @@ public class MenuButton {
     public static final int YES=3;
     public static final int NEXT=4;
     
+    /**
+     * Initializes the button
+     * @param pos the position of the button
+     * @param type the kind of button
+     */
     public MenuButton(Vector2 pos, int type){
         position=pos;
         this.type=type;
         load(type);
     }
+    
+    /**
+     * Draws a different sprite depending on the location of the mouse relative to the button
+     * @param batch The ImageCollection for drawing
+     */
     public void draw(ImageCollection batch){
         if(selected){
             batch.Draw(scrolled, position, 15);
@@ -39,6 +49,10 @@ public class MenuButton {
         }
     }
     
+    /**
+     * Determines if the button should be highlighted
+     * @param m Mouse in active use
+     */
     public void update(Mouse m){
         if(normal.getRectangle().contains((int)m.location().getX(), (int)m.location().getY())){
             selected=true;
@@ -46,7 +60,10 @@ public class MenuButton {
             selected=false;
         }
     }
-    
+    /**
+     * Initializes the image for the button based upon its type
+     * @param type the kind of MenuButton
+     */
     private void load(int type){
         if(type==CREDITS){
             normal = new Image2D("Game Resources/Sprites/GUIs/NormalCredits.png");
@@ -70,6 +87,11 @@ public class MenuButton {
         }
     }
     
+    /**
+     * Determines if the MenuButton is pressed
+     * @param m the Mouse in active use
+     * @return whether the mouse is over the button and the mouse is pressed
+     */
     public boolean isPressed(Mouse m){
         return selected && m.isPressed(Mouse.LEFT_BUTTON);
     }
