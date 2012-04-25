@@ -26,6 +26,11 @@ public class Draggable {
         pos=p;
         id=ID;
     }
+    
+    /**
+     * Moves toward mouse
+     * @param m Mouse in active use
+     */
     public void update(Mouse m){
         double x1=pos.getX();
         double x2=m.location().getX();
@@ -36,10 +41,20 @@ public class Draggable {
         pos.dY((y2-y1)*movespeed);
         
     }
+    
+    /**
+     * Draws
+     * @param batch ImageCollection for drawing
+     */
     public void draw(ImageCollection batch){
         batch.Draw(sprite,pos,1000);
     }
     
+    /**
+     * Creates a tower at a given tile based upon the id
+     * @param pos Rect used to determine the position for placement
+     * @return the Tower to be placed
+     */
     public Tower getTower(Rect pos){
         Tower t=null;
         Vector2 placingPos=new Vector2(pos.x*32 +16, pos.y*32 +16);
