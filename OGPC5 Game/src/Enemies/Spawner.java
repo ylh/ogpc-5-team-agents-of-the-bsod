@@ -54,9 +54,7 @@ public class Spawner {
         quota=10;
         isSpawning=false;
         thisRoundQuota=new double[12];
-        for(int i = 0; i<12; i++){            
-            EnemyProbabilityTable.setProbability(i, 20);
-        }
+        StartGameLoad();
     }
 
     /**
@@ -71,15 +69,25 @@ public class Spawner {
         if(!isSpawning && time- lastTime >= timeToWait){
             isSpawning=true;
             new SoundFile("Game Resources/Sound/ominous.wav",1).start();
-            for(int i=0; i<12; i++){
-                thisRoundQuota[i]=quota*(EnemyProbabilityTable.getProbability(i)/100.0);
+            for(int n=0; n<quota;){
+                for(int i=0; i<12; i++){
+                    if (Math.random()<EnemyProbabilityTable.getProbability(i)/100.0){
+                        thisRoundQuota[i]++;
+                        n++;
+                    }
+                }
             }
         }
         if(!isSpawning && k.isKeyDown(KeyEvent.VK_SPACE)){
             isSpawning=true;
             new SoundFile("Game Resources/Sound/ominous.wav",1).start();
-            for(int i=0; i<12; i++){
-                thisRoundQuota[i]=quota*(EnemyProbabilityTable.getProbability(i)/100.0);
+            for(int n=0; n<quota;){
+                for(int i=0; i<12; i++){
+                    if (Math.random()<EnemyProbabilityTable.getProbability(i)/100.0){
+                        thisRoundQuota[i]++;
+                        n++;
+                    }
+                }
             }
         }
         if(isSpawning && time-spawnLast >=500){
@@ -124,25 +132,25 @@ public class Spawner {
         AbstractEnemy e = null;
         switch(enemy){
             case AbstractEnemy.ARSONIST:
-                e = new Enemy(AbstractEnemy.ARSONIST, 1, 1000, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Enemies/Arsonist/arsonist0.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.ARSONIST, 1, 1000, 2, pos.clone(), "Game Resources/Sprites/SamSprites/Enemies/Arsonist/arsonist0.png", theGame.tiles);
                 break;
             case AbstractEnemy.CRIMINAL:
-                e = new Enemy(AbstractEnemy.CRIMINAL, 1, 1000, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.CRIMINAL, 2, 1000, 2, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case AbstractEnemy.EARTHQUACKE:
                 e = new Enemy(AbstractEnemy.EARTHQUACKE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-1.png", theGame.tiles);
                 break;
             case AbstractEnemy.EDUCATION:
-                e = new Enemy(AbstractEnemy.EDUCATION, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.EDUCATION, 1, 50, 20, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case AbstractEnemy.FIRE:
-                e = new Enemy(AbstractEnemy.FIRE, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Fire/fire0.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.FIRE, 3, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Fire/fire0.png", theGame.tiles);
                 break;
             case AbstractEnemy.FLOOD:
-                e = new Enemy(AbstractEnemy.FLOOD, 1, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Flood/flood0.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.FLOOD, 2, 50, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Flood/flood0.png", theGame.tiles);
                 break;
             case AbstractEnemy.GANGS:
-                e = new Enemy(AbstractEnemy.GANGS, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.GANGS, 1, 50, 15, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case AbstractEnemy.GENERIC:
                 e = new Enemy(AbstractEnemy.GENERIC, 1, 50, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
@@ -180,7 +188,7 @@ public class Spawner {
         EnemyProbabilityTable.setProbability(AbstractEnemy.WATER_POLUTION, 0);
     }
     
-    public void setSpawnPropabilities(int score,ArrayList<Tower> towers){
+    public void setSpawnProbabilities(int score,ArrayList<Tower> towers){
         quota=(score/40)+3;
         
         int factories=0;
@@ -225,7 +233,17 @@ public class Spawner {
         }
         total=factories+parks+houses+monuments+policefire+recycling+schools+stores+water;
         if (total!=0){
-            
+            EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, total*3/(policefire+1));
+            EnemyProbabilityTable.setProbability(AbstractEnemy.CRIMINAL, (total*3+stores*5)/(policefire+factories+1));
+            EnemyProbabilityTable.setProbability(AbstractEnemy.EARTHQUACKE, total);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.EDUCATION, total*8/(schools*2+1));
+            EnemyProbabilityTable.setProbability(AbstractEnemy.FIRE, total*6+parks+factories);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.FLOOD, 5+total*5);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.GANGS, stores*15/(schools+1));
+            EnemyProbabilityTable.setProbability(AbstractEnemy.GRAFITTI, total*10/(schools+1));
+            EnemyProbabilityTable.setProbability(AbstractEnemy.SMOG, total*5+factories*15);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.TRASH, (total*5+factories*15)/(recycling*2+1));
+            EnemyProbabilityTable.setProbability(AbstractEnemy.WATER_POLUTION, (total*3+factories*20)/(water*3+1));
         }
         else{
             EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, 0);
