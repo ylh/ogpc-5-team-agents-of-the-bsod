@@ -190,7 +190,7 @@ public class Spawner {
     }
     
     public void setSpawnProbabilities(int score,ArrayList<Tower> towers){
-        quota=(int)(Math.sqrt(score)/100)+2;
+        quota=(int)(score/100)+2;
         scaleFactor=1+score/2000;
         int factories=0;
         int parks=0;
@@ -259,7 +259,7 @@ public class Spawner {
             EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, 0);
             EnemyProbabilityTable.setProbability(AbstractEnemy.CRIMINAL, 0);
             EnemyProbabilityTable.setProbability(AbstractEnemy.EARTHQUACKE, 0);
-            EnemyProbabilityTable.setProbability(AbstractEnemy.EDUCATION, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.EDUCATION, 100);
             EnemyProbabilityTable.setProbability(AbstractEnemy.FIRE, 0);
             EnemyProbabilityTable.setProbability(AbstractEnemy.FLOOD, 0);
             EnemyProbabilityTable.setProbability(AbstractEnemy.GANGS, 0);
