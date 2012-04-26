@@ -295,6 +295,7 @@ public class CityGame extends Game {
             bs.Update(keyboard);
             if(bs.returnToGame()){
                 blueScreen=false;
+                bs= new BlueScreen();
             }
             if(bs.goToStart()){
                 blueScreen=false;

@@ -9,6 +9,7 @@ import Utilities.ImageCollection;
 import Utilities.KeyBoard;
 import Utilities.SoundFile;
 import Utilities.Vector2;
+import java.awt.Color;
 
 /**
  *
@@ -32,12 +33,18 @@ public class BlueScreen {
     String s7="Check to make sure that any new hardware or software is properly installed.";
     String s8="If this is a Java problem, you are screwed until Oracle releases a new update";
     String s9="which might simply continue the problem.";
-    String s10="Technicle information: ";
-    String s11="*** STOP: 0x000000D1 (0x0000006c, 0x0000006f, 0x0000006c, 0x0000007a)";
-    String s12="***     Main.join() -6982Bf error at Address 777Bg";
-    String s13="Begining dump of physical memory";
-    String s14="Physical memory dump complete";
-    String s15="Hope you city was nice, because now it's gone!";
+    String s10 ="If problems continue, disable or remove any newly installed hardware";
+    String s11="or software. Disable JAVA memory options such as caching or shadowing.";
+    String s12="If you need to use Safe Mode to remove or disable any components, then";
+    String s13="you are doing something wrong, because this isn't the OS. Protip:";
+    String s14="hold down BSoD.";
+    String s15="Technical information: ";
+    String s16="***   STOP: 0x000000D1 (0x0000006c, 0x0000006f, 0x0000006c, 0x0000007a)";
+    String s17="***          Main.join() -6982Bf error at Address 777Bg";
+    String s18="Begining dump of physical memory";
+    String s19="Physical memory dump complete";
+    String s20="Hope you city was nice, because now it's gone!";
+    String s21="Contact your local Sys Admin for more information";
     
     public BlueScreen(){
         hasStarted=false;
@@ -45,10 +52,31 @@ public class BlueScreen {
     
     public void Draw(ImageCollection batch){
         batch.Draw(background, new Vector2(970 / 2, 611 / 2));
+        batch.DrawString(new Vector2(10,14), s1, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*2), s2, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*4), s3, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*6), s4, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*7), s5, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*8), s6, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*10), s7, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*11), s8, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*12), s9, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*14), s10, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*15), s11, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*16), s12, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*17), s13, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*18), s14, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*20), s15, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*22), s16, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*25), s17, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*27), s18, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*28), s19, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*29), s20, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
+        batch.DrawString(new Vector2(10,14*30), s21, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
     }
     
     public void Update(KeyBoard k){
-        if(k.isKeyDown('s') && k.isKeyDown('g') && k.isKeyDown('d')  && k.isKeyDown('e')){
+        if(k.isKeyDown('s') && k.isKeyDown('d') && k.isKeyDown('b') && k.isKeyDown('o')){
             sgde=true;
         }
         double t=System.currentTimeMillis();
