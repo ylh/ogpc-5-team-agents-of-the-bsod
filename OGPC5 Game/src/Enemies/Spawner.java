@@ -233,17 +233,26 @@ public class Spawner {
         }
         total=factories+parks+houses+monuments+policefire+recycling+schools+stores+water;
         if (total!=0){
-            EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, total*3/(policefire+1));
-            EnemyProbabilityTable.setProbability(AbstractEnemy.CRIMINAL, (total*3+stores*5)/(policefire+factories+1));
+            
+            
             EnemyProbabilityTable.setProbability(AbstractEnemy.EARTHQUACKE, total);
             EnemyProbabilityTable.setProbability(AbstractEnemy.EDUCATION, total*8/(schools*2+1));
             EnemyProbabilityTable.setProbability(AbstractEnemy.FIRE, total*6+parks+factories);
             EnemyProbabilityTable.setProbability(AbstractEnemy.FLOOD, 5+total*5);
-            EnemyProbabilityTable.setProbability(AbstractEnemy.GANGS, stores*15/(schools+1));
             EnemyProbabilityTable.setProbability(AbstractEnemy.GRAFITTI, total*10/(schools+1));
             EnemyProbabilityTable.setProbability(AbstractEnemy.SMOG, total*5+factories*15);
             EnemyProbabilityTable.setProbability(AbstractEnemy.TRASH, (total*5+factories*15)/(recycling*2+1));
             EnemyProbabilityTable.setProbability(AbstractEnemy.WATER_POLUTION, (total*3+factories*20)/(water*3+1));
+            if (score>200){
+                EnemyProbabilityTable.setProbability(AbstractEnemy.GANGS, stores*15/(schools+1));
+            }
+            if (score>500){
+                EnemyProbabilityTable.setProbability(AbstractEnemy.CRIMINAL, (total*3+stores*5)/(policefire+factories+1));
+            }
+            if (score>1000){
+                EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, total*3/(policefire+1));
+            }
+            
         }
         else{
             EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, 0);
