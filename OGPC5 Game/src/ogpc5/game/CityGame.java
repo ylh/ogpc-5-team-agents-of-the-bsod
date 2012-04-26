@@ -620,11 +620,11 @@ public class CityGame extends Game {
         //button 7
         buttons.add(new Button(Tower.STORE, "Game Resources/Sprites/August/Supermarket 32x32.png", 880, 220));
         //button 8
-        buttons.add(new Button(99, "Game Resources/Sprites/Roads/CurvedRoadRightDown.png", 920, 220));
+        buttons.add(new Button(99, "Game Resources/Sprites/Roads/CurvedRoadRightDown.png", 920, 260));
         //delete
         buttons.add(new Button(100, "Game Resources/Sprites/GUIS/deleteButton.png", 900, 300));
         //button 9?
-        buttons.add(new Button(Tower.SCHOOL, "Game Resources/Sprites/SamSprites/Towers/School/school0.png",920,260));
+        buttons.add(new Button(Tower.SCHOOL, "Game Resources/Sprites/SamSprites/Towers/School/school0.png",920,220));
         // waterPurification. wooh
         buttons.add(new Button(Tower.WATER_PURIFICATION_CENTER,"Game Resources/Sprites/SamSprites/Towers/Water Purification/pureWater5.png",880,260));
 
