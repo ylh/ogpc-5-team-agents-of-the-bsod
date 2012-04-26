@@ -579,7 +579,7 @@ public class CityGame extends Game {
      * @return the score.
      */
     private double getScore() {
-        return score + (money +happiness - polution)/3;
+        return Math.max(score + (money +happiness - polution)/3,0);
     }
 
     public void addToWorldObjects(WorldObject wo) {
@@ -603,13 +603,13 @@ public class CityGame extends Game {
     }
     public void addButtons(){
         //factory
-        buttons.add(new Button(Tower.FACTORY, "Game Resources/Sprites/SamSprites/Towers/Factory/3factory32x32.png", 880, 100));
+        buttons.add(new Button(Tower.FACTORY, "Game Resources/Sprites/August/ACME Corp/0.png", 880, 100));
         //button 2
         buttons.add(new Button(Tower.GREEN_BELT, "Game Resources/Sprites/Liam's Sprites/Towers/Park/park2-1.png", 920,100));
         //button 3
         buttons.add(new Button(Tower.HOUSE, "Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png", 880, 140));
         //button 4
-        buttons.add(new Button(Tower.MONUMENT, "Game Resources/Sprites/SamSprites/Towers/Monuments/monument0.png", 920, 140));
+        buttons.add(new Button(Tower.MONUMENT, "Game Resources/Sprites/August/Memorial/00.png", 920, 140));
         //button 5
         buttons.add(new Button(Tower.POLICE_FIRE_STATION, "Game Resources/Sprites/August/Police Station 32x32.png", 880, 180));
         //button 6
