@@ -82,61 +82,77 @@ public class EnemyNavigation2 {
         int minDir = -1;
         int n = 0;
         int[] values = new int[4];
-        try {
-            values[0] = visits[x][y - 1];
-            if (values[0] < 9000) {
-                n++;
-            }
-        } catch (Exception e) {
-            //GO HERE
-            values[0] = -1000000;
-        }
-        try {
-            values[1] = visits[x + 1][y];
-            if (values[1] < 9000) {
-                n++;
-            }
-        } catch (Exception e) {
-            //DON'T GO HERE
-            values[1] = 1000000;
-        }
-        try {
-            values[2] = visits[x][y + 1];
-            if (values[2] < 9000) {
-                n++;
-            }
-        } catch (Exception e) {
-            //DON'T GO HERE
-            values[2] = 1000000;
-        }
-        try {
-            values[3] = visits[x - 1][y];
-            if (values[3] < 9000) {
-                n++;
-            }
-        } catch (Exception e) {
-            //DON'T GO HERE
-            values[3] = 1000000;
-        }
-        if (n == 4 && visits[x][y]<4) {
-            visits[x][y]-=1;
-            return dir;
+        /**
+         * If it's off the road, it'll go up
+         */
+        if (visits[x][y] > 9000) {
+            return 0;
         } else {
-            n = 0;
-            for (int i = 0; i < 4; i++) {
-                if (values[i] < min) {
-                    min = values[i];
-                    minDir = i;
+            /**
+             * Get the values of the adjacent squares
+             */
+            try {
+                values[0] = visits[x][y - 1];
+                if (values[0] < 9000) {
                     n++;
-                } else if (values[i] == min) {
+                }
+            } catch (Exception e) {
+                //GO HERE
+                values[0] = -1000000;
+            }
+            try {
+                values[1] = visits[x + 1][y];
+                if (values[1] < 9000) {
                     n++;
-                    double m = (double) n;
-                    if (Math.random() <= 1 / m) {
+                }
+            } catch (Exception e) {
+                //DON'T GO HERE
+                values[1] = 1000000;
+            }
+            try {
+                values[2] = visits[x][y + 1];
+                if (values[2] < 9000) {
+                    n++;
+                }
+            } catch (Exception e) {
+                //DON'T GO HERE
+                values[2] = 1000000;
+            }
+            try {
+                values[3] = visits[x - 1][y];
+                if (values[3] < 9000) {
+                    n++;
+                }
+            } catch (Exception e) {
+                //DON'T GO HERE
+                values[3] = 1000000;
+            }
+            /**
+             * If there are 4 adjacent squares and I haven't been here before much, go straight
+             */
+            if (n == 4 && visits[x][y] < 4) {
+                visits[x][y] -= 1;
+                return dir;
+            } else {
+                /**
+                 * Pick the square that's been visited the least
+                 */
+                n = 0;
+                for (int i = 0; i < 4; i++) {
+                    if (values[i] < min) {
+                        min = values[i];
                         minDir = i;
+                        n++;
+                    } else if (values[i] == min) {
+                        n++;
+                        double m = (double) n;
+                        if (Math.random() <= 1 / m) {
+                            minDir = i;
+                        }
                     }
                 }
+                return minDir;
             }
-            return minDir;
         }
         /* Directions:
          *   0 
