@@ -43,6 +43,7 @@ public abstract class AbstractEnemy extends WorldObject {
     double range;
     double loaded;
     double fireSpeed;
+    double maxspeed;
     /**
      * The type ID for the enemy
      */
@@ -78,6 +79,7 @@ public abstract class AbstractEnemy extends WorldObject {
     public AbstractEnemy(double Speed, double Health, double Armor, Vector2 pos, String path, Tile[][] t) {
         super(pos, 1, path);
         speed = Speed;
+        maxspeed= Speed;
         targetPos=new Vector2(pos.getX(),pos.getY()-32);
         health = Health;
         maxhealth= Health;
@@ -119,7 +121,7 @@ public abstract class AbstractEnemy extends WorldObject {
      * @param sdamage the amount of damage the speed rating takes
      */
     public void Hit(double damage,double adamage,double sdamage){
-        speed/=(sdamage+1);
+        speed=Math.min(maxspeed/(sdamage+1),speed);
         if (armor>0){
             armorDisplay=1;
         }

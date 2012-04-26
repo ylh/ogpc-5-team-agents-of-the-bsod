@@ -48,6 +48,7 @@ public class Factory extends Tower{
         adamage=0;
         projspeed=10;//not correct
         speed=15;//not done
+        sdamage=1;
         this.moneyBonus=8;
         this.happyBonus=-10;
     }
@@ -71,7 +72,7 @@ public class Factory extends Tower{
     @Override
     protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
         if(e.getID()==AbstractEnemy.SMOG){
-            return new Bullet(position.clone(), damage/2, adamage/2, sdamage/2, projspeed, e);
+            return new Bullet(position.clone(), damage/2, adamage/2, 0, projspeed, e);
         }
         
         return new Bullet(position.clone(), damage, adamage, sdamage, projspeed, e);
