@@ -197,7 +197,7 @@ public abstract class AbstractEnemy extends WorldObject {
         healthDisplay--;
         armorDisplay++;
         loaded--;
-        range+=0.5;
+        range+=0.2;
     }
     public void shoot(ArrayList<WorldObject> wo,ArrayList<Tower> towers) {
         //peter, what?
