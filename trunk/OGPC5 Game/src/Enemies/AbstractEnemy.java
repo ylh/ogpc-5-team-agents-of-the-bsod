@@ -120,12 +120,13 @@ public abstract class AbstractEnemy extends WorldObject {
      */
     public void Hit(double damage,double adamage,double sdamage){
         speed/=(sdamage+1);
-        armor=Math.max(0,armor-adamage);
-        health-=Math.max(0,damage-armor);
-        healthDisplay=20;
         if (armor>0){
             armorDisplay=1;
         }
+        armor=Math.max(0,armor-adamage);
+        health-=Math.max(0,damage-armor);
+        healthDisplay=20;
+        
         
         
     }

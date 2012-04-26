@@ -260,6 +260,8 @@ public class CityGame extends Game {
                 //navigator.start();
             }
             spawn.update(keyboard);
+            
+            spawn.setSpawnProbabilities((int)score,activeTiles);
 
             for (int i = 0; i < allObjects.size(); i++) {
                 WorldObject wo = allObjects.get(i);

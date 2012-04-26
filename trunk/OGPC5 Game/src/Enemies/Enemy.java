@@ -242,7 +242,7 @@ public class Enemy extends AbstractEnemy{
                 load(5,100);
                 break;
             case AbstractEnemy.TRASH:
-                load(7,100);
+                load(4,100);
                 break;
             case AbstractEnemy.SMOG:
                 load(2,50);
