@@ -315,7 +315,7 @@ public class CityGame extends Game {
             }
             spawn.update(keyboard);
             
-            spawn.setSpawnProbabilities((int)score,activeTiles);
+            spawn.setSpawnProbabilities((int)(score+polution/3),activeTiles);
 
             for (int i = 0; i < allObjects.size(); i++) {
                 WorldObject wo = allObjects.get(i);
