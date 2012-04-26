@@ -21,6 +21,7 @@ public class Enemy extends AbstractEnemy{
     
     Animation a;
     Animation earthquake1, earthquake2, earthquake3, earthquake4, smog1, smog2, smog3, smog4;
+    String bulletSprite;
     /**
      * 
      * @param Speed enemy speed
@@ -55,6 +56,7 @@ public class Enemy extends AbstractEnemy{
         score=10;
         id=type;
         System.out.println("Enemy Created");
+        bulletSprite="Game Resources/Sprites/particle.png";
         chooseAnimation();
         initializeAnimations();
         LoadStats();
@@ -219,7 +221,7 @@ public class Enemy extends AbstractEnemy{
     }
     @Override
     public Bullet setTowerBulletHitting(Tower t) {
-        return new Bullet(this.position.clone(), this.damage, 0, 0, 10, t);
+        return new Bullet(bulletSprite, this.position.clone(), this.damage, 0, 0, 10, t);
         
     }
 
@@ -227,13 +229,13 @@ public class Enemy extends AbstractEnemy{
     public void LoadStats() {
         switch(id){
             case AbstractEnemy.ARSONIST:
-                load(25,500);
+                load("Game Resources/Sprites/Bullets/firebullet.png",25,500);
                 break;
             case AbstractEnemy.EARTHQUACKE:
                 load(4,10);
                 break;
             case AbstractEnemy.FIRE:
-                load(5,100);
+                load("Game Resources/Sprites/Bullets/firebullet.png",5,100);
                 break;
             case AbstractEnemy.FLOOD:
                 load(5,50);
@@ -245,10 +247,10 @@ public class Enemy extends AbstractEnemy{
                 load(4,100);
                 break;
             case AbstractEnemy.SMOG:
-                load(2,50);
+                load("Game Resources/Sprites/Bullets/smogbullet.png",2,50);
                 break;
             case AbstractEnemy.WATER_POLUTION:
-                load(5,50);
+                load("Game Resources/Sprites/Bullets/smogbullet.png",5,50);
                 break;
             case AbstractEnemy.CRIMINAL:
                 load(15,300);
@@ -268,5 +270,10 @@ public class Enemy extends AbstractEnemy{
     private void load(int damage, int fireSpeed){
         this.damage=damage;
         this.fireSpeed=fireSpeed;
+    }
+    private void load(String s, int damage, int fireSpeed){
+        this.damage=damage;
+        this.fireSpeed=fireSpeed;
+        this.bulletSprite=s;
     }
 }

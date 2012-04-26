@@ -28,8 +28,11 @@ public class Monument extends Tower{
 
     @Override
     protected void loadAnimation() {
-        ani = new Animation(1,10, position,100);
-        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Monuments/monument0.png");
+        ani = new Animation(11,10, position,100);
+        for(int n=0; n<10; n++){
+            ani.addCell("Game Resources/Sprites/August/Memorial/0"+n+".png");
+        }
+        ani.addCell("Game Resources/Sprites/August/Memorial/10.png");
     }
 
     @Override

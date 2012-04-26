@@ -60,7 +60,7 @@ public class GreenBelt extends Tower{
 
     @Override
     protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
-        String s="Game Resources/Sprites/Bullets/leaf.png";
+        String s="Game Resources/Sprites/Bullets/leafbullet.png";
         if(e.getID()==AbstractEnemy.SMOG){
             return new Bullet(s,position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
         }else if(e.getID()==AbstractEnemy.ARSONIST){

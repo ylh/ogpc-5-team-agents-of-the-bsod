@@ -28,11 +28,10 @@ public class Factory extends Tower{
 
     @Override
     protected void loadAnimation() {
-        ani = new Animation(4,10, position,100);
-        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory1_32x32.png");
-        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory2_32x32.png");
-        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory3_32x32.png");
-        ani.addCell("Game Resources/Sprites/SamSprites/Towers/Factory/3factory32x32.png");
+        ani = new Animation(20,10, position,100);
+        for(int n=0;n<21;n++){
+            ani.addCell("Game Resources/Sprites/August/ACME Corp/"+n+".png");
+        }
         
 //        ani= new Animation(21, 10, position, 100);
 //        for(int i=0; i<21; i++){
@@ -71,11 +70,12 @@ public class Factory extends Tower{
 
     @Override
     protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
+        String s="Game Resources/Sprites/Bullets/firebullet.png";
         if(e.getID()==AbstractEnemy.SMOG){
-            return new Bullet(position.clone(), damage/2, adamage/2, 0, projspeed, e);
+            return new Bullet(s,position.clone(), damage/2, adamage/2, 0, projspeed, e);
         }
         
-        return new Bullet(position.clone(), damage, adamage, sdamage, projspeed, e);
+        return new Bullet(s,position.clone(), damage, adamage, sdamage, projspeed, e);
     }
     
 }
