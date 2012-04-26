@@ -190,7 +190,7 @@ public class Spawner {
     }
     
     public void setSpawnProbabilities(int score,ArrayList<Tower> towers){
-        quota=(int)(score/100)+2;
+        quota=(int)(Math.sqrt((double)score)/10)+2;
         scaleFactor=1+score/2000;
         int factories=0;
         int parks=0;
