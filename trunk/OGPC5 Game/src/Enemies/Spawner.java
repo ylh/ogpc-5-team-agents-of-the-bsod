@@ -133,7 +133,7 @@ public class Spawner {
         AbstractEnemy e = null;
         switch(enemy){
             case AbstractEnemy.ARSONIST:
-                e = new Enemy(AbstractEnemy.ARSONIST, 1, 1000*scaleFactor, 2*scaleFactor, pos.clone(), "Game Resources/Sprites/SamSprites/Enemies/Arsonist/arsonist0.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.ARSONIST, 1, 150*scaleFactor, 2*scaleFactor, pos.clone(), "Game Resources/Sprites/SamSprites/Enemies/Arsonist/arsonist0.png", theGame.tiles);
                 break;
             case AbstractEnemy.CRIMINAL:
                 e = new Enemy(AbstractEnemy.CRIMINAL, 2, 100*scaleFactor, 2*scaleFactor, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
