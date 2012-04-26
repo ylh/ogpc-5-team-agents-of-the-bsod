@@ -14,6 +14,7 @@ import GUIStuff.Draggable;
 import GUIStuff.MenuButton;
 import GUIStuff.ScrollingBackground;
 import GUIStuff.Tile;
+import GUIStuff.Tutorial;
 import Game.Game;
 import KylesTesting.OpeningAnimation;
 import Utilities.Image2D;
@@ -87,8 +88,10 @@ public class CityGame extends Game {
     boolean tutorial=false;
     MenuButton skip;
     MenuButton yes;
+    Tutorial tut;
     //PreGame
     boolean makeFirstRoad = true;
+    
     //Main game needed
     Tile BottomRoad;
     double UpdateAllStart;
@@ -150,6 +153,7 @@ public class CityGame extends Game {
         //TutorialStart
         skip = new MenuButton(new Vector2(485, 500), MenuButton.SKIP);
         yes = new MenuButton(new Vector2(485, 350), MenuButton.YES);
+        tut= new Tutorial();
         
         //navigator = new EnemyNavigation(tiles, "Default", 10, 10);
     }
@@ -246,6 +250,15 @@ public class CityGame extends Game {
             skip.update(mouse);
             if(skip.isPressed(mouse)){
                 startTutorial=false;
+            }
+            if(yes.isPressed(mouse)){
+                tutorial=true;
+                startTutorial=false;
+            }
+        }else if(tutorial){
+            tut.Update(keyboard, mouse);
+            if(tut.isDone()){
+                tutorial=false;
             }
         } else {
 
@@ -504,7 +517,9 @@ public class CityGame extends Game {
             skip.draw(batch);
             yes.draw(batch);
             batch.DrawString(new Vector2(50,100), "Would you like a tutorial?", Color.CYAN, 5, ImageCollection.FONT_DIALOG, ImageCollection.FONT_NORMAL, 28);
-        } else {
+        }else if(tutorial){
+            tut.Draw(batch);
+        }else {
             this.setBackground(Color.white);
             for (WorldObject wo : allObjects) {
                 wo.Draw(batch);
