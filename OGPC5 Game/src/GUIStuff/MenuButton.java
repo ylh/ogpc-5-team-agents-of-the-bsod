@@ -19,6 +19,7 @@ public class MenuButton {
     Vector2 position;
     int type;
     boolean selected;
+    double start;
     
     public static final int CREDITS=0;
     public static final int START=1;
@@ -35,6 +36,7 @@ public class MenuButton {
         position=pos;
         this.type=type;
         load(type);
+        start=System.currentTimeMillis();
     }
     
     /**
@@ -94,6 +96,16 @@ public class MenuButton {
      */
     public boolean isPressed(Mouse m){
         return selected && m.isPressed(Mouse.LEFT_BUTTON);
+    }
+    
+    public boolean isPressedDelayed(Mouse m){
+        double now=System.currentTimeMillis();
+        if(selected && m.isPressed(Mouse.LEFT_BUTTON) && now-start >=1000){
+            start=now;
+            return true;
+        }else{
+            return false;
+        }
     }
         
 }
