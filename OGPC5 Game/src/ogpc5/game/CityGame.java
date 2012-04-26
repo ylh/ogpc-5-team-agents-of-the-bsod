@@ -392,6 +392,7 @@ public class CityGame extends Game {
                     int x=(int)t.getPosition().getX()/32;
                     int y=(int)t.getPosition().getY()/32;
                     tiles[x][y]= new Tile(new Vector2(x * 32, y * 32));
+                    new SoundFile("Game Resources/Sound/destroy2.wav",1).start();
                 }
                 globalCount++;
             }
@@ -435,6 +436,7 @@ public class CityGame extends Game {
                     //road adding
                     if (b.contains(x, y) && (keyboard.isKeyDown('r')||placingRoads) && mouse.isPressed(Mouse.LEFT_BUTTON)&&keyboard.isKeyUp('d') && money > -5000) {
                         if (!(tiles[i][j] instanceof Road)) {
+                            new SoundFile("Game Resources/Sound/road.wav",1).start();
                             Vector2 roadPos = new Vector2((i * 32), (j * 32));
                             tiles[i][j] = new Road(roadPos, Road.returnSprite(Road.setRoadShape(tiles, i, j)));
                             Road.setNeighbors(tiles, i, j);

@@ -5,10 +5,7 @@
 package WorldObjects.towers;
 
 import Enemies.AbstractEnemy;
-import Utilities.Animation;
-import Utilities.Image2D;
-import Utilities.ImageCollection;
-import Utilities.Vector2;
+import Utilities.*;
 import WorldObjects.WorldObject;
 import java.util.ArrayList;
 
@@ -50,6 +47,7 @@ public class Bullet extends WorldObject {
         this.adamage=adamage;
         this.sdamage=sdamage;
         sprite=new Image2D("Game Resources/Sprites/particle.png");
+        
     }
     
     /**

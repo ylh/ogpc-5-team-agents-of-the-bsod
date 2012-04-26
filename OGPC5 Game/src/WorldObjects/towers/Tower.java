@@ -6,10 +6,7 @@ package WorldObjects.towers;
 
 import Enemies.AbstractEnemy;
 import GUIStuff.Tile;
-import Utilities.Animation;
-import Utilities.Image2D;
-import Utilities.ImageCollection;
-import Utilities.Vector2;
+import Utilities.*;
 import WorldObjects.WorldObject;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -264,7 +261,7 @@ public abstract class Tower extends Tile {
                 Bullet t=setEnemyBulletHitting((AbstractEnemy)target);
                 //Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
                 wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
-                
+                new SoundFile("Game Resources/Sound/shoot1.wav",1).start();
                 loaded=speed;
             }
         }
