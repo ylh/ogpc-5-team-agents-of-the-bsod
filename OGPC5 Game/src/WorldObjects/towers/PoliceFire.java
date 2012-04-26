@@ -60,8 +60,8 @@ public class PoliceFire extends Tower{
         ArrayList<Tile> s=this.getRangedTowers(theGame.tiles);
         for(Tile t : s){
             if(t instanceof Tower){
-                if(((Tower)t).health<100){
-                    ((Tower)t).health+=2;
+                if(((Tower)t).health<((Tower)t).maxHealth()){
+                    ((Tower)t).health+=5;
                 }
             }
         }

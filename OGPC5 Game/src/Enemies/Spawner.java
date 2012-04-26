@@ -7,7 +7,18 @@ package Enemies;
 import Utilities.KeyBoard;
 import Utilities.SoundFile;
 import Utilities.Vector2;
+import WorldObjects.towers.Factory;
+import WorldObjects.towers.GreenBelt;
+import WorldObjects.towers.House;
+import WorldObjects.towers.Monument;
+import WorldObjects.towers.PoliceFire;
+import WorldObjects.towers.RecyclingCenter;
+import WorldObjects.towers.School;
+import WorldObjects.towers.Store;
+import WorldObjects.towers.Tower;
+import WorldObjects.towers.WaterPurification;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import ogpc5.game.CityGame;
 
 /**
@@ -167,5 +178,67 @@ public class Spawner {
         EnemyProbabilityTable.setProbability(AbstractEnemy.SMOG, 0);
         EnemyProbabilityTable.setProbability(AbstractEnemy.TRASH, 50);
         EnemyProbabilityTable.setProbability(AbstractEnemy.WATER_POLUTION, 0);
+    }
+    
+    public void setSpawnPropabilities(int score,ArrayList<Tower> towers){
+        quota=(score/40)+3;
+        
+        int factories=0;
+        int parks=0;
+        int houses=0;
+        int monuments=0;
+        int policefire=0;
+        int recycling=0;
+        int schools=0;
+        int stores=0;
+        int water=0;
+        
+        int total=0;
+        for(Tower t: towers){
+            if(t instanceof Factory){
+                factories++;
+            }
+            if(t instanceof GreenBelt){
+                parks++;
+            }
+            if(t instanceof House){
+                houses++;
+            }
+            if(t instanceof Monument){
+                monuments++;
+            }
+            if(t instanceof PoliceFire){
+                policefire++;
+            }
+            if(t instanceof RecyclingCenter){
+                recycling++;
+            }
+            if(t instanceof School){
+                schools++;
+            }
+            if(t instanceof Store){
+                stores++;
+            }
+            if(t instanceof WaterPurification){
+                water++;
+            }
+        }
+        total=factories+parks+houses+monuments+policefire+recycling+schools+stores+water;
+        if (total!=0){
+            
+        }
+        else{
+            EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.CRIMINAL, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.EARTHQUACKE, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.EDUCATION, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.FIRE, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.FLOOD, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.GANGS, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.GRAFITTI, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.SMOG, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.TRASH, 0);
+            EnemyProbabilityTable.setProbability(AbstractEnemy.WATER_POLUTION, 0);
+        }
     }
 }

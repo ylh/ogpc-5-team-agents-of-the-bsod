@@ -37,7 +37,7 @@ public abstract class Tower extends Tile {
     Animation ani;
     ArrayList<Tile> rangeSelectedTiles;
     boolean healthDisplay;
-    double maxHealth;
+    public double maxHealth;
     /*
      * Coordinates for bounding box
      */
@@ -269,7 +269,9 @@ public abstract class Tower extends Tile {
             }
         }
     }
-    
+    public double maxHealth(){
+        return maxHealth;
+    }
     
     public abstract void updateGameStats(CityGame theGame);
     protected abstract void loadAnimation();
