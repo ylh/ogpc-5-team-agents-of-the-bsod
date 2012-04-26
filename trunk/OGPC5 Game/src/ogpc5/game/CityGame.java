@@ -642,7 +642,9 @@ public class CityGame extends Game {
      * @return the score.
      */
     private double getScore() {
+        polution=Math.max(polution,0);
         return Math.max(score + (money +happiness - polution)/3,0);
+        
     }
 
     public void addToWorldObjects(WorldObject wo) {
