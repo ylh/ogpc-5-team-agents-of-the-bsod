@@ -145,7 +145,7 @@ public class CityGame extends Game {
 
         //For the main game
         UpdateAllStart = startTime;//Convienience, means nothing really....
-        spawn = new Spawner((1000) * 100, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        spawn = new Spawner((1000) * 45, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
         
         //TutorialStart
         skip = new MenuButton(new Vector2(485, 500), MenuButton.SKIP);
@@ -377,7 +377,7 @@ public class CityGame extends Game {
             //ORDER HERE COUTNS!!!
             double thisLoopTime = System.currentTimeMillis();
             boolean updateAll=false;
-            if (thisLoopTime - this.UpdateAllStart >= (1000) * 15) {
+            if (thisLoopTime - this.UpdateAllStart >= (1000) * 5) {
                 updateAll = true;
                 UpdateAllStart = thisLoopTime;
             }
