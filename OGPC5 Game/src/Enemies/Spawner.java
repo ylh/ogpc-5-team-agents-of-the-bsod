@@ -136,13 +136,13 @@ public class Spawner {
                 e = new Enemy(AbstractEnemy.ARSONIST, 1, 1000*scaleFactor, 2*scaleFactor, pos.clone(), "Game Resources/Sprites/SamSprites/Enemies/Arsonist/arsonist0.png", theGame.tiles);
                 break;
             case AbstractEnemy.CRIMINAL:
-                e = new Enemy(AbstractEnemy.CRIMINAL, 2, 1000*scaleFactor, 2*scaleFactor, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.CRIMINAL, 2, 100*scaleFactor, 2*scaleFactor, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case AbstractEnemy.EARTHQUACKE:
-                e = new Enemy(AbstractEnemy.EARTHQUACKE, 1, 50*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-1.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.EARTHQUACKE, 1, 150*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Earthquake/earthquake monsterVD1-1.png", theGame.tiles);
                 break;
             case AbstractEnemy.EDUCATION:
-                e = new Enemy(AbstractEnemy.EDUCATION, 1, 50*scaleFactor, 20*scaleFactor, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.EDUCATION, 1, 40*scaleFactor, 20*scaleFactor, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case AbstractEnemy.FIRE:
                 e = new Enemy(AbstractEnemy.FIRE, 3, 50*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Fire/fire0.png", theGame.tiles);
@@ -151,22 +151,22 @@ public class Spawner {
                 e = new Enemy(AbstractEnemy.FLOOD, 2, 50*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Flood/flood0.png", theGame.tiles);
                 break;
             case AbstractEnemy.GANGS:
-                e = new Enemy(AbstractEnemy.GANGS, 1, 50*scaleFactor, 15*scaleFactor, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.GANGS, 1, 100*scaleFactor, 15*scaleFactor, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case AbstractEnemy.GENERIC:
                 e = new Enemy(AbstractEnemy.GENERIC, 1, 50*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case AbstractEnemy.GRAFITTI:
-                e = new Enemy(AbstractEnemy.GRAFITTI, 1, 50*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Grafitti/graffiti0.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.GRAFITTI, 1, 80*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/SamSprites/Grafitti/graffiti0.png", theGame.tiles);
                 break;
             case AbstractEnemy.SMOG:
                 e = new Enemy(AbstractEnemy.SMOG, 1, 50*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png", theGame.tiles);
                 break;
             case AbstractEnemy.TRASH:
-                e = new Enemy(AbstractEnemy.TRASH, 1, 50*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.TRASH, 1, 80*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             case AbstractEnemy.WATER_POLUTION:
-                e = new Enemy(AbstractEnemy.WATER_POLUTION, 1, 50*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
+                e = new Enemy(AbstractEnemy.WATER_POLUTION, 1, 60*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
                 break;
             default:
                 e = new Enemy(AbstractEnemy.GENERIC, 1, 50*scaleFactor, 0, pos.clone(), "Game Resources/Sprites/PlaceHolderEnemy.png", theGame.tiles);
