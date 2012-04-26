@@ -407,9 +407,10 @@ public class CityGame extends Game {
             }
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && !insideBounds(mouse.location())){
                 if (drag == null && buttons.get(0).canOpen()) {
-                        invOpen = true;
+                        //invOpen = true;
                     }  
             }
+            invOpen=!insideBounds(mouse.location());
             
             //Mouse update methods in grid, the 832 should be most left pixel of the grid
             if (mouse.isPressed(Mouse.LEFT_BUTTON) && insideBounds(mouse.location())) {

@@ -45,7 +45,7 @@ public class Button {
     public Button(int i, String sp, double x,double y) {
         id=i;
         openY = y;
-        closeY = y-300;
+        closeY = y-400;
         pos = new Vector2(x,closeY);
         movespeed = 0.05;
         travel=0;
