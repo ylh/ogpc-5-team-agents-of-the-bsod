@@ -100,9 +100,9 @@ public class Tutorial {
             batch.Draw(Grafitti, new Vector2(100,400), 1);
             batch.Draw(Education, new Vector2(100,440), 1);
             
-            batch.DrawString(new Vector2(140,40),"The Smog Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,80),"The Gangs Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,120),"The Arsonists Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,40),"The Smog Enemy: This is caused by excessivly high Polution.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,80),"The Gangs Enemy: These are caused by lack of Education and Lots of Stores", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,120),"The Arsonists Enemy: These are anarchists. They just don't like you.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,160),"The Criminal Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,200),"The Trash Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,240),"The Water Polution Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);

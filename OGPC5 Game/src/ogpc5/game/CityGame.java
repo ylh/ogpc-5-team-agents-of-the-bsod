@@ -10,6 +10,7 @@ import Enemies.Spawner;
 import Enemies.Enemy;
 import GUIStuff.Button;
 import Credits.CreditScreen;
+import EasterEggs.BlueScreen;
 import GUIStuff.Draggable;
 import GUIStuff.MenuButton;
 import GUIStuff.ScrollingBackground;
@@ -25,6 +26,7 @@ import Utilities.SoundFile;
 import Utilities.Vector2;
 import WorldObjects.WorldObject;
 import WorldObjects.towers.Bullet;
+import WorldObjects.towers.Monument;
 import WorldObjects.towers.Road;
 import WorldObjects.towers.Tower;
 import java.awt.Color;
@@ -102,6 +104,10 @@ public class CityGame extends Game {
     boolean placingRoads=false;
     boolean deleting=false;
     public boolean moneyBonus=false;
+    
+    //EasterEggs
+    BlueScreen bs;
+    boolean blueScreen;
 
     @Override
     public void InitializeAndLoad() {
@@ -132,30 +138,52 @@ public class CityGame extends Game {
         }
 
         //Creating the opening animation.
+        //opening animation controlls
+        JAVA = true;
+        firstwait = false;
+        secondwait = false;
+        AOTBSOD = false;
+        javaLength = 18 * 200;
+        aLength = 33 * 150;
+        first = 1000;
+        second = 1000;
+        awwStarted = false;
         java = new OpeningAnimation(new Vector2(970 / 2, 640 / 2), OpeningAnimation.JAVA);
         aotbsod = new OpeningAnimation(new Vector2(970 / 2, 640 / 2), OpeningAnimation.AOTBSOD);
         startTime = System.currentTimeMillis();
         aww = new SoundFile("Game Resources/Sound/AwwComeon.wav", 1);
 
         //Creates the Main Menu
+        mainMenu = false;
+        turnOnMenuSong=true;
         creds = new MenuButton(new Vector2(485, 500), MenuButton.CREDITS);
         start = new MenuButton(new Vector2(485, 450), MenuButton.START);
         mainMenuSong= new SoundFile("Game Resources/Sound/urban towers.wav",3);
 
         //Creates the credits
+        turnOnCreditSong=true;
+        tutorial=false;
         creditScreen = new CreditScreen();
         creditSong=new SoundFile("Game Resources/Sound/creditsong.wav",2);
 
         //For the main game
+        makeFirstRoad = true;
         UpdateAllStart = startTime;//Convienience, means nothing really....
         spawn = new Spawner((1000) * 45, this, new Vector2(13 * 32 + 16, 18 * 32 + 16));
+        resetEnemies = true;
+        placingRoads=false;
+        deleting=false;
+        moneyBonus=false;
         
         //TutorialStart
+        startTutorial=false;
         skip = new MenuButton(new Vector2(485, 500), MenuButton.SKIP);
         yes = new MenuButton(new Vector2(485, 350), MenuButton.YES);
         tut= new Tutorial();
         
-        //navigator = new EnemyNavigation(tiles, "Default", 10, 10);
+        //Easter Eggs
+        bs=new BlueScreen();
+        blueScreen=false;
     }
 
     @Override
@@ -260,6 +288,18 @@ public class CityGame extends Game {
             if(tut.isDone()){
                 tutorial=false;
             }
+        }else if(blueScreen){
+            if(!bs.hasStarted()){
+                bs.start();
+            }
+            bs.Update(keyboard);
+            if(bs.returnToGame()){
+                blueScreen=false;
+            }
+            if(bs.goToStart()){
+                blueScreen=false;
+                reset();
+            }
         } else {
 
             if (makeFirstRoad) {
@@ -361,10 +401,13 @@ public class CityGame extends Game {
 
                         int x = ((int) mouse.location().getX()) / 32;
                         int y = ((int) mouse.location().getY()) / 32;
-                        if (insideBounds(x, y) && !(tiles[x][y] instanceof Road) && !(tiles[x][y] instanceof Tower)
-                                && x < tiles.length && y < tiles[0].length && x > -1 && y > -1) {
-                            if (money > -5000) {
-                                tiles[x][y] = drag.getTower(new Rect(x, y, 32, 32));
+                        if (insideBounds(x, y) && !(tiles[x][y] instanceof Road) && !(tiles[x][y] instanceof Tower)) {
+                            Tower tower=drag.getTower(new Rect(x, y, 32, 32));
+                            if(((x==0 && y==0) || (x==0 && y==19) || (x==26 && y==0) || (x==26 && y==19)) && tower instanceof Monument){
+                                blueScreen=true;
+                            }
+                            if (money -tower.getCost() >= -500) {
+                                tiles[x][y] = tower;
                                 this.activeTiles.add((Tower) tiles[x][y]);
                                 money -= ((Tower) tiles[x][y]).getCost();
                                 new SoundFile("Game Resources/Sound/build.wav", 1).start();
@@ -519,6 +562,8 @@ public class CityGame extends Game {
             batch.DrawString(new Vector2(50,100), "Would you like a tutorial?", Color.CYAN, 5, ImageCollection.FONT_DIALOG, ImageCollection.FONT_NORMAL, 28);
         }else if(tutorial){
             tut.Draw(batch);
+        }else if(blueScreen){
+            bs.Draw(batch);
         }else {
             this.setBackground(Color.white);
             for (WorldObject wo : allObjects) {
