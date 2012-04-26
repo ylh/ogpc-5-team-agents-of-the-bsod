@@ -643,7 +643,7 @@ public class CityGame extends Game {
      */
     private double getScore() {
         polution=Math.max(Math.min(polution,2000),0);
-        happiness=Math.max(Math.min(happiness,2000),0);
+        happiness=Math.max(Math.min(happiness,999),-999);
         return Math.max(score + (money +happiness - polution)/4,0);
         
     }
