@@ -58,7 +58,7 @@ public class RecyclingCenter extends Tower{
 
     @Override
     protected Bullet setEnemyBulletHitting(AbstractEnemy e) {
-        String s="Game Resources/Sprites/Bullets/paper.png";
+        String s="Game Resources/Sprites/August/Recycling Center Bullet.png";
         if(e.getID()==AbstractEnemy.TRASH){
             return new Bullet(s,position.clone(), damage*2, adamage*2, sdamage*2, projspeed, e);
         }else if(e.getID()==AbstractEnemy.WATER_POLUTION){
