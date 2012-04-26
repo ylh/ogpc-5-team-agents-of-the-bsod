@@ -189,7 +189,7 @@ public class Spawner {
     }
     
     public void setSpawnProbabilities(int score,ArrayList<Tower> towers){
-        quota=(score/40)+3;
+        quota=(score/100)+2;
         
         int factories=0;
         int parks=0;
@@ -243,13 +243,13 @@ public class Spawner {
             EnemyProbabilityTable.setProbability(AbstractEnemy.SMOG, total*5+factories*15);
             EnemyProbabilityTable.setProbability(AbstractEnemy.TRASH, (total*5+factories*15)/(recycling*2+1));
             EnemyProbabilityTable.setProbability(AbstractEnemy.WATER_POLUTION, (total*3+factories*20)/(water*3+1));
-            if (score>200){
+            if (score>500){
                 EnemyProbabilityTable.setProbability(AbstractEnemy.GANGS, stores*15/(schools+1));
             }
-            if (score>500){
+            if (score>1000){
                 EnemyProbabilityTable.setProbability(AbstractEnemy.CRIMINAL, (total*3+stores*5)/(policefire+factories+1));
             }
-            if (score>1000){
+            if (score>2500){
                 EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, total*3/(policefire+1));
             }
             

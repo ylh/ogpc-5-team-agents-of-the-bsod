@@ -58,8 +58,8 @@ public class Button {
     }
 
     /**
-     * This tells the game that the button is opened.
-     * @param o 
+     * This sets the button's position to open or closed.
+     * @param o Whether or not the button is closed
      */
     public void setOpen(boolean o){
         open=o;
@@ -129,6 +129,11 @@ public class Button {
     public Image2D getSprite(){
         return sprite;
     }
+    
+    /**
+     * This changes the button's overlay so it appears to be toggled on or off
+     * @param t on or off
+     */
     public void toggle(boolean t) {
 
         if (t) {
