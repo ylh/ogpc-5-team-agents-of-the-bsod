@@ -36,7 +36,7 @@ public class Credit {
      * @param batch 
      */
     public void draw(ImageCollection batch){
-        batch.DrawString(position, creditString, Color.red, 10);
+        batch.DrawString(position, creditString, Color.white, 10, ImageCollection.FONT_SERIF, ImageCollection.FONT_ITALIC, 10);
     }
     /**
      * This stops the credit's movement.

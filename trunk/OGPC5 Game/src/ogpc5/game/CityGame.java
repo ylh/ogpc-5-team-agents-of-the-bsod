@@ -12,6 +12,7 @@ import GUIStuff.Button;
 import Credits.CreditScreen;
 import EasterEggs.BlueScreen;
 import GUIStuff.Draggable;
+import GUIStuff.EndScreen;
 import GUIStuff.MenuButton;
 import GUIStuff.ScrollingBackground;
 import GUIStuff.Tile;
@@ -104,6 +105,11 @@ public class CityGame extends Game {
     boolean placingRoads=false;
     boolean deleting=false;
     public boolean moneyBonus=false;
+    int lives;
+    
+    //EndGame
+    EndScreen loseEnd;
+    boolean loose;
     
     //EasterEggs
     BlueScreen bs;
@@ -174,12 +180,17 @@ public class CityGame extends Game {
         placingRoads=false;
         deleting=false;
         moneyBonus=false;
+        lives=20;
         
         //TutorialStart
         startTutorial=false;
         skip = new MenuButton(new Vector2(485, 500), MenuButton.SKIP);
         yes = new MenuButton(new Vector2(485, 350), MenuButton.YES);
         tut= new Tutorial();
+        
+        //EndScreen
+        loseEnd=new EndScreen();
+        loose=false;
         
         //Easter Eggs
         bs=new BlueScreen();
@@ -301,7 +312,15 @@ public class CityGame extends Game {
                 blueScreen=false;
                 reset();
             }
-        } else {
+        } else if(loose){
+            if(!loseEnd.hasStarted()){
+                loseEnd.start();
+            }
+            loseEnd.Update(keyboard);
+            if(loseEnd.restart()){
+                reset();
+            }
+        }else {
 
             if (makeFirstRoad) {
                 int i = 13, j = 18;
@@ -316,6 +335,10 @@ public class CityGame extends Game {
             spawn.update(keyboard);
             
             spawn.setSpawnProbabilities((int)(score+polution/3),activeTiles);
+            
+            if(lives<=0){
+                loose=true;
+            }
 
             for (int i = 0; i < allObjects.size(); i++) {
                 WorldObject wo = allObjects.get(i);
@@ -330,6 +353,7 @@ public class CityGame extends Game {
                     if (wo.getPosition().getY() < 0) {
                         allObjects.remove(wo);
                         score -= ((AbstractEnemy) wo).getScore();
+                        lives--;
                     }
                     e.shoot(allObjects, activeTiles);
                 }
@@ -565,6 +589,9 @@ public class CityGame extends Game {
             tut.Draw(batch);
         }else if(blueScreen){
             bs.Draw(batch);
+        }else if(loose){
+            this.setBackground(Color.black);
+            loseEnd.Draw(batch);
         }else {
             this.setBackground(Color.white);
             for (WorldObject wo : allObjects) {
@@ -598,6 +625,8 @@ public class CityGame extends Game {
             } else {
                 batch.DrawString(new Vector2(850, 60), "Happiness: " + (int)happiness, Color.black, 10,ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 12);
             }
+            //Lives Remaining
+            batch.DrawString(new Vector2(835,580), "Chances Left: "+this.lives, Color.black, 10);
             // next round
             batch.DrawString(new Vector2(835, 600), "Next Round: " + (int) this.spawn.getRemainingTime() / 1000 + " s", Color.black, 10);
 
