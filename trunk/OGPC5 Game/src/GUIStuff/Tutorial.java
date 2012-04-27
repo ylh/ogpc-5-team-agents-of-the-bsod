@@ -24,6 +24,7 @@ public class Tutorial {
     Image2D second;
     Image2D third;
     Image2D fourth;
+    Image2D fifth;
     public Tutorial(){
         next = new MenuButton(new Vector2(200,500), MenuButton.NEXT);
         screen=1;
@@ -32,6 +33,7 @@ public class Tutorial {
         second= new Image2D("Game Resources/Sprites/Tutorial/SecondTutorialScreen.png");
         third= new Image2D("Game Resources/Sprites/Tutorial/ThirdTutorialScreen.png");
         fourth= new Image2D("Game Resources/Sprites/Tutorial/FourthTutorialScreen.png");
+        fifth= new Image2D("Game Resources/Sprites/Tutorial/FifthTutorialScreen.png");
     }
     
     public void Draw(ImageCollection batch){
@@ -45,6 +47,8 @@ public class Tutorial {
         }else if(screen==4){
             batch.Draw(fourth, new Vector2(970 / 2, 611 / 2), 0);
         }else if(screen==5){
+            batch.Draw(fifth, new Vector2(970 / 2, 611 / 2), 0);
+        }else if(screen == 6){
             es.Draw(batch);
         }
     }
@@ -59,7 +63,7 @@ public class Tutorial {
     }
     
     public boolean isDone(){
-        return screen>=6;
+        return screen>=7;
     }
     
     private void loadNext(){
