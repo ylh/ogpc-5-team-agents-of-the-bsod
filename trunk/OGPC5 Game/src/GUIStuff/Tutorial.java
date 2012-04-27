@@ -103,14 +103,14 @@ public class Tutorial {
             batch.DrawString(new Vector2(140,40),"The Smog Enemy: This is caused by excessivly high Polution.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,80),"The Gangs Enemy: These are caused by lack of Education and Lots of Stores", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,120),"The Arsonists Enemy: These are anarchists. They just don't like you.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,160),"The Criminal Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,200),"The Trash Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,240),"The Water Polution Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,280),"The Fire Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,320),"The Flood Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,360),"The Earthquake Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,400),"The Grafitti Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,440),"The Bad Education Enemy", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,160),"The Criminal Enemy: They like to steal stuff. The police should stop them.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,200),"The Trash Enemy: Trash build up is what happens when you don't recycle.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,260),"The Water Polution Enemy: This water is filthy. You should clean it up.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,295),"The Fire Enemy: FIRE!!!!!! IT MOVES SO FAST!", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,340),"The Flood Enemy: Floods are never fun.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,370),"The Earthquake Enemy: Sure, it doesn't look like an earthquake. But when this lizard walks, the earth shakes.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,405),"The Grafitti Enemy: Beloved of Hip-Hop Artists, Archenemy of Posh Elitists. Schools should take care of them.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,440),"The Bad Education Enemy: No one likes wearing the dunce cap. You should have tried harder at school!", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             
         }
     }
