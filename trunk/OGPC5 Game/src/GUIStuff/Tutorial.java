@@ -25,6 +25,10 @@ public class Tutorial {
     Image2D third;
     Image2D fourth;
     Image2D fifth;
+    
+    /**
+     * Initializes tutorial screen images and Next button
+     */
     public Tutorial(){
         next = new MenuButton(new Vector2(200,500), MenuButton.NEXT);
         screen=1;
@@ -36,6 +40,10 @@ public class Tutorial {
         fifth= new Image2D("Game Resources/Sprites/Tutorial/FifthTutorialScreen.png");
     }
     
+    /**
+     * Draws next button and relevant tutorial screen
+     * @param batch ImageCollection for drawing
+     */
     public void Draw(ImageCollection batch){
         next.draw(batch);
         if(screen ==1){
@@ -53,6 +61,11 @@ public class Tutorial {
         }
     }
     
+    /**
+     * Updates screen if Next is clicked or space is pressed
+     * @param k KeyBoard in use
+     * @param m Mouse in use
+     */
     public void Update(KeyBoard k, Mouse m){
         next.update(m);
         if(next.isPressedDelayed(m) || k.isKeyDown(KeyEvent.VK_SPACE)){
@@ -62,14 +75,20 @@ public class Tutorial {
         
     }
     
+    /**
+     * Determines if tutorial is done
+     * @return if the final screen has been passed
+     */
     public boolean isDone(){
         return screen>=7;
     }
     
+    /**
+     * Advances to the next screen
+     */
     private void loadNext(){
         screen++;
     }
-    
     
     private class EnemyScreen{
         Image2D Smog=new Image2D("Game Resources/Sprites/Liam's Sprites/Enemies/Smog/SmogH1-1.png");
@@ -86,10 +105,17 @@ public class Tutorial {
         
         Image2D Background=new Image2D("Game Resources/Sprites/bgtexture.png");
         
+        /**
+         * Default constructor
+         */
         public EnemyScreen(){
             
         }
         
+        /**
+         * Draws enemy sprites and information on page
+         * @param batch ImageCollection to be drawn
+         */
         public void Draw(ImageCollection batch){
             batch.Draw(Background, new Vector2(970 / 2, 611 / 2), 0);
             batch.Draw(Smog, new Vector2(100,40), 1);
@@ -109,11 +135,11 @@ public class Tutorial {
             batch.DrawString(new Vector2(140,120),"The Arsonists Enemy: These are anarchists. They just don't like you.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,160),"The Criminal Enemy: They like to steal stuff. The police should stop them.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,200),"The Trash Enemy: Trash build up is what happens when you don't recycle.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,260),"The Water Polution Enemy: This water is filthy. You should clean it up.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,260),"The Water Pollution Enemy: This water is filthy. You should clean it up.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,295),"The Fire Enemy: FIRE!!!!!! IT MOVES SO FAST!", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,340),"The Flood Enemy: Floods are never fun.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,370),"The Earthquake Enemy: Sure, it doesn't look like an earthquake. But when this lizard walks, the earth shakes.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
-            batch.DrawString(new Vector2(140,405),"The Grafitti Enemy: Beloved of Hip-Hop Artists, Archenemy of Posh Elitists. Schools should take care of them.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
+            batch.DrawString(new Vector2(140,405),"The Graffiti Enemy: Beloved of Hip-Hop Artists, Archenemy of Posh Elitists. Schools should take care of them.", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             batch.DrawString(new Vector2(140,440),"The Bad Education Enemy: No one likes wearing the dunce cap. You should have tried harder at school!", Color.black, ImageCollection.FONT_SERIF, ImageCollection.FONT_NORMAL, 14, 10);
             
         }
