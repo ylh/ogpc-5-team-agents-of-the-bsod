@@ -46,10 +46,17 @@ public class BlueScreen {
     String s20="Hope you city was nice, because now it's gone!";
     String s21="Contact your local Sys Admin for more information";
     
+    /**
+     * Hasn't yet started
+     */
     public BlueScreen(){
         hasStarted=false;
     }
     
+    /**
+     * Draws blue screen and each String of text
+     * @param batch ImageCollection for drawing
+     */
     public void Draw(ImageCollection batch){
         batch.Draw(background, new Vector2(970 / 2, 611 / 2));
         batch.DrawString(new Vector2(10,14), s1, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
@@ -75,6 +82,10 @@ public class BlueScreen {
         batch.DrawString(new Vector2(10,14*30), s21, Color.white, 1,ImageCollection.FONT_MONOSPACED, ImageCollection.FONT_NORMAL, 18);
     }
     
+    /**
+     * Allows the user the ability to return to game before it restarts
+     * @param k KeyBoard in use
+     */
     public void Update(KeyBoard k){
         if(k.isKeyDown('s') && k.isKeyDown('d') && k.isKeyDown('b') && k.isKeyDown('o')){
             sgde=true;
@@ -84,16 +95,34 @@ public class BlueScreen {
             shouldExit=true;
         }
     }
+    
+    /**
+     * Starts
+     */
     public void start(){
         start=System.currentTimeMillis();
         hasStarted=true;
     }
+    
+    /**
+     * Determines if game should restart
+     * @return if the blue screen has persisted long enough without opt-out
+     */
     public boolean goToStart(){
         return shouldExit && !sgde;
     }
+    
+    /**
+     * Determines if game should resume
+     * @return if the blue screen timer has run out and the proper keys have been pressed for opt-out
+     */
     public boolean returnToGame(){
         return shouldExit && sgde;
     }
+    
+    /*
+     * Determines if the blue screen has started
+     */
     public boolean hasStarted(){
         return hasStarted;
     }
