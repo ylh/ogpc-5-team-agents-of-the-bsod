@@ -62,6 +62,8 @@ public class Achievements {
     
     Image2D Background=new Image2D("Game Resources/Sprites/bgtexture.png");
     
+    AchievementPopup popup=new AchievementPopup();
+    
     /**
      * Initializes all achievements to false
      */
@@ -100,46 +102,69 @@ public class Achievements {
      * @param m the active Mouse
      */
     public void update(CityGame theGame, Mouse m){
-        if(theGame.score>9000){
+        popup.update();
+        if(theGame.score>9000 && !over9000){
             over9000=true;
+            
         }
-        if(theGame.score+theGame.happiness+theGame.money>100000){
+        if(theGame.score+theGame.happiness+theGame.money>100000 && !MasterOfUniverse){
             MasterOfUniverse=true;
+            
         }
-        if(theGame.happiness>=999){
+        if(theGame.happiness>=999 && !breadAndCircus){
             breadAndCircus=true;
         }
-        if(mt>=50){
+        if(mt>=50 && !massTransit){
             massTransit=true;
+            popup.set("Game Resources/Sprites/Roads/CurevedRoadRightDown.png",
+                    "Mass Transit","Build 50 Roads");
         }
-        if(gt>=50){
+        if(gt>=20 && !greenThumb){
             greenThumb=true;
+            popup.set("Game Resources/Sprites/Liam's Sprites/Towers/Park/park2-1.png",
+                    "Green Thumb","Build 20 Parks");
         }
-        if(mh>=50){
+        if(mh>=20 && !MassHousing){
             MassHousing=true;
+            popup.set("Game Resources/Sprites/Liam's Sprites/Towers/House/house1-1.png",
+                    "Mass Housing","Build 20 Houses");
         }
-        if(hf>=50){
+        if(hf>=20 && !HenryFord){
             HenryFord=true;
+            popup.set("Game Resources/Sprites/August/ACME Corp/0.png",
+                    "Henry Ford","Build 20 Factories");
         }
-        if(htd>=50){
+        if(htd>=20 && !honorTheDead){
             honorTheDead=true;
+            popup.set("Game Resources/Sprites/August/Memorial/00.png",
+                    "Honor The Dead","Build 20 Monuments");
         }
-        if(cbtf>=50){
+        if(cbtf>=20 && !cantBeTooSafe){
             cantBeTooSafe=true;
+            popup.set("Game Resources/Sprites/August/Police Station 32x32.png",
+                    "Can't Be Too Safe","Build 20 Police Stations");
         }
-        if(lte>=50){
+        if(lte>=20 && !loveTheEarth){
             loveTheEarth=true;
+            popup.set("Game Resources/Sprites/August/Recycling Center.png",
+                    "Love The Earth","Build 20 Recycling Centers");
         }
-        if(fw>=50){
+        if(fw>=20 && !freshWater){
             freshWater=true;
+            popup.set("Game Resources/Sprites/SamSprites/Towers/Water Purification/pureWater5.png",
+                    "Fresh Water","Build 20 Water Purification Centers");
         }
-        if(totc>=50){
+        if(totc>=20 && !TopOfTheClass){
             TopOfTheClass=true;
+            popup.set("Game Resources/Sprites/SamSprites/Towers/School/school.png",
+                    "Top Of The Class","Build 20 Schools");
         }
-        if(FM>=50){
+        if(FM>=20 && !FreeMarket){
             FreeMarket=true;
+            popup.set("Game Resources/Sprites/August/Supermarket 32x32.png",
+                    "Free Market","Build 20 Stores");
         }
-        if(System.currentTimeMillis()-startTime>=(1000*(15*3600))){
+        if(System.currentTimeMillis()-startTime>=(1000*(15*3600)) && !GLaDOSWouldBeProud){
             this.GLaDOSWouldBeProud=true;
         }
         
@@ -204,7 +229,7 @@ public class Achievements {
      * @param batch ImageCollection being drawn
      */
     public void Draw(ImageCollection batch){
-        
+        popup.draw(batch);
     }
     
     /**
