@@ -10,6 +10,7 @@ import Enemies.Spawner;
 import Enemies.Enemy;
 import GUIStuff.Button;
 import Credits.CreditScreen;
+import EasterEggs.Achievements;
 import EasterEggs.BlueScreen;
 import GUIStuff.Draggable;
 import GUIStuff.EndScreen;
@@ -114,6 +115,8 @@ public class CityGame extends Game {
     //EasterEggs
     BlueScreen bs;
     boolean blueScreen;
+    boolean achievementScreen;
+    Achievements achievements;
 
     @Override
     public void InitializeAndLoad() {
@@ -195,6 +198,8 @@ public class CityGame extends Game {
         //Easter Eggs
         bs=new BlueScreen();
         blueScreen=false;
+        achievementScreen=false;
+        achievements=new Achievements();
     }
 
     @Override
@@ -321,7 +326,9 @@ public class CityGame extends Game {
                 reset();
             }
         }else {
-
+            if(!achievements.isStarted()){
+                achievements.start();
+            }
             if (makeFirstRoad) {
                 int i = 13, j = 18;
                 Vector2 roadPos = new Vector2((i * 32), (j * 32));
@@ -436,7 +443,7 @@ public class CityGame extends Game {
                                 this.activeTiles.add((Tower) tiles[x][y]);
                                 money -= ((Tower) tiles[x][y]).getCost();
                                 new SoundFile("Game Resources/Sound/build.wav", 1).start();
-
+                                achievements.addedATower(tower);
                                 if (selection != null) {
                                     selection.unselect(tiles);
                                     selection = tiles[x][y];
@@ -516,7 +523,7 @@ public class CityGame extends Game {
                         //invOpen = false;
                     }
                     //road adding
-                    if (b.contains(x, y) && (keyboard.isKeyDown('r')||placingRoads) && mouse.isPressed(Mouse.LEFT_BUTTON)&&keyboard.isKeyUp('d') && money > -5000) {
+                    if (b.contains(x, y) && (keyboard.isKeyDown('r')||placingRoads) && mouse.isPressed(Mouse.LEFT_BUTTON)&&keyboard.isKeyUp('d') && money > -500) {
                         if (!(tiles[i][j] instanceof Road)&& !(tiles[i][j] instanceof Tower) && (money -5 >= -500)) {
                             new SoundFile("Game Resources/Sound/road.wav",1).start();
                             Vector2 roadPos = new Vector2((i * 32), (j * 32));
@@ -526,9 +533,10 @@ public class CityGame extends Game {
                             resetEnemies = true;
                             money -= 5;
                             selection = null;
+                            achievements.addedATower(tiles[i][j]);
                         }
                     }
-                    if (b.contains(x, y) && (keyboard.isKeyDown('d')||deleting) && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r') && money> -5000) {
+                    if (b.contains(x, y) && (keyboard.isKeyDown('d')||deleting) && mouse.isPressed(Mouse.LEFT_BUTTON) && keyboard.isKeyUp('r') && money> -500) {
                         if (!(tiles[i][j] == BottomRoad) && (tiles[i][j] instanceof Road)) {
                             new SoundFile("Game Resources/Sound/destroy1.wav",1).start();
                             roads.remove(tiles[i][j]);
