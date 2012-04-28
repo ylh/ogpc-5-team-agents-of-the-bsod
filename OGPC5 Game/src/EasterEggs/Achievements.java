@@ -245,6 +245,8 @@ public class Achievements {
     public void masterKey(){
         if (!masterKey){
             masterKey=true;
+            popup.set("Game Resources/Sprites/Yestin/OHFUUUUUUU.png",
+                    "Master Key","Cheat (the blue screen of) Death");
         }
     }
     
