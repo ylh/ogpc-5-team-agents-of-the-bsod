@@ -175,6 +175,9 @@ public class Spawner {
         theGame.addToWorldObjects(e);
     }
     
+    /**
+     * Sets default probabilities
+     */
     private void StartGameLoad(){
         EnemyProbabilityTable.setProbability(AbstractEnemy.ARSONIST, 0);
         EnemyProbabilityTable.setProbability(AbstractEnemy.CRIMINAL, 50);
@@ -189,6 +192,11 @@ public class Spawner {
         EnemyProbabilityTable.setProbability(AbstractEnemy.WATER_POLUTION, 0);
     }
     
+    /**
+     * Determines the probabilities of spawning certain kinds of enemies based upon how many of each tower have been built and score
+     * @param score player's score
+     * @param towers list of towers
+     */
     public void setSpawnProbabilities(int score,ArrayList<Tower> towers){
         quota=(int)(Math.sqrt((double)score)/6)+2;
         scaleFactor=1+score/1000;
