@@ -341,6 +341,9 @@ public class CityGame extends Game {
             if(!achievements.isStarted()){
                 achievements.start();
             }
+            else{
+                achievements.update(this, mouse);
+            }
             if (makeFirstRoad) {
                 int i = 13, j = 18;
                 Vector2 roadPos = new Vector2((i * 32), (j * 32));
@@ -622,6 +625,9 @@ public class CityGame extends Game {
                 wo.Draw(batch);
                 globalCount++;
             }
+            //draw the achievements
+            achievements.Draw(batch);
+            
             for (Button b : buttons) {
                 b.draw(batch);
                 globalCount++;
