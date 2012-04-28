@@ -62,6 +62,9 @@ public class Achievements {
     
     Image2D Background=new Image2D("Game Resources/Sprites/bgtexture.png");
     
+    /**
+     * Initializes all achievements to false
+     */
     public Achievements(){
         over9000=false;
         massTransit=false;
@@ -91,6 +94,11 @@ public class Achievements {
         FM=0;
     }
     
+    /**
+     * Determines if an achievement has been earned
+     * @param theGame the main game
+     * @param m the active Mouse
+     */
     public void update(CityGame theGame, Mouse m){
         if(theGame.score>9000){
             over9000=true;
@@ -137,14 +145,26 @@ public class Achievements {
         
     }
     
+    /**
+     * 
+     * @return if started
+     */
     public boolean isStarted(){
         return hasBeenStarted;
     }
+    
+    /**
+     * Starts
+     */
     public void start(){
         hasBeenStarted=true;
         startTime=System.currentTimeMillis();
     }
     
+    /**
+     * Contributes to counters for achievements
+     * @param t a given Tile being built
+     */
     public void addedATower(Tile t){
         if(t instanceof Road){
             mt++;
@@ -179,10 +199,17 @@ public class Achievements {
         }
     }
     
+    /**
+     * Draws
+     * @param batch ImageCollection being drawn
+     */
     public void Draw(ImageCollection batch){
         
     }
     
+    /**
+     * Sets masterKey to true
+     */
     public void masterKey(){
         masterKey=true;
     }
