@@ -21,6 +21,11 @@ public class OpeningAnimation {
     Animation a;
     Vector2 position;
     int type;
+    /**
+     * Creates those fancy animations you see at the beginning of the game
+     * @param pos the position of the enemy
+     * @param type determines which animation to play
+     */
     
     public OpeningAnimation(Vector2 pos, int type){
         position=pos;

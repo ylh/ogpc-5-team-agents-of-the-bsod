@@ -15,7 +15,12 @@ import ogpc5.game.CityGame;
  * @author Ksweeney12
  */
 public class Monument extends Tower{
-
+/**
+ * creates a monument tower
+ * @param pos
+ * @param high
+ * @param wide 
+ */
     public Monument(Vector2 pos, int high, int wide){
         super(pos,"", high, wide);  
         cost=200;

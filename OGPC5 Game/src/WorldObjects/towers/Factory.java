@@ -15,6 +15,13 @@ import ogpc5.game.CityGame;
  * @author Ksweeney12
  */
 public class Factory extends Tower{
+    /**
+     * Creates a factory tower
+     * @param pos the tower's position
+     * @param high not used
+     * @param wide not used either
+     * High and Wide are from the time we tried to create towers that took up multiple cells
+     */
 
     public Factory(Vector2 pos, int high, int wide){
         super(pos,"", high, wide);  

@@ -15,7 +15,12 @@ import ogpc5.game.CityGame;
  * @author Ksweeney12
  */
 public class School extends Tower{
-
+/**
+ * Creates a school tower
+ * @param pos
+ * @param high
+ * @param wide 
+ */
     public School(Vector2 pos, int high, int wide){
         super(pos,"", high, wide);  
         cost=70;

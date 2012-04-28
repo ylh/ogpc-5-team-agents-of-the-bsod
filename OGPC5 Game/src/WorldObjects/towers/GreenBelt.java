@@ -15,6 +15,12 @@ import ogpc5.game.CityGame;
  * @author Ksweeney12
  */
 public class GreenBelt extends Tower{
+    /**
+     * creates a Park tower
+     * @param pos 
+     * @param high
+     * @param wide 
+     */
 
     public GreenBelt(Vector2 pos, int high, int wide){
         super(pos,"", high, wide);

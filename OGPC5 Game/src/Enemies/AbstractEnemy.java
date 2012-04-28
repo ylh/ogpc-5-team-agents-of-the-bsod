@@ -199,6 +199,12 @@ public abstract class AbstractEnemy extends WorldObject {
         loaded--;
         range+=0.2;
     }
+    /**
+     * This code allows the enemies to fight back
+     * Enemies always target the closest tower
+     * @param wo the array of world objects
+     * @param towers the array of towers
+     */
     public void shoot(ArrayList<WorldObject> wo,ArrayList<Tower> towers) {
         //peter, what?
         if (loaded < 0) {

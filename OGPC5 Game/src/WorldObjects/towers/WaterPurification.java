@@ -15,7 +15,12 @@ import ogpc5.game.CityGame;
  * @author Ksweeney12
  */
 public class WaterPurification extends Tower{
-
+/**
+ * creates a water purification center
+ * @param pos
+ * @param high
+ * @param wide 
+ */
     public WaterPurification(Vector2 pos, int high, int wide){
         super(pos, "", high, wide);
         cost=45;
