@@ -109,6 +109,18 @@ public class CityGame extends Game {
     public boolean moneyBonus=false;
     int lives;
     
+    //musac;
+    boolean mFirst;
+    boolean mSecond;
+    boolean mThird;
+    boolean mFouth;
+    boolean mFifth;
+    SoundFile sFirst;
+    SoundFile sSecond;
+    SoundFile sThird;
+    SoundFile sFourth;
+    SoundFile sFifth;
+    
     //EndGame
     EndScreen loseEnd;
     boolean loose;
@@ -204,6 +216,18 @@ public class CityGame extends Game {
         blueScreen=false;
         achievementScreen=false;
         achievements=new Achievements();
+        
+        //musac;
+         mFirst=true;
+        mSecond=false;
+        mThird=false;
+        mFouth=false;
+        mFifth=false;
+        sFirst= new SoundFile("Game Resources/Sound/Thane/Based.wav",1);
+        sSecond=new SoundFile("Game Resources/Sound/Thane/Danger.wav",1);
+        sThird=new SoundFile("Game Resources/Sound/Thane/Song2.wav",1);
+        sFourth=new SoundFile("Game Resources/Sound/Thane/SyncDie.wav",1);
+        sFifth=new SoundFile("Game Resources/Sound/Thane/Yes.wav",1);
     }
 
     /**
@@ -318,6 +342,7 @@ public class CityGame extends Game {
                 tutorial=false;
             }
         }else if(blueScreen){
+            endAllMusic();
             if(!bs.hasStarted()){
                 bs.start();
             }
@@ -325,10 +350,12 @@ public class CityGame extends Game {
             if(bs.returnToGame()){
                 blueScreen=false;
                 bs= new BlueScreen();
+                resetMusic();
                 achievements.masterKey();
             }
             if(bs.goToStart()){
                 blueScreen=false;
+                endAllMusic();
                 reset();
             }
         } else if(loose){
@@ -337,6 +364,7 @@ public class CityGame extends Game {
             }
             loseEnd.Update(keyboard);
             if(loseEnd.restart()){
+                endAllMusic();
                 reset();
             }
         }else {
@@ -356,6 +384,35 @@ public class CityGame extends Game {
                 BottomRoad = tiles[i][j];                
                 //navigator.start();
             }
+            
+            //music
+            if(!sFifth.isAlive()&&mFirst){
+                sFirst.start();
+                sFifth=new SoundFile("Game Resources/Sound/Thane/Yes.wav",1);
+                mFirst=false;
+                mSecond=true;
+            }else if(!sFirst.isAlive() && mSecond){
+                mSecond=false;
+                sSecond.start();
+                sFirst= new SoundFile("Game Resources/Sound/Thane/Based.wav",1);
+                mThird=true;
+            }else if(!sSecond.isAlive() && mThird){
+                mThird=false;
+                sThird.start();
+                sSecond=new SoundFile("Game Resources/Sound/Thane/Danger.wav",1);
+                mFouth=true;
+            }else if(!sThird.isAlive() && mFouth){
+                mFouth=false;
+                sFourth.start();
+                sThird=new SoundFile("Game Resources/Sound/Thane/Song2.wav",1);
+                mFifth=true;
+            }else if(!sFourth.isAlive() && mFifth){
+                mFifth=false;
+                sFifth.start();
+                sFourth=new SoundFile("Game Resources/Sound/Thane/SyncDie.wav",1);
+                mFirst=true;
+            }
+            
             spawn.update(keyboard);
             
             spawn.setSpawnProbabilities((int)(score+polution/3),activeTiles);
@@ -808,5 +865,37 @@ public class CityGame extends Game {
         t[x][y]=add;
         add.select(t);
         selection=add;
+    }
+
+    
+    public void resetMusic(){
+        mFirst=true;
+        mSecond=false;
+        mThird=false;
+        mFouth=false;
+        mFifth=false;
+        sFirst= new SoundFile("Game Resources/Sound/Thane/Based.wav",1);
+        sSecond=new SoundFile("Game Resources/Sound/Thane/Danger.wav",1);
+        sThird=new SoundFile("Game Resources/Sound/Thane/Song2.wav",1);
+        sFourth=new SoundFile("Game Resources/Sound/Thane/SyncDie.wav",1);
+        sFifth=new SoundFile("Game Resources/Sound/Thane/Yes.wav",1);
+    }
+    
+    public void endAllMusic(){
+        if(sFirst.isAlive()){
+            sFirst.kill();
+        }
+        if(sSecond.isAlive()){
+            sSecond.kill();
+        }
+        if(sThird.isAlive()){
+            sThird.kill();
+        }
+        if(sFourth.isAlive()){
+            sFourth.kill();
+        }
+        if(sFifth.isAlive()){
+            sFifth.kill();
+        }
     }
 }
