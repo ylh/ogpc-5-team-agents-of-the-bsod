@@ -107,12 +107,13 @@ public class Achievements {
         popup.update();
         if(theGame.score>9000 && !over9000){
             over9000=true;
-            
+            popup.set("Game Resources/Sprites/Yestin/Vegeta.png",
+                    "IT'S OVER 9000!!!1!1","Score >9000");
         }
         if(theGame.score+theGame.happiness+theGame.money>=100000 && !MasterOfUniverse){
             MasterOfUniverse=true;
             popup.set("Game Resources/Sprites/August/Game Icon.png",
-                    "Master of the Universe","Score+happiness+money=100000");
+                    "Master of the Universe","Score+happiness+money=100,000!");
             
         }
         if(theGame.happiness>=999 && !breadAndCircus){
