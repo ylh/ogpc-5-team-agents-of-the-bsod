@@ -30,6 +30,18 @@ public class AchievementPopup {
         timer=0;
         active=true;
     }
+    public AchievementPopup(){
+        active=false;
+    }
+    public void set(String i, String n, String d){
+        Icon=new Image2D(i);
+        name=n;
+        description=d;
+        x=20;
+        y=-32;
+        timer=0;
+        active=true;
+    }
     public void update(){
         if (active){
             timer++;
