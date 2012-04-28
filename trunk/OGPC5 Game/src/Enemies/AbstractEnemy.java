@@ -236,7 +236,7 @@ public abstract class AbstractEnemy extends WorldObject {
                 Bullet t=setTowerBulletHitting(target);
                 //Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
                 wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
-                new SoundFile("Game Resources/Sound/shoot2.wav",1).start();
+                //new SoundFile("Game Resources/Sound/shoot2.wav",1).start();
                 loaded=fireSpeed;
             }
         }
