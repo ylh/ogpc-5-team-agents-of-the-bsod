@@ -59,12 +59,20 @@ public class AchievementPopup {
     public void draw(ImageCollection batch){
         if(active){
             batch.Draw(Icon, new Vector2(x,y),1000);
+            //draw the text
             batch.DrawString(new Vector2(x+20,y-10), "ACHIEVEMENT GET!", 
                 Color.white, 1000, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
             batch.DrawString(new Vector2(x+20,y), name, 
                 Color.white, 1000, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
             batch.DrawString(new Vector2(x+20,y+10), description, 
                 Color.white, 1000, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
+            //draw the text's shadow
+            batch.DrawString(new Vector2(x+19,y-9), "ACHIEVEMENT GET!", 
+                Color.black, 999, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
+            batch.DrawString(new Vector2(x+19,y+1), name, 
+                Color.black, 999, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
+            batch.DrawString(new Vector2(x+19,y+11), description, 
+                Color.black, 999, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
         }
     }
 }
