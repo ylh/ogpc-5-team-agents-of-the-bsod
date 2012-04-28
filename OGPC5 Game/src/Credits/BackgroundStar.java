@@ -21,6 +21,11 @@ public class BackgroundStar {
     double delay;
     double time;
     
+    /**
+     * Initializes the star's animation and the current time
+     * @param pos the position of the star
+     * @param delay the delay between redraws
+     */
     public BackgroundStar(Vector2 pos, double delay){
         this.Position=pos;
         sprite= new Image2D("Game Resources/Sprites/Credits/BackgroundStar.png");
@@ -36,6 +41,10 @@ public class BackgroundStar {
         this.delay=delay;
     }
     
+    /**
+     * Draws star, shining if necessary
+     * @param batch ImageCollection to be drawn
+     */
     public void Draw(ImageCollection batch){
         if(System.currentTimeMillis()-time>=delay){
             shine=true;

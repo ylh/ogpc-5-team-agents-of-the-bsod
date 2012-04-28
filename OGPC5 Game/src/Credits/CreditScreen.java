@@ -39,6 +39,9 @@ public class CreditScreen {
     ClosingAnimation finalPic;
     ArrayList<BackgroundStar> bgs= new ArrayList<BackgroundStar>();
     
+    /**
+     * Initializes the words that will appear in the credits
+     */
     public CreditScreen(){
         kyle= new Credit("Kyle Sweeney: Project Manager, Lead Programmer", new Vector2(50,0));
         peter= new Credit("Peter Cowal: Programmer, Artistic and Music Contributor", new Vector2(50,0));
@@ -60,11 +63,17 @@ public class CreditScreen {
         this.MakeBackgroundStars();
     }
     
+    /**
+     * Starts the credits
+     */
     public void start(){
         startTimer=System.currentTimeMillis();
         theEndStart=startTimer;
     }
     
+    /**
+     * Scrolls each credit over time and determines if the credits are done scrolling
+     */
     public void update(){
         double time=System.currentTimeMillis();
         if(time-startTimer>=5000){
@@ -139,6 +148,10 @@ public class CreditScreen {
         }
     }
     
+    /**
+     * Draws credits and stars needed
+     * @param batch ImageCollection to be drawn
+     */
     public void draw(ImageCollection batch){
         for(Credit c: credits){
             c.draw(batch);
@@ -151,10 +164,19 @@ public class CreditScreen {
         }
     }
     
+    /**
+     * Determines if the credits should be finished
+     * @param k KeyBoard in use
+     * @param m Mouse in use
+     * @return if the credits are ended
+     */
     public boolean isDone(KeyBoard k, Mouse m){
         return (k.isKeyDown(KeyEvent.VK_SPACE) ||m.isPressed(Mouse.LEFT_BUTTON) || done) && (System.currentTimeMillis()-theEndStart>=100);
     }
     
+    /**
+     * Creates stars randomly for the background
+     */
     public void MakeBackgroundStars(){
         Toolkit t = Toolkit.getDefaultToolkit();
         double height=t.getScreenSize().height;
