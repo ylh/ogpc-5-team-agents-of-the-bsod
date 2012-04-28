@@ -5,6 +5,8 @@
 package EasterEggs;
 
 import GUIStuff.Tile;
+import Utilities.Image2D;
+import Utilities.ImageCollection;
 import Utilities.Mouse;
 import WorldObjects.towers.*;
 import ogpc5.game.CityGame;
@@ -57,6 +59,8 @@ public class Achievements {
     
    //BreadAndCircuses
     boolean breadAndCircus;
+    
+    Image2D Background=new Image2D("Game Resources/Sprites/bgtexture.png");
     
     public Achievements(){
         over9000=false;
@@ -173,6 +177,10 @@ public class Achievements {
         if(t instanceof Store){
             FM++;
         }
+    }
+    
+    public void Draw(ImageCollection batch){
+        
     }
     
     public void masterKey(){
