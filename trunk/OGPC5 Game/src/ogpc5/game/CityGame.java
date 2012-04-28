@@ -325,6 +325,7 @@ public class CityGame extends Game {
             if(bs.returnToGame()){
                 blueScreen=false;
                 bs= new BlueScreen();
+                achievements.masterKey();
             }
             if(bs.goToStart()){
                 blueScreen=false;
