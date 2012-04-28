@@ -267,7 +267,7 @@ public abstract class Tower extends Tile {
                 Bullet t=setEnemyBulletHitting((AbstractEnemy)target);
                 //Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
                 wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
-                if (Math.random()<2/(n+1)){
+                if (Math.random()<(1/(n+1))){
                     new SoundFile("Game Resources/Sound/shoot1.wav",1).start();
                 }
                 loaded=speed;
