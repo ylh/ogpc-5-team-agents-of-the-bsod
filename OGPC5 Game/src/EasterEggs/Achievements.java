@@ -116,7 +116,7 @@ public class Achievements {
         }
         if(mt>=50 && !massTransit){
             massTransit=true;
-            popup.set("Game Resources/Sprites/Roads/CurevedRoadRightDown.png",
+            popup.set("Game Resources/Sprites/Roads/CurvedRoadRightDown.png",
                     "Mass Transit","Build 50 Roads");
         }
         if(gt>=20 && !greenThumb){
