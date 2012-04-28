@@ -21,6 +21,12 @@ public class Draggable {
     Image2D sprite;
     double movespeed = 0.5;
     int id;
+    /**
+     * Creates a draggable image that creates a tower when placed
+     * @param sp the path to the sprite
+     * @param p the position the draggable is created
+     * @param ID the ID of the draggable- used in tower creation
+     */
     public Draggable(String sp,Vector2 p, int ID){
         sprite=new Image2D(sp);
         pos=p;

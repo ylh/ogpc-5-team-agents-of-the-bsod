@@ -8,7 +8,7 @@ import GUIStuff.Tile;
 import Utilities.Vector2;
 
 /**
- *
+ * This was also back from the time we tried to make multitile towers
  * @author Ksweeney12
  */
 public class MultiTileCell extends Tile{

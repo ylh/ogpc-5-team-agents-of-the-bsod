@@ -22,7 +22,8 @@ public abstract class WorldObject {
     /**
      * Initializes an object with basic properties determining its motion and appearance
      * @param pos the position of the object (x,y)
-     * @param dir the direction of the object's motion
+     * @param dir the direction of the object's motion- this was going to be
+     * used, but when we switched to tower defense, it was forgotten
      * @param spritePath the file path of the object's sprite
      */
         public WorldObject(Vector2 pos, int dir, String spritePath){

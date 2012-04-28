@@ -17,7 +17,12 @@ import ogpc5.game.CityGame;
  * @author Ksweeney12
  */
 public class PoliceFire extends Tower{
-
+/**
+ * Creates a Police/Fire Tower
+ * @param pos
+ * @param high
+ * @param wide 
+ */
     public PoliceFire(Vector2 pos, int high, int wide){
         super(pos,"", high, wide);  
         cost=150;

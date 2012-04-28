@@ -10,7 +10,8 @@ import WorldObjects.WorldObject;
 import java.util.ArrayList;
 
 /**
- *
+ * This was back from when we tried to create multi-tile buildings
+ * We scrapped that idea
  * @author Ksweeney12
  */
 public class MasterTile extends Tile{

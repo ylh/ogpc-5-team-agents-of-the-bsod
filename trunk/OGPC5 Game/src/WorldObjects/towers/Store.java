@@ -17,7 +17,12 @@ import ogpc5.game.CityGame;
  * @author tsutton14
  */
 public class Store extends Tower {
-    
+    /**
+     * Creates a store tower
+     * @param pos
+     * @param high
+     * @param width 
+     */
     public Store(Vector2 pos, int high, int width){
         super(pos,"",high,width);
         cost=65;

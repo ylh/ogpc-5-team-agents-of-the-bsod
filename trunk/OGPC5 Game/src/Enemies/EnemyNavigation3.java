@@ -38,6 +38,11 @@ public class EnemyNavigation3 {
             }
         }
     }
+    /**
+     * A recursive algorithm that sets the values for every cell
+     * @param x
+     * @param y 
+     */
     public void setValue(int x,int y){
         int value=values[x][y];
         int min=value;
@@ -90,6 +95,11 @@ public class EnemyNavigation3 {
             }
         }
     }
+    /**
+     * Returns the cell that would bring the enemy to the exit the fastest
+     * @param pos
+     * @return 
+     */
     public int decide(Vector2 pos){
         int x= (int)pos.getX()/32;
         int y= (int)pos.getY()/32;

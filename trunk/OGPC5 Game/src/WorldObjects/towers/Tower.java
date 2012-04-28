@@ -15,8 +15,7 @@ import ogpc5.game.CityGame;
 /**
  *
  * @author Taylor Sutton & Peter Cowal
- * WHAT!? pcowal15 totally did more work than tsutton14 on this!!!
- * Let's not get petty about this...-Nekel_Seyew
+ * 
  */
 public abstract class Tower extends Tile {
 

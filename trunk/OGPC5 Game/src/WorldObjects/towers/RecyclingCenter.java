@@ -15,7 +15,12 @@ import ogpc5.game.CityGame;
  * @author Ksweeney12
  */
 public class RecyclingCenter extends Tower{
-
+/**
+ * Creates a Recycling Center
+ * @param pos
+ * @param high
+ * @param wide 
+ */
     public RecyclingCenter(Vector2 pos, int high, int wide){
         super(pos, "", high, wide);
         cost=45;
