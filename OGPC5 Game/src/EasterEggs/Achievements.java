@@ -8,7 +8,9 @@ import GUIStuff.Tile;
 import Utilities.Image2D;
 import Utilities.ImageCollection;
 import Utilities.Mouse;
+import Utilities.Vector2;
 import WorldObjects.towers.*;
+import java.awt.Color;
 import ogpc5.game.CityGame;
 
 /**
@@ -107,8 +109,10 @@ public class Achievements {
             over9000=true;
             
         }
-        if(theGame.score+theGame.happiness+theGame.money>100000 && !MasterOfUniverse){
+        if(theGame.score+theGame.happiness+theGame.money>=100000 && !MasterOfUniverse){
             MasterOfUniverse=true;
+            popup.set("Game Resources/Sprites/August/Game Icon.png",
+                    "Master of the Universe","Score+happiness+money=100000");
             
         }
         if(theGame.happiness>=999 && !breadAndCircus){
@@ -116,7 +120,7 @@ public class Achievements {
         }
         if(mt>=50 && !massTransit){
             massTransit=true;
-            popup.set("Game Resources/Sprites/Roads/CurvedRoadRightDown.png",
+            popup.set("Game Resources/Sprites/Roads/CurvedRoadRight.png",
                     "Mass Transit","Build 50 Roads");
         }
         if(gt>=20 && !greenThumb){
@@ -166,6 +170,8 @@ public class Achievements {
         }
         if(System.currentTimeMillis()-startTime>=(1000*(15*3600)) && !GLaDOSWouldBeProud){
             this.GLaDOSWouldBeProud=true;
+            popup.set("Game Resources/Sprites/Yestin/muralidy.png",
+                    "GLaDOS Would Be Proud","Play for 15 minutes");
         }
         
     }
@@ -236,6 +242,31 @@ public class Achievements {
      * Sets masterKey to true
      */
     public void masterKey(){
-        masterKey=true;
+        if (!masterKey){
+            masterKey=true;
+        }
+    }
+    
+    public void drawAchievement(boolean found, double x,double y,ImageCollection batch, String sprite, String name, String description){
+        if (found){
+            batch.Draw(new Image2D(sprite), new Vector2(x,y),1000);
+            //draw the text
+            batch.DrawString(new Vector2(x+20,y-10), "ACHIEVEMENT GET!", 
+                Color.white, 1000, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
+            batch.DrawString(new Vector2(x+20,y), name, 
+                Color.white, 1000, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
+            batch.DrawString(new Vector2(x+20,y+10), description, 
+                Color.white, 1000, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
+            //draw the text's shadow
+            batch.DrawString(new Vector2(x+19,y-9), "ACHIEVEMENT GET!", 
+                Color.black, 999, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
+            batch.DrawString(new Vector2(x+19,y+1), name, 
+                Color.black, 999, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
+            batch.DrawString(new Vector2(x+19,y+11), description, 
+                Color.black, 999, ImageCollection.FONT_DIALOG_INPUT, ImageCollection.FONT_BOLD_ITALIC, 10);
+        }
+        else{
+            
+        }
     }
 }
