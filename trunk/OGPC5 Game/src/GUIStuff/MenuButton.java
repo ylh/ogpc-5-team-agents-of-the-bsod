@@ -98,6 +98,11 @@ public class MenuButton {
         return selected && m.isPressed(Mouse.LEFT_BUTTON);
     }
     
+    /**
+     * Determines if the button press is delayed
+     * @param m Mouse in use
+     * @return if the press is delayed
+     */
     public boolean isPressedDelayed(Mouse m){
         double now=System.currentTimeMillis();
         if(selected && m.isPressed(Mouse.LEFT_BUTTON) && now-start >=1000){
