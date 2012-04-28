@@ -238,10 +238,16 @@ public abstract class Tower extends Tile {
 
 
             double maxDanger = 0;
+            double n=0;
 
             Vector2 displacement = new Vector2(range, 0);
             double distance;
             WorldObject target = null;
+            for (WorldObject w : wo) {
+                if (w instanceof Tower){
+                    n++;
+                }
+            }
             for (WorldObject w : wo) {
                 if (w instanceof AbstractEnemy) {
                     
@@ -261,7 +267,9 @@ public abstract class Tower extends Tile {
                 Bullet t=setEnemyBulletHitting((AbstractEnemy)target);
                 //Bullet t=new Bullet(position, damage, adamage, sdamage, projspeed, target);
                 wo.add(t);//new Bullet(position, damage, adamage, sdamage, projspeed, target));
-                new SoundFile("Game Resources/Sound/shoot1.wav",1).start();
+                if (Math.random()<2/(n+1)){
+                    new SoundFile("Game Resources/Sound/shoot1.wav",1).start();
+                }
                 loaded=speed;
             }
         }
