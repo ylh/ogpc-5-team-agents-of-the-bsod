@@ -117,7 +117,10 @@ public class CityGame extends Game {
     boolean blueScreen;
     boolean achievementScreen;
     Achievements achievements;
-
+    
+    /**
+     * Initializes game
+     */
     @Override
     public void InitializeAndLoad() {
         //Core features creation.
@@ -202,10 +205,16 @@ public class CityGame extends Game {
         achievements=new Achievements();
     }
 
+    /**
+     * Does nothing
+     */
     @Override
     public void UnloadContent() {
     }
 
+    /**
+     * Sets frame vitals
+     */
     @Override
     public void run() {
 //        super.Run();
@@ -214,6 +223,9 @@ public class CityGame extends Game {
         this.base.theGUI.setTitle("Urban Towers");
     }
 
+    /**
+     * Updates all logic in the game;  The main game loop
+     */
     @Override
     public void Update() {
         globalCount = 0;
@@ -573,6 +585,10 @@ public class CityGame extends Game {
         }// End of Main Game Else
     }
 
+    /**
+     * Draws all batches
+     * @param g Graphics object.
+     */
     @Override
     public void Draw(Graphics g) {
         if (firstRun) {
@@ -686,25 +702,44 @@ public class CityGame extends Game {
         
     }
 
+    /**
+     * Adds a given object to the list of all objects
+     * @param wo a WorldObject to add
+     */
     public void addToWorldObjects(WorldObject wo) {
         allObjects.add(wo);
     }
 
+    /**
+     * Returns rectangular bounding
+     * @param i2d the image who bounding is being returned
+     * @return the Rect representing the bounding
+     */
     public static Rect getRectangle(Image2D i2d) {
         return new Rect((int) (i2d.getPosition().getX() - i2d.getIconWidth() / 2),
                 (int) (i2d.getPosition().getY() - i2d.getIconHeight() / 2),
                 i2d.getIconWidth(), i2d.getIconHeight());
     }
 
+    /**
+     * Saves
+     */
     private void save() {
         String path = "Game Resources/Saved Files/";
         File allSavedFiles = new File(path + "SavedFilesHead.txt");
     }
 
+    /**
+     * Loads
+     */
     private void load() {
         String path = "Game Resources/Saved Files/";
         File allSavedFiles = new File(path + "SavedFilesHead.txt");
     }
+    
+    /**
+     * Adds all buttons to a list of buttons for easy access
+     */
     public void addButtons(){
         //factory
         buttons.add(new Button(Tower.FACTORY, "Game Resources/Sprites/August/ACME Corp/0.png", 880, 100));
@@ -731,15 +766,34 @@ public class CityGame extends Game {
 
     }
     
+    /**
+     * Determines if a point is inside the play area
+     * @param x x value of the point
+     * @param y y value of the point
+     * @return if the point is inside the play area
+     */
     public boolean insideBounds(int x, int y){
         return (x>=0 && x<830) && (y>=0 && y<600);
     }
+    
+    /**
+     * Determines if a point is inside the play area based upon a Vector2
+     * @param pos the point's position
+     * @return if the point is inside the play area
+     */
     public boolean insideBounds(Vector2 pos){
         int x=(int)pos.getX();
         int y=(int)pos.getY();
         return insideBounds(x,y);
     }
     
+    /**
+     * Builds a given Tile
+     * @param t the main Tile[][] array
+     * @param add the Tile to add to the array
+     * @param x the horizontal position of the grid square
+     * @param y the vertical position of the grid square
+     */
     public void build(Tile[][] t, Tile add, int x, int y){
         selection.unselect(t);
         t[x][y].unselect(t);
