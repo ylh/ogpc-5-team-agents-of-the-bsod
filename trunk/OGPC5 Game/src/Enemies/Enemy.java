@@ -62,6 +62,9 @@ public class Enemy extends AbstractEnemy{
         LoadStats();
     }
     
+    /**
+     * Initializes the proper animation for this enemy based upon its id
+     */
     private void chooseAnimation(){
         switch(id){
             case AbstractEnemy.ARSONIST: 
@@ -142,18 +145,29 @@ public class Enemy extends AbstractEnemy{
         }
     }
     
+    /**
+     * Draws the determined Animation
+     * @param batch ImageCollection to be drawn
+     */
     @Override
     public void Draw(ImageCollection batch){
         super.Draw(batch);
         a.Draw(batch);
     }
     
-        @Override
+    /**
+     * Changes animations if necessary and inherits Update method
+     * @param wol List of all objects
+     */
+    @Override
     public void Update(ArrayList<WorldObject> wol) {
         super.Update(wol);
         alterAnimationDirection();
     }
-        
+    
+    /**
+     * Changes direction of the enemy's current animation depending on its dir if necessary
+     */
     private void alterAnimationDirection() {
         if (id == AbstractEnemy.EARTHQUACKE) {
             if(dir == 0){
@@ -184,6 +198,9 @@ public class Enemy extends AbstractEnemy{
         }
     }
     
+    /**
+     * Initializes directional animations for quicker access
+     */
     private void initializeAnimations() {
         //EATHQUAKES
         //Earthquack1
@@ -225,7 +242,10 @@ public class Enemy extends AbstractEnemy{
         return new Bullet(bulletSprite, this.position.clone(), this.damage, 0, 0, 10, t);
         
     }
-
+    
+    /**
+     * Loads proper bullet for the given type of enemy
+     */
     @Override
     public void LoadStats() {
         switch(id){
@@ -268,10 +288,22 @@ public class Enemy extends AbstractEnemy{
         }
     }
     
+    /**
+     * Sets vital stats
+     * @param damage damage the enemy does
+     * @param fireSpeed the firing rate
+     */
     private void load(int damage, int fireSpeed){
         this.damage=damage;
         this.fireSpeed=fireSpeed;
     }
+    
+    /**
+     * Sets vital stats
+     * @param s the file path of the bullet sprite
+     * @param damage damage the enemy does
+     * @param fireSpeed the firing rate
+     */
     private void load(String s, int damage, int fireSpeed){
         this.damage=damage;
         this.fireSpeed=fireSpeed;
