@@ -1,0 +1,1 @@
+This is the project for team Agents of the BSoD from Jesuit High School for the Oregon Game Project Challenge. This year, we are using Java and the NetBeans IDE. The basis of the game is the Sweeney Game Development Environment developed by Kyle Maximilian Sweeney (Nekel\_Seyew).
